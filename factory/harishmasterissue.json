@@ -1,0 +1,11 @@
+{
+	"name": "harishmasterissue",
+	"properties": {
+		"globalParameters": {
+			"Testblobalparam": {
+				"type": "string",
+				"value": "123"
+			}
+		}
+	}
+}
