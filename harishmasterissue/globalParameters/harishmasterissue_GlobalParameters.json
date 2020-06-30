@@ -1,1 +1,6 @@
-{}
+{
+	"Testblobalparam": {
+		"type": "string",
+		"value": "123"
+	}
+}
