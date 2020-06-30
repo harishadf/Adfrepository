@@ -1,0 +1,6 @@
+{
+	"name": "integrationRuntimehk",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
