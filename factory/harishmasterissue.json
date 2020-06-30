@@ -3,8 +3,8 @@
 	"properties": {
 		"globalParameters": {
 			"Testblobalparam": {
-				"type": "string",
-				"value": "123"
+				"type": "int",
+				"value": 54
 			}
 		}
 	}
