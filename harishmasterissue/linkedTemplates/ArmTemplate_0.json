@@ -1416,7 +1416,7 @@
 			"properties": {
 				"description": "test",
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
