@@ -1,0 +1,19 @@
+{
+	"name": "targetdataDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "NonprodLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "nonproddata.txt",
+				"folderPath": "ADFsource",
+				"container": "harisource"
+			}
+		}
+	}
+}

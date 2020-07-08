@@ -1,0 +1,19 @@
+{
+	"name": "Nonproddata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "NonprodLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp.txt",
+				"folderPath": "ADFsource",
+				"container": "harisource"
+			}
+		}
+	}
+}
