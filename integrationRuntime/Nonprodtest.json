@@ -1,0 +1,6 @@
+{
+	"name": "Nonprodtest",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
