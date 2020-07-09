@@ -1,0 +1,44 @@
+{
+	"name": "AzureblobTargetDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoragedestination",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "harishtarget"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"modifiedby": {
+					"type": "string"
+				},
+				"modifiedon": {
+					"type": "string"
+				},
+				"hpi_noteshistory": {
+					"type": "string"
+				},
+				"createdon": {
+					"type": "string"
+				},
+				"hpi_subject": {
+					"type": "string"
+				},
+				"hpi_caseid": {
+					"type": "string"
+				},
+				"incidentid": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

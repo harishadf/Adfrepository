@@ -1,0 +1,6 @@
+{
+	"name": "NonprodLS",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
