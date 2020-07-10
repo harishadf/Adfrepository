@@ -1,0 +1,101 @@
+{
+	"name": "Parquet2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "hariparquet"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "YearMonthDay",
+				"type": "UTF8"
+			},
+			{
+				"name": "Day",
+				"type": "DATE"
+			},
+			{
+				"name": "DayOfMonth",
+				"type": "UTF8"
+			},
+			{
+				"name": "DayOfWeek",
+				"type": "UTF8"
+			},
+			{
+				"name": "MondayOfWeek",
+				"type": "UTF8"
+			},
+			{
+				"name": "SundayOfWeek",
+				"type": "UTF8"
+			},
+			{
+				"name": "MonthOfYear",
+				"type": "UTF8"
+			},
+			{
+				"name": "LastDayOfMonthIndicator",
+				"type": "UTF8"
+			},
+			{
+				"name": "QuarterOfYear",
+				"type": "UTF8"
+			},
+			{
+				"name": "WeekOfYear",
+				"type": "UTF8"
+			},
+			{
+				"name": "Year",
+				"type": "UTF8"
+			},
+			{
+				"name": "YearWeek",
+				"type": "UTF8"
+			},
+			{
+				"name": "YearMonth",
+				"type": "UTF8"
+			},
+			{
+				"name": "YearQuarter",
+				"type": "UTF8"
+			},
+			{
+				"name": "DayOfWeekSales",
+				"type": "UTF8"
+			},
+			{
+				"name": "WeekSales",
+				"type": "INT32"
+			},
+			{
+				"name": "YearWeekSundayStart",
+				"type": "UTF8"
+			},
+			{
+				"name": "BDLLoadTimeStamp",
+				"type": "INT96"
+			},
+			{
+				"name": "BDLUpdateTimeStamp",
+				"type": "INT96"
+			},
+			{
+				"name": "BDLFlag",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
