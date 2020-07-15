@@ -1,0 +1,18 @@
+{
+	"name": "DS2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AblobLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "harisource"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
