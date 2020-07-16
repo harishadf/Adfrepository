@@ -1,0 +1,1472 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Dinesh1"
+		},
+		"AblobLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AblobLS'"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
+		"Blobtest1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
+		},
+		"DGLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DGLS'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DGLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "emp.txt",
+						"container": "harisource"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DGLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DGLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harisource"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DGLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "harish.csv",
+						"container": "harishfold"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harishfold"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "govdata.json",
+						"folderPath": "ADFsource",
+						"container": "harisource"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"view": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"averageRating": {
+											"type": "integer"
+										},
+										"createdAt": {
+											"type": "integer"
+										},
+										"description": {
+											"type": "string"
+										},
+										"displayType": {
+											"type": "string"
+										},
+										"downloadCount": {
+											"type": "integer"
+										},
+										"hideFromCatalog": {
+											"type": "boolean"
+										},
+										"hideFromDataJson": {
+											"type": "boolean"
+										},
+										"indexUpdatedAt": {
+											"type": "integer"
+										},
+										"newBackend": {
+											"type": "boolean"
+										},
+										"numberOfComments": {
+											"type": "integer"
+										},
+										"oid": {
+											"type": "integer"
+										},
+										"provenance": {
+											"type": "string"
+										},
+										"publicationAppendEnabled": {
+											"type": "boolean"
+										},
+										"publicationDate": {
+											"type": "integer"
+										},
+										"publicationGroup": {
+											"type": "integer"
+										},
+										"publicationStage": {
+											"type": "string"
+										},
+										"rowsUpdatedAt": {
+											"type": "integer"
+										},
+										"rowsUpdatedBy": {
+											"type": "string"
+										},
+										"tableId": {
+											"type": "integer"
+										},
+										"totalTimesRated": {
+											"type": "integer"
+										},
+										"viewCount": {
+											"type": "integer"
+										},
+										"viewLastModified": {
+											"type": "integer"
+										},
+										"viewType": {
+											"type": "string"
+										},
+										"approvals": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reviewedAt": {
+														"type": "integer"
+													},
+													"reviewedAutomatically": {
+														"type": "boolean"
+													},
+													"state": {
+														"type": "string"
+													},
+													"submissionId": {
+														"type": "integer"
+													},
+													"submissionObject": {
+														"type": "string"
+													},
+													"submissionOutcome": {
+														"type": "string"
+													},
+													"submittedAt": {
+														"type": "integer"
+													},
+													"workflowId": {
+														"type": "integer"
+													},
+													"submissionDetails": {
+														"type": "object",
+														"properties": {
+															"permissionType": {
+																"type": "string"
+															}
+														}
+													},
+													"submissionOutcomeApplication": {
+														"type": "object",
+														"properties": {
+															"failureCount": {
+																"type": "integer"
+															},
+															"status": {
+																"type": "string"
+															}
+														}
+													},
+													"submitter": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"displayName": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										},
+										"columns": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "integer"
+													},
+													"name": {
+														"type": "string"
+													},
+													"dataTypeName": {
+														"type": "string"
+													},
+													"fieldName": {
+														"type": "string"
+													},
+													"position": {
+														"type": "integer"
+													},
+													"renderTypeName": {
+														"type": "string"
+													},
+													"format": {
+														"type": "object"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"grants": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"inherited": {
+														"type": "boolean"
+													},
+													"type": {
+														"type": "string"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"metadata": {
+											"type": "object",
+											"properties": {
+												"custom_fields": {
+													"type": "object",
+													"properties": {
+														"Data Reference": {
+															"type": "object",
+															"properties": {
+																"Reference for Technical Information": {
+																	"type": "string"
+																},
+																"Frequency": {
+																	"type": "string"
+																},
+																"Date Updated": {
+																	"type": "string"
+																},
+																"Date Released": {
+																	"type": "string"
+																},
+																"Period of Coverage": {
+																	"type": "string"
+																},
+																"Unit of Analysis": {
+																	"type": "string"
+																},
+																"Data dictionary/variable list": {
+																	"type": "string"
+																}
+															}
+														},
+														"Hawaii Line of Business": {
+															"type": "object",
+															"properties": {
+																"Division name": {
+																	"type": "string"
+																},
+																"Line of Business": {
+																	"type": "string"
+																},
+																"Division shortname, acronym": {
+																	"type": "string"
+																},
+																"Department Agency short name, acronym": {
+																	"type": "string"
+																},
+																"State of Hawaii Data Book Category": {
+																	"type": "string"
+																},
+																"Department/Agency": {
+																	"type": "string"
+																}
+															}
+														},
+														"Terms of Use Acknowledgement": {
+															"type": "object",
+															"properties": {
+																"I agree by uploading this dataset that it contains no private information, and adheres to the data.hawaii.gov terms of use.": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												},
+												"availableDisplayTypes": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												},
+												"renderTypeConfig": {
+													"type": "object",
+													"properties": {
+														"visible": {
+															"type": "object",
+															"properties": {
+																"table": {
+																	"type": "boolean"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"owner": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"query": {
+											"type": "object"
+										},
+										"rights": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"tableAuthor": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"flags": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harisource"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"view": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"averageRating": {
+											"type": "integer"
+										},
+										"createdAt": {
+											"type": "integer"
+										},
+										"description": {
+											"type": "string"
+										},
+										"displayType": {
+											"type": "string"
+										},
+										"downloadCount": {
+											"type": "integer"
+										},
+										"hideFromCatalog": {
+											"type": "boolean"
+										},
+										"hideFromDataJson": {
+											"type": "boolean"
+										},
+										"indexUpdatedAt": {
+											"type": "integer"
+										},
+										"newBackend": {
+											"type": "boolean"
+										},
+										"numberOfComments": {
+											"type": "integer"
+										},
+										"oid": {
+											"type": "integer"
+										},
+										"provenance": {
+											"type": "string"
+										},
+										"publicationAppendEnabled": {
+											"type": "boolean"
+										},
+										"publicationDate": {
+											"type": "integer"
+										},
+										"publicationGroup": {
+											"type": "integer"
+										},
+										"publicationStage": {
+											"type": "string"
+										},
+										"rowsUpdatedAt": {
+											"type": "integer"
+										},
+										"rowsUpdatedBy": {
+											"type": "string"
+										},
+										"tableId": {
+											"type": "integer"
+										},
+										"totalTimesRated": {
+											"type": "integer"
+										},
+										"viewCount": {
+											"type": "integer"
+										},
+										"viewLastModified": {
+											"type": "integer"
+										},
+										"viewType": {
+											"type": "string"
+										},
+										"approvals": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reviewedAt": {
+														"type": "integer"
+													},
+													"reviewedAutomatically": {
+														"type": "boolean"
+													},
+													"state": {
+														"type": "string"
+													},
+													"submissionId": {
+														"type": "integer"
+													},
+													"submissionObject": {
+														"type": "string"
+													},
+													"submissionOutcome": {
+														"type": "string"
+													},
+													"submittedAt": {
+														"type": "integer"
+													},
+													"workflowId": {
+														"type": "integer"
+													},
+													"submissionDetails": {
+														"type": "object",
+														"properties": {
+															"permissionType": {
+																"type": "string"
+															}
+														}
+													},
+													"submissionOutcomeApplication": {
+														"type": "object",
+														"properties": {
+															"failureCount": {
+																"type": "integer"
+															},
+															"status": {
+																"type": "string"
+															}
+														}
+													},
+													"submitter": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"displayName": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										},
+										"columns": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "integer"
+													},
+													"name": {
+														"type": "string"
+													},
+													"dataTypeName": {
+														"type": "string"
+													},
+													"fieldName": {
+														"type": "string"
+													},
+													"position": {
+														"type": "integer"
+													},
+													"renderTypeName": {
+														"type": "string"
+													},
+													"format": {
+														"type": "object"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"grants": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"inherited": {
+														"type": "boolean"
+													},
+													"type": {
+														"type": "string"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"metadata": {
+											"type": "object",
+											"properties": {
+												"custom_fields": {
+													"type": "object",
+													"properties": {
+														"Data Reference": {
+															"type": "object",
+															"properties": {
+																"Reference for Technical Information": {
+																	"type": "string"
+																},
+																"Frequency": {
+																	"type": "string"
+																},
+																"Date Updated": {
+																	"type": "string"
+																},
+																"Date Released": {
+																	"type": "string"
+																},
+																"Period of Coverage": {
+																	"type": "string"
+																},
+																"Unit of Analysis": {
+																	"type": "string"
+																},
+																"Data dictionary/variable list": {
+																	"type": "string"
+																}
+															}
+														},
+														"Hawaii Line of Business": {
+															"type": "object",
+															"properties": {
+																"Division name": {
+																	"type": "string"
+																},
+																"Line of Business": {
+																	"type": "string"
+																},
+																"Division shortname, acronym": {
+																	"type": "string"
+																},
+																"Department Agency short name, acronym": {
+																	"type": "string"
+																},
+																"State of Hawaii Data Book Category": {
+																	"type": "string"
+																},
+																"Department/Agency": {
+																	"type": "string"
+																}
+															}
+														},
+														"Terms of Use Acknowledgement": {
+															"type": "object",
+															"properties": {
+																"I agree by uploading this dataset that it contains no private information, and adheres to the data.hawaii.gov terms of use.": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												},
+												"availableDisplayTypes": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												},
+												"renderTypeConfig": {
+													"type": "object",
+													"properties": {
+														"visible": {
+															"type": "object",
+															"properties": {
+																"table": {
+																	"type": "boolean"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"owner": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"query": {
+											"type": "object"
+										},
+										"rights": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"tableAuthor": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"flags": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harishtarget"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"view": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"averageRating": {
+											"type": "integer"
+										},
+										"createdAt": {
+											"type": "integer"
+										},
+										"description": {
+											"type": "string"
+										},
+										"displayType": {
+											"type": "string"
+										},
+										"downloadCount": {
+											"type": "integer"
+										},
+										"hideFromCatalog": {
+											"type": "boolean"
+										},
+										"hideFromDataJson": {
+											"type": "boolean"
+										},
+										"indexUpdatedAt": {
+											"type": "integer"
+										},
+										"newBackend": {
+											"type": "boolean"
+										},
+										"numberOfComments": {
+											"type": "integer"
+										},
+										"oid": {
+											"type": "integer"
+										},
+										"provenance": {
+											"type": "string"
+										},
+										"publicationAppendEnabled": {
+											"type": "boolean"
+										},
+										"publicationDate": {
+											"type": "integer"
+										},
+										"publicationGroup": {
+											"type": "integer"
+										},
+										"publicationStage": {
+											"type": "string"
+										},
+										"rowsUpdatedAt": {
+											"type": "integer"
+										},
+										"rowsUpdatedBy": {
+											"type": "string"
+										},
+										"tableId": {
+											"type": "integer"
+										},
+										"totalTimesRated": {
+											"type": "integer"
+										},
+										"viewCount": {
+											"type": "integer"
+										},
+										"viewLastModified": {
+											"type": "integer"
+										},
+										"viewType": {
+											"type": "string"
+										},
+										"approvals": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reviewedAt": {
+														"type": "integer"
+													},
+													"reviewedAutomatically": {
+														"type": "boolean"
+													},
+													"state": {
+														"type": "string"
+													},
+													"submissionId": {
+														"type": "integer"
+													},
+													"submissionObject": {
+														"type": "string"
+													},
+													"submissionOutcome": {
+														"type": "string"
+													},
+													"submittedAt": {
+														"type": "integer"
+													},
+													"workflowId": {
+														"type": "integer"
+													},
+													"submissionDetails": {
+														"type": "object",
+														"properties": {
+															"permissionType": {
+																"type": "string"
+															}
+														}
+													},
+													"submissionOutcomeApplication": {
+														"type": "object",
+														"properties": {
+															"failureCount": {
+																"type": "integer"
+															},
+															"status": {
+																"type": "string"
+															}
+														}
+													},
+													"submitter": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"displayName": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										},
+										"columns": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "integer"
+													},
+													"name": {
+														"type": "string"
+													},
+													"dataTypeName": {
+														"type": "string"
+													},
+													"fieldName": {
+														"type": "string"
+													},
+													"position": {
+														"type": "integer"
+													},
+													"renderTypeName": {
+														"type": "string"
+													},
+													"format": {
+														"type": "object"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"grants": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"inherited": {
+														"type": "boolean"
+													},
+													"type": {
+														"type": "string"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"metadata": {
+											"type": "object",
+											"properties": {
+												"custom_fields": {
+													"type": "object",
+													"properties": {
+														"Data Reference": {
+															"type": "object",
+															"properties": {
+																"Reference for Technical Information": {
+																	"type": "string"
+																},
+																"Frequency": {
+																	"type": "string"
+																},
+																"Date Updated": {
+																	"type": "string"
+																},
+																"Date Released": {
+																	"type": "string"
+																},
+																"Period of Coverage": {
+																	"type": "string"
+																},
+																"Unit of Analysis": {
+																	"type": "string"
+																},
+																"Data dictionary/variable list": {
+																	"type": "string"
+																}
+															}
+														},
+														"Hawaii Line of Business": {
+															"type": "object",
+															"properties": {
+																"Division name": {
+																	"type": "string"
+																},
+																"Line of Business": {
+																	"type": "string"
+																},
+																"Division shortname, acronym": {
+																	"type": "string"
+																},
+																"Department Agency short name, acronym": {
+																	"type": "string"
+																},
+																"State of Hawaii Data Book Category": {
+																	"type": "string"
+																},
+																"Department/Agency": {
+																	"type": "string"
+																}
+															}
+														},
+														"Terms of Use Acknowledgement": {
+															"type": "object",
+															"properties": {
+																"I agree by uploading this dataset that it contains no private information, and adheres to the data.hawaii.gov terms of use.": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												},
+												"availableDisplayTypes": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												},
+												"renderTypeConfig": {
+													"type": "object",
+													"properties": {
+														"visible": {
+															"type": "object",
+															"properties": {
+																"table": {
+																	"type": "boolean"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"owner": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"query": {
+											"type": "object"
+										},
+										"rights": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"tableAuthor": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"flags": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						},
+						"modifiedby": {
+							"type": "string"
+						},
+						"modifiedon": {
+							"type": "string"
+						},
+						"hpi_noteshistory": {
+							"type": "string"
+						},
+						"createdon": {
+							"type": "string"
+						},
+						"hpi_subject": {
+							"type": "string"
+						},
+						"hpi_caseid": {
+							"type": "string"
+						},
+						"incidentid": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AblobLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AblobLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage3_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Blobtest1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('Blobtest1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DGLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('DGLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger2')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "test",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Month",
+						"interval": 1,
+						"startTime": "2020-06-30T05:45:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"monthDays": [
+								7
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IRSelf-hosted')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntimehk')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		}
+	]
+}
