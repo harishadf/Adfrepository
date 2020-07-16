@@ -2,7 +2,7 @@
 	"name": "DS2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AblobLS",
+			"referenceName": "DGLS",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
