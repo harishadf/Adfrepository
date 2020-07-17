@@ -1,0 +1,14 @@
+{
+	"name": "ADLSLS",
+	"properties": {
+		"description": "LS",
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://sourceadlsharish.azuredatalakestore.net/webhdfs/v1",
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"subscriptionId": "82da1dd1-f682-4164-8732-e21666d90066",
+			"resourceGroupName": "harishsql"
+		}
+	}
+}
