@@ -17,11 +17,32 @@
 		"AzureBlobStorage3_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage4_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage5_connectionString": {
+			"value": ""
+		},
 		"Blobtest1_connectionString": {
 			"value": ""
 		},
 		"DGLS_connectionString": {
 			"value": ""
+		},
+		"harishparquet_connectionString": {
+			"value": ""
+		},
+		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://sourceadlsharish.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLSLS_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ADLSLS_properties_typeProperties_subscriptionId": {
+			"value": "82da1dd1-f682-4164-8732-e21666d90066"
+		},
+		"ADLSLS_properties_typeProperties_resourceGroupName": {
+			"value": "harishsql"
 		}
 	}
 }

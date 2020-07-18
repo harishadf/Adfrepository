@@ -23,6 +23,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
 		},
+		"AzureBlobStorage4_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
+		},
+		"AzureBlobStorage5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
+		},
 		"Blobtest1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
@@ -30,6 +38,26 @@
 		"DGLS_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DGLS'"
+		},
+		"harishparquet_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishparquet'"
+		},
+		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://sourceadlsharish.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLSLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ADLSLS_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "82da1dd1-f682-4164-8732-e21666d90066"
+		},
+		"ADLSLS_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "harishsql"
 		},
 		"containerUri": {
 			"type": "string",
@@ -70,15 +98,56 @@
 					"AzureBlobStorage3_connectionString": {
 						"value": "[parameters('AzureBlobStorage3_connectionString')]"
 					},
+					"AzureBlobStorage4_connectionString": {
+						"value": "[parameters('AzureBlobStorage4_connectionString')]"
+					},
+					"AzureBlobStorage5_connectionString": {
+						"value": "[parameters('AzureBlobStorage5_connectionString')]"
+					},
 					"Blobtest1_connectionString": {
 						"value": "[parameters('Blobtest1_connectionString')]"
 					},
 					"DGLS_connectionString": {
 						"value": "[parameters('DGLS_connectionString')]"
+					},
+					"harishparquet_connectionString": {
+						"value": "[parameters('harishparquet_connectionString')]"
+					},
+					"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"ADLSLS_properties_typeProperties_tenant": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_tenant')]"
+					},
+					"ADLSLS_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_subscriptionId')]"
+					},
+					"ADLSLS_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_resourceGroupName')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
 		}
 	]
 }
