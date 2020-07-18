@@ -10,23 +10,33 @@
 						"type": "DatasetReference"
 					},
 					"name": "employees"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
+					"name": "Department"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "outputds",
+						"referenceName": "DelimitedText4",
 						"type": "DatasetReference"
 					},
-					"name": "totalemployeesbydeptid"
+					"name": "sink1"
 				}
 			],
 			"transformations": [
 				{
 					"name": "Aggregate1"
+				},
+				{
+					"name": "Join1"
 				}
 			],
-			"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> employees\nemployees aggregate(groupBy(deptid),\n\ttotalemployees = count(empid)) ~> Aggregate1\nAggregate1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['totalemployeesbydeptid'],\n\tmapColumn(\n\t\tdeptid,\n\t\ttotalemployees\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> totalemployeesbydeptid"
+			"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> employees\nsource(output(\n\t\tdeptid as string,\n\t\tDepname as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Department\nemployees aggregate(groupBy(deptid),\n\ttotalemployees = count(empid)) ~> Aggregate1\nAggregate1, Department join(Aggregate1@deptid == Depname,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tmapColumn(\n\t\tdeptid = Aggregate1@deptid,\n\t\ttotalemployees,\n\t\tdeptid = Department@deptid,\n\t\tDepname\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
