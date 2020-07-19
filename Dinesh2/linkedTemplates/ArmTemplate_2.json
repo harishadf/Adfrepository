@@ -26,7 +26,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "ITEmployees.csv",
+						"fileName": "empl.csv",
 						"container": "source"
 					},
 					"columnDelimiter": ",",
