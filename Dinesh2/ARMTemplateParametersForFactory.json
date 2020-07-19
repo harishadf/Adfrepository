@@ -29,6 +29,12 @@
 		"AzureBlobStorage7_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage8_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage9_connectionString": {
+			"value": ""
+		},
 		"Blobtest1_connectionString": {
 			"value": ""
 		},

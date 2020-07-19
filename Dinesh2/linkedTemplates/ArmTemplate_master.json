@@ -39,6 +39,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
 		},
+		"AzureBlobStorage8_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage8'"
+		},
+		"AzureBlobStorage9_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
+		},
 		"Blobtest1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
@@ -189,6 +197,12 @@
 					"AzureBlobStorage7_connectionString": {
 						"value": "[parameters('AzureBlobStorage7_connectionString')]"
 					},
+					"AzureBlobStorage8_connectionString": {
+						"value": "[parameters('AzureBlobStorage8_connectionString')]"
+					},
+					"AzureBlobStorage9_connectionString": {
+						"value": "[parameters('AzureBlobStorage9_connectionString')]"
+					},
 					"Blobtest1_connectionString": {
 						"value": "[parameters('Blobtest1_connectionString')]"
 					},
@@ -215,12 +229,6 @@
 					},
 					"employeesls_connectionString": {
 						"value": "[parameters('employeesls_connectionString')]"
-					},
-					"harishlsoutput_connectionString": {
-						"value": "[parameters('harishlsoutput_connectionString')]"
-					},
-					"harishparquet_connectionString": {
-						"value": "[parameters('harishparquet_connectionString')]"
 					},
 					"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
 						"value": "[parameters('ADLSLS_properties_typeProperties_dataLakeStoreUri')]"
@@ -251,6 +259,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"harishlsoutput_connectionString": {
+						"value": "[parameters('harishlsoutput_connectionString')]"
+					},
+					"harishparquet_connectionString": {
+						"value": "[parameters('harishparquet_connectionString')]"
 					},
 					"hremployeeslsnew_connectionString": {
 						"value": "[parameters('hremployeeslsnew_connectionString')]"
