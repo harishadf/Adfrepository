@@ -21,6 +21,7 @@
 				"activities": [
 					{
 						"name": "ITemployees",
+						"description": "ITempl",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
