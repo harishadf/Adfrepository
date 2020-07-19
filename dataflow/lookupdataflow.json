@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "departmentds",
+						"referenceName": "DelimitedText6",
 						"type": "DatasetReference"
 					},
 					"name": "Departments"
