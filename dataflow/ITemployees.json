@@ -1,0 +1,46 @@
+{
+	"name": "ITemployees",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ITempl",
+						"type": "DatasetReference"
+					},
+					"name": "ITemployees"
+				},
+				{
+					"dataset": {
+						"referenceName": "Payrollemployees",
+						"type": "DatasetReference"
+					},
+					"name": "Payrollemplu"
+				},
+				{
+					"dataset": {
+						"referenceName": "HRemployees",
+						"type": "DatasetReference"
+					},
+					"name": "HRemployees"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "unionallemployees",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "UnionAllemployees"
+				}
+			],
+			"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ITemployees\nsource(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Payrollemplu\nsource(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartmetn as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> HRemployees\nITemployees, Payrollemplu, HRemployees union(byName: true)~> UnionAllemployees\nUnionAllemployees sink(input(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['unionallemployees.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}
