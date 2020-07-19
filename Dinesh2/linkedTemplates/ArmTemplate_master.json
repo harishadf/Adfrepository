@@ -31,6 +31,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
 		},
+		"AzureBlobStorage6_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
+		},
+		"AzureBlobStorage7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
+		},
 		"Blobtest1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
@@ -43,9 +51,65 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DSharish'"
 		},
+		"HRemployeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'HRemployeesls'"
+		},
+		"ITempl_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITempl'"
+		},
+		"ITemployeesds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITemployeesds'"
+		},
+		"ITemployeeslinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITemployeeslinkedservice'"
+		},
+		"departmentls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'departmentls'"
+		},
+		"employeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'employeesls'"
+		},
+		"harishlsoutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishlsoutput'"
+		},
 		"harishparquet_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'harishparquet'"
+		},
+		"hremployeeslsnew_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'hremployeeslsnew'"
+		},
+		"lookupoutds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lookupoutds'"
+		},
+		"lsharish_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsharish'"
+		},
+		"lsharishoutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsharishoutput'"
+		},
+		"outputdsls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'outputdsls'"
+		},
+		"payrollemployeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'payrollemployeesls'"
+		},
+		"unionofallemloyees_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'unionofallemloyees'"
 		},
 		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -119,6 +183,12 @@
 					"AzureBlobStorage5_connectionString": {
 						"value": "[parameters('AzureBlobStorage5_connectionString')]"
 					},
+					"AzureBlobStorage6_connectionString": {
+						"value": "[parameters('AzureBlobStorage6_connectionString')]"
+					},
+					"AzureBlobStorage7_connectionString": {
+						"value": "[parameters('AzureBlobStorage7_connectionString')]"
+					},
 					"Blobtest1_connectionString": {
 						"value": "[parameters('Blobtest1_connectionString')]"
 					},
@@ -127,6 +197,27 @@
 					},
 					"DSharish_connectionString": {
 						"value": "[parameters('DSharish_connectionString')]"
+					},
+					"HRemployeesls_connectionString": {
+						"value": "[parameters('HRemployeesls_connectionString')]"
+					},
+					"ITempl_connectionString": {
+						"value": "[parameters('ITempl_connectionString')]"
+					},
+					"ITemployeesds_connectionString": {
+						"value": "[parameters('ITemployeesds_connectionString')]"
+					},
+					"ITemployeeslinkedservice_connectionString": {
+						"value": "[parameters('ITemployeeslinkedservice_connectionString')]"
+					},
+					"departmentls_connectionString": {
+						"value": "[parameters('departmentls_connectionString')]"
+					},
+					"employeesls_connectionString": {
+						"value": "[parameters('employeesls_connectionString')]"
+					},
+					"harishlsoutput_connectionString": {
+						"value": "[parameters('harishlsoutput_connectionString')]"
 					},
 					"harishparquet_connectionString": {
 						"value": "[parameters('harishparquet_connectionString')]"
@@ -142,15 +233,6 @@
 					},
 					"ADLSLS_properties_typeProperties_resourceGroupName": {
 						"value": "[parameters('ADLSLS_properties_typeProperties_resourceGroupName')]"
-					},
-					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
-						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
-					},
-					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
-						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
-					},
-					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 					}
 				}
 			},
@@ -169,11 +251,81 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"hremployeeslsnew_connectionString": {
+						"value": "[parameters('hremployeeslsnew_connectionString')]"
+					},
+					"lookupoutds_connectionString": {
+						"value": "[parameters('lookupoutds_connectionString')]"
+					},
+					"lsharish_connectionString": {
+						"value": "[parameters('lsharish_connectionString')]"
+					},
+					"lsharishoutput_connectionString": {
+						"value": "[parameters('lsharishoutput_connectionString')]"
+					},
+					"outputdsls_connectionString": {
+						"value": "[parameters('outputdsls_connectionString')]"
+					},
+					"payrollemployeesls_connectionString": {
+						"value": "[parameters('payrollemployeesls_connectionString')]"
+					},
+					"unionofallemloyees_connectionString": {
+						"value": "[parameters('unionofallemloyees_connectionString')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 					}
 				}
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_2')]"
 			]
 		}
 	]

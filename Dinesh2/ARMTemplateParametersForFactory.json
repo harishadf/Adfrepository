@@ -23,6 +23,12 @@
 		"AzureBlobStorage5_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage6_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage7_connectionString": {
+			"value": ""
+		},
 		"Blobtest1_connectionString": {
 			"value": ""
 		},
@@ -32,7 +38,49 @@
 		"DSharish_connectionString": {
 			"value": ""
 		},
+		"HRemployeesls_connectionString": {
+			"value": ""
+		},
+		"ITempl_connectionString": {
+			"value": ""
+		},
+		"ITemployeesds_connectionString": {
+			"value": ""
+		},
+		"ITemployeeslinkedservice_connectionString": {
+			"value": ""
+		},
+		"departmentls_connectionString": {
+			"value": ""
+		},
+		"employeesls_connectionString": {
+			"value": ""
+		},
+		"harishlsoutput_connectionString": {
+			"value": ""
+		},
 		"harishparquet_connectionString": {
+			"value": ""
+		},
+		"hremployeeslsnew_connectionString": {
+			"value": ""
+		},
+		"lookupoutds_connectionString": {
+			"value": ""
+		},
+		"lsharish_connectionString": {
+			"value": ""
+		},
+		"lsharishoutput_connectionString": {
+			"value": ""
+		},
+		"outputdsls_connectionString": {
+			"value": ""
+		},
+		"payrollemployeesls_connectionString": {
+			"value": ""
+		},
+		"unionofallemloyees_connectionString": {
 			"value": ""
 		},
 		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
