@@ -92,6 +92,9 @@
 		"hremployeeslsnew_connectionString": {
 			"value": ""
 		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
 		"lookupoutds_connectionString": {
 			"value": ""
 		},

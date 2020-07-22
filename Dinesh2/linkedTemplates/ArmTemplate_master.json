@@ -123,6 +123,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'hremployeeslsnew'"
 		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
 		"lookupoutds_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lookupoutds'"
@@ -326,6 +330,9 @@
 					"hremployeeslsnew_connectionString": {
 						"value": "[parameters('hremployeeslsnew_connectionString')]"
 					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
+					},
 					"lookupoutds_connectionString": {
 						"value": "[parameters('lookupoutds_connectionString')]"
 					},
@@ -349,15 +356,6 @@
 					},
 					"unionofallemloyees_connectionString": {
 						"value": "[parameters('unionofallemloyees_connectionString')]"
-					},
-					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
-						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
-					},
-					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
-						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
-					},
-					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 					}
 				}
 			},
@@ -378,6 +376,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 					}
 				}
 			},
