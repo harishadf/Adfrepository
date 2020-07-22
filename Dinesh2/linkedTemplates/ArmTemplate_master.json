@@ -15,6 +15,34 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureBlobStorage10_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage10'"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage11'"
+		},
+		"AzureBlobStorage12_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage12'"
+		},
+		"AzureBlobStorage13_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage13'"
+		},
+		"AzureBlobStorage14_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage14'"
+		},
+		"AzureBlobStorage15_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage15'"
+		},
+		"AzureBlobStorage16_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage16'"
+		},
 		"AzureBlobStorage2_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
@@ -115,6 +143,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'payrollemployeesls'"
 		},
+		"ps1filels_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ps1filels'"
+		},
+		"psfiledsls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'psfiledsls'"
+		},
 		"unionofallemloyees_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'unionofallemloyees'"
@@ -179,6 +215,27 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureBlobStorage10_connectionString": {
+						"value": "[parameters('AzureBlobStorage10_connectionString')]"
+					},
+					"AzureBlobStorage11_connectionString": {
+						"value": "[parameters('AzureBlobStorage11_connectionString')]"
+					},
+					"AzureBlobStorage12_connectionString": {
+						"value": "[parameters('AzureBlobStorage12_connectionString')]"
+					},
+					"AzureBlobStorage13_connectionString": {
+						"value": "[parameters('AzureBlobStorage13_connectionString')]"
+					},
+					"AzureBlobStorage14_connectionString": {
+						"value": "[parameters('AzureBlobStorage14_connectionString')]"
+					},
+					"AzureBlobStorage15_connectionString": {
+						"value": "[parameters('AzureBlobStorage15_connectionString')]"
+					},
+					"AzureBlobStorage16_connectionString": {
+						"value": "[parameters('AzureBlobStorage16_connectionString')]"
+					},
 					"AzureBlobStorage2_connectionString": {
 						"value": "[parameters('AzureBlobStorage2_connectionString')]"
 					},
@@ -208,27 +265,6 @@
 					},
 					"DGLS_connectionString": {
 						"value": "[parameters('DGLS_connectionString')]"
-					},
-					"DSharish_connectionString": {
-						"value": "[parameters('DSharish_connectionString')]"
-					},
-					"HRemployeesls_connectionString": {
-						"value": "[parameters('HRemployeesls_connectionString')]"
-					},
-					"ITempl_connectionString": {
-						"value": "[parameters('ITempl_connectionString')]"
-					},
-					"ITemployeesds_connectionString": {
-						"value": "[parameters('ITemployeesds_connectionString')]"
-					},
-					"ITemployeeslinkedservice_connectionString": {
-						"value": "[parameters('ITemployeeslinkedservice_connectionString')]"
-					},
-					"departmentls_connectionString": {
-						"value": "[parameters('departmentls_connectionString')]"
-					},
-					"employeesls_connectionString": {
-						"value": "[parameters('employeesls_connectionString')]"
 					},
 					"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
 						"value": "[parameters('ADLSLS_properties_typeProperties_dataLakeStoreUri')]"
@@ -260,6 +296,27 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"DSharish_connectionString": {
+						"value": "[parameters('DSharish_connectionString')]"
+					},
+					"HRemployeesls_connectionString": {
+						"value": "[parameters('HRemployeesls_connectionString')]"
+					},
+					"ITempl_connectionString": {
+						"value": "[parameters('ITempl_connectionString')]"
+					},
+					"ITemployeesds_connectionString": {
+						"value": "[parameters('ITemployeesds_connectionString')]"
+					},
+					"ITemployeeslinkedservice_connectionString": {
+						"value": "[parameters('ITemployeeslinkedservice_connectionString')]"
+					},
+					"departmentls_connectionString": {
+						"value": "[parameters('departmentls_connectionString')]"
+					},
+					"employeesls_connectionString": {
+						"value": "[parameters('employeesls_connectionString')]"
+					},
 					"harishlsoutput_connectionString": {
 						"value": "[parameters('harishlsoutput_connectionString')]"
 					},
@@ -283,6 +340,12 @@
 					},
 					"payrollemployeesls_connectionString": {
 						"value": "[parameters('payrollemployeesls_connectionString')]"
+					},
+					"ps1filels_connectionString": {
+						"value": "[parameters('ps1filels_connectionString')]"
+					},
+					"psfiledsls_connectionString": {
+						"value": "[parameters('psfiledsls_connectionString')]"
 					},
 					"unionofallemloyees_connectionString": {
 						"value": "[parameters('unionofallemloyees_connectionString')]"
@@ -340,6 +403,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_3')]"
 			]
 		}
 	]
