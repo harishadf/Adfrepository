@@ -1,0 +1,805 @@
+{
+	"name": "Parquet3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage15",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Dummyhpi_partsorder (1).parquet",
+				"container": "parquetfilesource"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "createdby",
+				"type": "UTF8"
+			},
+			{
+				"name": "createdbyname",
+				"type": "UTF8"
+			},
+			{
+				"name": "createdbyyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "createdon",
+				"type": "INT96"
+			},
+			{
+				"name": "createdonbehalfby",
+				"type": "UTF8"
+			},
+			{
+				"name": "createdonbehalfbyname",
+				"type": "UTF8"
+			},
+			{
+				"name": "createdonbehalfbyyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "exchangerate",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "hpi_addessvalidated",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_addessvalidatedname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_advisoryid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_amid2",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_amid4",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_assetid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_assetidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_authorizedemployee",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_autoclosedate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_badgenumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_badgenumbername",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_billblock",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_carrier",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseentitlementid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseentitlementidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseoffer",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseofferid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseofferidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseoffername",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_chooseaddress",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_chooseaddresses",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_chooseaddressesname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_chooseaddressname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_city",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_companyname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_contactfirstname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_contactid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_contactidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_contactidyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_contactlastname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_contract_baseline",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_country",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_countryname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_countryshortcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_csrid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_csridname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_cust_grp5",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_customer_site",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_customerselfrepairid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_customerselfrepairidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_daysleft",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_deliverycomplete",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_deliverycompletename",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_deliveryinstructions",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_deliverypriorities",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_deliveryprioritiesname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_deliverypriority",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_deliverypriorityname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_distributionchannel",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_division",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_dlv_block",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_dropbox",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_dropboxname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_emailaddress",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_enddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_entitlementoverridereasonid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_entitlementoverridereasonidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_entitlementstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_entitlementstatusname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_expecteddeliverydate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_formopenedfirsttime",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_formopenedfirsttimename",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckcount",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_fraudcheckdescription",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckholddetails",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckholdreason",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_fraudcheckholdreasonname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_fraudcheckstatusname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_globalshipmentcondition",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_globalshipmentconditionname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_globalspecialprocess",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_globalspecialprocessname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_globalsupplychain",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_globalsupplychainname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_isplaceorder",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_isplaceordername",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_ispoaddressupdate",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_ispoaddressupdatename",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_latest_date",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_latestdatetime",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_line1",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_line2",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_logisticorderidentifier",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_mc_flag",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_message",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_netordervalue",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "hpi_netordervalue_base",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "hpi_nfid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_obligationid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_order_reason_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_orderaddress",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_orderaddressname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_ordercloseddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_ordernumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_orderreason",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_orderreasonname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_orderstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_orderstatuscode",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_orderstatusname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_originator",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_otccodeid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_otccodeidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_overridereason",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_parentpartorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_parentpartorderidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_part_delivery_timestamp",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_partdescription",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partrequesteddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_partsorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_paymentterms",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_pendingtransactiontype",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_phonenumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_pricingdate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_productname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_productnamename",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_queue",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_queuename",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_receiveddateandtime",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_remotediagnosticscode",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_requesteddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_ribbonprocessing",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_ribbonprocessingname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_safariid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_salesorg",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_securitystatuscode",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_serialnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_service_flag",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_service_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_serviceidentificationnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_servicenotificationidentifier",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_serviceorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_serviceorderidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_shipping_carrier_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_shipping_condition_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_shippingcondition",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_shippingconditionname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_shippinginstructions",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_shippinginstructionsname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_site",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_site_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_sitename",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_sitepatnerid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_sitepatneridname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_siteyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_sku",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_startdate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_stateprovince",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_systemproductnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_systemserialnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_timezone",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_trackingnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_usage",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_workorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_workorderidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_zipextension",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_zippostalcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "importsequencenumber",
+				"type": "INT32"
+			},
+			{
+				"name": "modifiedby",
+				"type": "UTF8"
+			},
+			{
+				"name": "modifiedbyname",
+				"type": "UTF8"
+			},
+			{
+				"name": "modifiedbyyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "modifiedon",
+				"type": "INT96"
+			},
+			{
+				"name": "modifiedonbehalfby",
+				"type": "UTF8"
+			},
+			{
+				"name": "modifiedonbehalfbyname",
+				"type": "UTF8"
+			},
+			{
+				"name": "modifiedonbehalfbyyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "overriddencreatedon",
+				"type": "INT96"
+			},
+			{
+				"name": "ownerid",
+				"type": "UTF8"
+			},
+			{
+				"name": "owneridname",
+				"type": "UTF8"
+			},
+			{
+				"name": "owneridtype",
+				"type": "UTF8"
+			},
+			{
+				"name": "owneridyominame",
+				"type": "UTF8"
+			},
+			{
+				"name": "owningbusinessunit",
+				"type": "UTF8"
+			},
+			{
+				"name": "owningteam",
+				"type": "UTF8"
+			},
+			{
+				"name": "owninguser",
+				"type": "UTF8"
+			},
+			{
+				"name": "statecode",
+				"type": "INT32"
+			},
+			{
+				"name": "statecodename",
+				"type": "UTF8"
+			},
+			{
+				"name": "statuscode",
+				"type": "UTF8"
+			},
+			{
+				"name": "statuscodename",
+				"type": "UTF8"
+			},
+			{
+				"name": "timezoneruleversionnumber",
+				"type": "INT32"
+			},
+			{
+				"name": "transactioncurrencyid",
+				"type": "UTF8"
+			},
+			{
+				"name": "transactioncurrencyidname",
+				"type": "UTF8"
+			},
+			{
+				"name": "utcconversiontimezonecode",
+				"type": "INT32"
+			},
+			{
+				"name": "versionnumber",
+				"type": "INT32"
+			}
+		]
+	}
+}

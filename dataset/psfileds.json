@@ -1,0 +1,285 @@
+{
+	"name": "psfileds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "psfiledsls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hpi_partsorder_2019-07-19.parquet",
+				"container": "parquetfilesource"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "hpi_deliverypriorities",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_assetid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_ordernumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_zippostalcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "statuscode",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_partsorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_globalshipmentcondition",
+				"type": "INT32"
+			},
+			{
+				"name": "createdon",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_deliveryinstructions",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_formopenedfirsttime",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_serialnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_workorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "ownerid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_badgenumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "modifiedon",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_safariid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_addessvalidated",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "statecode",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_chooseaddresses",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_deliverycomplete",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_isplaceorder",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "timezoneruleversionnumber",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_orderstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "modifiedby",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_countryshortcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_country",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_otccodeid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partrequesteddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_globalsupplychain",
+				"type": "INT32"
+			},
+			{
+				"name": "versionnumber",
+				"type": "INT64"
+			},
+			{
+				"name": "hpi_ispoaddressupdate",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_orderreason",
+				"type": "INT32"
+			},
+			{
+				"name": "createdby",
+				"type": "UTF8"
+			},
+			{
+				"name": "owningbusinessunit",
+				"type": "UTF8"
+			},
+			{
+				"name": "owninguser",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_ribbonprocessing",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "hpi_site",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_shippingcondition",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_contactid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partdescription",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_entitlementstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_startdate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_caseofferid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partnumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_caseentitlementid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_daysleft",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_enddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_receiveddateandtime",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_sitepatnerid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckdescription",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_productname",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckcount",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_division",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_fraudcheckstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_latest_date",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_partorderid",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_usage",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_line1",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_distributionchannel",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_servicenotificationidentifier",
+				"type": "UTF8"
+			},
+			{
+				"name": "hpi_ordercloseddate",
+				"type": "INT96"
+			},
+			{
+				"name": "hpi_fraudcheckholdreason",
+				"type": "INT32"
+			},
+			{
+				"name": "hpi_city",
+				"type": "UTF8"
+			},
+			{
+				"name": "createdonbehalfby",
+				"type": "UTF8"
+			}
+		]
+	}
+}

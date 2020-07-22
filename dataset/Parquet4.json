@@ -1,0 +1,19 @@
+{
+	"name": "Parquet4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage16",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sharepointdata"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
