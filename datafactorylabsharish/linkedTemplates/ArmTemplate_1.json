@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DSharish'"
 		},
+		"DatabricksLinkedService_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'DatabricksLinkedService'"
+		},
 		"HRemployeesls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'HRemployeesls'"
@@ -82,10 +86,6 @@
 		"payrollemployeesls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'payrollemployeesls'"
-		},
-		"ps1filels_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ps1filels'"
 		}
 	},
 	"variables": {
@@ -114,6 +114,30 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('DSharish_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DatabricksLinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "DatabricksLinkedService",
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-4580107131276044.4.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('DatabricksLinkedService_accessToken')]"
+					},
+					"newClusterNodeType": "Standard_NC6s_v3",
+					"newClusterNumOfWorker": "2",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "6.3.x-gpu-ml-scala2.11"
 				}
 			},
 			"dependsOn": []
@@ -350,20 +374,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('payrollemployeesls_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ps1filels')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "ps1filels",
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('ps1filels_connectionString')]"
 				}
 			},
 			"dependsOn": []

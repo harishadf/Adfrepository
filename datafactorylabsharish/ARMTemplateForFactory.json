@@ -95,6 +95,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accessKey' of 'DataFactoryLabBatchServic'"
 		},
+		"DatabricksLinkedService_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'DatabricksLinkedService'"
+		},
 		"HRemployeesls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'HRemployeesls'"
@@ -778,6 +782,56 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/lookupdataflow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "NotebookActivity",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Movie classification with Azure Databricks",
+							"libraries": [
+								{
+									"pypi": {
+										"package": "genism"
+									}
+								},
+								{
+									"pypi": {
+										"package": "keras"
+									}
+								},
+								{
+									"pypi": {
+										"package": "Tensorflow"
+									}
+								}
+							]
+						},
+						"linkedServiceName": {
+							"referenceName": "DatabricksLinkedService",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DatabricksLinkedService')]"
 			]
 		},
 		{
@@ -5746,6 +5800,30 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/BatchStorageLinkedServic')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DatabricksLinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "DatabricksLinkedService",
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-4580107131276044.4.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('DatabricksLinkedService_accessToken')]"
+					},
+					"newClusterNodeType": "Standard_NC6s_v3",
+					"newClusterNumOfWorker": "2",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "6.3.x-gpu-ml-scala2.11"
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/HRemployeesls')]",

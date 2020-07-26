@@ -71,6 +71,9 @@
 		"DataFactoryLabBatchServic_accessKey": {
 			"value": ""
 		},
+		"DatabricksLinkedService_accessToken": {
+			"value": ""
+		},
 		"HRemployeesls_connectionString": {
 			"value": ""
 		},

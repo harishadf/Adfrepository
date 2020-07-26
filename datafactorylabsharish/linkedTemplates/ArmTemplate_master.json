@@ -95,6 +95,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accessKey' of 'DataFactoryLabBatchServic'"
 		},
+		"DatabricksLinkedService_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'DatabricksLinkedService'"
+		},
 		"HRemployeesls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'HRemployeesls'"
@@ -334,6 +338,9 @@
 					"DSharish_connectionString": {
 						"value": "[parameters('DSharish_connectionString')]"
 					},
+					"DatabricksLinkedService_accessToken": {
+						"value": "[parameters('DatabricksLinkedService_accessToken')]"
+					},
 					"HRemployeesls_connectionString": {
 						"value": "[parameters('HRemployeesls_connectionString')]"
 					},
@@ -384,9 +391,6 @@
 					},
 					"payrollemployeesls_connectionString": {
 						"value": "[parameters('payrollemployeesls_connectionString')]"
-					},
-					"ps1filels_connectionString": {
-						"value": "[parameters('ps1filels_connectionString')]"
 					}
 				}
 			},
@@ -407,6 +411,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ps1filels_connectionString": {
+						"value": "[parameters('ps1filels_connectionString')]"
 					},
 					"psfiledsls_connectionString": {
 						"value": "[parameters('psfiledsls_connectionString')]"
