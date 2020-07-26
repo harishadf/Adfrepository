@@ -1,0 +1,150 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafactorylabsharish"
+		},
+		"AblobLS_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage10_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage11_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage12_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage13_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage14_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage15_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage16_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage2_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage3_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage4_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage5_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage6_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage7_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage8_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage9_connectionString": {
+			"value": ""
+		},
+		"Blobtest1_connectionString": {
+			"value": ""
+		},
+		"DGLS_connectionString": {
+			"value": ""
+		},
+		"DSharish_connectionString": {
+			"value": ""
+		},
+		"HRemployeesls_connectionString": {
+			"value": ""
+		},
+		"ITempl_connectionString": {
+			"value": ""
+		},
+		"ITemployeesds_connectionString": {
+			"value": ""
+		},
+		"ITemployeeslinkedservice_connectionString": {
+			"value": ""
+		},
+		"adflabsinkdataset_connectionString": {
+			"value": ""
+		},
+		"adflabsourcestorage_connectionString": {
+			"value": ""
+		},
+		"departmentls_connectionString": {
+			"value": ""
+		},
+		"employeesls_connectionString": {
+			"value": ""
+		},
+		"harishlsoutput_connectionString": {
+			"value": ""
+		},
+		"harishparquet_connectionString": {
+			"value": ""
+		},
+		"hremployeeslsnew_connectionString": {
+			"value": ""
+		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
+		"lookupoutds_connectionString": {
+			"value": ""
+		},
+		"lsharish_connectionString": {
+			"value": ""
+		},
+		"lsharishoutput_connectionString": {
+			"value": ""
+		},
+		"outputdsls_connectionString": {
+			"value": ""
+		},
+		"payrollemployeesls_connectionString": {
+			"value": ""
+		},
+		"ps1filels_connectionString": {
+			"value": ""
+		},
+		"psfiledsls_connectionString": {
+			"value": ""
+		},
+		"unionofallemloyees_connectionString": {
+			"value": ""
+		},
+		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://sourceadlsharish.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLSLS_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ADLSLS_properties_typeProperties_subscriptionId": {
+			"value": "82da1dd1-f682-4164-8732-e21666d90066"
+		},
+		"ADLSLS_properties_typeProperties_resourceGroupName": {
+			"value": "harishsql"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "harishchamp.database.windows.net"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "harishchamp"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
+		}
+	}
+}

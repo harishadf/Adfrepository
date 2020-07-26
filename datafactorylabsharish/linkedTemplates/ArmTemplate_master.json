@@ -1,0 +1,450 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorylabsharish"
+		},
+		"AblobLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AblobLS'"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureBlobStorage10_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage10'"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage11'"
+		},
+		"AzureBlobStorage12_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage12'"
+		},
+		"AzureBlobStorage13_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage13'"
+		},
+		"AzureBlobStorage14_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage14'"
+		},
+		"AzureBlobStorage15_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage15'"
+		},
+		"AzureBlobStorage16_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage16'"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
+		"AzureBlobStorage4_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
+		},
+		"AzureBlobStorage5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
+		},
+		"AzureBlobStorage6_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
+		},
+		"AzureBlobStorage7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
+		},
+		"AzureBlobStorage8_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage8'"
+		},
+		"AzureBlobStorage9_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
+		},
+		"Blobtest1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
+		},
+		"DGLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DGLS'"
+		},
+		"DSharish_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DSharish'"
+		},
+		"HRemployeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'HRemployeesls'"
+		},
+		"ITempl_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITempl'"
+		},
+		"ITemployeesds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITemployeesds'"
+		},
+		"ITemployeeslinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITemployeeslinkedservice'"
+		},
+		"adflabsinkdataset_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'adflabsinkdataset'"
+		},
+		"adflabsourcestorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'adflabsourcestorage'"
+		},
+		"departmentls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'departmentls'"
+		},
+		"employeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'employeesls'"
+		},
+		"harishlsoutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishlsoutput'"
+		},
+		"harishparquet_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishparquet'"
+		},
+		"hremployeeslsnew_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'hremployeeslsnew'"
+		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
+		"lookupoutds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lookupoutds'"
+		},
+		"lsharish_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsharish'"
+		},
+		"lsharishoutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsharishoutput'"
+		},
+		"outputdsls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'outputdsls'"
+		},
+		"payrollemployeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'payrollemployeesls'"
+		},
+		"ps1filels_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ps1filels'"
+		},
+		"psfiledsls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'psfiledsls'"
+		},
+		"unionofallemloyees_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'unionofallemloyees'"
+		},
+		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://sourceadlsharish.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLSLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ADLSLS_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "82da1dd1-f682-4164-8732-e21666d90066"
+		},
+		"ADLSLS_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "harishsql"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "harishchamp.database.windows.net"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"type": "string",
+			"defaultValue": "harishchamp"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AblobLS_connectionString": {
+						"value": "[parameters('AblobLS_connectionString')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"AzureBlobStorage10_connectionString": {
+						"value": "[parameters('AzureBlobStorage10_connectionString')]"
+					},
+					"AzureBlobStorage11_connectionString": {
+						"value": "[parameters('AzureBlobStorage11_connectionString')]"
+					},
+					"AzureBlobStorage12_connectionString": {
+						"value": "[parameters('AzureBlobStorage12_connectionString')]"
+					},
+					"AzureBlobStorage13_connectionString": {
+						"value": "[parameters('AzureBlobStorage13_connectionString')]"
+					},
+					"AzureBlobStorage14_connectionString": {
+						"value": "[parameters('AzureBlobStorage14_connectionString')]"
+					},
+					"AzureBlobStorage15_connectionString": {
+						"value": "[parameters('AzureBlobStorage15_connectionString')]"
+					},
+					"AzureBlobStorage16_connectionString": {
+						"value": "[parameters('AzureBlobStorage16_connectionString')]"
+					},
+					"AzureBlobStorage2_connectionString": {
+						"value": "[parameters('AzureBlobStorage2_connectionString')]"
+					},
+					"AzureBlobStorage3_connectionString": {
+						"value": "[parameters('AzureBlobStorage3_connectionString')]"
+					},
+					"AzureBlobStorage4_connectionString": {
+						"value": "[parameters('AzureBlobStorage4_connectionString')]"
+					},
+					"AzureBlobStorage5_connectionString": {
+						"value": "[parameters('AzureBlobStorage5_connectionString')]"
+					},
+					"AzureBlobStorage6_connectionString": {
+						"value": "[parameters('AzureBlobStorage6_connectionString')]"
+					},
+					"AzureBlobStorage7_connectionString": {
+						"value": "[parameters('AzureBlobStorage7_connectionString')]"
+					},
+					"AzureBlobStorage8_connectionString": {
+						"value": "[parameters('AzureBlobStorage8_connectionString')]"
+					},
+					"AzureBlobStorage9_connectionString": {
+						"value": "[parameters('AzureBlobStorage9_connectionString')]"
+					},
+					"Blobtest1_connectionString": {
+						"value": "[parameters('Blobtest1_connectionString')]"
+					},
+					"DGLS_connectionString": {
+						"value": "[parameters('DGLS_connectionString')]"
+					},
+					"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"ADLSLS_properties_typeProperties_tenant": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_tenant')]"
+					},
+					"ADLSLS_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_subscriptionId')]"
+					},
+					"ADLSLS_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('ADLSLS_properties_typeProperties_resourceGroupName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DSharish_connectionString": {
+						"value": "[parameters('DSharish_connectionString')]"
+					},
+					"HRemployeesls_connectionString": {
+						"value": "[parameters('HRemployeesls_connectionString')]"
+					},
+					"ITempl_connectionString": {
+						"value": "[parameters('ITempl_connectionString')]"
+					},
+					"ITemployeesds_connectionString": {
+						"value": "[parameters('ITemployeesds_connectionString')]"
+					},
+					"ITemployeeslinkedservice_connectionString": {
+						"value": "[parameters('ITemployeeslinkedservice_connectionString')]"
+					},
+					"adflabsinkdataset_connectionString": {
+						"value": "[parameters('adflabsinkdataset_connectionString')]"
+					},
+					"adflabsourcestorage_connectionString": {
+						"value": "[parameters('adflabsourcestorage_connectionString')]"
+					},
+					"departmentls_connectionString": {
+						"value": "[parameters('departmentls_connectionString')]"
+					},
+					"employeesls_connectionString": {
+						"value": "[parameters('employeesls_connectionString')]"
+					},
+					"harishlsoutput_connectionString": {
+						"value": "[parameters('harishlsoutput_connectionString')]"
+					},
+					"harishparquet_connectionString": {
+						"value": "[parameters('harishparquet_connectionString')]"
+					},
+					"hremployeeslsnew_connectionString": {
+						"value": "[parameters('hremployeeslsnew_connectionString')]"
+					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
+					},
+					"lookupoutds_connectionString": {
+						"value": "[parameters('lookupoutds_connectionString')]"
+					},
+					"lsharish_connectionString": {
+						"value": "[parameters('lsharish_connectionString')]"
+					},
+					"lsharishoutput_connectionString": {
+						"value": "[parameters('lsharishoutput_connectionString')]"
+					},
+					"outputdsls_connectionString": {
+						"value": "[parameters('outputdsls_connectionString')]"
+					},
+					"payrollemployeesls_connectionString": {
+						"value": "[parameters('payrollemployeesls_connectionString')]"
+					},
+					"ps1filels_connectionString": {
+						"value": "[parameters('ps1filels_connectionString')]"
+					},
+					"psfiledsls_connectionString": {
+						"value": "[parameters('psfiledsls_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"unionofallemloyees_connectionString": {
+						"value": "[parameters('unionofallemloyees_connectionString')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
+					},
+					"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+						"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_3')]"
+			]
+		}
+	]
+}

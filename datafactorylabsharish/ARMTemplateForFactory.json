@@ -1,0 +1,6246 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorylabsharish"
+		},
+		"AblobLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AblobLS'"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureBlobStorage10_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage10'"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage11'"
+		},
+		"AzureBlobStorage12_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage12'"
+		},
+		"AzureBlobStorage13_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage13'"
+		},
+		"AzureBlobStorage14_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage14'"
+		},
+		"AzureBlobStorage15_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage15'"
+		},
+		"AzureBlobStorage16_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage16'"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
+		"AzureBlobStorage4_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
+		},
+		"AzureBlobStorage5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
+		},
+		"AzureBlobStorage6_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
+		},
+		"AzureBlobStorage7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
+		},
+		"AzureBlobStorage8_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage8'"
+		},
+		"AzureBlobStorage9_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
+		},
+		"Blobtest1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
+		},
+		"DGLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DGLS'"
+		},
+		"DSharish_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DSharish'"
+		},
+		"HRemployeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'HRemployeesls'"
+		},
+		"ITempl_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITempl'"
+		},
+		"ITemployeesds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITemployeesds'"
+		},
+		"ITemployeeslinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ITemployeeslinkedservice'"
+		},
+		"adflabsinkdataset_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'adflabsinkdataset'"
+		},
+		"adflabsourcestorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'adflabsourcestorage'"
+		},
+		"departmentls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'departmentls'"
+		},
+		"employeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'employeesls'"
+		},
+		"harishlsoutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishlsoutput'"
+		},
+		"harishparquet_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishparquet'"
+		},
+		"hremployeeslsnew_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'hremployeeslsnew'"
+		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
+		"lookupoutds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lookupoutds'"
+		},
+		"lsharish_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsharish'"
+		},
+		"lsharishoutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsharishoutput'"
+		},
+		"outputdsls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'outputdsls'"
+		},
+		"payrollemployeesls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'payrollemployeesls'"
+		},
+		"ps1filels_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ps1filels'"
+		},
+		"psfiledsls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'psfiledsls'"
+		},
+		"unionofallemloyees_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'unionofallemloyees'"
+		},
+		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://sourceadlsharish.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLSLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ADLSLS_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "82da1dd1-f682-4164-8732-e21666d90066"
+		},
+		"ADLSLS_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "harishsql"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "harishchamp.database.windows.net"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"type": "string",
+			"defaultValue": "harishchamp"
+		},
+		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Executedataflow')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"employees": {},
+									"Department": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Unionpipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Unionpipeline",
+				"activities": [
+					{
+						"name": "ITemployees",
+						"description": "ITempl",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ITemployees",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ITemployees": {},
+									"Payrollemplu": {},
+									"HRemployees": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/ITemployees')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adflabControlFlowPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "getFileNamesActivity",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "adflabSampleData",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "filterCsvFiles",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "getFileNamesActivity",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('getFileNamesActivity').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@endswith(item().name,'csv')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "filterCsvFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('filterCsvFiles').output.Value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "getFileSizeActivity",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "adflabSampleDataCSV",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": "@item().name"
+											}
+										},
+										"fieldList": [
+											"size"
+										],
+										"storeSettings": {
+											"type": "AzureBlobStorageReadSettings",
+											"recursive": true
+										},
+										"formatSettings": {
+											"type": "DelimitedTextReadSettings"
+										}
+									}
+								},
+								{
+									"name": "IfConditionActivity",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "getFileSizeActivity",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@greaterOrEquals(1024,activity('getFileSizeActivity').output.size)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "deleteActivity",
+												"type": "Delete",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"dataset": {
+														"referenceName": "adflabSampleDataCSV",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": "@item().name"
+														}
+													},
+													"logStorageSettings": {
+														"linkedServiceName": {
+															"referenceName": "adflabsourcestorage",
+															"type": "LinkedServiceReference"
+														}
+													},
+													"enableLogging": true,
+													"storeSettings": {
+														"type": "AzureBlobStorageReadSettings",
+														"recursive": true
+													}
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "CopyToBlobActivity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "adflabSampleDataCSV",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": "@item().name"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "adflabsinkdatase",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/adflabSampleData')]",
+				"[concat(variables('factoryId'), '/datasets/adflabSampleDataCSV')]",
+				"[concat(variables('factoryId'), '/datasets/adflabsinkdatase')]",
+				"[concat(variables('factoryId'), '/linkedServices/adflabsourcestorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lookupdataflowoutput')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "lookupdataflow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "lookupdataflow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Employees": {},
+									"Departments": {},
+									"ouputdataset": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/lookupdataflow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS1')]",
+				"[concat(variables('factoryId'), '/datasets/DS2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "existdataflow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow2",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Employeesdata": {},
+									"Department": {},
+									"harishoutout": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "lookupdataflow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "lookupdataflow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Employees": {},
+									"Departments": {},
+									"ouputdataset": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/lookupdataflow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DGLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "emp.txt",
+						"container": "harisource"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DGLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DGLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harisource"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DGLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DSLS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "lsharish",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "empl.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/lsharish')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "harish.csv",
+						"container": "harishfold"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harishfold"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage6",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dept.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "deptid",
+						"type": "String"
+					},
+					{
+						"name": "Depname",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage6')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage7",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage7')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage8",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dept.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "deptid",
+						"type": "String"
+					},
+					{
+						"name": "Depname",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage8')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage9",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dept.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "deptid",
+						"type": "String"
+					},
+					{
+						"name": "Depname",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage9')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HRemployees')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "hremployeeslsnew",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HREmployees.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "departmetn",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/hremployeeslsnew')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ITempl')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ITempl",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ITEmployees.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "department",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ITempl')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ITemployeesdataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ITemployeeslinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "empl.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "department",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ITemployeeslinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "govdata.json",
+						"folderPath": "ADFsource",
+						"container": "harisource"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"view": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"averageRating": {
+											"type": "integer"
+										},
+										"createdAt": {
+											"type": "integer"
+										},
+										"description": {
+											"type": "string"
+										},
+										"displayType": {
+											"type": "string"
+										},
+										"downloadCount": {
+											"type": "integer"
+										},
+										"hideFromCatalog": {
+											"type": "boolean"
+										},
+										"hideFromDataJson": {
+											"type": "boolean"
+										},
+										"indexUpdatedAt": {
+											"type": "integer"
+										},
+										"newBackend": {
+											"type": "boolean"
+										},
+										"numberOfComments": {
+											"type": "integer"
+										},
+										"oid": {
+											"type": "integer"
+										},
+										"provenance": {
+											"type": "string"
+										},
+										"publicationAppendEnabled": {
+											"type": "boolean"
+										},
+										"publicationDate": {
+											"type": "integer"
+										},
+										"publicationGroup": {
+											"type": "integer"
+										},
+										"publicationStage": {
+											"type": "string"
+										},
+										"rowsUpdatedAt": {
+											"type": "integer"
+										},
+										"rowsUpdatedBy": {
+											"type": "string"
+										},
+										"tableId": {
+											"type": "integer"
+										},
+										"totalTimesRated": {
+											"type": "integer"
+										},
+										"viewCount": {
+											"type": "integer"
+										},
+										"viewLastModified": {
+											"type": "integer"
+										},
+										"viewType": {
+											"type": "string"
+										},
+										"approvals": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reviewedAt": {
+														"type": "integer"
+													},
+													"reviewedAutomatically": {
+														"type": "boolean"
+													},
+													"state": {
+														"type": "string"
+													},
+													"submissionId": {
+														"type": "integer"
+													},
+													"submissionObject": {
+														"type": "string"
+													},
+													"submissionOutcome": {
+														"type": "string"
+													},
+													"submittedAt": {
+														"type": "integer"
+													},
+													"workflowId": {
+														"type": "integer"
+													},
+													"submissionDetails": {
+														"type": "object",
+														"properties": {
+															"permissionType": {
+																"type": "string"
+															}
+														}
+													},
+													"submissionOutcomeApplication": {
+														"type": "object",
+														"properties": {
+															"failureCount": {
+																"type": "integer"
+															},
+															"status": {
+																"type": "string"
+															}
+														}
+													},
+													"submitter": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"displayName": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										},
+										"columns": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "integer"
+													},
+													"name": {
+														"type": "string"
+													},
+													"dataTypeName": {
+														"type": "string"
+													},
+													"fieldName": {
+														"type": "string"
+													},
+													"position": {
+														"type": "integer"
+													},
+													"renderTypeName": {
+														"type": "string"
+													},
+													"format": {
+														"type": "object"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"grants": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"inherited": {
+														"type": "boolean"
+													},
+													"type": {
+														"type": "string"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"metadata": {
+											"type": "object",
+											"properties": {
+												"custom_fields": {
+													"type": "object",
+													"properties": {
+														"Data Reference": {
+															"type": "object",
+															"properties": {
+																"Reference for Technical Information": {
+																	"type": "string"
+																},
+																"Frequency": {
+																	"type": "string"
+																},
+																"Date Updated": {
+																	"type": "string"
+																},
+																"Date Released": {
+																	"type": "string"
+																},
+																"Period of Coverage": {
+																	"type": "string"
+																},
+																"Unit of Analysis": {
+																	"type": "string"
+																},
+																"Data dictionary/variable list": {
+																	"type": "string"
+																}
+															}
+														},
+														"Hawaii Line of Business": {
+															"type": "object",
+															"properties": {
+																"Division name": {
+																	"type": "string"
+																},
+																"Line of Business": {
+																	"type": "string"
+																},
+																"Division shortname, acronym": {
+																	"type": "string"
+																},
+																"Department Agency short name, acronym": {
+																	"type": "string"
+																},
+																"State of Hawaii Data Book Category": {
+																	"type": "string"
+																},
+																"Department/Agency": {
+																	"type": "string"
+																}
+															}
+														},
+														"Terms of Use Acknowledgement": {
+															"type": "object",
+															"properties": {
+																"I agree by uploading this dataset that it contains no private information, and adheres to the data.hawaii.gov terms of use.": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												},
+												"availableDisplayTypes": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												},
+												"renderTypeConfig": {
+													"type": "object",
+													"properties": {
+														"visible": {
+															"type": "object",
+															"properties": {
+																"table": {
+																	"type": "boolean"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"owner": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"query": {
+											"type": "object"
+										},
+										"rights": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"tableAuthor": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"flags": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harisource"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"view": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"averageRating": {
+											"type": "integer"
+										},
+										"createdAt": {
+											"type": "integer"
+										},
+										"description": {
+											"type": "string"
+										},
+										"displayType": {
+											"type": "string"
+										},
+										"downloadCount": {
+											"type": "integer"
+										},
+										"hideFromCatalog": {
+											"type": "boolean"
+										},
+										"hideFromDataJson": {
+											"type": "boolean"
+										},
+										"indexUpdatedAt": {
+											"type": "integer"
+										},
+										"newBackend": {
+											"type": "boolean"
+										},
+										"numberOfComments": {
+											"type": "integer"
+										},
+										"oid": {
+											"type": "integer"
+										},
+										"provenance": {
+											"type": "string"
+										},
+										"publicationAppendEnabled": {
+											"type": "boolean"
+										},
+										"publicationDate": {
+											"type": "integer"
+										},
+										"publicationGroup": {
+											"type": "integer"
+										},
+										"publicationStage": {
+											"type": "string"
+										},
+										"rowsUpdatedAt": {
+											"type": "integer"
+										},
+										"rowsUpdatedBy": {
+											"type": "string"
+										},
+										"tableId": {
+											"type": "integer"
+										},
+										"totalTimesRated": {
+											"type": "integer"
+										},
+										"viewCount": {
+											"type": "integer"
+										},
+										"viewLastModified": {
+											"type": "integer"
+										},
+										"viewType": {
+											"type": "string"
+										},
+										"approvals": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reviewedAt": {
+														"type": "integer"
+													},
+													"reviewedAutomatically": {
+														"type": "boolean"
+													},
+													"state": {
+														"type": "string"
+													},
+													"submissionId": {
+														"type": "integer"
+													},
+													"submissionObject": {
+														"type": "string"
+													},
+													"submissionOutcome": {
+														"type": "string"
+													},
+													"submittedAt": {
+														"type": "integer"
+													},
+													"workflowId": {
+														"type": "integer"
+													},
+													"submissionDetails": {
+														"type": "object",
+														"properties": {
+															"permissionType": {
+																"type": "string"
+															}
+														}
+													},
+													"submissionOutcomeApplication": {
+														"type": "object",
+														"properties": {
+															"failureCount": {
+																"type": "integer"
+															},
+															"status": {
+																"type": "string"
+															}
+														}
+													},
+													"submitter": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"displayName": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										},
+										"columns": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "integer"
+													},
+													"name": {
+														"type": "string"
+													},
+													"dataTypeName": {
+														"type": "string"
+													},
+													"fieldName": {
+														"type": "string"
+													},
+													"position": {
+														"type": "integer"
+													},
+													"renderTypeName": {
+														"type": "string"
+													},
+													"format": {
+														"type": "object"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"grants": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"inherited": {
+														"type": "boolean"
+													},
+													"type": {
+														"type": "string"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"metadata": {
+											"type": "object",
+											"properties": {
+												"custom_fields": {
+													"type": "object",
+													"properties": {
+														"Data Reference": {
+															"type": "object",
+															"properties": {
+																"Reference for Technical Information": {
+																	"type": "string"
+																},
+																"Frequency": {
+																	"type": "string"
+																},
+																"Date Updated": {
+																	"type": "string"
+																},
+																"Date Released": {
+																	"type": "string"
+																},
+																"Period of Coverage": {
+																	"type": "string"
+																},
+																"Unit of Analysis": {
+																	"type": "string"
+																},
+																"Data dictionary/variable list": {
+																	"type": "string"
+																}
+															}
+														},
+														"Hawaii Line of Business": {
+															"type": "object",
+															"properties": {
+																"Division name": {
+																	"type": "string"
+																},
+																"Line of Business": {
+																	"type": "string"
+																},
+																"Division shortname, acronym": {
+																	"type": "string"
+																},
+																"Department Agency short name, acronym": {
+																	"type": "string"
+																},
+																"State of Hawaii Data Book Category": {
+																	"type": "string"
+																},
+																"Department/Agency": {
+																	"type": "string"
+																}
+															}
+														},
+														"Terms of Use Acknowledgement": {
+															"type": "object",
+															"properties": {
+																"I agree by uploading this dataset that it contains no private information, and adheres to the data.hawaii.gov terms of use.": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												},
+												"availableDisplayTypes": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												},
+												"renderTypeConfig": {
+													"type": "object",
+													"properties": {
+														"visible": {
+															"type": "object",
+															"properties": {
+																"table": {
+																	"type": "boolean"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"owner": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"query": {
+											"type": "object"
+										},
+										"rights": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"tableAuthor": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"flags": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "harishtarget"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"view": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"averageRating": {
+											"type": "integer"
+										},
+										"createdAt": {
+											"type": "integer"
+										},
+										"description": {
+											"type": "string"
+										},
+										"displayType": {
+											"type": "string"
+										},
+										"downloadCount": {
+											"type": "integer"
+										},
+										"hideFromCatalog": {
+											"type": "boolean"
+										},
+										"hideFromDataJson": {
+											"type": "boolean"
+										},
+										"indexUpdatedAt": {
+											"type": "integer"
+										},
+										"newBackend": {
+											"type": "boolean"
+										},
+										"numberOfComments": {
+											"type": "integer"
+										},
+										"oid": {
+											"type": "integer"
+										},
+										"provenance": {
+											"type": "string"
+										},
+										"publicationAppendEnabled": {
+											"type": "boolean"
+										},
+										"publicationDate": {
+											"type": "integer"
+										},
+										"publicationGroup": {
+											"type": "integer"
+										},
+										"publicationStage": {
+											"type": "string"
+										},
+										"rowsUpdatedAt": {
+											"type": "integer"
+										},
+										"rowsUpdatedBy": {
+											"type": "string"
+										},
+										"tableId": {
+											"type": "integer"
+										},
+										"totalTimesRated": {
+											"type": "integer"
+										},
+										"viewCount": {
+											"type": "integer"
+										},
+										"viewLastModified": {
+											"type": "integer"
+										},
+										"viewType": {
+											"type": "string"
+										},
+										"approvals": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reviewedAt": {
+														"type": "integer"
+													},
+													"reviewedAutomatically": {
+														"type": "boolean"
+													},
+													"state": {
+														"type": "string"
+													},
+													"submissionId": {
+														"type": "integer"
+													},
+													"submissionObject": {
+														"type": "string"
+													},
+													"submissionOutcome": {
+														"type": "string"
+													},
+													"submittedAt": {
+														"type": "integer"
+													},
+													"workflowId": {
+														"type": "integer"
+													},
+													"submissionDetails": {
+														"type": "object",
+														"properties": {
+															"permissionType": {
+																"type": "string"
+															}
+														}
+													},
+													"submissionOutcomeApplication": {
+														"type": "object",
+														"properties": {
+															"failureCount": {
+																"type": "integer"
+															},
+															"status": {
+																"type": "string"
+															}
+														}
+													},
+													"submitter": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"displayName": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											}
+										},
+										"columns": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "integer"
+													},
+													"name": {
+														"type": "string"
+													},
+													"dataTypeName": {
+														"type": "string"
+													},
+													"fieldName": {
+														"type": "string"
+													},
+													"position": {
+														"type": "integer"
+													},
+													"renderTypeName": {
+														"type": "string"
+													},
+													"format": {
+														"type": "object"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"grants": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"inherited": {
+														"type": "boolean"
+													},
+													"type": {
+														"type": "string"
+													},
+													"flags": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"metadata": {
+											"type": "object",
+											"properties": {
+												"custom_fields": {
+													"type": "object",
+													"properties": {
+														"Data Reference": {
+															"type": "object",
+															"properties": {
+																"Reference for Technical Information": {
+																	"type": "string"
+																},
+																"Frequency": {
+																	"type": "string"
+																},
+																"Date Updated": {
+																	"type": "string"
+																},
+																"Date Released": {
+																	"type": "string"
+																},
+																"Period of Coverage": {
+																	"type": "string"
+																},
+																"Unit of Analysis": {
+																	"type": "string"
+																},
+																"Data dictionary/variable list": {
+																	"type": "string"
+																}
+															}
+														},
+														"Hawaii Line of Business": {
+															"type": "object",
+															"properties": {
+																"Division name": {
+																	"type": "string"
+																},
+																"Line of Business": {
+																	"type": "string"
+																},
+																"Division shortname, acronym": {
+																	"type": "string"
+																},
+																"Department Agency short name, acronym": {
+																	"type": "string"
+																},
+																"State of Hawaii Data Book Category": {
+																	"type": "string"
+																},
+																"Department/Agency": {
+																	"type": "string"
+																}
+															}
+														},
+														"Terms of Use Acknowledgement": {
+															"type": "object",
+															"properties": {
+																"I agree by uploading this dataset that it contains no private information, and adheres to the data.hawaii.gov terms of use.": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												},
+												"availableDisplayTypes": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												},
+												"renderTypeConfig": {
+													"type": "object",
+													"properties": {
+														"visible": {
+															"type": "object",
+															"properties": {
+																"table": {
+																	"type": "boolean"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"owner": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"query": {
+											"type": "object"
+										},
+										"rights": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"tableAuthor": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"displayName": {
+													"type": "string"
+												},
+												"screenName": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												},
+												"userSegment": {
+													"type": "string"
+												},
+												"flags": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"flags": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						},
+						"modifiedby": {
+							"type": "string"
+						},
+						"modifiedon": {
+							"type": "string"
+						},
+						"hpi_noteshistory": {
+							"type": "string"
+						},
+						"createdon": {
+							"type": "string"
+						},
+						"hpi_subject": {
+							"type": "string"
+						},
+						"hpi_caseid": {
+							"type": "string"
+						},
+						"incidentid": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OutputDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adflabsinkdataset",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adflabsinkdataset')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage13",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hpi_partsorder_2019-07-19.parquet",
+						"container": "parquetfilesource"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "hpi_deliverypriorities",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_assetid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordernumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zippostalcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscode",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_partsorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalshipmentcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "createdon",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_deliveryinstructions",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_formopenedfirsttime",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_serialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ownerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_badgenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedon",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_safariid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_addessvalidated",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "statecode",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddresses",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverycomplete",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_isplaceorder",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "timezoneruleversionnumber",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "modifiedby",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryshortcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_country",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partrequesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_globalsupplychain",
+						"type": "INT32"
+					},
+					{
+						"name": "versionnumber",
+						"type": "INT64"
+					},
+					{
+						"name": "hpi_ispoaddressupdate",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_orderreason",
+						"type": "INT32"
+					},
+					{
+						"name": "createdby",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "UTF8"
+					},
+					{
+						"name": "owninguser",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ribbonprocessing",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippingcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_contactid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_startdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_caseofferid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_daysleft",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_enddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_receiveddateandtime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_sitepatnerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_productname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckcount",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_division",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_latest_date",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_usage",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_line1",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_distributionchannel",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_servicenotificationidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordercloseddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_fraudcheckholdreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_city",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfby",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage13')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage14",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hpi_partsorder_2019-07-19.parquet",
+						"container": "parquetfilesource"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "hpi_deliverypriorities",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_assetid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordernumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zippostalcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscode",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_partsorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalshipmentcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "createdon",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_deliveryinstructions",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_formopenedfirsttime",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_serialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ownerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_badgenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedon",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_safariid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_addessvalidated",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "statecode",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddresses",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverycomplete",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_isplaceorder",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "timezoneruleversionnumber",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "modifiedby",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryshortcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_country",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partrequesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_globalsupplychain",
+						"type": "INT32"
+					},
+					{
+						"name": "versionnumber",
+						"type": "INT64"
+					},
+					{
+						"name": "hpi_ispoaddressupdate",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_orderreason",
+						"type": "INT32"
+					},
+					{
+						"name": "createdby",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "UTF8"
+					},
+					{
+						"name": "owninguser",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ribbonprocessing",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippingcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_contactid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_startdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_caseofferid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_daysleft",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_enddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_receiveddateandtime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_sitepatnerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_productname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckcount",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_division",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_latest_date",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_usage",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_line1",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_distributionchannel",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_servicenotificationidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordercloseddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_fraudcheckholdreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_city",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfby",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage14')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage15",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dummyhpi_partsorder (1).parquet",
+						"container": "parquetfilesource"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "createdby",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdon",
+						"type": "INT96"
+					},
+					{
+						"name": "createdonbehalfby",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "exchangerate",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "hpi_addessvalidated",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_addessvalidatedname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_advisoryid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_amid2",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_amid4",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_assetid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_assetidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_authorizedemployee",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_autoclosedate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_badgenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_badgenumbername",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_billblock",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_carrier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseoffer",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseofferid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseofferidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseoffername",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_chooseaddress",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddresses",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddressesname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_chooseaddressname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_city",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_companyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactfirstname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactidyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactlastname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contract_baseline",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_country",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryshortcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_csrid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_csridname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_cust_grp5",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_customer_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_customerselfrepairid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_customerselfrepairidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_daysleft",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverycomplete",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_deliverycompletename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_deliveryinstructions",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_deliverypriorities",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliveryprioritiesname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_deliverypriority",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverypriorityname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_distributionchannel",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_division",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_dlv_block",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_dropbox",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_dropboxname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_emailaddress",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_enddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_entitlementoverridereasonid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementoverridereasonidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_entitlementstatusname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_expecteddeliverydate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_formopenedfirsttime",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_formopenedfirsttimename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckcount",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_fraudcheckdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckholddetails",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckholdreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_fraudcheckholdreasonname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_fraudcheckstatusname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalshipmentcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_globalshipmentconditionname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalspecialprocess",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_globalspecialprocessname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalsupplychain",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_globalsupplychainname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_id",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_isplaceorder",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_isplaceordername",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ispoaddressupdate",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_ispoaddressupdatename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_latest_date",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_latestdatetime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_line1",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_line2",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_logisticorderidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_mc_flag",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_message",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_netordervalue",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "hpi_netordervalue_base",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "hpi_nfid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_obligationid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_order_reason_code",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderaddress",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderaddressname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordercloseddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_ordernumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderreasonname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderstatuscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderstatusname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_originator",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_overridereason",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_parentpartorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_parentpartorderidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_part_delivery_timestamp",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_partdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partrequesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_partsorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_paymentterms",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_pendingtransactiontype",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_phonenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_pricingdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_productname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_productnamename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_queue",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_queuename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_receiveddateandtime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_remotediagnosticscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_requesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_ribbonprocessing",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_ribbonprocessingname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_safariid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_salesorg",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_securitystatuscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_service_flag",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_service_type",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serviceidentificationnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_servicenotificationidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serviceorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serviceorderidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shipping_carrier_code",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shipping_condition_code",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippingcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_shippingconditionname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippinginstructions",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_shippinginstructionsname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_site_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sitename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sitepatnerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sitepatneridname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_siteyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sku",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_startdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_stateprovince",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_systemproductnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_systemserialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_timezone",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_trackingnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_usage",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zipextension",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zippostalcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "importsequencenumber",
+						"type": "INT32"
+					},
+					{
+						"name": "modifiedby",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedon",
+						"type": "INT96"
+					},
+					{
+						"name": "modifiedonbehalfby",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedonbehalfbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedonbehalfbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "overriddencreatedon",
+						"type": "INT96"
+					},
+					{
+						"name": "ownerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "owneridname",
+						"type": "UTF8"
+					},
+					{
+						"name": "owneridtype",
+						"type": "UTF8"
+					},
+					{
+						"name": "owneridyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningteam",
+						"type": "UTF8"
+					},
+					{
+						"name": "owninguser",
+						"type": "UTF8"
+					},
+					{
+						"name": "statecode",
+						"type": "INT32"
+					},
+					{
+						"name": "statecodename",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscodename",
+						"type": "UTF8"
+					},
+					{
+						"name": "timezoneruleversionnumber",
+						"type": "INT32"
+					},
+					{
+						"name": "transactioncurrencyid",
+						"type": "UTF8"
+					},
+					{
+						"name": "transactioncurrencyidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "utcconversiontimezonecode",
+						"type": "INT32"
+					},
+					{
+						"name": "versionnumber",
+						"type": "INT32"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage15')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedService1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "sharepointdata"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Payrollemployees')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "payrollemployeesls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "PayrollEmployees.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "department",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/payrollemployeesls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adflabSampleData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adflabsourcestorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "inputfiles",
+						"container": "rawdata"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adflabsourcestorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adflabSampleDataCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adflabsourcestorage",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string",
+						"defaultValue": "csv"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "inputfiles",
+						"container": "rawdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmployeeId",
+						"type": "String"
+					},
+					{
+						"name": "EmpName",
+						"type": "String"
+					},
+					{
+						"name": "Age",
+						"type": "String"
+					},
+					{
+						"name": "Location",
+						"type": "String"
+					},
+					{
+						"name": "Role",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adflabsourcestorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adflabsinkdatase')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adflabsourcestorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adflabsourcestorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/departmentds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "departmentls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dept.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "deptid",
+						"type": "String"
+					},
+					{
+						"name": "Depname",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/departmentls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds2harish')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DSharish",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dept.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "deptid",
+						"type": "String"
+					},
+					{
+						"name": "Depname",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DSharish')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/employeesds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "employeesls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "empl.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "deptid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/employeesls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/harishdsharish')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "harishlsoutput",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/harishlsoutput')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/harsh')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "lsharishoutput",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "harishoutput.csv",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/lsharishoutput')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lookupoutds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "lookupoutds",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "deptid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/lookupoutds')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/outputds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DSharish",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DSharish')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ps1file')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ps1filels",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Dummyhpi_partsorder (1).parquet",
+						"container": "parquetfilesource"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "createdby",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdon",
+						"type": "INT96"
+					},
+					{
+						"name": "createdonbehalfby",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "exchangerate",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "hpi_addessvalidated",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_addessvalidatedname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_advisoryid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_amid2",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_amid4",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_assetid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_assetidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_authorizedemployee",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_autoclosedate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_badgenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_badgenumbername",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_billblock",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_carrier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseoffer",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseofferid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseofferidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseoffername",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_chooseaddress",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddresses",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddressesname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_chooseaddressname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_city",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_companyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactfirstname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactidyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contactlastname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_contract_baseline",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_country",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryshortcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_csrid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_csridname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_cust_grp5",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_customer_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_customerselfrepairid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_customerselfrepairidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_daysleft",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverycomplete",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_deliverycompletename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_deliveryinstructions",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_deliverypriorities",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliveryprioritiesname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_deliverypriority",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverypriorityname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_distributionchannel",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_division",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_dlv_block",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_dropbox",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_dropboxname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_emailaddress",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_enddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_entitlementoverridereasonid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementoverridereasonidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_entitlementstatusname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_expecteddeliverydate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_formopenedfirsttime",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_formopenedfirsttimename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckcount",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_fraudcheckdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckholddetails",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckholdreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_fraudcheckholdreasonname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_fraudcheckstatusname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalshipmentcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_globalshipmentconditionname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalspecialprocess",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_globalspecialprocessname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalsupplychain",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_globalsupplychainname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_id",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_isplaceorder",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_isplaceordername",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ispoaddressupdate",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_ispoaddressupdatename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_latest_date",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_latestdatetime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_line1",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_line2",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_logisticorderidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_mc_flag",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_message",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_netordervalue",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "hpi_netordervalue_base",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "hpi_nfid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_obligationid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_order_reason_code",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderaddress",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderaddressname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordercloseddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_ordernumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderreasonname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderstatuscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_orderstatusname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_originator",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_overridereason",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_parentpartorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_parentpartorderidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_part_delivery_timestamp",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_partdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partrequesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_partsorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_paymentterms",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_pendingtransactiontype",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_phonenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_pricingdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_productname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_productnamename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_queue",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_queuename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_receiveddateandtime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_remotediagnosticscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_requesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_ribbonprocessing",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_ribbonprocessingname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_safariid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_salesorg",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_securitystatuscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_service_flag",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_service_type",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serviceidentificationnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_servicenotificationidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serviceorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_serviceorderidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shipping_carrier_code",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shipping_condition_code",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippingcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_shippingconditionname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippinginstructions",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_shippinginstructionsname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_site_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sitename",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sitepatnerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sitepatneridname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_siteyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_sku",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_startdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_stateprovince",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_systemproductnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_systemserialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_timezone",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_trackingnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_usage",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zipextension",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zippostalcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "importsequencenumber",
+						"type": "INT32"
+					},
+					{
+						"name": "modifiedby",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedon",
+						"type": "INT96"
+					},
+					{
+						"name": "modifiedonbehalfby",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedonbehalfbyname",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedonbehalfbyyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "overriddencreatedon",
+						"type": "INT96"
+					},
+					{
+						"name": "ownerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "owneridname",
+						"type": "UTF8"
+					},
+					{
+						"name": "owneridtype",
+						"type": "UTF8"
+					},
+					{
+						"name": "owneridyominame",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningteam",
+						"type": "UTF8"
+					},
+					{
+						"name": "owninguser",
+						"type": "UTF8"
+					},
+					{
+						"name": "statecode",
+						"type": "INT32"
+					},
+					{
+						"name": "statecodename",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscode",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscodename",
+						"type": "UTF8"
+					},
+					{
+						"name": "timezoneruleversionnumber",
+						"type": "INT32"
+					},
+					{
+						"name": "transactioncurrencyid",
+						"type": "UTF8"
+					},
+					{
+						"name": "transactioncurrencyidname",
+						"type": "UTF8"
+					},
+					{
+						"name": "utcconversiontimezonecode",
+						"type": "INT32"
+					},
+					{
+						"name": "versionnumber",
+						"type": "INT32"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ps1filels')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/psfileds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "psfiledsls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hpi_partsorder_2019-07-19.parquet",
+						"container": "parquetfilesource"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "hpi_deliverypriorities",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_assetid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordernumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_zippostalcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "statuscode",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_partsorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_globalshipmentcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "createdon",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_deliveryinstructions",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_formopenedfirsttime",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_serialnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_workorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ownerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_badgenumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "modifiedon",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_safariid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_addessvalidated",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "statecode",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_chooseaddresses",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_deliverycomplete",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_isplaceorder",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "timezoneruleversionnumber",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_orderstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "modifiedby",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_countryshortcode",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_country",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_otccodeid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partrequesteddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_globalsupplychain",
+						"type": "INT32"
+					},
+					{
+						"name": "versionnumber",
+						"type": "INT64"
+					},
+					{
+						"name": "hpi_ispoaddressupdate",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_orderreason",
+						"type": "INT32"
+					},
+					{
+						"name": "createdby",
+						"type": "UTF8"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "UTF8"
+					},
+					{
+						"name": "owninguser",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ribbonprocessing",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "hpi_site",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_shippingcondition",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_contactid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_entitlementstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_startdate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_caseofferid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partnumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_caseentitlementid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_daysleft",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_enddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_receiveddateandtime",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_sitepatnerid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckdescription",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_productname",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckcount",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_division",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_fraudcheckstatus",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_latest_date",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_partorderid",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_usage",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_line1",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_distributionchannel",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_servicenotificationidentifier",
+						"type": "UTF8"
+					},
+					{
+						"name": "hpi_ordercloseddate",
+						"type": "INT96"
+					},
+					{
+						"name": "hpi_fraudcheckholdreason",
+						"type": "INT32"
+					},
+					{
+						"name": "hpi_city",
+						"type": "UTF8"
+					},
+					{
+						"name": "createdonbehalfby",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/psfiledsls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sourceds')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DSharish",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "empl.csv",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "deptid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DSharish')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/unionallemployees')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "unionofallemloyees",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "deptid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/unionofallemloyees')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "LS",
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('ADLSLS_properties_typeProperties_dataLakeStoreUri')]",
+					"tenant": "[parameters('ADLSLS_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('ADLSLS_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('ADLSLS_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AblobLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AblobLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage10')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage10_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage11')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage11_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage12')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage12_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage13')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage13_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage14')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage14_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage15')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage15_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage16')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage16_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage3_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage4_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage5')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage5_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage6')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage6_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage7')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage7_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage8')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage8_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage9')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage9_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Blobtest1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('Blobtest1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DGLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('DGLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DSharish')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('DSharish_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HRemployeesls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "HRemployeesls",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('HRemployeesls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ITempl')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ITempl",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ITempl_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ITemployeesds')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ITemployeesds",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ITemployeesds_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ITemployeeslinkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ITemployeeslinkedservice",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ITemployeeslinkedservice_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adflabsinkdataset')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('adflabsinkdataset_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adflabsourcestorage')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "adflabsourcestorage",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('adflabsourcestorage_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/departmentls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "departmentls",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('departmentls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/employeesls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "employeesls",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('employeesls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/harishlsoutput')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "harishlsoutput",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('harishlsoutput_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/harishparquet')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "test",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('harishparquet_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/hremployeeslsnew')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "hremployeeslsnew",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('hremployeeslsnew_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('linkedService1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lookupoutds')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "lookupoutds",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('lookupoutds_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lsharish')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "lsharish",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('lsharish_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lsharishoutput')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "lsharishoutput",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('lsharishoutput_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/outputdsls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "outputdsls",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('outputdsls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/payrollemployeesls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "payrollemployeesls",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('payrollemployeesls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ps1filels')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ps1filels",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ps1filels_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/psfiledsls')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "psfiledsls",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('psfiledsls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/unionofallemloyees')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "unionofallemloyees",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('unionofallemloyees_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger2')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "test",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Month",
+						"interval": 1,
+						"startTime": "2020-06-30T05:45:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"monthDays": [
+								7
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IRSSIS')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "East US",
+						"nodeSize": "Standard_D2_v3",
+						"numberOfNodes": 2,
+						"maxParallelExecutionsPerNode": 2
+					},
+					"ssisProperties": {
+						"catalogInfo": {
+							"catalogServerEndpoint": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]",
+							"catalogAdminUserName": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]",
+							"catalogAdminPassword": {
+								"type": "SecureString",
+								"value": "[parameters('IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
+							},
+							"catalogPricingTier": "S1"
+						},
+						"edition": "Standard",
+						"licenseType": "LicenseIncluded"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IRSelf-hosted')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntimehk')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ITemployees')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ITempl",
+								"type": "DatasetReference"
+							},
+							"name": "ITemployees"
+						},
+						{
+							"dataset": {
+								"referenceName": "Payrollemployees",
+								"type": "DatasetReference"
+							},
+							"name": "Payrollemplu"
+						},
+						{
+							"dataset": {
+								"referenceName": "HRemployees",
+								"type": "DatasetReference"
+							},
+							"name": "HRemployees"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "unionallemployees",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "UnionAllemployees"
+						}
+					],
+					"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ITemployees\nsource(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Payrollemplu\nsource(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartmetn as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> HRemployees\nITemployees, Payrollemplu, HRemployees union(byName: true)~> UnionAllemployees\nUnionAllemployees sink(input(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['unionallemployees.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ITempl')]",
+				"[concat(variables('factoryId'), '/datasets/Payrollemployees')]",
+				"[concat(variables('factoryId'), '/datasets/HRemployees')]",
+				"[concat(variables('factoryId'), '/datasets/unionallemployees')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "sourceds",
+								"type": "DatasetReference"
+							},
+							"name": "employees"
+						},
+						{
+							"dataset": {
+								"referenceName": "DelimitedText3",
+								"type": "DatasetReference"
+							},
+							"name": "Department"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText4",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Aggregate1"
+						},
+						{
+							"name": "Join1"
+						}
+					],
+					"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> employees\nsource(output(\n\t\tdeptid as string,\n\t\tDepname as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Department\nemployees aggregate(groupBy(deptid),\n\ttotalemployees = count(empid)) ~> Aggregate1\nAggregate1, Department join(Aggregate1@deptid == Depname,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tmapColumn(\n\t\tdeptid = Aggregate1@deptid,\n\t\ttotalemployees,\n\t\tdeptid = Department@deptid,\n\t\tDepname\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/sourceds')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText3')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow2')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "employeesds",
+								"type": "DatasetReference"
+							},
+							"name": "Employeesdata"
+						},
+						{
+							"dataset": {
+								"referenceName": "departmentds",
+								"type": "DatasetReference"
+							},
+							"name": "Department"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "harishdsharish",
+								"type": "DatasetReference"
+							},
+							"name": "harishoutout"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Exists1"
+						}
+					],
+					"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Employeesdata\nsource(output(\n\t\tdeptid as string,\n\t\tDepname as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Department\nEmployeesdata, Department exists(Employeesdata@deptid == Depname,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nExists1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['harishoutout.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> harishoutout"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/employeesds')]",
+				"[concat(variables('factoryId'), '/datasets/departmentds')]",
+				"[concat(variables('factoryId'), '/datasets/harishdsharish')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow3')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "psfileds",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet3",
+								"type": "DatasetReference"
+							},
+							"name": "source2"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Parquet4",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumn1"
+						},
+						{
+							"name": "Union1"
+						}
+					],
+					"script": "source(output(\n\t\thpi_deliverypriorities as integer,\n\t\thpi_assetid as string,\n\t\thpi_ordernumber as string,\n\t\thpi_zippostalcode as string,\n\t\tstatuscode as integer,\n\t\thpi_partsorderid as string,\n\t\thpi_globalshipmentcondition as integer,\n\t\tcreatedon as timestamp,\n\t\thpi_deliveryinstructions as string,\n\t\thpi_formopenedfirsttime as boolean,\n\t\thpi_serialnumber as string,\n\t\thpi_workorderid as string,\n\t\townerid as string,\n\t\thpi_badgenumber as string,\n\t\tmodifiedon as timestamp,\n\t\thpi_safariid as string,\n\t\thpi_addessvalidated as boolean,\n\t\tstatecode as integer,\n\t\thpi_chooseaddresses as integer,\n\t\thpi_deliverycomplete as boolean,\n\t\thpi_isplaceorder as boolean,\n\t\ttimezoneruleversionnumber as integer,\n\t\thpi_orderstatus as integer,\n\t\tmodifiedby as string,\n\t\thpi_countryshortcode as string,\n\t\thpi_name as string,\n\t\thpi_country as string,\n\t\thpi_otccodeid as string,\n\t\thpi_partrequesteddate as timestamp,\n\t\thpi_globalsupplychain as integer,\n\t\tversionnumber as long,\n\t\thpi_ispoaddressupdate as boolean,\n\t\thpi_orderreason as integer,\n\t\tcreatedby as string,\n\t\towningbusinessunit as string,\n\t\towninguser as string,\n\t\thpi_ribbonprocessing as boolean,\n\t\thpi_site as string,\n\t\thpi_shippingcondition as integer,\n\t\thpi_contactid as string,\n\t\thpi_partdescription as string,\n\t\thpi_caseid as string,\n\t\thpi_entitlementstatus as integer,\n\t\thpi_startdate as timestamp,\n\t\thpi_caseofferid as string,\n\t\thpi_partnumber as string,\n\t\thpi_caseentitlementid as string,\n\t\thpi_daysleft as integer,\n\t\thpi_enddate as timestamp,\n\t\thpi_receiveddateandtime as timestamp,\n\t\thpi_sitepatnerid as string,\n\t\thpi_fraudcheckdescription as string,\n\t\thpi_productname as string,\n\t\thpi_fraudcheckcount as integer,\n\t\thpi_division as string,\n\t\thpi_fraudcheckstatus as integer,\n\t\thpi_latest_date as string,\n\t\thpi_partorderid as string,\n\t\thpi_usage as string,\n\t\thpi_line1 as string,\n\t\thpi_distributionchannel as string,\n\t\thpi_servicenotificationidentifier as string,\n\t\thpi_ordercloseddate as timestamp,\n\t\thpi_fraudcheckholdreason as integer,\n\t\thpi_city as string,\n\t\tcreatedonbehalfby as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet') ~> source1\nsource(output(\n\t\tcreatedby as string,\n\t\tcreatedbyname as string,\n\t\tcreatedbyyominame as string,\n\t\tcreatedon as timestamp,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfbyname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\texchangerate as double,\n\t\thpi_addessvalidated as boolean,\n\t\thpi_addessvalidatedname as string,\n\t\thpi_advisoryid as string,\n\t\thpi_amid2 as string,\n\t\thpi_amid4 as string,\n\t\thpi_assetid as string,\n\t\thpi_assetidname as string,\n\t\thpi_authorizedemployee as string,\n\t\thpi_autoclosedate as timestamp,\n\t\thpi_badgenumber as string,\n\t\thpi_badgenumbername as string,\n\t\thpi_billblock as string,\n\t\thpi_carrier as string,\n\t\thpi_caseentitlementid as string,\n\t\thpi_caseentitlementidname as string,\n\t\thpi_caseid as string,\n\t\thpi_caseidname as string,\n\t\thpi_caseoffer as string,\n\t\thpi_caseofferid as string,\n\t\thpi_caseofferidname as string,\n\t\thpi_caseoffername as string,\n\t\thpi_chooseaddress as integer,\n\t\thpi_chooseaddresses as integer,\n\t\thpi_chooseaddressesname as string,\n\t\thpi_chooseaddressname as string,\n\t\thpi_city as string,\n\t\thpi_companyname as string,\n\t\thpi_contactfirstname as string,\n\t\thpi_contactid as string,\n\t\thpi_contactidname as string,\n\t\thpi_contactidyominame as string,\n\t\thpi_contactlastname as string,\n\t\thpi_contract_baseline as string,\n\t\thpi_country as string,\n\t\thpi_countryname as string,\n\t\thpi_countryshortcode as string,\n\t\thpi_csrid as string,\n\t\thpi_csridname as string,\n\t\thpi_cust_grp5 as string,\n\t\thpi_customer_site as string,\n\t\thpi_customerselfrepairid as string,\n\t\thpi_customerselfrepairidname as string,\n\t\thpi_daysleft as integer,\n\t\thpi_deliverycomplete as boolean,\n\t\thpi_deliverycompletename as string,\n\t\thpi_deliveryinstructions as string,\n\t\thpi_deliverypriorities as integer,\n\t\thpi_deliveryprioritiesname as string,\n\t\thpi_deliverypriority as integer,\n\t\thpi_deliverypriorityname as string,\n\t\thpi_distributionchannel as string,\n\t\thpi_division as string,\n\t\thpi_dlv_block as string,\n\t\thpi_dropbox as string,\n\t\thpi_dropboxname as string,\n\t\thpi_emailaddress as string,\n\t\thpi_enddate as timestamp,\n\t\thpi_entitlementoverridereasonid as string,\n\t\thpi_entitlementoverridereasonidname as string,\n\t\thpi_entitlementstatus as integer,\n\t\thpi_entitlementstatusname as string,\n\t\thpi_expecteddeliverydate as timestamp,\n\t\thpi_formopenedfirsttime as boolean,\n\t\thpi_formopenedfirsttimename as string,\n\t\thpi_fraudcheckcount as integer,\n\t\thpi_fraudcheckdescription as string,\n\t\thpi_fraudcheckholddetails as string,\n\t\thpi_fraudcheckholdreason as integer,\n\t\thpi_fraudcheckholdreasonname as string,\n\t\thpi_fraudcheckstatus as integer,\n\t\thpi_fraudcheckstatusname as string,\n\t\thpi_globalshipmentcondition as integer,\n\t\thpi_globalshipmentconditionname as string,\n\t\thpi_globalspecialprocess as integer,\n\t\thpi_globalspecialprocessname as string,\n\t\thpi_globalsupplychain as integer,\n\t\thpi_globalsupplychainname as string,\n\t\thpi_id as string,\n\t\thpi_isplaceorder as boolean,\n\t\thpi_isplaceordername as string,\n\t\thpi_ispoaddressupdate as boolean,\n\t\thpi_ispoaddressupdatename as string,\n\t\thpi_latest_date as string,\n\t\thpi_latestdatetime as timestamp,\n\t\thpi_line1 as string,\n\t\thpi_line2 as string,\n\t\thpi_logisticorderidentifier as string,\n\t\thpi_mc_flag as string,\n\t\thpi_message as string,\n\t\thpi_name as string,\n\t\thpi_netordervalue as double,\n\t\thpi_netordervalue_base as double,\n\t\thpi_nfid as string,\n\t\thpi_obligationid as string,\n\t\thpi_order_reason_code as string,\n\t\thpi_orderaddress as integer,\n\t\thpi_orderaddressname as string,\n\t\thpi_ordercloseddate as timestamp,\n\t\thpi_ordernumber as string,\n\t\thpi_orderreason as integer,\n\t\thpi_orderreasonname as string,\n\t\thpi_orderstatus as integer,\n\t\thpi_orderstatuscode as string,\n\t\thpi_orderstatusname as string,\n\t\thpi_originator as string,\n\t\thpi_otccodeid as string,\n\t\thpi_otccodeidname as string,\n\t\thpi_overridereason as string,\n\t\thpi_parentpartorderid as string,\n\t\thpi_parentpartorderidname as string,\n\t\thpi_part_delivery_timestamp as timestamp,\n\t\thpi_partdescription as string,\n\t\thpi_partnumber as string,\n\t\thpi_partorderid as string,\n\t\thpi_partrequesteddate as timestamp,\n\t\thpi_partsorderid as string,\n\t\thpi_paymentterms as string,\n\t\thpi_pendingtransactiontype as string,\n\t\thpi_phonenumber as string,\n\t\thpi_pricingdate as timestamp,\n\t\thpi_productname as string,\n\t\thpi_productnamename as string,\n\t\thpi_queue as string,\n\t\thpi_queuename as string,\n\t\thpi_receiveddateandtime as timestamp,\n\t\thpi_remotediagnosticscode as string,\n\t\thpi_requesteddate as timestamp,\n\t\thpi_ribbonprocessing as boolean,\n\t\thpi_ribbonprocessingname as string,\n\t\thpi_safariid as string,\n\t\thpi_salesorg as string,\n\t\thpi_securitystatuscode as string,\n\t\thpi_serialnumber as string,\n\t\thpi_service_flag as string,\n\t\thpi_service_type as string,\n\t\thpi_serviceidentificationnumber as string,\n\t\thpi_servicenotificationidentifier as string,\n\t\thpi_serviceorderid as string,\n\t\thpi_serviceorderidname as string,\n\t\thpi_shipping_carrier_code as string,\n\t\thpi_shipping_condition_code as string,\n\t\thpi_shippingcondition as integer,\n\t\thpi_shippingconditionname as string,\n\t\thpi_shippinginstructions as integer,\n\t\thpi_shippinginstructionsname as string,\n\t\thpi_site as string,\n\t\thpi_site_name as string,\n\t\thpi_sitename as string,\n\t\thpi_sitepatnerid as string,\n\t\thpi_sitepatneridname as string,\n\t\thpi_siteyominame as string,\n\t\thpi_sku as string,\n\t\thpi_startdate as timestamp,\n\t\thpi_stateprovince as string,\n\t\thpi_systemproductnumber as string,\n\t\thpi_systemserialnumber as string,\n\t\thpi_timezone as integer,\n\t\thpi_trackingnumber as string,\n\t\thpi_usage as string,\n\t\thpi_workorderid as string,\n\t\thpi_workorderidname as string,\n\t\thpi_zipextension as string,\n\t\thpi_zippostalcode as string,\n\t\timportsequencenumber as integer,\n\t\tmodifiedby as string,\n\t\tmodifiedbyname as string,\n\t\tmodifiedbyyominame as string,\n\t\tmodifiedon as timestamp,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\toverriddencreatedon as timestamp,\n\t\townerid as string,\n\t\towneridname as string,\n\t\towneridtype as string,\n\t\towneridyominame as string,\n\t\towningbusinessunit as string,\n\t\towningteam as string,\n\t\towninguser as string,\n\t\tstatecode as integer,\n\t\tstatecodename as string,\n\t\tstatuscode as string,\n\t\tstatuscodename as string,\n\t\ttimezoneruleversionnumber as integer,\n\t\ttransactioncurrencyid as string,\n\t\ttransactioncurrencyidname as string,\n\t\tutcconversiontimezonecode as integer,\n\t\tversionnumber as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet') ~> source2\nsource1 derive(statuscode = toString(statuscode)) ~> DerivedColumn1\nDerivedColumn1, source2 union(byName: true)~> Union1\nUnion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:['harishparquetoutput.parquet'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/psfileds')]",
+				"[concat(variables('factoryId'), '/datasets/Parquet3')]",
+				"[concat(variables('factoryId'), '/datasets/Parquet4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lookupdataflow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ITemployeesdataset",
+								"type": "DatasetReference"
+							},
+							"name": "Employees"
+						},
+						{
+							"dataset": {
+								"referenceName": "DelimitedText6",
+								"type": "DatasetReference"
+							},
+							"name": "Departments"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "lookupoutds",
+								"type": "DatasetReference"
+							},
+							"name": "ouputdataset"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Lookup1"
+						}
+					],
+					"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Employees\nsource(output(\n\t\tdeptid as string,\n\t\tDepname as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Departments\nEmployees, Departments lookup(department == deptid,\n\tmultiple: false,\n\tpickup: 'any',\n\tbroadcast: 'auto')~> Lookup1\nLookup1 sink(input(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['lookupactivity11.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ouputdataset"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ITemployeesdataset')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText6')]",
+				"[concat(variables('factoryId'), '/datasets/lookupoutds')]"
+			]
+		}
+	]
+}
