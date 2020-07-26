@@ -1,0 +1,45 @@
+{
+	"name": "pipeline4",
+	"properties": {
+		"activities": [
+			{
+				"name": "NotebookActivity",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Movie classification with Azure Databricks",
+					"libraries": [
+						{
+							"pypi": {
+								"package": "genism"
+							}
+						},
+						{
+							"pypi": {
+								"package": "keras"
+							}
+						},
+						{
+							"pypi": {
+								"package": "Tensorflow"
+							}
+						}
+					]
+				},
+				"linkedServiceName": {
+					"referenceName": "DatabricksLinkedService",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
