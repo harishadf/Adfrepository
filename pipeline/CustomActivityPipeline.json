@@ -1,0 +1,37 @@
+{
+	"name": "CustomActivityPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "CustomActivity",
+				"type": "Custom",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"command": "CustomApp.exe",
+					"resourceLinkedService": {
+						"referenceName": "BatchStorageLinkedServic",
+						"type": "LinkedServiceReference"
+					},
+					"folderPath": "batchjobs",
+					"referenceObjects": {
+						"linkedServices": [],
+						"datasets": []
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DataFactoryLabBatchServic",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
