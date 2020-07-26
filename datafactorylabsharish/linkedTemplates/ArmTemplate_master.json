@@ -75,6 +75,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
 		},
+		"BatchStorageLinkedServic_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BatchStorageLinkedServic'"
+		},
 		"Blobtest1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
@@ -86,6 +90,10 @@
 		"DSharish_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DSharish'"
+		},
+		"DataFactoryLabBatchServic_accessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessKey' of 'DataFactoryLabBatchServic'"
 		},
 		"HRemployeesls_connectionString": {
 			"type": "secureString",
@@ -183,6 +191,18 @@
 			"type": "string",
 			"defaultValue": "harishsql"
 		},
+		"DataFactoryLabBatchServic_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "datafactorylabh"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://datafactorylabh.eastus.batch.azure.com"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "datafactorysolution"
+		},
 		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
 			"defaultValue": "harishchamp.database.windows.net"
@@ -272,11 +292,11 @@
 					"AzureBlobStorage9_connectionString": {
 						"value": "[parameters('AzureBlobStorage9_connectionString')]"
 					},
+					"BatchStorageLinkedServic_connectionString": {
+						"value": "[parameters('BatchStorageLinkedServic_connectionString')]"
+					},
 					"Blobtest1_connectionString": {
 						"value": "[parameters('Blobtest1_connectionString')]"
-					},
-					"DGLS_connectionString": {
-						"value": "[parameters('DGLS_connectionString')]"
 					},
 					"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
 						"value": "[parameters('ADLSLS_properties_typeProperties_dataLakeStoreUri')]"
@@ -307,6 +327,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"DGLS_connectionString": {
+						"value": "[parameters('DGLS_connectionString')]"
 					},
 					"DSharish_connectionString": {
 						"value": "[parameters('DSharish_connectionString')]"
@@ -364,9 +387,6 @@
 					},
 					"ps1filels_connectionString": {
 						"value": "[parameters('ps1filels_connectionString')]"
-					},
-					"psfiledsls_connectionString": {
-						"value": "[parameters('psfiledsls_connectionString')]"
 					}
 				}
 			},
@@ -387,6 +407,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"psfiledsls_connectionString": {
+						"value": "[parameters('psfiledsls_connectionString')]"
 					},
 					"unionofallemloyees_connectionString": {
 						"value": "[parameters('unionofallemloyees_connectionString')]"
@@ -439,6 +462,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"DataFactoryLabBatchServic_accessKey": {
+						"value": "[parameters('DataFactoryLabBatchServic_accessKey')]"
+					},
+					"DataFactoryLabBatchServic_properties_typeProperties_accountName": {
+						"value": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_accountName')]"
+					},
+					"DataFactoryLabBatchServic_properties_typeProperties_batchUri": {
+						"value": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_batchUri')]"
+					},
+					"DataFactoryLabBatchServic_properties_typeProperties_poolName": {
+						"value": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_poolName')]"
 					}
 				}
 			},

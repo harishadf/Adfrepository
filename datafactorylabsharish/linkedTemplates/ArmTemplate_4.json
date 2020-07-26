@@ -6,12 +6,136 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorylabsharish"
+		},
+		"DataFactoryLabBatchServic_accessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessKey' of 'DataFactoryLabBatchServic'"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "datafactorylabh"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://datafactorylabh.eastus.batch.azure.com"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "datafactorysolution"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/unionallemployees')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "unionofallemloyees",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empid",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "deptid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataFactoryLabBatchServic')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "DataFactoryLabBatchServic",
+				"annotations": [],
+				"type": "AzureBatch",
+				"typeProperties": {
+					"accountName": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_accountName')]",
+					"accessKey": {
+						"type": "SecureString",
+						"value": "[parameters('DataFactoryLabBatchServic_accessKey')]"
+					},
+					"batchUri": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_batchUri')]",
+					"poolName": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_poolName')]",
+					"linkedServiceName": {
+						"referenceName": "BatchStorageLinkedServic",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CustomActivityPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CustomActivity",
+						"type": "Custom",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"command": "CustomApp.exe",
+							"resourceLinkedService": {
+								"referenceName": "BatchStorageLinkedServic",
+								"type": "LinkedServiceReference"
+							},
+							"folderPath": "batchjobs",
+							"referenceObjects": {
+								"linkedServices": [],
+								"datasets": []
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DataFactoryLabBatchServic",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataFactoryLabBatchServic')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/adflabControlFlowPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -351,7 +475,9 @@
 					"script": "source(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ITemployees\nsource(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Payrollemplu\nsource(output(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdepartmetn as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> HRemployees\nITemployees, Payrollemplu, HRemployees union(byName: true)~> UnionAllemployees\nUnionAllemployees sink(input(\n\t\tempid as string,\n\t\tname as string,\n\t\tcountry as string,\n\t\tdeptid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['unionallemployees.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/unionallemployees')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dataflow1')]",

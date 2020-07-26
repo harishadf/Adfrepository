@@ -75,13 +75,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
 		},
+		"BatchStorageLinkedServic_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BatchStorageLinkedServic'"
+		},
 		"Blobtest1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
-		},
-		"DGLS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DGLS'"
 		},
 		"ADLSLS_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -343,6 +343,20 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/BatchStorageLinkedServic')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "BatchStorageLinkedServic",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('BatchStorageLinkedServic_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Blobtest1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -351,19 +365,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('Blobtest1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DGLS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('DGLS_connectionString')]"
 				}
 			},
 			"dependsOn": []

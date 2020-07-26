@@ -56,6 +56,9 @@
 		"AzureBlobStorage9_connectionString": {
 			"value": ""
 		},
+		"BatchStorageLinkedServic_connectionString": {
+			"value": ""
+		},
 		"Blobtest1_connectionString": {
 			"value": ""
 		},
@@ -63,6 +66,9 @@
 			"value": ""
 		},
 		"DSharish_connectionString": {
+			"value": ""
+		},
+		"DataFactoryLabBatchServic_accessKey": {
 			"value": ""
 		},
 		"HRemployeesls_connectionString": {
@@ -136,6 +142,15 @@
 		},
 		"ADLSLS_properties_typeProperties_resourceGroupName": {
 			"value": "harishsql"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_accountName": {
+			"value": "datafactorylabh"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_batchUri": {
+			"value": "https://datafactorylabh.eastus.batch.azure.com"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_poolName": {
+			"value": "datafactorysolution"
 		},
 		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"value": "harishchamp.database.windows.net"

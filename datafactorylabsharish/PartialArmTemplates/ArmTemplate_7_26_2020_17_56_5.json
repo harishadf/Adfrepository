@@ -1,0 +1,82 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorylabsharish"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CustomActivityPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CustomActivity",
+						"type": "Custom",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"command": "CustomApp.exe",
+							"resourceLinkedService": {
+								"referenceName": "BatchStorageLinkedServic",
+								"type": "LinkedServiceReference"
+							},
+							"folderPath": "batchjobs",
+							"referenceObjects": {
+								"linkedServices": [],
+								"datasets": []
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DataFactoryLabBatchServic",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataFactoryLabBatchServic')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataFactoryLabBatchServic')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "DataFactoryLabBatchServic",
+				"annotations": [],
+				"type": "AzureBatch",
+				"typeProperties": {
+					"accountName": "datafactorylabh",
+					"accessKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"batchUri": "https://datafactorylabh.eastus.batch.azure.com",
+					"poolName": "datafactorysolution",
+					"linkedServiceName": {
+						"referenceName": "BatchStorageLinkedServic",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -75,6 +75,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
 		},
+		"BatchStorageLinkedServic_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BatchStorageLinkedServic'"
+		},
 		"Blobtest1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Blobtest1'"
@@ -86,6 +90,10 @@
 		"DSharish_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DSharish'"
+		},
+		"DataFactoryLabBatchServic_accessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessKey' of 'DataFactoryLabBatchServic'"
 		},
 		"HRemployeesls_connectionString": {
 			"type": "secureString",
@@ -183,6 +191,18 @@
 			"type": "string",
 			"defaultValue": "harishsql"
 		},
+		"DataFactoryLabBatchServic_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "datafactorylabh"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://datafactorylabh.eastus.batch.azure.com"
+		},
+		"DataFactoryLabBatchServic_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "datafactorysolution"
+		},
 		"IRSSIS_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
 			"defaultValue": "harishchamp.database.windows.net"
@@ -199,6 +219,49 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CustomActivityPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CustomActivity",
+						"type": "Custom",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"command": "CustomApp.exe",
+							"resourceLinkedService": {
+								"referenceName": "BatchStorageLinkedServic",
+								"type": "LinkedServiceReference"
+							},
+							"folderPath": "batchjobs",
+							"referenceObjects": {
+								"linkedServices": [],
+								"datasets": []
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DataFactoryLabBatchServic",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BatchStorageLinkedServic')]",
+				"[concat(variables('factoryId'), '/linkedServices/DataFactoryLabBatchServic')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Executedataflow')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -5606,6 +5669,20 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/BatchStorageLinkedServic')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "BatchStorageLinkedServic",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('BatchStorageLinkedServic_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Blobtest1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -5643,6 +5720,32 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataFactoryLabBatchServic')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "DataFactoryLabBatchServic",
+				"annotations": [],
+				"type": "AzureBatch",
+				"typeProperties": {
+					"accountName": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_accountName')]",
+					"accessKey": {
+						"type": "SecureString",
+						"value": "[parameters('DataFactoryLabBatchServic_accessKey')]"
+					},
+					"batchUri": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_batchUri')]",
+					"poolName": "[parameters('DataFactoryLabBatchServic_properties_typeProperties_poolName')]",
+					"linkedServiceName": {
+						"referenceName": "BatchStorageLinkedServic",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BatchStorageLinkedServic')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/HRemployeesls')]",
