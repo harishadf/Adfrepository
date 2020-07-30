@@ -1,0 +1,23 @@
+{
+	"name": "filtertestactivity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "filtertestls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "filtertest.csv",
+				"container": "filteractivity"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
