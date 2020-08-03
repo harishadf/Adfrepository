@@ -1,7 +1,0 @@
-{
-	"name": "pipeline2",
-	"properties": {
-		"annotations": []
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
-}
