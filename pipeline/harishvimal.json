@@ -1,6 +1,7 @@
 {
 	"name": "harishvimal",
 	"properties": {
+		"description": "harishvimalpipeline",
 		"activities": [
 			{
 				"name": "lookupActivity",
