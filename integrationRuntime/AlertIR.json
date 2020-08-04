@@ -1,0 +1,6 @@
+{
+	"name": "AlertIR",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
