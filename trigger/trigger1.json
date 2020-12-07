@@ -3,20 +3,13 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "harishvimal",
-					"type": "PipelineReference"
-				}
-			}
-		],
+		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Week",
 				"interval": 1,
-				"startTime": "2020-08-04T10:07:00.000Z",
+				"startTime": "2020-08-04T10:07:00Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"weekDays": [
