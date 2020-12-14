@@ -219,7 +219,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy data11111",
+						"name": "anikettesting",
+						"description": "11",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
