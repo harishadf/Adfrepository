@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "anikettesting",
+				"description": "11",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
