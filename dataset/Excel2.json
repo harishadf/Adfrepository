@@ -1,0 +1,30 @@
+{
+	"name": "Excel2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage32",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "timestamp.xlsx",
+				"container": "haimfile"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Timevalues",
+				"type": "String"
+			},
+			{
+				"name": "values",
+				"type": "String"
+			}
+		]
+	}
+}
