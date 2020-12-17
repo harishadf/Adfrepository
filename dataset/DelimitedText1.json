@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "timestamp.xlsx",
 				"container": "haimfile"
 			},
 			"columnDelimiter": ",",
