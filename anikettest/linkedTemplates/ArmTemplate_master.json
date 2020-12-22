@@ -99,6 +99,38 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
 		},
+		"AzureBlobStorage30_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage30'"
+		},
+		"AzureBlobStorage31_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage31'"
+		},
+		"AzureBlobStorage32_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage32'"
+		},
+		"AzureBlobStorage33_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage33'"
+		},
+		"AzureBlobStorage34_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage34'"
+		},
+		"AzureBlobStorage35_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage35'"
+		},
+		"AzureBlobStorage36_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage36'"
+		},
+		"AzureBlobStorage37_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage37'"
+		},
 		"AzureBlobStorage4_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
@@ -321,6 +353,30 @@
 					"AzureBlobStorage3_connectionString": {
 						"value": "[parameters('AzureBlobStorage3_connectionString')]"
 					},
+					"AzureBlobStorage30_connectionString": {
+						"value": "[parameters('AzureBlobStorage30_connectionString')]"
+					},
+					"AzureBlobStorage31_connectionString": {
+						"value": "[parameters('AzureBlobStorage31_connectionString')]"
+					},
+					"AzureBlobStorage32_connectionString": {
+						"value": "[parameters('AzureBlobStorage32_connectionString')]"
+					},
+					"AzureBlobStorage33_connectionString": {
+						"value": "[parameters('AzureBlobStorage33_connectionString')]"
+					},
+					"AzureBlobStorage34_connectionString": {
+						"value": "[parameters('AzureBlobStorage34_connectionString')]"
+					},
+					"AzureBlobStorage35_connectionString": {
+						"value": "[parameters('AzureBlobStorage35_connectionString')]"
+					},
+					"AzureBlobStorage36_connectionString": {
+						"value": "[parameters('AzureBlobStorage36_connectionString')]"
+					},
+					"AzureBlobStorage37_connectionString": {
+						"value": "[parameters('AzureBlobStorage37_connectionString')]"
+					},
 					"AzureBlobStorage4_connectionString": {
 						"value": "[parameters('AzureBlobStorage4_connectionString')]"
 					},
@@ -347,6 +403,26 @@
 					},
 					"csvdepartmentls_connectionString": {
 						"value": "[parameters('csvdepartmentls_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'anikettest_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "anikettest_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"csvemplds_connectionString": {
 						"value": "[parameters('csvemplds_connectionString')]"
@@ -372,32 +448,6 @@
 					"filtertestls_connectionString": {
 						"value": "[parameters('filtertestls_connectionString')]"
 					},
-					"desktop_properties_typeProperties_host": {
-						"value": "[parameters('desktop_properties_typeProperties_host')]"
-					},
-					"desktop_properties_typeProperties_userId": {
-						"value": "[parameters('desktop_properties_typeProperties_userId')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'anikettest_ArmTemplate_0')]"
-			]
-		},
-		{
-			"name": "anikettest_ArmTemplate_2",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
 					"harishaggregratelss_connectionString": {
 						"value": "[parameters('harishaggregratelss_connectionString')]"
 					},
@@ -421,11 +471,37 @@
 					},
 					"sourcecsvls_connectionString": {
 						"value": "[parameters('sourcecsvls_connectionString')]"
+					},
+					"desktop_properties_typeProperties_host": {
+						"value": "[parameters('desktop_properties_typeProperties_host')]"
+					},
+					"desktop_properties_typeProperties_userId": {
+						"value": "[parameters('desktop_properties_typeProperties_userId')]"
 					}
 				}
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'anikettest_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "anikettest_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'anikettest_ArmTemplate_2')]"
 			]
 		}
 	]

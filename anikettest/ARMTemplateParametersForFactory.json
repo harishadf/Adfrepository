@@ -74,6 +74,30 @@
 		"AzureBlobStorage3_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage30_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage31_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage32_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage33_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage34_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage35_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage36_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage37_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage4_connectionString": {
 			"value": ""
 		},
