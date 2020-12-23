@@ -98,7 +98,19 @@
 		"AzureBlobStorage37_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage38_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage39_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage4_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage40_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage41_connectionString": {
 			"value": ""
 		},
 		"AzureBlobStorage5_connectionString": {
@@ -171,6 +183,15 @@
 			"value": ""
 		},
 		"sourcecsvls_connectionString": {
+			"value": ""
+		},
+		"testtimeds_connectionString": {
+			"value": ""
+		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
+		"linkedService2_connectionString": {
 			"value": ""
 		},
 		"desktop_properties_typeProperties_host": {

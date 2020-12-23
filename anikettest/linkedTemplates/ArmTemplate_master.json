@@ -131,9 +131,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage37'"
 		},
+		"AzureBlobStorage38_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage38'"
+		},
+		"AzureBlobStorage39_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage39'"
+		},
 		"AzureBlobStorage4_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
+		},
+		"AzureBlobStorage40_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage40'"
+		},
+		"AzureBlobStorage41_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage41'"
 		},
 		"AzureBlobStorage5_connectionString": {
 			"type": "secureString",
@@ -230,6 +246,18 @@
 		"sourcecsvls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sourcecsvls'"
+		},
+		"testtimeds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'testtimeds'"
+		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
+		"linkedService2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService2'"
 		},
 		"desktop_properties_typeProperties_host": {
 			"type": "string",
@@ -377,8 +405,20 @@
 					"AzureBlobStorage37_connectionString": {
 						"value": "[parameters('AzureBlobStorage37_connectionString')]"
 					},
+					"AzureBlobStorage38_connectionString": {
+						"value": "[parameters('AzureBlobStorage38_connectionString')]"
+					},
+					"AzureBlobStorage39_connectionString": {
+						"value": "[parameters('AzureBlobStorage39_connectionString')]"
+					},
 					"AzureBlobStorage4_connectionString": {
 						"value": "[parameters('AzureBlobStorage4_connectionString')]"
+					},
+					"AzureBlobStorage40_connectionString": {
+						"value": "[parameters('AzureBlobStorage40_connectionString')]"
+					},
+					"AzureBlobStorage41_connectionString": {
+						"value": "[parameters('AzureBlobStorage41_connectionString')]"
 					},
 					"AzureBlobStorage5_connectionString": {
 						"value": "[parameters('AzureBlobStorage5_connectionString')]"
@@ -391,18 +431,6 @@
 					},
 					"AzureBlobStorage8_connectionString": {
 						"value": "[parameters('AzureBlobStorage8_connectionString')]"
-					},
-					"AzureBlobStorage9_connectionString": {
-						"value": "[parameters('AzureBlobStorage9_connectionString')]"
-					},
-					"Datasetcsv_connectionString": {
-						"value": "[parameters('Datasetcsv_connectionString')]"
-					},
-					"NonprodLS_connectionString": {
-						"value": "[parameters('NonprodLS_connectionString')]"
-					},
-					"csvdepartmentls_connectionString": {
-						"value": "[parameters('csvdepartmentls_connectionString')]"
 					}
 				}
 			},
@@ -423,6 +451,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage9_connectionString": {
+						"value": "[parameters('AzureBlobStorage9_connectionString')]"
+					},
+					"Datasetcsv_connectionString": {
+						"value": "[parameters('Datasetcsv_connectionString')]"
+					},
+					"NonprodLS_connectionString": {
+						"value": "[parameters('NonprodLS_connectionString')]"
+					},
+					"csvdepartmentls_connectionString": {
+						"value": "[parameters('csvdepartmentls_connectionString')]"
 					},
 					"csvemplds_connectionString": {
 						"value": "[parameters('csvemplds_connectionString')]"
@@ -497,6 +537,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"testtimeds_connectionString": {
+						"value": "[parameters('testtimeds_connectionString')]"
+					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
+					},
+					"linkedService2_connectionString": {
+						"value": "[parameters('linkedService2_connectionString')]"
 					}
 				}
 			},
