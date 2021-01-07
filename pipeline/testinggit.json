@@ -1,10 +1,9 @@
 {
-	"name": "anikettest1",
+	"name": "testinggit",
 	"properties": {
 		"activities": [
 			{
-				"name": "anikettesting",
-				"description": "1111",
+				"name": "test1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -36,20 +35,20 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary1",
+						"referenceName": "dataset1",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary2",
+						"referenceName": "dataset123",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2020-12-22T09:59:21Z"
+		"lastPublishTime": "2020-12-02T09:25:29Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

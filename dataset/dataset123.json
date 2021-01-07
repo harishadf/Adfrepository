@@ -1,8 +1,8 @@
 {
-	"name": "Binary1",
+	"name": "dataset123",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage28",
+			"referenceName": "linkedservice123",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "dbocustomer_table.txt",
-				"container": "adfv2tutorial"
+				"container": "babu"
 			}
 		}
 	},

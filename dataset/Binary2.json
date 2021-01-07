@@ -13,5 +13,6 @@
 				"container": "twouput1"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
