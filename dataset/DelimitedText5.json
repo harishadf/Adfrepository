@@ -1,0 +1,40 @@
+{
+	"name": "DelimitedText5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage44",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Harish",
+				"type": "String"
+			},
+			{
+				"name": "33",
+				"type": "String"
+			},
+			{
+				"name": "30000",
+				"type": "String"
+			},
+			{
+				"name": "Pilani",
+				"type": "String"
+			}
+		]
+	}
+}
