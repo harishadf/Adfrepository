@@ -71,21 +71,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage41'"
 		},
-		"AzureBlobStorage5_connectionString": {
+		"AzureBlobStorage42_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage42'"
 		},
-		"AzureBlobStorage6_connectionString": {
+		"AzureBlobStorage43_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage43'"
 		},
-		"AzureBlobStorage7_connectionString": {
+		"AzureBlobStorage44_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage44'"
 		},
-		"AzureBlobStorage8_connectionString": {
+		"AzureBlobStorage45_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage8'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage45'"
 		}
 	},
 	"variables": {
@@ -301,53 +301,53 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage5')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage42')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage5_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage42_connectionString')]"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage6')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage43')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage6_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage43_connectionString')]"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage7')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage44')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage7_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage44_connectionString')]"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage8')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage45')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage8_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage45_connectionString')]"
 				}
 			},
 			"dependsOn": []

@@ -113,6 +113,18 @@
 		"AzureBlobStorage41_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage42_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage43_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage44_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage45_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage5_connectionString": {
 			"value": ""
 		},
@@ -128,6 +140,21 @@
 		"AzureBlobStorage9_connectionString": {
 			"value": ""
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureTableStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureTableStorage2_connectionString": {
+			"value": ""
+		},
 		"Datasetcsv_connectionString": {
 			"value": ""
 		},
@@ -138,6 +165,9 @@
 			"value": ""
 		},
 		"csvemplds_connectionString": {
+			"value": ""
+		},
+		"csvforematxells_connectionString": {
 			"value": ""
 		},
 		"departmentcsvls_connectionString": {
@@ -167,6 +197,21 @@
 		"joinoutputofemplndeptls_connectionString": {
 			"value": ""
 		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
+		"linkedService2_connectionString": {
+			"value": ""
+		},
+		"linkedService3_connectionString": {
+			"value": ""
+		},
+		"linkedds1_connectionString": {
+			"value": ""
+		},
+		"linkedservice123_connectionString": {
+			"value": ""
+		},
 		"outputempldept_connectionString": {
 			"value": ""
 		},
@@ -188,11 +233,26 @@
 		"testtimeds_connectionString": {
 			"value": ""
 		},
-		"linkedService1_connectionString": {
+		"xelformatls_connectionString": {
 			"value": ""
 		},
-		"linkedService2_connectionString": {
+		"AzureBlobStorage46_connectionString": {
 			"value": ""
+		},
+		"AzureBlobStorage47_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage48_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage49_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://harishgen2.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://harishgen2.dfs.core.windows.net"
 		},
 		"desktop_properties_typeProperties_host": {
 			"value": "C:\\Users\\hariku\\OneDrive - Microsoft\\Desktop\\copyactivity"
