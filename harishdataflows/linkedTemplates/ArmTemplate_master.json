@@ -1,0 +1,820 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "harishdataflows"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureBlobStorage10_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage10'"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage11'"
+		},
+		"AzureBlobStorage12_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage12'"
+		},
+		"AzureBlobStorage13_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage13'"
+		},
+		"AzureBlobStorage14_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage14'"
+		},
+		"AzureBlobStorage15_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage15'"
+		},
+		"AzureBlobStorage16_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage16'"
+		},
+		"AzureBlobStorage17_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage17'"
+		},
+		"AzureBlobStorage18_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage18'"
+		},
+		"AzureBlobStorage19_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage19'"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureBlobStorage20_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage20'"
+		},
+		"AzureBlobStorage21_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage21'"
+		},
+		"AzureBlobStorage22_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage22'"
+		},
+		"AzureBlobStorage23_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage23'"
+		},
+		"AzureBlobStorage24_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage24'"
+		},
+		"AzureBlobStorage25_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage25'"
+		},
+		"AzureBlobStorage26_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage26'"
+		},
+		"AzureBlobStorage27_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage27'"
+		},
+		"AzureBlobStorage28_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage28'"
+		},
+		"AzureBlobStorage29_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage29'"
+		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
+		"AzureBlobStorage30_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage30'"
+		},
+		"AzureBlobStorage31_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage31'"
+		},
+		"AzureBlobStorage32_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage32'"
+		},
+		"AzureBlobStorage33_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage33'"
+		},
+		"AzureBlobStorage34_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage34'"
+		},
+		"AzureBlobStorage35_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage35'"
+		},
+		"AzureBlobStorage36_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage36'"
+		},
+		"AzureBlobStorage37_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage37'"
+		},
+		"AzureBlobStorage38_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage38'"
+		},
+		"AzureBlobStorage39_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage39'"
+		},
+		"AzureBlobStorage4_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
+		},
+		"AzureBlobStorage40_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage40'"
+		},
+		"AzureBlobStorage41_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage41'"
+		},
+		"AzureBlobStorage42_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage42'"
+		},
+		"AzureBlobStorage43_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage43'"
+		},
+		"AzureBlobStorage44_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage44'"
+		},
+		"AzureBlobStorage45_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage45'"
+		},
+		"AzureBlobStorage46_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage46'"
+		},
+		"AzureBlobStorage47_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage47'"
+		},
+		"AzureBlobStorage48_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage48'"
+		},
+		"AzureBlobStorage49_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage49'"
+		},
+		"AzureBlobStorage5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
+		},
+		"AzureBlobStorage50_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage50'"
+		},
+		"AzureBlobStorage51_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage51'"
+		},
+		"AzureBlobStorage6_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
+		},
+		"AzureBlobStorage7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
+		},
+		"AzureBlobStorage8_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage8'"
+		},
+		"AzureBlobStorage9_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureTableStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureTableStorage1'"
+		},
+		"AzureTableStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureTableStorage2'"
+		},
+		"Datasetcsv_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Datasetcsv'"
+		},
+		"NonprodLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'NonprodLS'"
+		},
+		"csvdepartmentls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'csvdepartmentls'"
+		},
+		"csvemplds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'csvemplds'"
+		},
+		"csvforematxells_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'csvforematxells'"
+		},
+		"departmentcsvls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'departmentcsvls'"
+		},
+		"desktop_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'desktop'"
+		},
+		"destinationfilterls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'destinationfilterls'"
+		},
+		"employeescsvls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'employeescsvls'"
+		},
+		"eventtestls1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'eventtestls1'"
+		},
+		"eventtestls2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'eventtestls2'"
+		},
+		"filterexcells_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'filterexcells'"
+		},
+		"filteroutputharishls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'filteroutputharishls'"
+		},
+		"filtertestls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'filtertestls'"
+		},
+		"harishaggregratelss_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'harishaggregratelss'"
+		},
+		"joinoutputofemplndeptls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'joinoutputofemplndeptls'"
+		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
+		"linkedService2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService2'"
+		},
+		"linkedService3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService3'"
+		},
+		"linkedds1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedds1'"
+		},
+		"linkedservice123_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedservice123'"
+		},
+		"ls11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls11'"
+		},
+		"ls22_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls22'"
+		},
+		"ls33_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls33'"
+		},
+		"outputempldept_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'outputempldept'"
+		},
+		"parquet3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'parquet3'"
+		},
+		"parquetls1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'parquetls1'"
+		},
+		"parquetls2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'parquetls2'"
+		},
+		"sharepointdata_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sharepointdata'"
+		},
+		"sourcecsvls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sourcecsvls'"
+		},
+		"testtimeds_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'testtimeds'"
+		},
+		"xelformatls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'xelformatls'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://harishgen2.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://harishgen2.dfs.core.windows.net"
+		},
+		"desktop_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Users\\hariku\\OneDrive - Microsoft\\Desktop\\copyactivity"
+		},
+		"desktop_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "harishtest"
+		},
+		"Eventtrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/82da1dd1-f682-4164-8732-e21666d90066/resourceGroups/harishku/providers/Microsoft.Storage/storageAccounts/harishgen2"
+		},
+		"copytestblobtoblob_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/82da1dd1-f682-4164-8732-e21666d90066/resourceGroups/harishku/providers/Microsoft.Storage/storageAccounts/harishgen2"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "harishdataflows_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage10_connectionString": {
+						"value": "[parameters('AzureBlobStorage10_connectionString')]"
+					},
+					"AzureBlobStorage11_connectionString": {
+						"value": "[parameters('AzureBlobStorage11_connectionString')]"
+					},
+					"AzureBlobStorage12_connectionString": {
+						"value": "[parameters('AzureBlobStorage12_connectionString')]"
+					},
+					"AzureBlobStorage13_connectionString": {
+						"value": "[parameters('AzureBlobStorage13_connectionString')]"
+					},
+					"AzureBlobStorage14_connectionString": {
+						"value": "[parameters('AzureBlobStorage14_connectionString')]"
+					},
+					"AzureBlobStorage15_connectionString": {
+						"value": "[parameters('AzureBlobStorage15_connectionString')]"
+					},
+					"AzureBlobStorage16_connectionString": {
+						"value": "[parameters('AzureBlobStorage16_connectionString')]"
+					},
+					"AzureBlobStorage17_connectionString": {
+						"value": "[parameters('AzureBlobStorage17_connectionString')]"
+					},
+					"AzureBlobStorage18_connectionString": {
+						"value": "[parameters('AzureBlobStorage18_connectionString')]"
+					},
+					"AzureBlobStorage19_connectionString": {
+						"value": "[parameters('AzureBlobStorage19_connectionString')]"
+					},
+					"AzureBlobStorage2_connectionString": {
+						"value": "[parameters('AzureBlobStorage2_connectionString')]"
+					},
+					"AzureBlobStorage20_connectionString": {
+						"value": "[parameters('AzureBlobStorage20_connectionString')]"
+					},
+					"AzureBlobStorage21_connectionString": {
+						"value": "[parameters('AzureBlobStorage21_connectionString')]"
+					},
+					"AzureBlobStorage22_connectionString": {
+						"value": "[parameters('AzureBlobStorage22_connectionString')]"
+					},
+					"AzureBlobStorage23_connectionString": {
+						"value": "[parameters('AzureBlobStorage23_connectionString')]"
+					},
+					"AzureBlobStorage24_connectionString": {
+						"value": "[parameters('AzureBlobStorage24_connectionString')]"
+					},
+					"AzureBlobStorage25_connectionString": {
+						"value": "[parameters('AzureBlobStorage25_connectionString')]"
+					},
+					"AzureBlobStorage26_connectionString": {
+						"value": "[parameters('AzureBlobStorage26_connectionString')]"
+					},
+					"AzureBlobStorage27_connectionString": {
+						"value": "[parameters('AzureBlobStorage27_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage28_connectionString": {
+						"value": "[parameters('AzureBlobStorage28_connectionString')]"
+					},
+					"AzureBlobStorage29_connectionString": {
+						"value": "[parameters('AzureBlobStorage29_connectionString')]"
+					},
+					"AzureBlobStorage3_connectionString": {
+						"value": "[parameters('AzureBlobStorage3_connectionString')]"
+					},
+					"AzureBlobStorage30_connectionString": {
+						"value": "[parameters('AzureBlobStorage30_connectionString')]"
+					},
+					"AzureBlobStorage31_connectionString": {
+						"value": "[parameters('AzureBlobStorage31_connectionString')]"
+					},
+					"AzureBlobStorage32_connectionString": {
+						"value": "[parameters('AzureBlobStorage32_connectionString')]"
+					},
+					"AzureBlobStorage33_connectionString": {
+						"value": "[parameters('AzureBlobStorage33_connectionString')]"
+					},
+					"AzureBlobStorage34_connectionString": {
+						"value": "[parameters('AzureBlobStorage34_connectionString')]"
+					},
+					"AzureBlobStorage35_connectionString": {
+						"value": "[parameters('AzureBlobStorage35_connectionString')]"
+					},
+					"AzureBlobStorage36_connectionString": {
+						"value": "[parameters('AzureBlobStorage36_connectionString')]"
+					},
+					"AzureBlobStorage37_connectionString": {
+						"value": "[parameters('AzureBlobStorage37_connectionString')]"
+					},
+					"AzureBlobStorage38_connectionString": {
+						"value": "[parameters('AzureBlobStorage38_connectionString')]"
+					},
+					"AzureBlobStorage39_connectionString": {
+						"value": "[parameters('AzureBlobStorage39_connectionString')]"
+					},
+					"AzureBlobStorage4_connectionString": {
+						"value": "[parameters('AzureBlobStorage4_connectionString')]"
+					},
+					"AzureBlobStorage40_connectionString": {
+						"value": "[parameters('AzureBlobStorage40_connectionString')]"
+					},
+					"AzureBlobStorage41_connectionString": {
+						"value": "[parameters('AzureBlobStorage41_connectionString')]"
+					},
+					"AzureBlobStorage42_connectionString": {
+						"value": "[parameters('AzureBlobStorage42_connectionString')]"
+					},
+					"AzureBlobStorage43_connectionString": {
+						"value": "[parameters('AzureBlobStorage43_connectionString')]"
+					},
+					"AzureBlobStorage44_connectionString": {
+						"value": "[parameters('AzureBlobStorage44_connectionString')]"
+					},
+					"AzureBlobStorage45_connectionString": {
+						"value": "[parameters('AzureBlobStorage45_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage46_connectionString": {
+						"value": "[parameters('AzureBlobStorage46_connectionString')]"
+					},
+					"AzureBlobStorage47_connectionString": {
+						"value": "[parameters('AzureBlobStorage47_connectionString')]"
+					},
+					"AzureBlobStorage48_connectionString": {
+						"value": "[parameters('AzureBlobStorage48_connectionString')]"
+					},
+					"AzureBlobStorage49_connectionString": {
+						"value": "[parameters('AzureBlobStorage49_connectionString')]"
+					},
+					"AzureBlobStorage5_connectionString": {
+						"value": "[parameters('AzureBlobStorage5_connectionString')]"
+					},
+					"AzureBlobStorage50_connectionString": {
+						"value": "[parameters('AzureBlobStorage50_connectionString')]"
+					},
+					"AzureBlobStorage51_connectionString": {
+						"value": "[parameters('AzureBlobStorage51_connectionString')]"
+					},
+					"AzureBlobStorage6_connectionString": {
+						"value": "[parameters('AzureBlobStorage6_connectionString')]"
+					},
+					"AzureBlobStorage7_connectionString": {
+						"value": "[parameters('AzureBlobStorage7_connectionString')]"
+					},
+					"AzureBlobStorage8_connectionString": {
+						"value": "[parameters('AzureBlobStorage8_connectionString')]"
+					},
+					"AzureBlobStorage9_connectionString": {
+						"value": "[parameters('AzureBlobStorage9_connectionString')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureDataLakeStorage2_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AzureTableStorage1_connectionString": {
+						"value": "[parameters('AzureTableStorage1_connectionString')]"
+					},
+					"AzureTableStorage2_connectionString": {
+						"value": "[parameters('AzureTableStorage2_connectionString')]"
+					},
+					"Datasetcsv_connectionString": {
+						"value": "[parameters('Datasetcsv_connectionString')]"
+					},
+					"NonprodLS_connectionString": {
+						"value": "[parameters('NonprodLS_connectionString')]"
+					},
+					"csvdepartmentls_connectionString": {
+						"value": "[parameters('csvdepartmentls_connectionString')]"
+					},
+					"csvemplds_connectionString": {
+						"value": "[parameters('csvemplds_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage2_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"csvforematxells_connectionString": {
+						"value": "[parameters('csvforematxells_connectionString')]"
+					},
+					"departmentcsvls_connectionString": {
+						"value": "[parameters('departmentcsvls_connectionString')]"
+					},
+					"desktop_password": {
+						"value": "[parameters('desktop_password')]"
+					},
+					"destinationfilterls_connectionString": {
+						"value": "[parameters('destinationfilterls_connectionString')]"
+					},
+					"employeescsvls_connectionString": {
+						"value": "[parameters('employeescsvls_connectionString')]"
+					},
+					"eventtestls1_connectionString": {
+						"value": "[parameters('eventtestls1_connectionString')]"
+					},
+					"eventtestls2_connectionString": {
+						"value": "[parameters('eventtestls2_connectionString')]"
+					},
+					"filterexcells_connectionString": {
+						"value": "[parameters('filterexcells_connectionString')]"
+					},
+					"filteroutputharishls_connectionString": {
+						"value": "[parameters('filteroutputharishls_connectionString')]"
+					},
+					"filtertestls_connectionString": {
+						"value": "[parameters('filtertestls_connectionString')]"
+					},
+					"harishaggregratelss_connectionString": {
+						"value": "[parameters('harishaggregratelss_connectionString')]"
+					},
+					"joinoutputofemplndeptls_connectionString": {
+						"value": "[parameters('joinoutputofemplndeptls_connectionString')]"
+					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
+					},
+					"linkedService2_connectionString": {
+						"value": "[parameters('linkedService2_connectionString')]"
+					},
+					"linkedService3_connectionString": {
+						"value": "[parameters('linkedService3_connectionString')]"
+					},
+					"linkedds1_connectionString": {
+						"value": "[parameters('linkedds1_connectionString')]"
+					},
+					"linkedservice123_connectionString": {
+						"value": "[parameters('linkedservice123_connectionString')]"
+					},
+					"outputempldept_connectionString": {
+						"value": "[parameters('outputempldept_connectionString')]"
+					},
+					"parquet3_connectionString": {
+						"value": "[parameters('parquet3_connectionString')]"
+					},
+					"parquetls1_connectionString": {
+						"value": "[parameters('parquetls1_connectionString')]"
+					},
+					"desktop_properties_typeProperties_host": {
+						"value": "[parameters('desktop_properties_typeProperties_host')]"
+					},
+					"desktop_properties_typeProperties_userId": {
+						"value": "[parameters('desktop_properties_typeProperties_userId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"parquetls2_connectionString": {
+						"value": "[parameters('parquetls2_connectionString')]"
+					},
+					"sharepointdata_connectionString": {
+						"value": "[parameters('sharepointdata_connectionString')]"
+					},
+					"sourcecsvls_connectionString": {
+						"value": "[parameters('sourcecsvls_connectionString')]"
+					},
+					"testtimeds_connectionString": {
+						"value": "[parameters('testtimeds_connectionString')]"
+					},
+					"xelformatls_connectionString": {
+						"value": "[parameters('xelformatls_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"ls11_connectionString": {
+						"value": "[parameters('ls11_connectionString')]"
+					},
+					"ls22_connectionString": {
+						"value": "[parameters('ls22_connectionString')]"
+					},
+					"ls33_connectionString": {
+						"value": "[parameters('ls33_connectionString')]"
+					},
+					"Eventtrigger_properties_typeProperties_scope": {
+						"value": "[parameters('Eventtrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_4')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_6",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_6.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"copytestblobtoblob_properties_typeProperties_scope": {
+						"value": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_5')]"
+			]
+		}
+	]
+}
