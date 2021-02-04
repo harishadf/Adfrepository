@@ -146,6 +146,12 @@
 		"AzureBlobStorage51_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage52_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage53_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage6_connectionString": {
 			"value": ""
 		},
@@ -243,6 +249,9 @@
 			"value": ""
 		},
 		"ls33_connectionString": {
+			"value": ""
+		},
+		"ls333_connectionString": {
 			"value": ""
 		},
 		"outputempldept_connectionString": {

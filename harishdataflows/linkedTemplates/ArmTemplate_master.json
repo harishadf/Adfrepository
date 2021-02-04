@@ -195,6 +195,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage51'"
 		},
+		"AzureBlobStorage52_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage52'"
+		},
+		"AzureBlobStorage53_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage53'"
+		},
 		"AzureBlobStorage6_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
@@ -326,6 +334,10 @@
 		"ls33_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls33'"
+		},
+		"ls333_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls333'"
 		},
 		"outputempldept_connectionString": {
 			"type": "secureString",
@@ -775,6 +787,12 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureBlobStorage52_connectionString": {
+						"value": "[parameters('AzureBlobStorage52_connectionString')]"
+					},
+					"AzureBlobStorage53_connectionString": {
+						"value": "[parameters('AzureBlobStorage53_connectionString')]"
+					},
 					"ls11_connectionString": {
 						"value": "[parameters('ls11_connectionString')]"
 					},
@@ -784,8 +802,8 @@
 					"ls33_connectionString": {
 						"value": "[parameters('ls33_connectionString')]"
 					},
-					"Eventtrigger_properties_typeProperties_scope": {
-						"value": "[parameters('Eventtrigger_properties_typeProperties_scope')]"
+					"ls333_connectionString": {
+						"value": "[parameters('ls333_connectionString')]"
 					}
 				}
 			},
@@ -806,6 +824,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Eventtrigger_properties_typeProperties_scope": {
+						"value": "[parameters('Eventtrigger_properties_typeProperties_scope')]"
 					},
 					"copytestblobtoblob_properties_typeProperties_scope": {
 						"value": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]"
