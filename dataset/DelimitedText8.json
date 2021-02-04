@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText20",
+	"name": "DelimitedText8",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage23",
+			"referenceName": "AzureBlobStorage49",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,20 +10,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "filtertestvimal.csv",
-				"container": "vimalfilter"
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
 		"schema": [
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
 			{
 				"type": "String"
 			},

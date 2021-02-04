@@ -1,26 +1,28 @@
 {
-	"name": "DelimitedText2",
+	"name": "Excel2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage36",
+			"referenceName": "AzureBlobStorage32",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "timestamp.csv",
+				"fileName": "timestamp.xlsx",
 				"container": "haimfile"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
 				"name": "Timevalues",
+				"type": "String"
+			},
+			{
+				"name": "values",
 				"type": "String"
 			}
 		]

@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText23",
+	"name": "DelimitedText7",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage26",
+			"referenceName": "AzureBlobStorage47",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,11 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "sharepointdata"
+				"container": "aniketoutput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
 		"schema": []

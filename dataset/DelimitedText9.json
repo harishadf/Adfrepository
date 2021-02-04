@@ -1,8 +1,8 @@
 {
-	"name": "destinatinfilter",
+	"name": "DelimitedText9",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "destinationfilterls",
+			"referenceName": "AzureBlobStorage50",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,12 +10,26 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "filteractivity"
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
 	}
 }

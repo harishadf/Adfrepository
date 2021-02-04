@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText22",
+	"name": "DelimitedText5",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage25",
+			"referenceName": "AzureBlobStorage44",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "harishfilterinput2.csv",
-				"container": "source"
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
@@ -20,21 +20,19 @@
 		},
 		"schema": [
 			{
+				"name": "Harish",
 				"type": "String"
 			},
 			{
+				"name": "33",
 				"type": "String"
 			},
 			{
+				"name": "30000",
 				"type": "String"
 			},
 			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
+				"name": "Pilani",
 				"type": "String"
 			}
 		]

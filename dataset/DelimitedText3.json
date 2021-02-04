@@ -2,7 +2,7 @@
 	"name": "DelimitedText3",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage6",
+			"referenceName": "AzureBlobStorage42",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "destination"
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
@@ -19,23 +20,6 @@
 		},
 		"schema": [
 			{
-				"name": "empid",
-				"type": "String"
-			},
-			{
-				"name": "name",
-				"type": "String"
-			},
-			{
-				"name": "country",
-				"type": "String"
-			},
-			{
-				"name": "deptid",
-				"type": "String"
-			},
-			{
-				"name": "department",
 				"type": "String"
 			}
 		]

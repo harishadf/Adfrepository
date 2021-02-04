@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText21",
+	"name": "DelimitedText10",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage24",
+			"referenceName": "AzureBlobStorage51",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "emloyeedtmp.csv",
-				"container": "datafactorylabstore"
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

@@ -1,0 +1,18 @@
+{
+	"name": "eventtestls2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "eventtestls2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "eventtest2"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,8 +1,8 @@
 {
-	"name": "filtertestactivity",
+	"name": "DelimitedText6",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "filtertestls",
+			"referenceName": "AzureBlobStorage46",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,14 +10,26 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "filtertest.csv",
-				"container": "filteractivity"
+				"fileName": "Anikettestfile.csv",
+				"container": "aniketinput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
 	}
 }
