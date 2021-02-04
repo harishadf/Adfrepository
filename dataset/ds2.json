@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText1",
+	"name": "ds2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "ls22",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,21 +10,24 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "department.csv",
+				"fileName": "employee.csv",
 				"container": "inputs"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "Depid",
 				"type": "String"
 			},
 			{
-				"name": "Depname",
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
 				"type": "String"
 			}
 		]
