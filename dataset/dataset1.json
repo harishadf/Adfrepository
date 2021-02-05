@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "inputEmp.txt",
+				"fileName": "inputEmp1.txt",
 				"container": "adfv2tutorial"
 			}
 		}
