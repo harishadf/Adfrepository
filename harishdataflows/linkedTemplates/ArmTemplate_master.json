@@ -219,6 +219,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage57'"
 		},
+		"AzureBlobStorage58_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage58'"
+		},
+		"AzureBlobStorage59_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage59'"
+		},
 		"AzureBlobStorage6_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
@@ -824,6 +832,12 @@
 					},
 					"AzureBlobStorage57_connectionString": {
 						"value": "[parameters('AzureBlobStorage57_connectionString')]"
+					},
+					"AzureBlobStorage58_connectionString": {
+						"value": "[parameters('AzureBlobStorage58_connectionString')]"
+					},
+					"AzureBlobStorage59_connectionString": {
+						"value": "[parameters('AzureBlobStorage59_connectionString')]"
 					},
 					"emplls_connectionString": {
 						"value": "[parameters('emplls_connectionString')]"
