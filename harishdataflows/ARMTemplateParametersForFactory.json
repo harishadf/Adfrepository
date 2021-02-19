@@ -152,6 +152,18 @@
 		"AzureBlobStorage53_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage54_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage55_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage56_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage57_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage6_connectionString": {
 			"value": ""
 		},
@@ -201,6 +213,9 @@
 			"value": ""
 		},
 		"destinationfilterls_connectionString": {
+			"value": ""
+		},
+		"emplls_connectionString": {
 			"value": ""
 		},
 		"employeescsvls_connectionString": {

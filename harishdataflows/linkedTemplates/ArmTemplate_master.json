@@ -203,6 +203,22 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage53'"
 		},
+		"AzureBlobStorage54_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage54'"
+		},
+		"AzureBlobStorage55_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage55'"
+		},
+		"AzureBlobStorage56_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage56'"
+		},
+		"AzureBlobStorage57_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage57'"
+		},
 		"AzureBlobStorage6_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage6'"
@@ -270,6 +286,10 @@
 		"destinationfilterls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'destinationfilterls'"
+		},
+		"emplls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'emplls'"
 		},
 		"employeescsvls_connectionString": {
 			"type": "secureString",
@@ -793,6 +813,21 @@
 					"AzureBlobStorage53_connectionString": {
 						"value": "[parameters('AzureBlobStorage53_connectionString')]"
 					},
+					"AzureBlobStorage54_connectionString": {
+						"value": "[parameters('AzureBlobStorage54_connectionString')]"
+					},
+					"AzureBlobStorage55_connectionString": {
+						"value": "[parameters('AzureBlobStorage55_connectionString')]"
+					},
+					"AzureBlobStorage56_connectionString": {
+						"value": "[parameters('AzureBlobStorage56_connectionString')]"
+					},
+					"AzureBlobStorage57_connectionString": {
+						"value": "[parameters('AzureBlobStorage57_connectionString')]"
+					},
+					"emplls_connectionString": {
+						"value": "[parameters('emplls_connectionString')]"
+					},
 					"ls11_connectionString": {
 						"value": "[parameters('ls11_connectionString')]"
 					},
@@ -835,6 +870,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_6')]"
 			]
 		}
 	]
