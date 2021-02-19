@@ -1,0 +1,39 @@
+{
+	"name": "DelimitedText16",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage57",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "outputs"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "30",
+				"type": "String"
+			},
+			{
+				"name": "Rahul",
+				"type": "String"
+			},
+			{
+				"name": "India",
+				"type": "String"
+			},
+			{
+				"name": "33",
+				"type": "String"
+			}
+		]
+	}
+}
