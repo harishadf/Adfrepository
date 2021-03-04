@@ -1,0 +1,17 @@
+{
+	"name": "getlookup",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage68",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "inputs"
+			}
+		}
+	}
+}

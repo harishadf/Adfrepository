@@ -1,0 +1,22 @@
+{
+	"name": "DelimitedText25",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage69",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "mod1",
+				"container": "modified"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
