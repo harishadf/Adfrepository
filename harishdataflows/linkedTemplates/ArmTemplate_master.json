@@ -263,6 +263,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage67'"
 		},
+		"AzureBlobStorage68_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage68'"
+		},
+		"AzureBlobStorage69_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage69'"
+		},
 		"AzureBlobStorage7_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
@@ -919,6 +927,12 @@
 					"AzureBlobStorage67_connectionString": {
 						"value": "[parameters('AzureBlobStorage67_connectionString')]"
 					},
+					"AzureBlobStorage68_connectionString": {
+						"value": "[parameters('AzureBlobStorage68_connectionString')]"
+					},
+					"AzureBlobStorage69_connectionString": {
+						"value": "[parameters('AzureBlobStorage69_connectionString')]"
+					},
 					"emplls_connectionString": {
 						"value": "[parameters('emplls_connectionString')]"
 					},
@@ -956,12 +970,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Eventtrigger_properties_typeProperties_scope": {
-						"value": "[parameters('Eventtrigger_properties_typeProperties_scope')]"
-					},
-					"copytestblobtoblob_properties_typeProperties_scope": {
-						"value": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -982,6 +990,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Eventtrigger_properties_typeProperties_scope": {
+						"value": "[parameters('Eventtrigger_properties_typeProperties_scope')]"
+					},
+					"copytestblobtoblob_properties_typeProperties_scope": {
+						"value": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]"
 					}
 				}
 			},

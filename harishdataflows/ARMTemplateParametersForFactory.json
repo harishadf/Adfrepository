@@ -197,6 +197,12 @@
 		"AzureBlobStorage67_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage68_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage69_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage7_connectionString": {
 			"value": ""
 		},
