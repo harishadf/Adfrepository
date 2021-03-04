@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "mod"
+				"folderPath": "mod",
+				"container": "modified"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
