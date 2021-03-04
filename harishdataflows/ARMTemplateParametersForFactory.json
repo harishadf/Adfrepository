@@ -191,6 +191,12 @@
 		"AzureBlobStorage65_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage66_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage67_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage7_connectionString": {
 			"value": ""
 		},
@@ -281,6 +287,9 @@
 		"linkedservice123_connectionString": {
 			"value": ""
 		},
+		"lm11_connectionString": {
+			"value": ""
+		},
 		"ls11_connectionString": {
 			"value": ""
 		},
@@ -315,12 +324,6 @@
 			"value": ""
 		},
 		"xelformatls_connectionString": {
-			"value": ""
-		},
-		"lm11_connectionString": {
-			"value": ""
-		},
-		"AzureBlobStorage66_connectionString": {
 			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
