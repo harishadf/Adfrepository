@@ -275,6 +275,30 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage7'"
 		},
+		"AzureBlobStorage70_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage70'"
+		},
+		"AzureBlobStorage71_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage71'"
+		},
+		"AzureBlobStorage72_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage72'"
+		},
+		"AzureBlobStorage73_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage73'"
+		},
+		"AzureBlobStorage74_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage74'"
+		},
+		"AzureBlobStorage75_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage75'"
+		},
 		"AzureBlobStorage8_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage8'"
@@ -375,6 +399,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
 		},
+		"linkedService124_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService124'"
+		},
 		"linkedService2_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'linkedService2'"
@@ -434,6 +462,10 @@
 		"sourcecsvls_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sourcecsvls'"
+		},
+		"sql1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sql1'"
 		},
 		"testtimeds_connectionString": {
 			"type": "secureString",
@@ -933,8 +965,29 @@
 					"AzureBlobStorage69_connectionString": {
 						"value": "[parameters('AzureBlobStorage69_connectionString')]"
 					},
+					"AzureBlobStorage70_connectionString": {
+						"value": "[parameters('AzureBlobStorage70_connectionString')]"
+					},
+					"AzureBlobStorage71_connectionString": {
+						"value": "[parameters('AzureBlobStorage71_connectionString')]"
+					},
+					"AzureBlobStorage72_connectionString": {
+						"value": "[parameters('AzureBlobStorage72_connectionString')]"
+					},
+					"AzureBlobStorage73_connectionString": {
+						"value": "[parameters('AzureBlobStorage73_connectionString')]"
+					},
+					"AzureBlobStorage74_connectionString": {
+						"value": "[parameters('AzureBlobStorage74_connectionString')]"
+					},
+					"AzureBlobStorage75_connectionString": {
+						"value": "[parameters('AzureBlobStorage75_connectionString')]"
+					},
 					"emplls_connectionString": {
 						"value": "[parameters('emplls_connectionString')]"
+					},
+					"linkedService124_connectionString": {
+						"value": "[parameters('linkedService124_connectionString')]"
 					},
 					"lm11_connectionString": {
 						"value": "[parameters('lm11_connectionString')]"
@@ -950,6 +1003,9 @@
 					},
 					"ls333_connectionString": {
 						"value": "[parameters('ls333_connectionString')]"
+					},
+					"sql1_connectionString": {
+						"value": "[parameters('sql1_connectionString')]"
 					}
 				}
 			},
@@ -990,6 +1046,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_7')]"
+			]
+		},
+		{
+			"name": "harishdataflows_ArmTemplate_9",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_9.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"Eventtrigger_properties_typeProperties_scope": {
 						"value": "[parameters('Eventtrigger_properties_typeProperties_scope')]"
@@ -1000,7 +1076,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_7')]"
+				"[resourceId('Microsoft.Resources/deployments', 'harishdataflows_ArmTemplate_8')]"
 			]
 		}
 	]

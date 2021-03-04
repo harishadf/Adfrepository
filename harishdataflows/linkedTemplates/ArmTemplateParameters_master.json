@@ -206,6 +206,24 @@
 		"AzureBlobStorage7_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage70_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage71_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage72_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage73_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage74_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage75_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage8_connectionString": {
 			"value": ""
 		},
@@ -281,6 +299,9 @@
 		"linkedService1_connectionString": {
 			"value": ""
 		},
+		"linkedService124_connectionString": {
+			"value": ""
+		},
 		"linkedService2_connectionString": {
 			"value": ""
 		},
@@ -324,6 +345,9 @@
 			"value": ""
 		},
 		"sourcecsvls_connectionString": {
+			"value": ""
+		},
+		"sql1_connectionString": {
 			"value": ""
 		},
 		"testtimeds_connectionString": {
