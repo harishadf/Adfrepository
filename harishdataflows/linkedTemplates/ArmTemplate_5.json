@@ -43,25 +43,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage59'"
 		},
-		"emplls_connectionString": {
+		"AzureBlobStorage60_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'emplls'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage60'"
 		},
-		"ls11_connectionString": {
+		"AzureBlobStorage61_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls11'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage61'"
 		},
-		"ls22_connectionString": {
+		"AzureBlobStorage62_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls22'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage62'"
 		},
-		"ls33_connectionString": {
+		"AzureBlobStorage63_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls33'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage63'"
 		},
-		"ls333_connectionString": {
+		"AzureBlobStorage64_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls333'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage64'"
 		}
 	},
 	"variables": {
@@ -366,14 +366,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/emplls')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage60')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('emplls_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage60_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -383,14 +383,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls11')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage61')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls11_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage61_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -400,14 +400,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls22')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage62')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls22_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage62_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -417,14 +417,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls33')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage63')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls33_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage63_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -434,14 +434,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls333')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage64')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls333_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage64_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
