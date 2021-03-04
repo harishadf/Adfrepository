@@ -45,6 +45,7 @@
 						"value": "@activity('List Tables').output.value",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Export Table",
@@ -101,7 +102,13 @@
 							"outputs": [
 								{
 									"referenceName": "CSVTable",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": {
+											"value": "@concat(item().table_schema(),'_',item().table_name(),'.csv')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
