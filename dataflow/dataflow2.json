@@ -1,0 +1,20 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Json3",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(output(\n\t\tid as string,\n\t\tos_version as string,\n\t\tmodel as string,\n\t\tapp_version as string,\n\t\tos_type as string,\n\t\tudid as string,\n\t\timei as string,\n\t\tserial_number as string,\n\t\thardware_serial_number as string,\n\t\tname as string,\n\t\tproduct_name as string,\n\t\tactivated_at as string,\n\t\tlast_app_connection as string,\n\t\tuser as (id as string, name as string, email as string, external_id as string, organization as (name as string, id as string)),\n\t\tidentifier as string,\n\t\thealth_status as string,\n\t\tcompliance_status as string,\n\t\trisk_status as string,\n\t\tmdm_status as string,\n\t\tcurrent_health_warnings as string[],\n\t\tcurrent_compliance_warnings as string[],\n\t\tcurrent_risk_warnings as string[],\n\t\tcompromised as boolean,\n\t\tconfiguration as (location_services as string, push_notifications as string, personal_vpn as string, default_installer as string, system_admin as string, samsung_knox_services as string),\n\t\tstats as (networks_monitored as string, access_points_scanned as string, apps_analyzed as string, incidents as (network as (open as string, total as string), malware as (open as string, total as string), indicator_of_compromise as (open as string, total as string), configuration as (open as string, total as string), os as (open as string, total as string))),\n\t\tmdm as (username as string, device_id as string, friendly_name as string, last_connection as string, organization_group as string),\n\t\tcontainer as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tlimit: 100,\n\tdocumentForm: 'arrayOfDocuments') ~> source1"
+		}
+	}
+}

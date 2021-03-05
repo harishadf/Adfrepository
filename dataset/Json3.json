@@ -1,0 +1,246 @@
+{
+	"name": "Json3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage80",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "harishtesting.json",
+				"container": "exporteddata"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"os_version": {
+					"type": "string"
+				},
+				"model": {
+					"type": "string"
+				},
+				"app_version": {
+					"type": "string"
+				},
+				"os_type": {
+					"type": "string"
+				},
+				"udid": {
+					"type": "string"
+				},
+				"imei": {
+					"type": "string"
+				},
+				"serial_number": {
+					"type": "string"
+				},
+				"hardware_serial_number": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"product_name": {
+					"type": "string"
+				},
+				"activated_at": {
+					"type": "string"
+				},
+				"last_app_connection": {
+					"type": "string"
+				},
+				"user": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "integer"
+						},
+						"name": {
+							"type": "null"
+						},
+						"email": {
+							"type": "string"
+						},
+						"external_id": {
+							"type": "null"
+						},
+						"organization": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"id": {
+									"type": "integer"
+								}
+							}
+						}
+					}
+				},
+				"identifier": {
+					"type": "string"
+				},
+				"health_status": {
+					"type": "string"
+				},
+				"compliance_status": {
+					"type": "null"
+				},
+				"risk_status": {
+					"type": "string"
+				},
+				"mdm_status": {
+					"type": "string"
+				},
+				"current_health_warnings": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"current_compliance_warnings": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"current_risk_warnings": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"compromised": {
+					"type": "boolean"
+				},
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"location_services": {
+							"type": "string"
+						},
+						"push_notifications": {
+							"type": "string"
+						},
+						"personal_vpn": {
+							"type": "string"
+						},
+						"default_installer": {
+							"type": "string"
+						},
+						"system_admin": {
+							"type": "string"
+						},
+						"samsung_knox_services": {
+							"type": "string"
+						}
+					}
+				},
+				"stats": {
+					"type": "object",
+					"properties": {
+						"networks_monitored": {
+							"type": "integer"
+						},
+						"access_points_scanned": {
+							"type": "integer"
+						},
+						"apps_analyzed": {
+							"type": "integer"
+						},
+						"incidents": {
+							"type": "object",
+							"properties": {
+								"network": {
+									"type": "object",
+									"properties": {
+										"open": {
+											"type": "integer"
+										},
+										"total": {
+											"type": "integer"
+										}
+									}
+								},
+								"malware": {
+									"type": "object",
+									"properties": {
+										"open": {
+											"type": "integer"
+										},
+										"total": {
+											"type": "integer"
+										}
+									}
+								},
+								"indicator_of_compromise": {
+									"type": "object",
+									"properties": {
+										"open": {
+											"type": "integer"
+										},
+										"total": {
+											"type": "integer"
+										}
+									}
+								},
+								"configuration": {
+									"type": "object",
+									"properties": {
+										"open": {
+											"type": "integer"
+										},
+										"total": {
+											"type": "integer"
+										}
+									}
+								},
+								"os": {
+									"type": "object",
+									"properties": {
+										"open": {
+											"type": "integer"
+										},
+										"total": {
+											"type": "integer"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"mdm": {
+					"type": "object",
+					"properties": {
+						"username": {
+							"type": "string"
+						},
+						"device_id": {
+							"type": "string"
+						},
+						"friendly_name": {
+							"type": "string"
+						},
+						"last_connection": {
+							"type": "string"
+						},
+						"organization_group": {
+							"type": "string"
+						}
+					}
+				},
+				"container": {
+					"type": "boolean"
+				}
+			}
+		}
+	}
+}
