@@ -50,7 +50,7 @@
 				],
 				"typeProperties": {
 					"items": {
-						"value": "@array(activity('Get Metadata1').output)",
+						"value": "@activity('Get Metadata1').output",
 						"type": "Expression"
 					},
 					"isSequential": false,
@@ -70,7 +70,10 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "DelimitedText28",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": "csv"
+									}
 								},
 								"fieldList": [
 									"lastModified"
