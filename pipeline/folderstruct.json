@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DelimitedText29",
+						"referenceName": "DelimitedText33",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
