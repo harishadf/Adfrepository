@@ -1,0 +1,9 @@
+{
+	"name": "harishjune",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "99fde65a-808e-4d15-9098-c81b511ca1f9",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

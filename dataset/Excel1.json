@@ -1,19 +1,31 @@
 {
-	"name": "Binary1",
+	"name": "Excel1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "ADF_Test.xlsx",
 				"container": "input"
+			},
+			"firstRowAsHeader": false
+		},
+		"schema": [
+			{
+				"name": "EmplName",
+				"type": "String"
+			},
+			{
+				"name": "EmplDept",
+				"type": "String"
 			}
-		}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
