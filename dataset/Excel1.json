@@ -14,7 +14,7 @@
 				"fileName": "ADF_Test.xlsx",
 				"container": "input"
 			},
-			"firstRowAsHeader": false
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{

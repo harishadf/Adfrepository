@@ -33,7 +33,7 @@
 					"name": "ConditionalSplit1"
 				}
 			],
-			"script": "source(output(\n\t\tEmplName as string,\n\t\tEmplDept as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> source1\nsource1 split(and(isNull(EmplName),isNull(EmplDept)),\n\tdisjoint: false) ~> ConditionalSplit1@(errorfolderoutput, outputfolder)\nConditionalSplit1@errorfolderoutput sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1\nConditionalSplit1@outputfolder sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink2"
+			"script": "source(output(\n\t\tEmplName as string,\n\t\tEmplDept as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> source1\nsource1 split(isNull(EmplName),\n\tdisjoint: false) ~> ConditionalSplit1@(errorfolderoutput, outputfolder)\nConditionalSplit1@errorfolderoutput sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1\nConditionalSplit1@outputfolder sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink2"
 		}
 	}
 }
