@@ -2,7 +2,7 @@
 	"name": "Binary2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage29",
+			"referenceName": "AzureBlobStorage2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "twouput1"
+				"container": "outputfolder"
 			}
 		}
 	},

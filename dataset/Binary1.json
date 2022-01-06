@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "ADF_Test.xlsx",
-				"container": "input"
+				"fileName": "ASAjobs.txt",
+				"container": "inputfolder"
 			}
 		}
 	},
