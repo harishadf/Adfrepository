@@ -1,0 +1,119 @@
+{
+	"name": "ECOLABDATALAKE_AZONE_EXPL_SOLD_TO_PAYER_LOOKUP",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "BPRELATIONSEXPL"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "CUSTOMEREXPL"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "BPDEFADDRESSEXPL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "BpPartnerTSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "BpPartnerParquet"
+				}
+			],
+			"transformations": [
+				{
+					"name": "BPRELATIONSEXPLString"
+				},
+				{
+					"name": "CUSTOMEREXPLString"
+				},
+				{
+					"name": "BPDEFADDRESSEXPLString"
+				},
+				{
+					"name": "bppartnerFilter"
+				},
+				{
+					"name": "bppartnerSelect"
+				},
+				{
+					"name": "customerFilter"
+				},
+				{
+					"name": "customerSelect"
+				},
+				{
+					"name": "AddressFilter"
+				},
+				{
+					"name": "AddressSelect"
+				},
+				{
+					"name": "forRemoving"
+				},
+				{
+					"name": "BppartnerAfterRemovingJoin"
+				},
+				{
+					"name": "BppartnerAfterRemoving"
+				},
+				{
+					"name": "BppartnerAfterRemovingDistinct"
+				},
+				{
+					"name": "BppartnerAfterRemovingSelect"
+				},
+				{
+					"name": "BppartnerCount"
+				},
+				{
+					"name": "BpPartnerFinalJoin"
+				},
+				{
+					"name": "BpPartnerFinalSelect"
+				},
+				{
+					"name": "DistinctforRemoving"
+				},
+				{
+					"name": "CustNumRemoveDist"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "PayerRename"
+				}
+			],
+			"script": "parameters{\n\tpath_0BP_RELATIONS as string ('Exploration/EnterpriseBackbone/EBS/0BP_RELATIONS/'),\n\tpath_0CUSTOMER as string ('Exploration/EnterpriseBackbone/EBS/0CUSTOMER/'),\n\tpath_0BP_DEF_ADDRESS as string ('Exploration/EnterpriseBackbone/EBS/0BP_DEF_ADDRESS/'),\n\tfile_0BP_RELATIONS as string ('0BP_RELATIONS'),\n\tfile_0CUSTOMER as string ('0CUSTOMER'),\n\tfile_0BP_DEF_ADDRESS as string ('0BP_DEF_ADDRESS'),\n\tfile_extension_tsv as string ('.tsv'),\n\tpath_soldtopayerlookup as string ('/Exploration/EnterpriseBackbone/O2C_Lookup/'),\n\tfile_soldtopayerlookup as string ('soldtopayerlookup'),\n\tfile_extension_parquet as string ('.parquet')\n}\nsource(output(\n\t\tBPRelationshipNum as string,\n\t\tBusPartner1Num as string,\n\t\tBusPartner2Num as string,\n\t\tBusPartner1GUID as string,\n\t\tBusPartner2GUID as string,\n\t\tBusPartnerRelationshipCatgDirectionCd as string,\n\t\tBusPartnerRelationshipCatgCd as string,\n\t\tValidToDt as string,\n\t\tValidFromDt as string,\n\t\tPartnerFunctionCd as string,\n\t\tDeptCd as string,\n\t\tPartnerAuthCd as string,\n\t\tVIPPartnerCd as string,\n\t\tCountryCd as string,\n\t\tCityPostalCd as string,\n\t\tCityName as string,\n\t\tStreetName as string,\n\t\tHouseNum as string,\n\t\tFirstTelNum as string,\n\t\tFirstFaxNum as string,\n\t\tEmailAddrTxt as string,\n\t\tCapitalInterestPct as string,\n\t\tCapitalInterestAmt as string,\n\t\tCurCd as string,\n\t\tIfShareholderControlsCompanyInd as string,\n\t\tOneLineAddrDesc as string,\n\t\tOneLineAddrDesc2 as string,\n\t\tBPAddrLine0Desc as string,\n\t\tBPAddrLine1Desc as string,\n\t\tBPAddrLine2Desc as string,\n\t\tBPAddrLine3Desc as string,\n\t\tBPAddrLine4Desc as string,\n\t\tBPAddrLine5Desc as string,\n\t\tBPAddrLine6Desc as string,\n\t\tBPAddrLine7Desc as string,\n\t\tBPAddrLine8Desc as string,\n\t\tBPAddrLine9Desc as string,\n\t\tCheckboxInd as string,\n\t\tStandardRelationshipInd as string,\n\t\tLanguageCd as string,\n\t\tBusPartnerRelationshipCatgDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_0BP_RELATIONS+'tsv/'+$file_0BP_RELATIONS+'*'+$file_extension_tsv)]) ~> BPRELATIONSEXPL\nsource(output(\n\t\tCustomerNum as string,\n\t\tAddrNum as string,\n\t\tTitleTxt as string,\n\t\tCustCentralOrderBlockCd as string,\n\t\tExpressTrainStationCd as string,\n\t\tTrainStationCd as string,\n\t\tInternationalLocation1Num as string,\n\t\tInternationalLocation2Num as string,\n\t\tAuthGrpCd as string,\n\t\tIndustryCd as string,\n\t\tInternationalLocationNumCheckDigitCd as string,\n\t\tLineNumDataCommunicationTxt as string,\n\t\tRecordCreatedDt as string,\n\t\tRecordCreatedByName as string,\n\t\tUnloadingPointInd as string,\n\t\tCustCentralBillingBlockCd as string,\n\t\tMasterRecordWithFiscalAddrAccountNum as string,\n\t\tWorkingTmCalendarCd as string,\n\t\tAlternativePayerAccountNum as string,\n\t\tGrpCd as string,\n\t\tCustAccountGrpCd as string,\n\t\tCustClassificationCd as string,\n\t\tCountryKeyCd as string,\n\t\tVendorAccountNum as string,\n\t\tCustCntralDeliveryBlockCd as string,\n\t\tCityCoordinatesVal as string,\n\t\tMasterRecordDeletionInd as string,\n\t\tName1Desc as string,\n\t\tName2Desc as string,\n\t\tName3Desc as string,\n\t\tName4Desc as string,\n\t\tNielsenIDCd as string,\n\t\tCityName as string,\n\t\tDistrictName as string,\n\t\tPOBoxNum as string,\n\t\tPOBoxPostalCd as string,\n\t\tPostalCd as string,\n\t\tRegionCd as string,\n\t\tCountryCd as string,\n\t\tCityCd as string,\n\t\tRegionalMarketCd as string,\n\t\tSortFieldDesc as string,\n\t\tCentralPostingBlockInd as string,\n\t\tLanguageCd as string,\n\t\tTax1Num as string,\n\t\tTax2Num as string,\n\t\tBusPartnerEqualizationTaxInd as string,\n\t\tLiableForVATInd as string,\n\t\tHouseNumAndStreetDesc as string,\n\t\tTeleboxNumTxt as string,\n\t\tFirstTelNum as string,\n\t\tSecondTelNum as string,\n\t\tFaxNum as string,\n\t\tTeletaxNum as string,\n\t\tTelexNum as string,\n\t\tTransportationZoneCd as string,\n\t\tIsOneTimeAccountInd as string,\n\t\tIfAlternativePayeeAllowedInd as string,\n\t\tTradingPartnerCompanyCd as string,\n\t\tVATRegistrationNum as string,\n\t\tIsCompetitorInd as string,\n\t\tIsSalesPartnerInd as string,\n\t\tIsSalesProspectInd as string,\n\t\tCustType4Ind as string,\n\t\tSoldToPartyCd as string,\n\t\tIsConsumerInd as string,\n\t\tLegalStatusCd as string,\n\t\tIndustry1Cd as string,\n\t\tIndustry2Cd as string,\n\t\tIndustry3Cd as string,\n\t\tIndustry4Cd as string,\n\t\tIndustry5Cd as string,\n\t\tInitialContactCd as string,\n\t\tAnnualSalesNum as string,\n\t\tAnnualSalesYearTxt as string,\n\t\tSalesFigCurCd as string,\n\t\tYearlyCountOfEmpNum as string,\n\t\tYearForNumOfEmpTxt as string,\n\t\tAttr1Cd as string,\n\t\tAttr2Cd as string,\n\t\tAttr3Cd as string,\n\t\tAttr4Cd as string,\n\t\tCustLeadDivisionCd as string,\n\t\tAttr6Cd as string,\n\t\tAttr7Cd as string,\n\t\tAttr8Cd as string,\n\t\tAttr9Cd as string,\n\t\tAttr10Cd as string,\n\t\tNaturalPersonName as string,\n\t\tAnnualSalesNum2 as string,\n\t\tTaxJurisdictionCd as string,\n\t\tMatchCdSearchTerm1Desc as string,\n\t\tMatchCdSearchTerm2Desc as string,\n\t\tMatchCdSearchTerm3Desc as string,\n\t\tFiscalYearVariantCd as string,\n\t\tUsageInd as string,\n\t\tCustInspectionInd as string,\n\t\tOutboundDeliveryNoteInspectionInd as string,\n\t\tReferenceAccountGrpCd as string,\n\t\tPOBoxCityName as string,\n\t\tPlantCd as string,\n\t\tMediumOfDataExchangeInd as string,\n\t\tMediumOfDataExchangeInstructionCd as string,\n\t\tDataTransferStatusInd as string,\n\t\tAssignmentToHierarchyCd as string,\n\t\tPaymentBlockCd as string,\n\t\tCustPlantGrpISRLabelCd as string,\n\t\tNonMilitaryUseInd as string,\n\t\tMilitaryUseInd as string,\n\t\tCustConditionGrp1Cd as string,\n\t\tCustConditionGrp2Cd as string,\n\t\tCustConditionGrp3Cd as string,\n\t\tCustConditionGrp4Cd as string,\n\t\tCustConditionGrp5Cd as string,\n\t\tAlternativePayerUsingAccountNumInd as string,\n\t\tTaxTypeCd as string,\n\t\tTaxNumTypeCd as string,\n\t\tTaxNbr3Cd as string,\n\t\tTaxNbr4Cd as string,\n\t\tICMSExemptCustInd as string,\n\t\tIPIExemptCustInd as string,\n\t\tCustGrpCd as string,\n\t\tCustCFOPCatCd as string,\n\t\tICMSTaxLawCd as string,\n\t\tIPITaxLawCd as string,\n\t\tBiochemicalWarfareForLegalControlInd as string,\n\t\tNuclearProliferationForLegalControlInd as string,\n\t\tNationalSecurityForLegalControlInd as string,\n\t\tMissileTechnologyForLegalControlInd as string,\n\t\tCustCentralSalesBlockInd as string,\n\t\tUniformResourceLocatorTxt as string,\n\t\tNameDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_0CUSTOMER+'tsv/'+$file_0CUSTOMER+'*'+$file_extension_tsv)]) ~> CUSTOMEREXPL\nsource(output(\n\t\tBusPartnerNum as string,\n\t\tBusPartnerGUID as string,\n\t\tAddrNum as string,\n\t\tValidFromDt as string,\n\t\tInternationalAddrVersionCd as string,\n\t\tValidToDt as string,\n\t\tFormOfAddrCd as string,\n\t\tName1Desc as string,\n\t\tName2Desc as string,\n\t\tName3Desc as string,\n\t\tName4Desc as string,\n\t\tCareOfDesc as string,\n\t\tCityName as string,\n\t\tDistrictName as string,\n\t\tCityCd as string,\n\t\tDistrictCd as string,\n\t\tNonPostalCityName as string,\n\t\tDifferentCityCd as string,\n\t\tRegionalStructureGroupingCd as string,\n\t\tCityPostalCd as string,\n\t\tPOBoxPostalCd as string,\n\t\tCompanyPostalCd as string,\n\t\tPOBoxNum as string,\n\t\tPOBoxWithoutNumInd as string,\n\t\tPOBoxCityName as string,\n\t\tPOBoxCityCd as string,\n\t\tPOBoxRegionCd as string,\n\t\tPOBoxCountry as string,\n\t\tTransportationZoneCd as string,\n\t\tStreetName as string,\n\t\tStreetNumDesc as string,\n\t\tHouseNum as string,\n\t\tSupplementHouseNum as string,\n\t\tStreet2Name as string,\n\t\tStreet3Name as string,\n\t\tStreet4Name as string,\n\t\tStreet5Name as string,\n\t\tBuildingCd as string,\n\t\tFloorCd as string,\n\t\tRoomAptNum as string,\n\t\tCountryCd as string,\n\t\tLanguageCd as string,\n\t\tRegionCd as string,\n\t\tPersonalAddrFlagCd as string,\n\t\tSearchTerm1Txt as string,\n\t\tSearchTerm2Txt as string,\n\t\tFirstTelNum as string,\n\t\tFirstTelExtnCd as string,\n\t\tFirstFaxNum as string,\n\t\tFirstFaxExtnCd as string,\n\t\tExtenstion1Cd as string,\n\t\tExtenstion2Cd as string,\n\t\tAddrTmZoneCd as string,\n\t\tTaxJurisdictionCd as string,\n\t\tEmailAddrTxt as string,\n\t\tURIFieldForTransferToBWTxt as string,\n\t\tDisplayFrmtTelNum as string,\n\t\tDisplayFrmtFaxNum as string,\n\t\tGeoLocationLongitudeVal as string,\n\t\tGeoLocationLatitudeVal as string,\n\t\tGeoLocationHeightVal as string,\n\t\tGeoLocationDataSourceCd as string,\n\t\tGeoLocationPrecisionCd as string,\n\t\tAddrNum2 as string,\n\t\tOneLineAddrDesc as string,\n\t\tOneLineAddrDesc2 as string,\n\t\tBPAddrLin0Desc as string,\n\t\tBPAddrLin1Desc as string,\n\t\tBPAddrLin2Desc as string,\n\t\tBPAddrLin3Desc as string,\n\t\tBPAddrLin4Desc as string,\n\t\tBPAddrLin5Desc as string,\n\t\tBPAddrLin6Desc as string,\n\t\tBPAddrLin7Desc as string,\n\t\tBPAddrLin8Desc as string,\n\t\tBPAddrLin9Desc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_0BP_DEF_ADDRESS+'tsv/'+$file_0BP_DEF_ADDRESS+'*'+$file_extension_tsv)]) ~> BPDEFADDRESSEXPL\nDerivedColumn2 derive(each(match(true()), $$ = toString($$))) ~> BPRELATIONSEXPLString\nCUSTOMEREXPL derive(each(match(true()), $$ = toString($$))) ~> CUSTOMEREXPLString\nBPDEFADDRESSEXPL derive(each(match(true()), $$ = toString($$))) ~> BPDEFADDRESSEXPLString\nBPRELATIONSEXPLString filter(BusPartnerRelationshipCatgCd=='CRMH03' && BusPartnerRelationshipCatgDirectionCd =='1') ~> bppartnerFilter\nbppartnerFilter derive(Payer = BusPartner2Num,\n\t\tSoldTo = BusPartner1Num) ~> bppartnerSelect\nCUSTOMEREXPLString filter(IsDeletedInd=='Y') ~> customerFilter\ncustomerFilter select(mapColumn(\n\t\tCustomerNum\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> customerSelect\nBPDEFADDRESSEXPLString filter(like(StreetName, '#%')) ~> AddressFilter\nAddressFilter select(mapColumn(\n\t\tCustomerNum = BusPartnerNum\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> AddressSelect\ncustomerSelect, AddressSelect union(byName: true)~> forRemoving\nbppartnerSelect, CustNumRemoveDist join(SoldTo == CustomerNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> BppartnerAfterRemovingJoin\nBppartnerAfterRemovingJoin filter(isNull(CustomerNum)) ~> BppartnerAfterRemoving\nBppartnerAfterRemoving aggregate(groupBy(Payer,\n\t\tSoldTo),\n\tcount = count(1)) ~> BppartnerAfterRemovingDistinct\nBppartnerAfterRemovingDistinct select(mapColumn(\n\t\tL_Payer = Payer,\n\t\tSoldTo\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> BppartnerAfterRemovingSelect\nBppartnerAfterRemovingSelect aggregate(groupBy(L_Payer),\n\tcountofsoldto = count(1)) ~> BppartnerCount\nBppartnerAfterRemovingSelect, PayerRename join(L_Payer == R_Payer,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> BpPartnerFinalJoin\nDerivedColumn1 select(mapColumn(\n\t\tPayer = L_Payer,\n\t\tSoldTo,\n\t\tcountofsoldto\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> BpPartnerFinalSelect\nforRemoving aggregate(groupBy(CustomerNum),\n\tcount = count(1)) ~> DistinctforRemoving\nDistinctforRemoving select(mapColumn(\n\t\tCustomerNum\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> CustNumRemoveDist\nBpPartnerFinalJoin derive(countofsoldto = toString(countofsoldto)) ~> DerivedColumn1\nBPRELATIONSEXPL derive(each(match(true()), $$ = coalesce($$))) ~> DerivedColumn2\nBppartnerCount select(mapColumn(\n\t\tR_Payer = L_Payer,\n\t\tcountofsoldto\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> PayerRename\nBpPartnerFinalSelect sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($path_soldtopayerlookup+$file_soldtopayerlookup+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> BpPartnerTSV\nBpPartnerFinalSelect sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($path_soldtopayerlookup+$file_soldtopayerlookup+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> BpPartnerParquet"
+		}
+	}
+}

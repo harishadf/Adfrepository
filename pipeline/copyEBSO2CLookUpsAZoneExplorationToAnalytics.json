@@ -1,0 +1,621 @@
+{
+	"name": "copyEBSO2CLookUpsAZoneExplorationToAnalytics",
+	"properties": {
+		"activities": [
+			{
+				"name": "copyEBSO2CLookUpsAZoneExplorationToAnalytics_2",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "copyEBSO2CLookUpsAZoneExplorationToAnalytics_2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Ezone_location": {
+							"value": "@pipeline().parameters.Ezone_location",
+							"type": "Expression"
+						},
+						"Azone_location": {
+							"value": "@pipeline().parameters.Azone_location",
+							"type": "Expression"
+						},
+						"fileName_DIM_ACCOUNT_CHART": {
+							"value": "@pipeline().parameters.fileName_DIM_ACCOUNT_CHART",
+							"type": "Expression"
+						},
+						"fileName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+							"value": "@pipeline().parameters.fileName_DIM_ACCOUNT_DOCUMENT_TYPE",
+							"type": "Expression"
+						},
+						"fileName_DIM_ACCOUNTING_TYPE": {
+							"value": "@pipeline().parameters.fileName_DIM_ACCOUNTING_TYPE",
+							"type": "Expression"
+						},
+						"fileName_DIM_CREDIT_CONTROLLING_AREA": {
+							"value": "@pipeline().parameters.fileName_DIM_CREDIT_CONTROLLING_AREA",
+							"type": "Expression"
+						},
+						"fileName_DIM_DUNNING": {
+							"value": "@pipeline().parameters.fileName_DIM_DUNNING",
+							"type": "Expression"
+						},
+						"fileName_DIM_DUNNING_BLOCK": {
+							"value": "@pipeline().parameters.fileName_DIM_DUNNING_BLOCK",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_BLOCK": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_BLOCK",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_METHOD": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_METHOD",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_REASON": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_REASON",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_TERM": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_TERM",
+							"type": "Expression"
+						},
+						"folderName_DIM_ACCOUNT_CHART": {
+							"value": "@pipeline().parameters.folderName_DIM_ACCOUNT_CHART",
+							"type": "Expression"
+						},
+						"folderName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+							"value": "@pipeline().parameters.folderName_DIM_ACCOUNT_DOCUMENT_TYPE",
+							"type": "Expression"
+						},
+						"folderName_DIM_ACCOUNTING_TYPE": {
+							"value": "@pipeline().parameters.folderName_DIM_ACCOUNTING_TYPE",
+							"type": "Expression"
+						},
+						"folderName_DIM_CREDIT_CONTROLLING_AREA": {
+							"value": "@pipeline().parameters.folderName_DIM_CREDIT_CONTROLLING_AREA",
+							"type": "Expression"
+						},
+						"folderName_DIM_DUNNING": {
+							"value": "@pipeline().parameters.folderName_DIM_DUNNING",
+							"type": "Expression"
+						},
+						"folderName_DIM_DUNNING_BLOCK": {
+							"value": "@pipeline().parameters.folderName_DIM_DUNNING_BLOCK",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_BLOCK": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_BLOCK",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_METHOD": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_METHOD",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_REASON": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_REASON",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_TERM": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_TERM",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@pipeline().parameters.container",
+							"type": "Expression"
+						},
+						"file_extension_tsv": {
+							"value": "@pipeline().parameters.file_extension_tsv",
+							"type": "Expression"
+						},
+						"file_extension_parquet": {
+							"value": "@pipeline().parameters.file_extension_parquet",
+							"type": "Expression"
+						},
+						"Delimiter": {
+							"value": "@pipeline().parameters.Delimiter",
+							"type": "Expression"
+						},
+						"Audit_Path": {
+							"value": "@pipeline().parameters.Audit_Path",
+							"type": "Expression"
+						},
+						"src_Audit_PaymentBlock_Cntl": {
+							"value": "@pipeline().parameters.src_Audit_PaymentBlock_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0PMNT_BLOCK": {
+							"value": "@pipeline().parameters.file_name_0PMNT_BLOCK",
+							"type": "Expression"
+						},
+						"dummy_data_path": {
+							"value": "@pipeline().parameters.dummy_data_path",
+							"type": "Expression"
+						},
+						"src_filename_Audit_DunningBlock_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_DunningBlock_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0DUNN_BLOCK": {
+							"value": "@pipeline().parameters.file_name_0DUNN_BLOCK",
+							"type": "Expression"
+						},
+						"src_filename_Audit_Dunning_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_Dunning_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0DUNN_KEY": {
+							"value": "@pipeline().parameters.file_name_0DUNN_KEY",
+							"type": "Expression"
+						},
+						"src_filename_Audit_CreditControlArea_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_CreditControlArea_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0C_CTR_AREA": {
+							"value": "@pipeline().parameters.file_name_0C_CTR_AREA",
+							"type": "Expression"
+						},
+						"src_filename_Audit_AccountDocumentType_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_AccountDocumentType_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0AC_DOC_TYP": {
+							"value": "@pipeline().parameters.file_name_0AC_DOC_TYP",
+							"type": "Expression"
+						},
+						"src_filename_Audit_AccountChart_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_AccountChart_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0CHRT_ACCTS": {
+							"value": "@pipeline().parameters.file_name_0CHRT_ACCTS",
+							"type": "Expression"
+						},
+						"src_filename_Audit_AccountingType_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_AccountingType_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0ACCT_TYPE": {
+							"value": "@pipeline().parameters.file_name_0ACCT_TYPE",
+							"type": "Expression"
+						},
+						"src_filename_Audit_PaymentReason_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_PaymentReason_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0REASON_CDE": {
+							"value": "@pipeline().parameters.file_name_0REASON_CDE",
+							"type": "Expression"
+						},
+						"src_filename_Audit_PaymentMethod_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_PaymentMethod_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0PYMT_METH": {
+							"value": "@pipeline().parameters.file_name_0PYMT_METH",
+							"type": "Expression"
+						},
+						"src_filename_Audit_PaymentTerm_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_PaymentTerm_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0ID_PAYTERM": {
+							"value": "@pipeline().parameters.file_name_0ID_PAYTERM",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "copyEBSO2CLookUpsAZoneExplorationToAnalytics_1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "copyEBSO2CLookUpsAZoneExplorationToAnalytics_1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Ezone_location": {
+							"value": "@pipeline().parameters.Ezone_location",
+							"type": "Expression"
+						},
+						"Azone_location": {
+							"value": "@pipeline().parameters.Azone_location",
+							"type": "Expression"
+						},
+						"fileName_DIM_ACCOUNT_CHART": {
+							"value": "@pipeline().parameters.fileName_DIM_ACCOUNT_CHART",
+							"type": "Expression"
+						},
+						"fileName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+							"value": "@pipeline().parameters.fileName_DIM_ACCOUNT_DOCUMENT_TYPE",
+							"type": "Expression"
+						},
+						"fileName_DIM_ACCOUNTING_TYPE": {
+							"value": "@pipeline().parameters.fileName_DIM_ACCOUNTING_TYPE",
+							"type": "Expression"
+						},
+						"fileName_DIM_CREDIT_CONTROLLING_AREA": {
+							"value": "@pipeline().parameters.fileName_DIM_CREDIT_CONTROLLING_AREA",
+							"type": "Expression"
+						},
+						"fileName_DIM_DUNNING": {
+							"value": "@pipeline().parameters.fileName_DIM_DUNNING",
+							"type": "Expression"
+						},
+						"fileName_DIM_DUNNING_BLOCK": {
+							"value": "@pipeline().parameters.fileName_DIM_DUNNING_BLOCK",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_BLOCK": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_BLOCK",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_METHOD": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_METHOD",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_REASON": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_REASON",
+							"type": "Expression"
+						},
+						"fileName_DIM_PAYMENT_TERM": {
+							"value": "@pipeline().parameters.fileName_DIM_PAYMENT_TERM",
+							"type": "Expression"
+						},
+						"folderName_DIM_ACCOUNT_CHART": {
+							"value": "@pipeline().parameters.folderName_DIM_ACCOUNT_CHART",
+							"type": "Expression"
+						},
+						"folderName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+							"value": "@pipeline().parameters.folderName_DIM_ACCOUNT_DOCUMENT_TYPE",
+							"type": "Expression"
+						},
+						"folderName_DIM_ACCOUNTING_TYPE": {
+							"value": "@pipeline().parameters.folderName_DIM_ACCOUNTING_TYPE",
+							"type": "Expression"
+						},
+						"folderName_DIM_CREDIT_CONTROLLING_AREA": {
+							"value": "@pipeline().parameters.folderName_DIM_CREDIT_CONTROLLING_AREA",
+							"type": "Expression"
+						},
+						"folderName_DIM_DUNNING": {
+							"value": "@pipeline().parameters.folderName_DIM_DUNNING",
+							"type": "Expression"
+						},
+						"folderName_DIM_DUNNING_BLOCK": {
+							"value": "@pipeline().parameters.folderName_DIM_DUNNING_BLOCK",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_BLOCK": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_BLOCK",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_METHOD": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_METHOD",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_REASON": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_REASON",
+							"type": "Expression"
+						},
+						"folderName_DIM_PAYMENT_TERM": {
+							"value": "@pipeline().parameters.folderName_DIM_PAYMENT_TERM",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@pipeline().parameters.container",
+							"type": "Expression"
+						},
+						"file_extension_tsv": {
+							"value": "@pipeline().parameters.file_extension_tsv",
+							"type": "Expression"
+						},
+						"file_extension_parquet": {
+							"value": "@pipeline().parameters.file_extension_parquet",
+							"type": "Expression"
+						},
+						"Delimiter": {
+							"value": "@pipeline().parameters.Delimiter",
+							"type": "Expression"
+						},
+						"Audit_Path": {
+							"value": "@pipeline().parameters.Audit_Path",
+							"type": "Expression"
+						},
+						"src_Audit_PaymentBlock_Cntl": {
+							"value": "@pipeline().parameters.src_Audit_PaymentBlock_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0PMNT_BLOCK": {
+							"value": "@pipeline().parameters.file_name_0PMNT_BLOCK",
+							"type": "Expression"
+						},
+						"dummy_data_path": {
+							"value": "@pipeline().parameters.dummy_data_path",
+							"type": "Expression"
+						},
+						"src_filename_Audit_DunningBlock_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_DunningBlock_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0DUNN_BLOCK": {
+							"value": "@pipeline().parameters.file_name_0DUNN_BLOCK",
+							"type": "Expression"
+						},
+						"src_filename_Audit_Dunning_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_Dunning_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0DUNN_KEY": {
+							"value": "@pipeline().parameters.file_name_0DUNN_KEY",
+							"type": "Expression"
+						},
+						"src_filename_Audit_CreditControlArea_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_CreditControlArea_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0C_CTR_AREA": {
+							"value": "@pipeline().parameters.file_name_0C_CTR_AREA",
+							"type": "Expression"
+						},
+						"src_filename_Audit_AccountDocumentType_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_AccountDocumentType_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0AC_DOC_TYP": {
+							"value": "@pipeline().parameters.file_name_0AC_DOC_TYP",
+							"type": "Expression"
+						},
+						"src_filename_Audit_AccountChart_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_AccountChart_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0CHRT_ACCTS": {
+							"value": "@pipeline().parameters.file_name_0CHRT_ACCTS",
+							"type": "Expression"
+						},
+						"src_filename_Audit_AccountingType_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_AccountingType_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0ACCT_TYPE": {
+							"value": "@pipeline().parameters.file_name_0ACCT_TYPE",
+							"type": "Expression"
+						},
+						"src_filename_Audit_PaymentReason_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_PaymentReason_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0REASON_CDE": {
+							"value": "@pipeline().parameters.file_name_0REASON_CDE",
+							"type": "Expression"
+						},
+						"src_filename_Audit_PaymentMethod_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_PaymentMethod_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0PYMT_METH": {
+							"value": "@pipeline().parameters.file_name_0PYMT_METH",
+							"type": "Expression"
+						},
+						"src_filename_Audit_PaymentTerm_Cntl": {
+							"value": "@pipeline().parameters.src_filename_Audit_PaymentTerm_Cntl",
+							"type": "Expression"
+						},
+						"file_name_0ID_PAYTERM": {
+							"value": "@pipeline().parameters.file_name_0ID_PAYTERM",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Ezone_location": {
+				"type": "String",
+				"defaultValue": "Exploration/EnterpriseBackbone/EBS/"
+			},
+			"Azone_location": {
+				"type": "String",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseDims/"
+			},
+			"fileName_DIM_ACCOUNT_CHART": {
+				"type": "String",
+				"defaultValue": "dim_account_chart"
+			},
+			"fileName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+				"type": "String",
+				"defaultValue": "dim_account_document_type"
+			},
+			"fileName_DIM_ACCOUNTING_TYPE": {
+				"type": "String",
+				"defaultValue": "dim_accounting_type"
+			},
+			"fileName_DIM_CREDIT_CONTROLLING_AREA": {
+				"type": "String",
+				"defaultValue": "dim_credit_controlling_area"
+			},
+			"fileName_DIM_DUNNING": {
+				"type": "String",
+				"defaultValue": "dim_dunning"
+			},
+			"fileName_DIM_DUNNING_BLOCK": {
+				"type": "String",
+				"defaultValue": "dim_dunning_block"
+			},
+			"fileName_DIM_PAYMENT_BLOCK": {
+				"type": "String",
+				"defaultValue": "dim_payment_block"
+			},
+			"fileName_DIM_PAYMENT_METHOD": {
+				"type": "String",
+				"defaultValue": "dim_payment_method"
+			},
+			"fileName_DIM_PAYMENT_REASON": {
+				"type": "String",
+				"defaultValue": "dim_payment_reason"
+			},
+			"fileName_DIM_PAYMENT_TERM": {
+				"type": "String",
+				"defaultValue": "dim_payment_term"
+			},
+			"folderName_DIM_ACCOUNT_CHART": {
+				"type": "String",
+				"defaultValue": "ACCOUNT_CHART/"
+			},
+			"folderName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+				"type": "String",
+				"defaultValue": "ACCOUNT_DOCUMENT_TYPE/"
+			},
+			"folderName_DIM_ACCOUNTING_TYPE": {
+				"type": "String",
+				"defaultValue": "ACCOUNTING_TYPE/"
+			},
+			"folderName_DIM_CREDIT_CONTROLLING_AREA": {
+				"type": "String",
+				"defaultValue": "CREDIT_CONTROLLING_AREA/"
+			},
+			"folderName_DIM_DUNNING": {
+				"type": "String",
+				"defaultValue": "DUNNING/"
+			},
+			"folderName_DIM_DUNNING_BLOCK": {
+				"type": "String",
+				"defaultValue": "DUNNING_BLOCK/"
+			},
+			"folderName_DIM_PAYMENT_BLOCK": {
+				"type": "String",
+				"defaultValue": "PAYMENT_BLOCK/"
+			},
+			"folderName_DIM_PAYMENT_METHOD": {
+				"type": "String",
+				"defaultValue": "PAYMENT_METHOD/"
+			},
+			"folderName_DIM_PAYMENT_REASON": {
+				"type": "String",
+				"defaultValue": "PAYMENT_REASON/"
+			},
+			"folderName_DIM_PAYMENT_TERM": {
+				"type": "String",
+				"defaultValue": "PAYMENT_TERM/"
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "mapdatastorage"
+			},
+			"file_extension_tsv": {
+				"type": "string",
+				"defaultValue": ".tsv"
+			},
+			"file_extension_parquet": {
+				"type": "string",
+				"defaultValue": ".parquet"
+			},
+			"Delimiter": {
+				"type": "string",
+				"defaultValue": "\t"
+			},
+			"Audit_Path": {
+				"type": "string",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/"
+			},
+			"src_Audit_PaymentBlock_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentBlock_Cntl"
+			},
+			"file_name_0PMNT_BLOCK": {
+				"type": "string",
+				"defaultValue": "0PMNT_BLOCK"
+			},
+			"dummy_data_path": {
+				"type": "string",
+				"defaultValue": "Dummy_Data/"
+			},
+			"src_filename_Audit_DunningBlock_Cntl": {
+				"type": "string",
+				"defaultValue": "DunningBlock_Cntl"
+			},
+			"file_name_0DUNN_BLOCK": {
+				"type": "string",
+				"defaultValue": "0DUNN_BLOCK"
+			},
+			"src_filename_Audit_Dunning_Cntl": {
+				"type": "string",
+				"defaultValue": "Dunning_Cntl"
+			},
+			"file_name_0DUNN_KEY": {
+				"type": "string",
+				"defaultValue": "0DUNN_KEY"
+			},
+			"src_filename_Audit_CreditControlArea_Cntl": {
+				"type": "string",
+				"defaultValue": "CreditControlArea_Cntl"
+			},
+			"file_name_0C_CTR_AREA": {
+				"type": "string",
+				"defaultValue": "0C_CTR_AREA"
+			},
+			"src_filename_Audit_AccountDocumentType_Cntl": {
+				"type": "string",
+				"defaultValue": "AccountDocumentType_Cntl"
+			},
+			"file_name_0AC_DOC_TYP": {
+				"type": "string",
+				"defaultValue": "0AC_DOC_TYP"
+			},
+			"src_filename_Audit_AccountChart_Cntl": {
+				"type": "string",
+				"defaultValue": "AccountChart_Cntl"
+			},
+			"file_name_0CHRT_ACCTS": {
+				"type": "string",
+				"defaultValue": "0CHRT_ACCTS"
+			},
+			"src_filename_Audit_AccountingType_Cntl": {
+				"type": "string",
+				"defaultValue": "AccountingType_Cntl"
+			},
+			"file_name_0ACCT_TYPE": {
+				"type": "string",
+				"defaultValue": "0ACCT_TYPE"
+			},
+			"src_filename_Audit_PaymentReason_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentReason_Cntl"
+			},
+			"file_name_0REASON_CDE": {
+				"type": "string",
+				"defaultValue": "0REASON_CDE"
+			},
+			"src_filename_Audit_PaymentMethod_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentMethod_Cntl"
+			},
+			"file_name_0PYMT_METH": {
+				"type": "string",
+				"defaultValue": "0PYMT_METH"
+			},
+			"src_filename_Audit_PaymentTerm_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentTerm_Cntl"
+			},
+			"file_name_0ID_PAYTERM": {
+				"type": "string",
+				"defaultValue": "0ID_PAYTERM_BR"
+			}
+		},
+		"folder": {
+			"name": "Analytics"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-07T14:19:29Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

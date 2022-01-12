@@ -1,0 +1,47 @@
+{
+	"name": "SnowFlakeTriggerExists",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "Union1"
+				},
+				{
+					"name": "Aggregate2"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "Sort1"
+				}
+			],
+			"script": "parameters{\n\tTriggerFileFolder as string ('TriggerFile/Snowflake/Outbound/'),\n\tTriggerFileName as string ('1AZ_Trigger.tsv')\n}\nsource(output(\n\t\tCurrentDate as timestamp 'yyyy-MM-dd HH:mm:ss',\n\t\tStatus as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($TriggerFileFolder+$TriggerFileName)]) ~> source1\nsource1 derive(CurrentDate = currentTimestamp(),\n\t\tStatus = 'Y') ~> DerivedColumn1\nDerivedColumn1 aggregate(groupBy(Status),\n\tCurrentDate = max(CurrentDate)) ~> Aggregate1\nsource1, Aggregate1 union(byName: true)~> Union1\nUnion1 aggregate(groupBy(CurrentDate,\n\t\tStatus),\n\tdummy = count(1)) ~> Aggregate2\nSort1 select(mapColumn(\n\t\tCurrentDate,\n\t\tStatus\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nAggregate2 sort(desc(CurrentDate, false)) ~> Sort1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($TriggerFileFolder+$TriggerFileName)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}

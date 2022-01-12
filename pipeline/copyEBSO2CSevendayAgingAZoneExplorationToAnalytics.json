@@ -1,0 +1,638 @@
+{
+	"name": "copyEBSO2CSevendayAgingAZoneExplorationToAnalytics",
+	"properties": {
+		"description": "This is used for Loading Aging Fact Data in Analytic Zone",
+		"activities": [
+			{
+				"name": "ECOLABDATALAKE_O2C_AGING_FACT_SEVENDAYS",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "ECOLABDATALAKE_O2C_AGING_FACT_SEVENDAYS",
+						"type": "DataFlowReference",
+						"parameters": {
+							"src_path_ManualRun": {
+								"value": "'@{concat(pipeline().parameters.src_path_ManualRun,'/')}'",
+								"type": "Expression"
+							},
+							"filename_ManualRun": {
+								"value": "'@{pipeline().parameters.filename_ManualRun}'",
+								"type": "Expression"
+							},
+							"file_extension_tsv": {
+								"value": "'@{pipeline().parameters.extension1}'",
+								"type": "Expression"
+							},
+							"Folder_sold_player_lookup": {
+								"value": "'@{pipeline().parameters.Folder_sold_player_lookup}'",
+								"type": "Expression"
+							},
+							"filename_sold_player_lookup": {
+								"value": "'@{pipeline().parameters.filename_sold_player_lookup}'",
+								"type": "Expression"
+							},
+							"Folder_customer": {
+								"value": "'@{pipeline().parameters.Folder_Customer}'",
+								"type": "Expression"
+							},
+							"filename_customer": {
+								"value": "'@{pipeline().parameters.filename_Customer}'",
+								"type": "Expression"
+							},
+							"Folder_billing_sold_to_lookup": {
+								"value": "'@{pipeline().parameters.Folder_billing_sold_to_looku}'",
+								"type": "Expression"
+							},
+							"filename_billing_sold_to_lookup": {
+								"value": "'@{pipeline().parameters.filename_billing_sold_to_lo}'",
+								"type": "Expression"
+							},
+							"Folder_Customerhier": {
+								"value": "'@{pipeline().parameters.Folder_Customerhier}'",
+								"type": "Expression"
+							},
+							"filename_Customerhier": {
+								"value": "'@{pipeline().parameters.filename_Customerhier}'",
+								"type": "Expression"
+							},
+							"path_Exploration": {
+								"value": "'@{concat(pipeline().parameters.path_Exploration,'/')}'",
+								"type": "Expression"
+							},
+							"path_Analytics": {
+								"value": "'@{concat(pipeline().parameters.path_Analytics,'/')}'",
+								"type": "Expression"
+							},
+							"Folder_ext_customerxref": {
+								"value": "'@{pipeline().parameters.Folder_ext_customerxref}'",
+								"type": "Expression"
+							},
+							"filename_ext_customerxref": {
+								"value": "'@{pipeline().parameters.filename_ext_customerxref}'",
+								"type": "Expression"
+							},
+							"filename_BillingDocumentItemData": {
+								"value": "'@{pipeline().parameters.filename_BillingDocumentItemData}'",
+								"type": "Expression"
+							},
+							"delta_folder_structure": {
+								"value": "'@{concat(formatDateTime(pipeline().TriggerTime,'yyyy'),'/',formatDateTime(pipeline().TriggerTime,'MM'),'/',formatDateTime(pipeline().TriggerTime,'dd'))}'",
+								"type": "Expression"
+							},
+							"file_Aging_expl_extract": {
+								"value": "'@{pipeline().parameters.file_Aging_expl_extract}'",
+								"type": "Expression"
+							},
+							"jobid": {
+								"value": "'@{pipeline().RunId}'",
+								"type": "Expression"
+							},
+							"src_path_Aging": {
+								"value": "'@{concat(pipeline().parameters.src_path_Aging,'/')}'",
+								"type": "Expression"
+							},
+							"filename_Aging": {
+								"value": "'@{pipeline().parameters.filename_Aging}'",
+								"type": "Expression"
+							},
+							"path_cntl": {
+								"value": "'@{concat(pipeline().parameters.path_cntl,'/')}'",
+								"type": "Expression"
+							},
+							"filename_cntl": {
+								"value": "'@{pipeline().parameters.filename_cntl}'",
+								"type": "Expression"
+							},
+							"target_path": {
+								"value": "'@{concat(pipeline().parameters.Analytics_zone,'/')}'",
+								"type": "Expression"
+							},
+							"target_filename": {
+								"value": "'@{concat('temp_',pipeline().parameters.File_Name)}'",
+								"type": "Expression"
+							},
+							"file_extension_parquet": {
+								"value": "'@{pipeline().parameters.extension2}'",
+								"type": "Expression"
+							},
+							"SubjectAreacntl": {
+								"value": "'@{pipeline().parameters.SubjectAreacntl}'",
+								"type": "Expression"
+							},
+							"Folder_EBS": {
+								"value": "'@{pipeline().parameters.Folder_EBS}'",
+								"type": "Expression"
+							},
+							"inputfile_2LIS_13_VDITM": {
+								"value": "'@{pipeline().parameters.inputfile_2LIS_13_VDITM}'",
+								"type": "Expression"
+							},
+							"inputfile_0FI_AR_4": {
+								"value": "'@{pipeline().parameters.inputfile_0FI_AR_4}'",
+								"type": "Expression"
+							},
+							"parquet_folder": {
+								"value": "'@{pipeline().parameters.parquet_folder}'",
+								"type": "Expression"
+							},
+							"tsv_folder": {
+								"value": "'@{pipeline().parameters.tsv_folder}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"ManualRun": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"SourceSoldToPayerLookup": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"SourceCustomer": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"SourceBillingSoldToLookup": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"SourceCustomerhier": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"SourceExtCustomerxref": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"SourceBillingDocumentItemData": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"AgingExplExtract": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"sourcecntl": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"sinkCntl": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"sinkDefaultlvalue": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"OutputTSV": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"OutputParquet": {
+								"tgt_container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 272,
+						"computeType": "MemoryOptimized"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "DLL_Encryption_TSV",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "ECOLABDATALAKE_O2C_AGING_FACT_SEVENDAYS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": {
+						"value": "@concat(if(equals(pipeline().DataFactory,'mapdatafactory001d2'),'/CommercialReportingDev',\nif(equals(pipeline().DataFactory,'MAPADFSALES002Q'),'/CommercialReportingQA',\nif(equals(pipeline().DataFactory,'mapdatafactory002p'),'/CommercialReporting',\nif(equals(pipeline().DataFactory,'mapADFSALES002d'),'/CommercialReportingDev',\nif(equals(pipeline().DataFactory,'mapadfUKIR002d'),'/CommercialReportingDev',\nif(equals(pipeline().DataFactory,'mapdatafactory003q'),'/CommercialReportingQA',\nif(equals(pipeline().DataFactory,'mapdatafactory002s'),'/CommercialReportingQA',\n''))))))),'/Encoding/DLL_Encoding')",
+						"type": "Expression"
+					},
+					"baseParameters": {
+						"storageName": {
+							"value": "@pipeline().parameters.storageName",
+							"type": "Expression"
+						},
+						"containerName": {
+							"value": "@pipeline().parameters.Container",
+							"type": "Expression"
+						},
+						"filePath": {
+							"value": "@concat(pipeline().parameters.Analytics_zone,pipeline().parameters.tsv_folder)",
+							"type": "Expression"
+						},
+						"fileName": {
+							"value": "@concat('temp_',pipeline().parameters.File_Name,pipeline().parameters.extension1)",
+							"type": "Expression"
+						},
+						"columnToEncrypt": {
+							"value": "@pipeline().parameters.ColumnToEncrypt",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksDLL",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete_Temp_TSV",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "DLL_Encryption_TSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Archival_Dataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"Delimiter": {
+								"value": "@pipeline().parameters.delimiter",
+								"type": "Expression"
+							},
+							"Archival_Path": {
+								"value": "@concat(pipeline().parameters.Analytics_zone,pipeline().parameters.tsv_folder)",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": {
+							"value": "@{concat('temp_',pipeline().parameters.File_Name,pipeline().parameters.extension1)}",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "DLL_Encryption_PARQUET",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "ECOLABDATALAKE_O2C_AGING_FACT_SEVENDAYS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": {
+						"value": "@concat(if(equals(pipeline().DataFactory,'mapdatafactory001d2'),'/CommercialReportingDev',\nif(equals(pipeline().DataFactory,'MAPADFSALES002Q'),'/CommercialReportingQA',\nif(equals(pipeline().DataFactory,'mapdatafactory002p'),'/CommercialReporting',\nif(equals(pipeline().DataFactory,'mapADFSALES002d'),'/CommercialReportingDev',\nif(equals(pipeline().DataFactory,'mapadfUKIR002d'),'/CommercialReportingDev',\nif(equals(pipeline().DataFactory,'mapdatafactory003q'),'/CommercialReportingQA',\nif(equals(pipeline().DataFactory,'mapdatafactory002s'),'/CommercialReportingQA',\n''))))))),'/Encoding/DLL_Encoding')",
+						"type": "Expression"
+					},
+					"baseParameters": {
+						"storageName": {
+							"value": "@pipeline().parameters.storageName",
+							"type": "Expression"
+						},
+						"containerName": {
+							"value": "@pipeline().parameters.Container",
+							"type": "Expression"
+						},
+						"filePath": {
+							"value": "@concat(pipeline().parameters.Analytics_zone,pipeline().parameters.parquet_folder)",
+							"type": "Expression"
+						},
+						"fileName": {
+							"value": "@concat('temp_',pipeline().parameters.File_Name,pipeline().parameters.extension2)",
+							"type": "Expression"
+						},
+						"columnToEncrypt": {
+							"value": "@pipeline().parameters.ColumnToEncrypt",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksDLL",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete_Temp_PARQUET",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "DLL_Encryption_PARQUET",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Archival_Dataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"Delimiter": {
+								"value": "@pipeline().parameters.delimiter",
+								"type": "Expression"
+							},
+							"Archival_Path": {
+								"value": "@concat(pipeline().parameters.Analytics_zone,pipeline().parameters.parquet_folder)",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": {
+							"value": "@{concat('temp_',pipeline().parameters.File_Name,pipeline().parameters.extension2)}",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Azone_location_OpenSevendaysData": {
+				"type": "String",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseFacts/Accounts_Receivable/Aging"
+			},
+			"File_Name": {
+				"type": "String",
+				"defaultValue": "Aging_Transactions"
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "mapdatastorage"
+			},
+			"delimiter": {
+				"type": "string",
+				"defaultValue": "\t"
+			},
+			"extension1": {
+				"type": "string",
+				"defaultValue": ".tsv"
+			},
+			"extension2": {
+				"type": "string",
+				"defaultValue": ".parquet"
+			},
+			"Analytics_zone": {
+				"type": "string",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseFacts/Accounts_Receivable/Aging"
+			},
+			"src_path_ManualRun": {
+				"type": "string",
+				"defaultValue": "Analytics/AnalyticsManualRun"
+			},
+			"filename_ManualRun": {
+				"type": "string",
+				"defaultValue": "AgingFactManualRun"
+			},
+			"Folder_sold_player_lookup": {
+				"type": "string",
+				"defaultValue": "O2C_Lookup"
+			},
+			"filename_sold_player_lookup": {
+				"type": "string",
+				"defaultValue": "soldtopayerlookup"
+			},
+			"Folder_Customer": {
+				"type": "string",
+				"defaultValue": "CUSTOMER_NA"
+			},
+			"filename_Customer": {
+				"type": "string",
+				"defaultValue": "dim_customer"
+			},
+			"Folder_billing_sold_to_looku": {
+				"type": "string",
+				"defaultValue": "O2C_Lookup"
+			},
+			"filename_billing_sold_to_lo": {
+				"type": "string",
+				"defaultValue": "BillingSoldTolookup"
+			},
+			"Folder_Customerhier": {
+				"type": "string",
+				"defaultValue": "MDM_CUSTOMER_NA"
+			},
+			"filename_Customerhier": {
+				"type": "string",
+				"defaultValue": "dim_base_customer_hierarchy"
+			},
+			"path_Exploration": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/"
+			},
+			"path_Analytics": {
+				"type": "string",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseDims"
+			},
+			"Folder_ext_customerxref": {
+				"type": "string",
+				"defaultValue": "Lookups/USHistoricalSalesData"
+			},
+			"filename_BillingDocumentItemData": {
+				"type": "string",
+				"defaultValue": "2LIS_13_VDITM"
+			},
+			"filename_ext_customerxref": {
+				"type": "string",
+				"defaultValue": "SALES_LKP_CUSTOMER_XREF"
+			},
+			"file_Aging_expl_extract": {
+				"type": "string",
+				"defaultValue": "0FI_AR_4"
+			},
+			"src_path_Aging": {
+				"type": "string",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseFacts/Accounts_Receivable/Aging"
+			},
+			"filename_Aging": {
+				"type": "string",
+				"defaultValue": "Aging_Transactions"
+			},
+			"path_cntl": {
+				"type": "string",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA"
+			},
+			"filename_cntl": {
+				"type": "string",
+				"defaultValue": "OToC_Aging_Cntl"
+			},
+			"storageName": {
+				"type": "string",
+				"defaultValue": "mapdatalakestore002d"
+			},
+			"columnToEncrypt": {
+				"type": "string",
+				"defaultValue": "URLTxt"
+			},
+			"SubjectAreacntl": {
+				"type": "string",
+				"defaultValue": "Aging"
+			},
+			"Folder_EBS": {
+				"type": "string",
+				"defaultValue": "EBS"
+			},
+			"inputfile_2LIS_13_VDITM": {
+				"type": "string",
+				"defaultValue": "2LIS_13_VDITM"
+			},
+			"inputfile_0FI_AR_4": {
+				"type": "string",
+				"defaultValue": "0FI_AR_4"
+			},
+			"parquet_folder": {
+				"type": "string"
+			},
+			"tsv_folder": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Analytics"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-07T14:17:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

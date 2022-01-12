@@ -1,0 +1,162 @@
+{
+	"name": "ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "DUNNKEYCntlsource"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "TableDUNNKEYTEXTEXPLsource"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "viewdimdunning1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "dimDunningParquet"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "dimDunningTSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "DunningCntlTSV"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Filter1"
+				},
+				{
+					"name": "maxdate"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "expl"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "Filter2"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "Delta"
+				},
+				{
+					"name": "getDeltaRowNum"
+				},
+				{
+					"name": "MaxDimKey"
+				},
+				{
+					"name": "Join3"
+				},
+				{
+					"name": "appendMaxKey"
+				},
+				{
+					"name": "GetNewKeyDelta"
+				},
+				{
+					"name": "Join4"
+				},
+				{
+					"name": "Filter3"
+				},
+				{
+					"name": "Inserts"
+				},
+				{
+					"name": "Join5"
+				},
+				{
+					"name": "Updates"
+				},
+				{
+					"name": "Join6"
+				},
+				{
+					"name": "Filter4"
+				},
+				{
+					"name": "Aggregate2"
+				},
+				{
+					"name": "DerivedColumn4"
+				},
+				{
+					"name": "getnewcntlvalue"
+				},
+				{
+					"name": "UnionALL"
+				},
+				{
+					"name": "Sort1"
+				},
+				{
+					"name": "lrd"
+				},
+				{
+					"name": "Select5"
+				},
+				{
+					"name": "Select6"
+				},
+				{
+					"name": "Select7"
+				},
+				{
+					"name": "Existing"
+				},
+				{
+					"name": "Union3"
+				},
+				{
+					"name": "DTypeChange1"
+				},
+				{
+					"name": "DTypeChange2"
+				}
+			],
+			"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_Dunning_Cntl as string ('Dunning_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0DUNN_KEY as string ('0DUNN_KEY'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_dunning as string ('dim_dunning'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_DUNNING as string ('DUNNING/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_Dunning_Cntl+$file_extension_tsv)]) ~> DUNNKEYCntlsource\nsource(output(\n\t\tLanguageCd as string,\n\t\tDunningKeyCd as string,\n\t\tDunningKeyDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0DUNN_KEY+'/'+$file_name_0DUNN_KEY+$file_extension_tsv)]) ~> TableDUNNKEYTEXTEXPLsource\nsource(output(\n\t\tDunningKey as string,\n\t\tLanguageCd as string,\n\t\tDunningKeyCd as string,\n\t\tDunningKeyDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_DUNNING + $file_name_dim_dunning + $file_extension_tsv)]) ~> viewdimdunning1\nDUNNKEYCntlsource filter(SubjectArea=='Dunning'&& Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nDTypeChange1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'Dunning') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@LanguageCd == lrd@LanguageCd\n\t&& Select1@DunningKeyCd == lrd@DunningKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(LanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count([1])) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(LanguageCd,DunningKeyCd), true),\n\tNewDunningKey = rowNumber()) ~> getDeltaRowNum\nDTypeChange2 aggregate(MaxDunningKey = max(DunningKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageCd) || !isNull(MaxDunningKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxDunningKey = case(isNull(MaxDunningKey), toLong(0) ,(case(MaxDunningKey<=0,toLong(0),MaxDunningKey)))) ~> appendMaxKey\nappendMaxKey derive(DunningKey = NewDunningKey+MaxDunningKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewdimdunning1 join(Delta@LanguageCd == viewdimdunning1@LanguageCd\n\t&& Delta@DunningKeyCd == viewdimdunning1@DunningKeyCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewdimdunning1@LanguageCd) || isNull(viewdimdunning1@DunningKeyCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimdunning1@LanguageCd\n\t&& Delta@DunningKeyCd == viewdimdunning1@DunningKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimdunning1@LanguageCd\n\t&& Delta@DunningKeyCd == viewdimdunning1@DunningKeyCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@DunningKeyCd) || isNull(Delta@LanguageCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nDUNNKEYCntlsource derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'Dunning') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, DUNNKEYCntlsource union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tLanguageCd = Select1@LanguageCd,\n\t\tDunningKeyCd = Select1@DunningKeyCd,\n\t\tDunningKeyDesc = Select1@DunningKeyDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tLanguageCd = Delta@LanguageCd,\n\t\tDunningKeyCd = Delta@DunningKeyCd,\n\t\tDunningKeyDesc = Delta@DunningKeyDesc,\n\t\tDunningKey = GetNewKeyDelta@DunningKey,\n\t\tIsDeletedInd = Delta@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tDunningKeyDesc = Delta@DunningKeyDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tDunningKey = DTypeChange2@DunningKey,\n\t\tLanguageCd = viewdimdunning1@LanguageCd,\n\t\tDunningKeyCd = viewdimdunning1@DunningKeyCd,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tLanguageCd = viewdimdunning1@LanguageCd,\n\t\tDunningKeyCd = viewdimdunning1@DunningKeyCd,\n\t\tDunningKeyDesc = viewdimdunning1@DunningKeyDesc,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tLastUpdtDtTm = DTypeChange2@LastUpdtDtTm,\n\t\tIsDeletedInd = viewdimdunning1@IsDeletedInd,\n\t\tDunningKey = DTypeChange2@DunningKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nTableDUNNKEYTEXTEXPLsource derive(CreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange1\nviewdimdunning1 derive(DunningKey = toLong(DunningKey),\n\t\tCreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange2\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_DUNNING + $file_name_dim_dunning +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tDunningKey,\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimDunningParquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_DUNNING + $file_name_dim_dunning +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tDunningKey,\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimDunningTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_Dunning_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> DunningCntlTSV"
+		}
+	}
+}

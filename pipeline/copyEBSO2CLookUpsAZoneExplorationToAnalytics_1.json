@@ -1,0 +1,1912 @@
+{
+	"name": "copyEBSO2CLookUpsAZoneExplorationToAnalytics_1",
+	"properties": {
+		"activities": [
+			{
+				"name": "DIM_PAYMENT_BLOCK_Exists",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Generic_File_Exists",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"file_path": {
+								"value": "@concat(pipeline().parameters.Azone_location,pipeline().parameters.folderName_DIM_PAYMENT_BLOCK)",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@pipeline().parameters.fileName_DIM_PAYMENT_BLOCK",
+								"type": "Expression"
+							},
+							"delimiter": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							},
+							"file_extension": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "DIM_PAYMENT_BLOCK_Exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('DIM_PAYMENT_BLOCK_Exists').output.exists",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK",
+									"type": "DataFlowReference",
+									"parameters": {
+										"file_name_dim_payment_block": {
+											"value": "'@{pipeline().parameters.fileName_DIM_PAYMENT_BLOCK}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_PAYMENT_BLOCK": {
+											"value": "'@{pipeline().parameters.folderName_DIM_PAYMENT_BLOCK}'",
+											"type": "Expression"
+										},
+										"src_path_dummy": {
+											"value": "'@{pipeline().parameters.dummy_data_path}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"dimpaymentblockDummy": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimrouteTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimrouteParquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "GenericControlFileUpdate",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "GenericControlFileUpdate",
+									"type": "DataFlowReference",
+									"parameters": {
+										"FilePath": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "'@{pipeline().parameters.src_Audit_PaymentBlock_Cntl}'",
+											"type": "Expression"
+										},
+										"Status": "'S'",
+										"SubjectArea": {
+											"value": "'@{'PaymentBlock'}'",
+											"type": "Expression"
+										},
+										"TimeFormat": {
+											"value": "'@{'M/d/yyyy h:mm:ss a'}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"CntlSource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"CntlOutput": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ELSE_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "ELSE_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK",
+									"type": "DataFlowReference",
+									"parameters": {
+										"Audit_Path": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"src_filename_Audit_PaymentBlock_Cntl": {
+											"value": "'@{pipeline().parameters.src_Audit_PaymentBlock_Cntl}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"src_path_Exploration": {
+											"value": "'@{pipeline().parameters.Ezone_location}'",
+											"type": "Expression"
+										},
+										"file_name_0PMNT_BLOCK": {
+											"value": "'@{pipeline().parameters.file_name_0PMNT_BLOCK}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_payment_block": {
+											"value": "'@{pipeline().parameters.fileName_DIM_PAYMENT_BLOCK}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_PAYMENT_BLOCK": {
+											"value": "'@{pipeline().parameters.folderName_DIM_PAYMENT_BLOCK}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"PMNTBLOCKCntlsource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"TablePMNTBLOCKTEXTEXPLsource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"viewdimbillingblock1": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimPaymentBlockParquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										},
+										"dimPaymentBlockTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"PaymentBlockCntlTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "DIM_DUNNING_BLOCK_Exists",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Generic_File_Exists",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"file_path": {
+								"value": "@concat(pipeline().parameters.Azone_location,pipeline().parameters.folderName_DIM_DUNNING_BLOCK)",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@pipeline().parameters.fileName_DIM_DUNNING_BLOCK",
+								"type": "Expression"
+							},
+							"delimiter": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							},
+							"file_extension": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "DIM_DUNNING_Exists",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Generic_File_Exists",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"file_path": {
+								"value": "@concat(pipeline().parameters.Azone_location,pipeline().parameters.folderName_DIM_DUNNING)",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@pipeline().parameters.fileName_DIM_DUNNING",
+								"type": "Expression"
+							},
+							"delimiter": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							},
+							"file_extension": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "DIM_DUNNING_BLOCK_Exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('DIM_DUNNING_BLOCK_Exists').output.exists",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK",
+									"type": "DataFlowReference",
+									"parameters": {
+										"file_name_dim_dunning_block": {
+											"value": "'@{pipeline().parameters.fileName_DIM_DUNNING_BLOCK}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_DUNNING_BLOCK": {
+											"value": "'@{pipeline().parameters.folderName_DIM_DUNNING_BLOCK}'",
+											"type": "Expression"
+										},
+										"src_path_dummy": {
+											"value": "'@{pipeline().parameters.dummy_data_path}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"dimdunningblockDummy": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimrouteTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimrouteParquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "GenericControlFileUpdate1",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "GenericControlFileUpdate",
+									"type": "DataFlowReference",
+									"parameters": {
+										"FilePath": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_DunningBlock_Cntl}'",
+											"type": "Expression"
+										},
+										"Status": "'S'",
+										"SubjectArea": {
+											"value": "'@{'DunningBlock'}'",
+											"type": "Expression"
+										},
+										"TimeFormat": {
+											"value": "'@{'M/d/yyyy h:mm:ss a'}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"CntlSource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"CntlOutput": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK",
+									"type": "DataFlowReference",
+									"parameters": {
+										"Audit_Path": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"src_filename_Audit_DunningBlock_Cntl": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_DunningBlock_Cntl}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"src_path_Exploration": {
+											"value": "'@{pipeline().parameters.Ezone_location}'",
+											"type": "Expression"
+										},
+										"file_name_0DUNN_BLOCK": {
+											"value": "'@{pipeline().parameters.file_name_0DUNN_BLOCK}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_dunning_block": {
+											"value": "'@{pipeline().parameters.fileName_DIM_DUNNING_BLOCK}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_DUNNING_BLOCK": {
+											"value": "'@{pipeline().parameters.folderName_DIM_DUNNING_BLOCK}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"DUNNBLOCKCntlsource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"TableDUNNBLOCKTEXTEXPLsource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"viewdimdunningblock1": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimDunningBlockParquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										},
+										"dimDunningBlockTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"DunningBlockCntlTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ECOLABDATALAKE_AZONE_DIM_DUNNING",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "DIM_DUNNING_Exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('DIM_DUNNING_Exists').output.exists",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+									"type": "DataFlowReference",
+									"parameters": {
+										"file_name_dim_stor_chan": {
+											"value": "'@{pipeline().parameters.fileName_DIM_DUNNING}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_DUNNING": {
+											"value": "'@{pipeline().parameters.folderName_DIM_DUNNING}'",
+											"type": "Expression"
+										},
+										"src_path_dummy": {
+											"value": "'@{pipeline().parameters.dummy_data_path}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"dimdunningDummy": {
+											"Container": "mapdatastorage",
+											"Delimiter": "\t"
+										},
+										"dimrouteTSV": {
+											"Container": "mapdatastorage",
+											"Delimiter": "\t"
+										},
+										"dimrouteParquet": {
+											"tgt_container": "mapdatastorage"
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "GenericControlFileUpdate2",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "GenericControlFileUpdate",
+									"type": "DataFlowReference",
+									"parameters": {
+										"FilePath": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_Dunning_Cntl}'",
+											"type": "Expression"
+										},
+										"Status": "'S'",
+										"SubjectArea": {
+											"value": "'@{'Dunning'}'",
+											"type": "Expression"
+										},
+										"TimeFormat": {
+											"value": "'@{'M/d/yyyy h:mm:ss a'}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"CntlSource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"CntlOutput": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+									"type": "DataFlowReference",
+									"parameters": {
+										"Audit_Path": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"src_filename_Audit_Dunning_Cntl": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_Dunning_Cntl}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"src_path_Exploration": {
+											"value": "'@{pipeline().parameters.Ezone_location}'",
+											"type": "Expression"
+										},
+										"file_name_0DUNN_KEY": {
+											"value": "'@{pipeline().parameters.file_name_0DUNN_KEY}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_dunning": {
+											"value": "'@{pipeline().parameters.fileName_DIM_DUNNING}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_DUNNING": {
+											"value": "'@{pipeline().parameters.folderName_DIM_DUNNING}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"DUNNKEYCntlsource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"TableDUNNKEYTEXTEXPLsource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"viewdimdunning1": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"dimDunningParquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										},
+										"dimDunningTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"DunningCntlTSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "DIM_CREDIT_CONTROLLING_AREA_Exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('DIM_CREDIT_CONTROLLING_AREA_Exists').output.exists",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "IF_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "IF_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA",
+									"type": "DataFlowReference",
+									"parameters": {
+										"src_path_dummy": {
+											"value": "'@{pipeline().parameters.dummy_data_path}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_credit_controlling_area": {
+											"value": "'@{pipeline().parameters.fileName_DIM_CREDIT_CONTROLLING_AREA}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_CREDIT_CONTROLLING_AREA": {
+											"value": "'@{pipeline().parameters.folderName_DIM_CREDIT_CONTROLLING_AREA}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"dimCreditControllingAreaDummy": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"TSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"Parquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "GenericControlFileUpdate3",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "IF_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "GenericControlFileUpdate",
+									"type": "DataFlowReference",
+									"parameters": {
+										"FilePath": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_CreditControlArea_Cntl}'",
+											"type": "Expression"
+										},
+										"Status": "'S'",
+										"SubjectArea": {
+											"value": "'@{'CreditControlArea'}'",
+											"type": "Expression"
+										},
+										"TimeFormat": {
+											"value": "'@{'M/d/yyyy h:mm:ss a'}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"CntlSource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"CntlOutput": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ELSE_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "ELSE_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA",
+									"type": "DataFlowReference",
+									"parameters": {
+										"Audit_Path": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"src_filename_Audit_CreditControlArea_Cntl": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_CreditControlArea_Cntl}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"src_path_Exploration": {
+											"value": "'@{pipeline().parameters.Ezone_location}'",
+											"type": "Expression"
+										},
+										"file_name_0C_CTR_AREA": {
+											"value": "'@{pipeline().parameters.file_name_0C_CTR_AREA}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_credit_controlling_area": {
+											"value": "'@{pipeline().parameters.fileName_DIM_CREDIT_CONTROLLING_AREA}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_CREDIT_CONTROLLING_AREA": {
+											"value": "'@{pipeline().parameters.folderName_DIM_CREDIT_CONTROLLING_AREA}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"SrcCntl": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"viewEXPL": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"view1": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"outputparquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										},
+										"outputtsv": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"updatecntl": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "DIM_CREDIT_CONTROLLING_AREA_Exists",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Generic_File_Exists",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"file_path": {
+								"value": "@concat(pipeline().parameters.Azone_location,pipeline().parameters.folderName_DIM_CREDIT_CONTROLLING_AREA)",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@pipeline().parameters.fileName_DIM_CREDIT_CONTROLLING_AREA",
+								"type": "Expression"
+							},
+							"delimiter": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							},
+							"file_extension": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "DIM_ACCOUNT_DOCUMENT_TYPE_Exists",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Generic_File_Exists",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"file_path": {
+								"value": "@concat(pipeline().parameters.Azone_location,pipeline().parameters.folderName_DIM_ACCOUNT_DOCUMENT_TYPE)",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@pipeline().parameters.fileName_DIM_ACCOUNT_DOCUMENT_TYPE",
+								"type": "Expression"
+							},
+							"delimiter": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							},
+							"file_extension": {
+								"value": "@pipeline().parameters.file_extension_tsv",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "DIM_ACCOUNT_DOCUMENT_TYPE_Exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('DIM_ACCOUNT_DOCUMENT_TYPE_Exists').output.exists",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE",
+									"type": "DataFlowReference",
+									"parameters": {
+										"src_path_dummy": {
+											"value": "'@{pipeline().parameters.dummy_data_path}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_account_document_type": {
+											"value": "'@{pipeline().parameters.fileName_DIM_ACCOUNT_DOCUMENT_TYPE}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_ACCOUNT_DOCUMENT_TYPE": {
+											"value": "'@{pipeline().parameters.folderName_DIM_ACCOUNT_DOCUMENT_TYPE}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"dimDummy": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"TSV": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"Parquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "GenericControlFileUpdate4",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "GenericControlFileUpdate",
+									"type": "DataFlowReference",
+									"parameters": {
+										"FilePath": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_AccountDocumentType_Cntl}'",
+											"type": "Expression"
+										},
+										"Status": "'S'",
+										"SubjectArea": {
+											"value": "'@{'AccountDocumentType'}'",
+											"type": "Expression"
+										},
+										"TimeFormat": {
+											"value": "'@{'M/d/yyyy h:mm:ss a'}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"CntlSource": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"CntlOutput": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ELSE_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.05:00:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "ELSE_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE",
+									"type": "DataFlowReference",
+									"parameters": {
+										"Audit_Path": {
+											"value": "'@{pipeline().parameters.Audit_Path}'",
+											"type": "Expression"
+										},
+										"src_filename_Audit_AccountDocumentType_Cntl": {
+											"value": "'@{pipeline().parameters.src_filename_Audit_AccountDocumentType_Cntl}'",
+											"type": "Expression"
+										},
+										"file_extension_tsv": {
+											"value": "'@{pipeline().parameters.file_extension_tsv}'",
+											"type": "Expression"
+										},
+										"src_path_Exploration": {
+											"value": "'@{pipeline().parameters.Ezone_location}'",
+											"type": "Expression"
+										},
+										"file_name_0AC_DOC_TYP": {
+											"value": "'@{pipeline().parameters.file_name_0AC_DOC_TYP}'",
+											"type": "Expression"
+										},
+										"Analytics_Path": {
+											"value": "'@{pipeline().parameters.Azone_location}'",
+											"type": "Expression"
+										},
+										"file_name_dim_account_document_type": {
+											"value": "'@{pipeline().parameters.fileName_DIM_ACCOUNT_DOCUMENT_TYPE}'",
+											"type": "Expression"
+										},
+										"file_extension_parquet": {
+											"value": "'@{pipeline().parameters.file_extension_parquet}'",
+											"type": "Expression"
+										},
+										"Analytics_Folder_ACCOUNT_DOCUMENT_TYPE": {
+											"value": "'@{pipeline().parameters.folderName_DIM_ACCOUNT_DOCUMENT_TYPE}'",
+											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"SrcCntl": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"viewEXPL": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"viewroute1": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"outputparquet": {
+											"tgt_container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											}
+										},
+										"outputtsv": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										},
+										"updatecntl": {
+											"Container": {
+												"value": "@pipeline().parameters.container",
+												"type": "Expression"
+											},
+											"Delimiter": {
+												"value": "@pipeline().parameters.Delimiter",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"Ezone_location": {
+				"type": "String",
+				"defaultValue": "Exploration/EnterpriseBackbone/EBS/"
+			},
+			"Azone_location": {
+				"type": "String",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseDims/"
+			},
+			"fileName_DIM_ACCOUNT_CHART": {
+				"type": "String",
+				"defaultValue": "dim_account_chart"
+			},
+			"fileName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+				"type": "String",
+				"defaultValue": "dim_account_document_type"
+			},
+			"fileName_DIM_ACCOUNTING_TYPE": {
+				"type": "String",
+				"defaultValue": "dim_accounting_type"
+			},
+			"fileName_DIM_CREDIT_CONTROLLING_AREA": {
+				"type": "String",
+				"defaultValue": "dim_credit_controlling_area"
+			},
+			"fileName_DIM_DUNNING": {
+				"type": "String",
+				"defaultValue": "dim_dunning"
+			},
+			"fileName_DIM_DUNNING_BLOCK": {
+				"type": "String",
+				"defaultValue": "dim_dunning_block"
+			},
+			"fileName_DIM_PAYMENT_BLOCK": {
+				"type": "String",
+				"defaultValue": "dim_payment_block"
+			},
+			"fileName_DIM_PAYMENT_METHOD": {
+				"type": "String",
+				"defaultValue": "dim_payment_method"
+			},
+			"fileName_DIM_PAYMENT_REASON": {
+				"type": "String",
+				"defaultValue": "dim_payment_reason"
+			},
+			"fileName_DIM_PAYMENT_TERM": {
+				"type": "String",
+				"defaultValue": "dim_payment_term"
+			},
+			"folderName_DIM_ACCOUNT_CHART": {
+				"type": "String",
+				"defaultValue": "ACCOUNT_CHART/"
+			},
+			"folderName_DIM_ACCOUNT_DOCUMENT_TYPE": {
+				"type": "String",
+				"defaultValue": "ACCOUNT_DOCUMENT_TYPE/"
+			},
+			"folderName_DIM_ACCOUNTING_TYPE": {
+				"type": "String",
+				"defaultValue": "ACCOUNTING_TYPE/"
+			},
+			"folderName_DIM_CREDIT_CONTROLLING_AREA": {
+				"type": "String",
+				"defaultValue": "CREDIT_CONTROLLING_AREA/"
+			},
+			"folderName_DIM_DUNNING": {
+				"type": "String",
+				"defaultValue": "DUNNING/"
+			},
+			"folderName_DIM_DUNNING_BLOCK": {
+				"type": "String",
+				"defaultValue": "DUNNING_BLOCK/"
+			},
+			"folderName_DIM_PAYMENT_BLOCK": {
+				"type": "String",
+				"defaultValue": "PAYMENT_BLOCK/"
+			},
+			"folderName_DIM_PAYMENT_METHOD": {
+				"type": "String",
+				"defaultValue": "PAYMENT_METHOD/"
+			},
+			"folderName_DIM_PAYMENT_REASON": {
+				"type": "String",
+				"defaultValue": "PAYMENT_REASON/"
+			},
+			"folderName_DIM_PAYMENT_TERM": {
+				"type": "String",
+				"defaultValue": "PAYMENT_TERM/"
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "mapdatastorage"
+			},
+			"file_extension_tsv": {
+				"type": "string",
+				"defaultValue": ".tsv"
+			},
+			"file_extension_parquet": {
+				"type": "string",
+				"defaultValue": ".parquet"
+			},
+			"Delimiter": {
+				"type": "string",
+				"defaultValue": "\t"
+			},
+			"Audit_Path": {
+				"type": "string",
+				"defaultValue": "Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/"
+			},
+			"src_Audit_PaymentBlock_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentBlock_Cntl"
+			},
+			"file_name_0PMNT_BLOCK": {
+				"type": "string",
+				"defaultValue": "0PMNT_BLOCK"
+			},
+			"dummy_data_path": {
+				"type": "string",
+				"defaultValue": "Dummy_Data/"
+			},
+			"src_filename_Audit_DunningBlock_Cntl": {
+				"type": "string",
+				"defaultValue": "DunningBlock_Cntl"
+			},
+			"file_name_0DUNN_BLOCK": {
+				"type": "string",
+				"defaultValue": "0DUNN_BLOCK"
+			},
+			"src_filename_Audit_Dunning_Cntl": {
+				"type": "string",
+				"defaultValue": "Dunning_Cntl"
+			},
+			"file_name_0DUNN_KEY": {
+				"type": "string",
+				"defaultValue": "0DUNN_KEY"
+			},
+			"src_filename_Audit_CreditControlArea_Cntl": {
+				"type": "string",
+				"defaultValue": "CreditControlArea_Cntl"
+			},
+			"file_name_0C_CTR_AREA": {
+				"type": "string",
+				"defaultValue": "0C_CTR_AREA"
+			},
+			"src_filename_Audit_AccountDocumentType_Cntl": {
+				"type": "string",
+				"defaultValue": "AccountDocumentType_Cntl"
+			},
+			"file_name_0AC_DOC_TYP": {
+				"type": "string",
+				"defaultValue": "0AC_DOC_TYP"
+			},
+			"src_filename_Audit_AccountChart_Cntl": {
+				"type": "string",
+				"defaultValue": "AccountChart_Cntl"
+			},
+			"file_name_0CHRT_ACCTS": {
+				"type": "string",
+				"defaultValue": "0CHRT_ACCTS"
+			},
+			"src_filename_Audit_AccountingType_Cntl": {
+				"type": "string",
+				"defaultValue": "AccountingType_Cntl"
+			},
+			"file_name_0ACCT_TYPE": {
+				"type": "string",
+				"defaultValue": "0ACCT_TYPE"
+			},
+			"src_filename_Audit_PaymentReason_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentReason_Cntl"
+			},
+			"file_name_0REASON_CDE": {
+				"type": "string",
+				"defaultValue": "0REASON_CDE"
+			},
+			"src_filename_Audit_PaymentMethod_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentMethod_Cntl"
+			},
+			"file_name_0PYMT_METH": {
+				"type": "string",
+				"defaultValue": "0PYMT_METH"
+			},
+			"src_filename_Audit_PaymentTerm_Cntl": {
+				"type": "string",
+				"defaultValue": "PaymentTerm_Cntl"
+			},
+			"file_name_0ID_PAYTERM": {
+				"type": "string",
+				"defaultValue": "0ID_PAYTERM_BR"
+			}
+		},
+		"folder": {
+			"name": "Analytics"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-07T14:17:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

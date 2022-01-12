@@ -1,0 +1,12 @@
+{
+	"name": "ADLSGen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "ADLS Gen 2 data lake ",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://mapdatalakestore002p.dfs.core.windows.net"
+		}
+	}
+}

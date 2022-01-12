@@ -1,0 +1,275 @@
+{
+	"name": "copyEBSO2CBillAndSoldtoPayerAZoneExplorationToAnalytics",
+	"properties": {
+		"activities": [
+			{
+				"name": "ECOLABDATALAKE_AZONE_EXPL_SOLD_TO_PAYER_LOOKUP",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "ECOLABDATALAKE_AZONE_EXPL_SOLD_TO_PAYER_LOOKUP",
+						"type": "DataFlowReference",
+						"parameters": {
+							"path_0BP_RELATIONS": {
+								"value": "'@{pipeline().parameters.path_0BP_RELATIONS}'",
+								"type": "Expression"
+							},
+							"path_0CUSTOMER": {
+								"value": "'@{pipeline().parameters.path_0CUSTOMER}'",
+								"type": "Expression"
+							},
+							"path_0BP_DEF_ADDRESS": {
+								"value": "'@{pipeline().parameters.path_0BP_DEF_ADDRESS}'",
+								"type": "Expression"
+							},
+							"file_0BP_RELATIONS": {
+								"value": "'@{pipeline().parameters.file_0BP_RELATIONS}'",
+								"type": "Expression"
+							},
+							"file_0CUSTOMER": {
+								"value": "'@{pipeline().parameters.file_0CUSTOMER}'",
+								"type": "Expression"
+							},
+							"file_0BP_DEF_ADDRESS": {
+								"value": "'@{pipeline().parameters.file_0BP_DEF_ADDRESS}'",
+								"type": "Expression"
+							},
+							"file_extension_tsv": {
+								"value": "'@{pipeline().parameters.file_extension_tsv}'",
+								"type": "Expression"
+							},
+							"path_soldtopayerlookup": {
+								"value": "'@{pipeline().parameters.path_soldtopayerlookup}'",
+								"type": "Expression"
+							},
+							"file_soldtopayerlookup": {
+								"value": "'@{pipeline().parameters.file_soldtopayerlookup}'",
+								"type": "Expression"
+							},
+							"file_extension_parquet": {
+								"value": "'@{pipeline().parameters.file_extension_parquet}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"BPRELATIONSEXPL": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"CUSTOMEREXPL": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"BPDEFADDRESSEXPL": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"BpPartnerTSV": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"BpPartnerParquet": {
+								"tgt_container": "mapdatastorage"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "ECOLABDATALAKE_AZONE_EXPL_BILLING_SOLDTO_LOOKUP",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "ECOLABDATALAKE_AZONE_EXPL_SOLD_TO_PAYER_LOOKUP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.05:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "ECOLABDATALAKE_AZONE_EXPL_BILLING_SOLDTO_LOOKUP",
+						"type": "DataFlowReference",
+						"parameters": {
+							"path_2LIS_13_VDITM": {
+								"value": "'@{pipeline().parameters.path_2LIS_13_VDITM}'",
+								"type": "Expression"
+							},
+							"file_2LIS_13_VDITM": {
+								"value": "'@{pipeline().parameters.file_2LIS_13_VDITM}'",
+								"type": "Expression"
+							},
+							"file_extension_tsv": {
+								"value": "'@{pipeline().parameters.file_extension_tsv}'",
+								"type": "Expression"
+							},
+							"file_extension_parquet": {
+								"value": "'@{pipeline().parameters.file_extension_parquet}'",
+								"type": "Expression"
+							},
+							"path_BillingSoldTolookup": {
+								"value": "'@{pipeline().parameters.path_BillingSoldTolookup}'",
+								"type": "Expression"
+							},
+							"file_BillingSoldTolookup": {
+								"value": "'@{pipeline().parameters.file_BillingSoldTolookup}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"MasterSetSource": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"sink1": {
+								"Container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								},
+								"Delimiter": {
+									"value": "@pipeline().parameters.delimiter",
+									"type": "Expression"
+								}
+							},
+							"sink2": {
+								"tgt_container": {
+									"value": "@pipeline().parameters.container",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 48,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"container": {
+				"type": "string",
+				"defaultValue": "mapdatastorage"
+			},
+			"delimiter": {
+				"type": "string",
+				"defaultValue": "\t"
+			},
+			"file_extension_tsv": {
+				"type": "string",
+				"defaultValue": ".tsv"
+			},
+			"file_extension_parquet": {
+				"type": "string",
+				"defaultValue": ".parquet"
+			},
+			"path_0BP_RELATIONS": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/EBS/0BP_RELATIONS/"
+			},
+			"file_0BP_RELATIONS": {
+				"type": "string",
+				"defaultValue": "0BP_RELATIONS"
+			},
+			"path_0CUSTOMER": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/EBS/0CUSTOMER/"
+			},
+			"file_0CUSTOMER": {
+				"type": "string",
+				"defaultValue": "0CUSTOMER"
+			},
+			"path_0BP_DEF_ADDRESS": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/EBS/0BP_DEF_ADDRESS/"
+			},
+			"file_0BP_DEF_ADDRESS": {
+				"type": "string",
+				"defaultValue": "0BP_DEF_ADDRESS"
+			},
+			"path_soldtopayerlookup": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/O2C_Lookup/"
+			},
+			"file_soldtopayerlookup": {
+				"type": "string",
+				"defaultValue": "soldtopayerlookup"
+			},
+			"path_2LIS_13_VDITM": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/EBS/2LIS_13_VDITM/"
+			},
+			"file_2LIS_13_VDITM": {
+				"type": "string",
+				"defaultValue": "2LIS_13_VDITM"
+			},
+			"path_BillingSoldTolookup": {
+				"type": "string",
+				"defaultValue": "Exploration/EnterpriseBackbone/O2C_Lookup/"
+			},
+			"file_BillingSoldTolookup": {
+				"type": "string",
+				"defaultValue": "BillingSoldTolookup"
+			}
+		},
+		"folder": {
+			"name": "Analytics"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-07T14:17:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

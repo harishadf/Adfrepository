@@ -1,0 +1,18 @@
+{
+	"name": "LOGDBSERVER",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "MAPKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sql-opslog-conn"
+			}
+		}
+	}
+}

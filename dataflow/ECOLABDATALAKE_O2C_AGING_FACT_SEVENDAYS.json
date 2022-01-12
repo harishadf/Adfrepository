@@ -1,0 +1,364 @@
+{
+	"name": "ECOLABDATALAKE_O2C_AGING_FACT_SEVENDAYS",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "ManualRun"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSoldToPayerLookup"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SourceCustomer"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SourceBillingSoldToLookup"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SourceCustomerhier"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SourceExtCustomerxref"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SourceBillingDocumentItemData"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "AgingExplExtract"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sourcecntl"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sinkCntl"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sinkDefaultlvalue"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "OutputTSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "OutputParquet"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Window1"
+				},
+				{
+					"name": "Filter1"
+				},
+				{
+					"name": "SoldToPayerLookup"
+				},
+				{
+					"name": "Filter2"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "Window2"
+				},
+				{
+					"name": "Filter3"
+				},
+				{
+					"name": "SoldtoCust"
+				},
+				{
+					"name": "Window3"
+				},
+				{
+					"name": "Filter4"
+				},
+				{
+					"name": "BillingSoldToLookup"
+				},
+				{
+					"name": "Select2"
+				},
+				{
+					"name": "Window4"
+				},
+				{
+					"name": "Filter5"
+				},
+				{
+					"name": "SoldtoCustHier"
+				},
+				{
+					"name": "Select3"
+				},
+				{
+					"name": "Window5"
+				},
+				{
+					"name": "customerxref"
+				},
+				{
+					"name": "Select4"
+				},
+				{
+					"name": "Window6"
+				},
+				{
+					"name": "Filter6"
+				},
+				{
+					"name": "BillingDocumentItemData"
+				},
+				{
+					"name": "Filter7"
+				},
+				{
+					"name": "DerivedColumn1needtochange"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "GetRunDt"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "datefromfile"
+				},
+				{
+					"name": "Window7"
+				},
+				{
+					"name": "DerivedColumn3"
+				},
+				{
+					"name": "Window8"
+				},
+				{
+					"name": "Filter8"
+				},
+				{
+					"name": "AgingExplUniqueRecords"
+				},
+				{
+					"name": "DerivedColumn4"
+				},
+				{
+					"name": "AgingExplExtract1"
+				},
+				{
+					"name": "a1"
+				},
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "Join3"
+				},
+				{
+					"name": "Join4"
+				},
+				{
+					"name": "Join5"
+				},
+				{
+					"name": "DerivedColumn"
+				},
+				{
+					"name": "Join6"
+				},
+				{
+					"name": "BillingDocumentItemDataNon"
+				},
+				{
+					"name": "LogicPopulation"
+				},
+				{
+					"name": "BillTo"
+				},
+				{
+					"name": "PayerCust"
+				},
+				{
+					"name": "Join7"
+				},
+				{
+					"name": "Join8"
+				},
+				{
+					"name": "PayerCustHier"
+				},
+				{
+					"name": "Join9"
+				},
+				{
+					"name": "Join10"
+				},
+				{
+					"name": "Join11"
+				},
+				{
+					"name": "Join12"
+				},
+				{
+					"name": "DerivedColumn5"
+				},
+				{
+					"name": "FinalDailySet"
+				},
+				{
+					"name": "getoldcntlvalue"
+				},
+				{
+					"name": "DerivedColumn6"
+				},
+				{
+					"name": "Aggregate2"
+				},
+				{
+					"name": "getnewcntlvalue"
+				},
+				{
+					"name": "updatecntl"
+				},
+				{
+					"name": "DerivedColumn7"
+				},
+				{
+					"name": "Defaultlvalue"
+				},
+				{
+					"name": "Join13"
+				},
+				{
+					"name": "Filter10"
+				},
+				{
+					"name": "DerivedColumn8"
+				},
+				{
+					"name": "OpenSevendaysDataSet"
+				},
+				{
+					"name": "DerivedColumn9"
+				},
+				{
+					"name": "OpenSevendaysDataSet2"
+				},
+				{
+					"name": "Sort1"
+				},
+				{
+					"name": "Aggregate3"
+				},
+				{
+					"name": "DerivedColumn11"
+				},
+				{
+					"name": "Filter11"
+				},
+				{
+					"name": "DerivedColumn12"
+				},
+				{
+					"name": "CoalesceManualRun"
+				},
+				{
+					"name": "CoalesceSoldToPayerLookup"
+				},
+				{
+					"name": "CoalesceBIllingSoldToLookup"
+				},
+				{
+					"name": "CoalesceCustomerHier"
+				},
+				{
+					"name": "CoalesceExtCustomerXREF"
+				},
+				{
+					"name": "CoalesceBillingDocumentData"
+				},
+				{
+					"name": "CoalesceAgingExplExtract"
+				},
+				{
+					"name": "CoalesceCustomer"
+				},
+				{
+					"name": "CoalesceSourceCntl"
+				},
+				{
+					"name": "DerivedColumn13"
+				},
+				{
+					"name": "Filter12"
+				}
+			],
+			"script": "parameters{\n\tsrc_path_ManualRun as string ('Analytics/AnalyticsManualRun/'),\n\tfilename_ManualRun as string ('AgingFactManualRun'),\n\tfile_extension_tsv as string ('.tsv'),\n\tFolder_sold_player_lookup as string ('O2C_Lookup'),\n\tfilename_sold_player_lookup as string ('soldtopayerlookup'),\n\tFolder_customer as string ('CUSTOMER_NA'),\n\tfilename_customer as string ('dim_customer'),\n\tFolder_billing_sold_to_lookup as string ('O2C_Lookup'),\n\tfilename_billing_sold_to_lookup as string ('BillingSoldTolookup'),\n\tFolder_Customerhier as string ('MDM_CUSTOMER_NA'),\n\tfilename_Customerhier as string ('dim_base_customer_hierarchy'),\n\tpath_Exploration as string ('Exploration/EnterpriseBackbone/'),\n\tpath_Analytics as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tFolder_ext_customerxref as string ('Lookups/USHistoricalSalesData'),\n\tfilename_ext_customerxref as string ('SALES_LKP_CUSTOMER_XREF'),\n\tfilename_BillingDocumentItemData as string ('2LIS_13_VDITM*'),\n\tdelta_folder_structure as string ('2020/05/11'),\n\tfile_Aging_expl_extract as string ('0FI_AR_4*'),\n\tjobid as string (''),\n\tsrc_path_Aging as string ('Analytics/EnterpriseCertified/EnterpriseFacts/Accounts_Receivable/Aging/'),\n\tfilename_Aging as string ('Aging_Transactions'),\n\tpath_cntl as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tfilename_cntl as string ('OToC_Aging_Cntl'),\n\ttarget_path as string ('Analytics/EnterpriseCertified/EnterpriseFacts/Accounts_Receivable/Aging/'),\n\ttarget_filename as string ('Aging_Transactions'),\n\tfile_extension_parquet as string ('.parquet'),\n\tSubjectAreacntl as string,\n\tFolder_EBS as string ('EBS'),\n\tinputfile_2LIS_13_VDITM as string ('2LIS_13_VDITM/NA/*/*/*/*/*/'),\n\tinputfile_0FI_AR_4 as string ('0FI_AR_4/NA/*/*/*/*/*/'),\n\tparquet_folder as string,\n\ttsv_folder as string\n}\nsource(output(\n\t\tRunon as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_ManualRun+$filename_ManualRun+$file_extension_tsv)]) ~> ManualRun\nsource(output(\n\t\tPayer as string,\n\t\tSoldTo as string,\n\t\tcountofsoldto as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Exploration+$Folder_sold_player_lookup+'/'+$filename_sold_player_lookup+$file_extension_tsv)]) ~> SourceSoldToPayerLookup\nsource(output(\n\t\tCustomerKey as string,\n\t\tCustomerNum as string,\n\t\tAddrNum as string,\n\t\tTitleTxt as string,\n\t\tCustCentralOrderBlockCd as string,\n\t\tExpressTrainStationCd as string,\n\t\tTrainStationCd as string,\n\t\tInternationalLocation1Num as string,\n\t\tInternationalLocation2Num as string,\n\t\tAuthGrpCd as string,\n\t\tIndustryCd as string,\n\t\tInternationalLocationNumCheckDigitCd as string,\n\t\tLineNumDataCommunicationTxt as string,\n\t\tRecordCreatedDt as string,\n\t\tRecordCreatedByName as string,\n\t\tUnloadingPointInd as string,\n\t\tCustCentralBillingBlockCd as string,\n\t\tMasterRecordWithFiscalAddrAccountNum as string,\n\t\tWorkingTmCalendarCd as string,\n\t\tAlternativePayerAccountNum as string,\n\t\tGrpCd as string,\n\t\tCustAccountGrpCd as string,\n\t\tCustClassificationCd as string,\n\t\tCountryKeyCd as string,\n\t\tVendorAccountNum as string,\n\t\tCustCntralDeliveryBlockCd as string,\n\t\tCityCoordinatesVal as string,\n\t\tMasterRecordDeletionInd as string,\n\t\tName1Desc as string,\n\t\tName2Desc as string,\n\t\tName3Desc as string,\n\t\tName4Desc as string,\n\t\tNielsenIDCd as string,\n\t\tCityName as string,\n\t\tDistrictName as string,\n\t\tPOBoxNum as string,\n\t\tPOBoxPostalCd as string,\n\t\tPostalCd as string,\n\t\tRegionCd as string,\n\t\tCountryCd as string,\n\t\tCityCd as string,\n\t\tRegionalMarketCd as string,\n\t\tSortFieldDesc as string,\n\t\tCentralPostingBlockInd as string,\n\t\tLanguageCd as string,\n\t\tTax1Num as string,\n\t\tTax2Num as string,\n\t\tBusPartnerEqualizationTaxInd as string,\n\t\tLiableForVATInd as string,\n\t\tHouseNumAndStreetDesc as string,\n\t\tTeleboxNumTxt as string,\n\t\tFirstTelNum as string,\n\t\tSecondTelNum as string,\n\t\tFaxNum as string,\n\t\tTeletaxNum as string,\n\t\tTelexNum as string,\n\t\tTransportationZoneCd as string,\n\t\tIsOneTimeAccountInd as string,\n\t\tIfAlternativePayeeAllowedInd as string,\n\t\tTradingPartnerCompanyCd as string,\n\t\tVATRegistrationNum as string,\n\t\tIsCompetitorInd as string,\n\t\tIsSalesPartnerInd as string,\n\t\tIsSalesProspectInd as string,\n\t\tCustType4Ind as string,\n\t\tSoldToPartyCd as string,\n\t\tIsConsumerInd as string,\n\t\tLegalStatusCd as string,\n\t\tIndustry1Cd as string,\n\t\tIndustry2Cd as string,\n\t\tIndustry3Cd as string,\n\t\tIndustry4Cd as string,\n\t\tIndustry5Cd as string,\n\t\tInitialContactCd as string,\n\t\tAnnualSalesNum as string,\n\t\tAnnualSalesYearTxt as string,\n\t\tSalesFigCurCd as string,\n\t\tYearlyCountOfEmpNum as string,\n\t\tYearForNumOfEmpTxt as string,\n\t\tAttr1Cd as string,\n\t\tAttr2Cd as string,\n\t\tAttr3Cd as string,\n\t\tAttr4Cd as string,\n\t\tCustLeadDivisionCd as string,\n\t\tAttr6Cd as string,\n\t\tAttr7Cd as string,\n\t\tAttr8Cd as string,\n\t\tAttr9Cd as string,\n\t\tAttr10Cd as string,\n\t\tNaturalPersonName as string,\n\t\tAnnualSalesNum2 as string,\n\t\tTaxJurisdictionCd as string,\n\t\tMatchCdSearchTerm1Desc as string,\n\t\tMatchCdSearchTerm2Desc as string,\n\t\tMatchCdSearchTerm3Desc as string,\n\t\tFiscalYearVariantCd as string,\n\t\tUsageInd as string,\n\t\tCustInspectionInd as string,\n\t\tOutboundDeliveryNoteInspectionInd as string,\n\t\tReferenceAccountGrpCd as string,\n\t\tPOBoxCityName as string,\n\t\tPlantCd as string,\n\t\tMediumOfDataExchangeInd as string,\n\t\tMediumOfDataExchangeInstructionCd as string,\n\t\tDataTransferStatusInd as string,\n\t\tAssignmentToHierarchyCd as string,\n\t\tPaymentBlockCd as string,\n\t\tCustPlantGrpISRLabelCd as string,\n\t\tNonMilitaryUseInd as string,\n\t\tMilitaryUseInd as string,\n\t\tCustConditionGrp1Cd as string,\n\t\tCustConditionGrp2Cd as string,\n\t\tCustConditionGrp3Cd as string,\n\t\tCustConditionGrp4Cd as string,\n\t\tCustConditionGrp5Cd as string,\n\t\tAlternativePayerUsingAccountNumInd as string,\n\t\tTaxTypeCd as string,\n\t\tTaxNumTypeCd as string,\n\t\tTaxNbr3Cd as string,\n\t\tTaxNbr4Cd as string,\n\t\tICMSExemptCustInd as string,\n\t\tIPIExemptCustInd as string,\n\t\tCustGrpCd as string,\n\t\tCustCFOPCatCd as string,\n\t\tICMSTaxLawCd as string,\n\t\tIPITaxLawCd as string,\n\t\tBiochemicalWarfareForLegalControlInd as string,\n\t\tNuclearProliferationForLegalControlInd as string,\n\t\tNationalSecurityForLegalControlInd as string,\n\t\tMissileTechnologyForLegalControlInd as string,\n\t\tCustCentralSalesBlockInd as string,\n\t\tUniformResourceLocatorTxt as string,\n\t\tNameDesc as string,\n\t\tEBSBilWDlvry as string,\n\t\tBusPartnerCatgCd as string,\n\t\tBusPartnerTypeCd as string,\n\t\tBusPartnerGroupingCd as string,\n\t\tExternalSysBusPartnerNum as string,\n\t\tBusPartnerSearchTerm1Txt as string,\n\t\tBusPartnerSearchTerm2Txt as string,\n\t\tDataOriginTypeCd as string,\n\t\tAddressKeyFormCd as string,\n\t\tCentralArchiveInd as string,\n\t\tBusPartnerCentralBlockCd as string,\n\t\tSalutationTxt as string,\n\t\tBusPartnerContactPermissionCd as string,\n\t\tBusPartnerPrntFrmtCd as string,\n\t\tEBSMSDSLanguage1Cd as string,\n\t\tEBSMSDSLanguage2Cd as string,\n\t\tEBSMSDSLanguage3Cd as string,\n\t\tEBSMSDSLanguage4Cd as string,\n\t\tEBSCPrPoisonClsfCd as string,\n\t\tEBSWEENumCd as string,\n\t\tEBSInvOutputCd as string,\n\t\tEBSCustConditionGrp1Cd as string,\n\t\tEBSCustConditionGrp2Cd as string,\n\t\tEBSCustConditionGrp3Cd as string,\n\t\tEBSCustConditionGrp4Cd as string,\n\t\tEBSCustConditionGrp5Cd as string,\n\t\tEBSBrandOwnerName as string,\n\t\tEBSBrandName as string,\n\t\tEBSCustOutletCd as string,\n\t\tEBSCommercialCd as string,\n\t\tEBSCommercialName as string,\n\t\tEBSSiteNum as string,\n\t\tEBSSiteDesc as string,\n\t\tEBSGenID as string,\n\t\tEBSPersonalHRNum as string,\n\t\tEBSActiveDirectoryAcctName as string,\n\t\tEBSBlanketPONum as string,\n\t\tEBSIntOutletNum as string,\n\t\tEBSBillingWDeliveryCd as string,\n\t\tEBSBillBackClassificationCd as string,\n\t\tEBSPOUOnHeaderCd as string,\n\t\tEBSOrderConfirmCd as string,\n\t\tEBSGTAddrDesc as string,\n\t\tEBSSalesAllocRuleCd as string,\n\t\tEBSTerritoryCd as string,\n\t\tEBSAgreedPriceRequiredCd as string,\n\t\tEBSOwnershipCd as string,\n\t\tEBSCatgCd as string,\n\t\tEBSBusPartnerId as string,\n\t\tEBSSalesSkillCd as string,\n\t\tEBSBCMTypeCd as string,\n\t\tEBSDirectIndirectCustInd as string,\n\t\tEBSBusUnitCd as string,\n\t\tEBSSubBUCd as string,\n\t\tEBSDeliverOnOnlyDesc as string,\n\t\tEBSPalletJackReqdDesc as string,\n\t\tEBSLiftGateReqdDt as string,\n\t\tEBSDeliveryApptReqdCd as string,\n\t\tEBSDeliveryContactPersonName as string,\n\t\tEBSDeliveryContactInfoDesc as string,\n\t\tEBSDeliveryInstruction7Desc as string,\n\t\tEBSDeliveryInstructiont8Desc as string,\n\t\tEBSDeliveryInstructiont9Desc as string,\n\t\tEBSDeliveryInstructiont10Desc as string,\n\t\tEBSDeliveryInstruction11Desc as string,\n\t\tEBSCAMTerritoryCd as string,\n\t\tEBSReportDistributionCd as string,\n\t\tEBSMPPRLinkCd as string,\n\t\tEBSTerritoryCd1 as string,\n\t\tOrgName1 as string,\n\t\tOrgName2 as string,\n\t\tOrgName3 as string,\n\t\tOrgName4 as string,\n\t\tLegalFormOrgName as string,\n\t\tIndustrySectorCd as string,\n\t\tLegalEntityOrgName as string,\n\t\tOrgFoundedDt as string,\n\t\tLiduidationOrgDt as string,\n\t\tIntLocationNum1 as string,\n\t\tIntLocationNum2 as string,\n\t\tCheckDigitForIntLocationNum as string,\n\t\tBusPartnerLastName as string,\n\t\tBusPartnerFirstName as string,\n\t\tOtherLastName as string,\n\t\tBusPartnerBirthName as string,\n\t\tBusPartnerMiddleName as string,\n\t\tAcademicTitleCd as string,\n\t\tNamePrefixCd as string,\n\t\tBusPartnerNickname as string,\n\t\tMiddleInitialTxt as string,\n\t\tNameFormatRuleCountryCd as string,\n\t\tCorrespondenceLanguageCd as string,\n\t\tIfBusPartnerIsMaleInd as string,\n\t\tIfBusPartnerIsFemaleInd as string,\n\t\tBusPartnerBirthplaceName as string,\n\t\tBusPartnerMaritalStatusCd as string,\n\t\tNaturalPersonEmployerName as string,\n\t\tNationalityCd as string,\n\t\tPersonNum as string,\n\t\tIfBusPartnerSexIsNotKnownInd as string,\n\t\tObsoleteField2 as string,\n\t\tBusPartnerLanguageCd as string,\n\t\tBusPartnerBirthDt as string,\n\t\tBusPartnerDeathDt as string,\n\t\tPersonnelNum as string,\n\t\tObsoleteField3 as string,\n\t\tObsoleteField4 as string,\n\t\tGrpName1 as string,\n\t\tGrpName2 as string,\n\t\tSearchHelpField1Name as string,\n\t\tSearchHelpField2Name as string,\n\t\tObjectCreatedByName as string,\n\t\tObjectCreatedDt as string,\n\t\tObjectCreatedTm as string,\n\t\tObjChangedByName as string,\n\t\tObjectLastChangedDt as string,\n\t\tObjectLastChangedTm as string,\n\t\tBusPartnerGUID as string,\n\t\tIfPlannedChangedDocConvertedInd as string,\n\t\tBUT000BPDataValidityStartDt as string,\n\t\tBUT000BPDataValidityEndDt as string,\n\t\tIfBusPartnerIsNaturalPersonInd as string,\n\t\tBPTemplateID as string,\n\t\tBusPartnerCatgTextCd as string,\n\t\tShortDesc as string,\n\t\tMediumDesc as string,\n\t\tLongDesc as string,\n\t\tBusPartnerTextGUID as string,\n\t\tAddrValidFromDt as string,\n\t\tAddrValidToDt as string,\n\t\tFormOfAddrCd as string,\n\t\tCareOfDesc as string,\n\t\tNonPostalCityName as string,\n\t\tDifferentCityCd as string,\n\t\tRegionalStructureGroupingCd as string,\n\t\tCityPostalCd as string,\n\t\tCompanyPostalCd as string,\n\t\tPOBoxWithoutNumInd as string,\n\t\tPOBoxRegionCd as string,\n\t\tPOBoxCountry as string,\n\t\tStreetName as string,\n\t\tStreetNumDesc as string,\n\t\tHouseNum as string,\n\t\tSupplementHouseNum as string,\n\t\tStreet2Name as string,\n\t\tStreet3Name as string,\n\t\tStreet4Name as string,\n\t\tStreet5Name as string,\n\t\tBuildingCd as string,\n\t\tFloorCd as string,\n\t\tRoomAptNum as string,\n\t\tPersonalAddrFlagCd as string,\n\t\tSearchTerm1Txt as string,\n\t\tSearchTerm2Txt as string,\n\t\tFirstTelExtnCd as string,\n\t\tFirstFaxExtnCd as string,\n\t\tExtenstion1Cd as string,\n\t\tExtenstion2Cd as string,\n\t\tAddrTmZoneCd as string,\n\t\tEmailAddrTxt as string,\n\t\tURIFieldForTransferToBWTxt as string,\n\t\tDisplayFrmtTelNum as string,\n\t\tDisplayFrmtFaxNum as string,\n\t\tGeoLocationLongitudeVal as string,\n\t\tGeoLocationLatitudeVal as string,\n\t\tGeoLocationHeightVal as string,\n\t\tGeoLocationDataSourceCd as string,\n\t\tGeoLocationPrecisionCd as string,\n\t\tAddrNum2 as string,\n\t\tOneLineAddrDesc as string,\n\t\tOneLineAddrDesc2 as string,\n\t\tBPAddrLin0Desc as string,\n\t\tBPAddrLin1Desc as string,\n\t\tBPAddrLin2Desc as string,\n\t\tBPAddrLin3Desc as string,\n\t\tBPAddrLin4Desc as string,\n\t\tBPAddrLin5Desc as string,\n\t\tBPAddrLin6Desc as string,\n\t\tBPAddrLin7Desc as string,\n\t\tBPAddrLin8Desc as string,\n\t\tBPAddrLin9Desc as string,\n\t\tPricingHierarchyLevel1 as string,\n\t\tPricingHierarchyLevel1Desc as string,\n\t\tPricingHierarchyLevel2 as string,\n\t\tPricingHierarchyLevel2Desc as string,\n\t\tPricingHierarchyLevel3 as string,\n\t\tPricingHierarchyLevel3Desc as string,\n\t\tPricingHierarchyLevel4 as string,\n\t\tPricingHierarchyLevel4Desc as string,\n\t\tPricingHierarchyLevel5 as string,\n\t\tPricingHierarchyLevel5Desc as string,\n\t\tPricingHierarchyLevel6 as string,\n\t\tPricingHierarchyLevel6Desc as string,\n\t\tPricingHierarchyLevel7 as string,\n\t\tPricingHierarchyLevel7Desc as string,\n\t\tPricingHierLvl1Desc as string,\n\t\tPricingHierLvl2Desc as string,\n\t\tPricingHierLvl3Desc as string,\n\t\tPricingHierLvl4Desc as string,\n\t\tPricingHierLvl5Desc as string,\n\t\tPricingHierLvl6Desc as string,\n\t\tPricingHierLvl7Desc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string,\n\t\tMarketSegment1Desc as string,\n\t\tMarketSegment2Desc as string,\n\t\tEBSInsideDeliveryCd as string,\n\t\tEmailID as string,\n\t\tContactPersonCd as string,\n\t\tTelephoneCd as string,\n\t\tNightTimeDeliveryCd as string,\n\t\tIDNum as string,\n\t\tInstitutionCd as string,\n\t\tIDNumValidStartDt as string,\n\t\tIDNumValidEndDt as string,\n\t\tSalesOrgCd as string,\n\t\tAddress as string,\n\t\tCustNameCityNumber as string,\n\t\tCustNameNumber as string,\n\t\tEBSSiteNumName as string,\n\t\tDunningProcedureCd as string,\n\t\tPaymentKeyTermsCd as string,\n\t\tInstMarketSegment1Desc as string,\n\t\tInstMarketSegment2Desc as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Analytics+$Folder_customer+'/'+$filename_customer+$file_extension_tsv)]) ~> SourceCustomer\nsource(output(\n\t\tBillingDocNum as string,\n\t\tSoldTo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Exploration+$Folder_billing_sold_to_lookup+'/'+$filename_billing_sold_to_lookup+$file_extension_tsv)]) ~> SourceBillingSoldToLookup\nsource(output(\n\t\tBaseCustomerHierKey as string,\n\t\tCustomerNum as string,\n\t\tSiteZipClassCd as string,\n\t\tSiteGCityClassCd as string,\n\t\tSiteGCountryClassCd as string,\n\t\tSiteGAddress1ClassCd as string,\n\t\tSiteGAddress2ClassCd as string,\n\t\tSiteGStateCd as string,\n\t\tSiteGClassName as string,\n\t\tSiteGClass1Name as string,\n\t\tSite_Id as string,\n\t\tBaseCustHierarchyLevel1 as string,\n\t\tBaseCustHierarchyLevel1Desc as string,\n\t\tBaseCustHierarchyLevel2 as string,\n\t\tBaseCustHierarchyLevel2Desc as string,\n\t\tBaseCustHierarchyLevel3 as string,\n\t\tBaseCustHierarchyLevel3Desc as string,\n\t\tBaseCustHierarchyLevel4 as string,\n\t\tBaseCustHierarchyLevel4Desc as string,\n\t\tBaseCustHierarchyLevel5 as string,\n\t\tBaseCustHierarchyLevel5Desc as string,\n\t\tPublishDt as string,\n\t\tBaseHierType as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tSalesOrgCd as string,\n\t\tSiteIDName as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Analytics+$Folder_Customerhier+'/'+$filename_Customerhier+$file_extension_tsv)]) ~> SourceCustomerhier\nsource(output(\n\t\tCustomerCd as string,\n\t\tEBSCustNum as string,\n\t\tBillbackCd as string,\n\t\tDistChannelCd as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Exploration+$Folder_ext_customerxref+'/'+$filename_ext_customerxref+$file_extension_tsv)]) ~> SourceExtCustomerxref\nsource(output(\n\t\tDISequenceNum as string,\n\t\tDIOperationTypeCd as string,\n\t\tCancelDataRecInd as string,\n\t\tSalesDistDocumentNum as string,\n\t\tBillingDocumentPostingStatusCd as string,\n\t\tIntercompanyBillingTotalStatusCd as string,\n\t\tOrderBillingStatusCd as string,\n\t\tBillingStatusCd as string,\n\t\tOverallBillingBlockStatusCd as string,\n\t\tOverallProcessingStatusCd as string,\n\t\tOverallBlockedStatusCd as string,\n\t\tSDDocumentItemNum as string,\n\t\tChangesOnDt as string,\n\t\tCompanyCd as string,\n\t\tSalesDistrictCd as string,\n\t\tBillingTypeCd as string,\n\t\tBillingDt as string,\n\t\tBillingCatCd as string,\n\t\tLocalCurCd as string,\n\t\tCustGrpCd as string,\n\t\tSoldToPartyCd as string,\n\t\tPayerCd as string,\n\t\tFIPostingsExchangeRate as string,\n\t\tExchangeRateTypeCd as string,\n\t\tStatisticsCurCd as string,\n\t\tSDDocumentCatg1Cd as string,\n\t\tSalesOrgCd as string,\n\t\tDistChannelCd as string,\n\t\tSDDocumentCurCd as string,\n\t\tFiscalYear as string,\n\t\tPostingPeriodTm as string,\n\t\tTransferToAccountingStatusCd as string,\n\t\tAssignNumCd as string,\n\t\tPromotionCd as string,\n\t\tSalesDocumentNum as string,\n\t\tSalesDocumentItemNum as string,\n\t\tRebateBasis1Val as string,\n\t\tVolumeRebateGrpCd as string,\n\t\tGrossWeightQty as string,\n\t\tBillingItemDocumentCurGrossVal as string,\n\t\tApplicationComponentCd as string,\n\t\tSAPBWTransactionKeyCd as string,\n\t\tBatchNum as string,\n\t\tIntArticleNum as string,\n\t\tRecordCreatedDt as string,\n\t\tBillingPlanRuleCd as string,\n\t\tServicesRenderedDt as string,\n\t\tActualInvoicedQty as string,\n\t\tStockkeepingUnitBillingQty as string,\n\t\tWeightUnitMeas as string,\n\t\tSalesDealCd as string,\n\t\tControllingAreaCd as string,\n\t\tCostCenterCd as string,\n\t\tPriceDeterminationExchangeRate as string,\n\t\tTranslationDt as string,\n\t\tCustGrp1Cd as string,\n\t\tCustGrp2Cd as string,\n\t\tCustGrp3Cd as string,\n\t\tCustGrp4Cd as string,\n\t\tCustGrp5Cd as string,\n\t\tPricingProcedureConditionSubtotal1Amt as string,\n\t\tPricingProcedureConditionSubtotal2Amt as string,\n\t\tPricingProcedureConditionSubtotal3Amt as string,\n\t\tPricingProcedureConditionSubtotal4Amt as string,\n\t\tPricingProcedureConditionSubtotal5Amt as string,\n\t\tPricingProcedureConditionSubtotal6Amt as string,\n\t\tStorageLocationCd as string,\n\t\tMatMgmtRequiredQty as string,\n\t\tMatGrpCd as string,\n\t\tMatNum as string,\n\t\tMatEnteredNum as string,\n\t\tBaseUoMMeas as string,\n\t\tMatGrp1Cd as string,\n\t\tMatGrp2Cd as string,\n\t\tMatGrp3Cd as string,\n\t\tMatGrp4Cd as string,\n\t\tMatGrp5Cd as string,\n\t\tDocumentCurTaxAmt as string,\n\t\tBillingItemNetVal as string,\n\t\tNetWeightQty as string,\n\t\tBillToPartyCd as string,\n\t\tShipToPartyCd as string,\n\t\tItemTypeCd as string,\n\t\tProductHierarchyCd as string,\n\t\tCommisionGrpCd as string,\n\t\tPricingExchangeRateDt as string,\n\t\tSalesDocumentItemCatgCd as string,\n\t\tSalesEmpCd as string,\n\t\tCashDiscountEligibleAmt as string,\n\t\tBaseUoMScaleQty as string,\n\t\tOrderHeaderDivisionCd as string,\n\t\tDivisionCd as string,\n\t\tStatisticsDt as string,\n\t\tStatisticsExchangeRate as string,\n\t\tSalesQtyToSKUConversionDenominatorQty as string,\n\t\tSalesQtyToSKUConversionNumeratorQty as string,\n\t\tStatisticsUpdateDt as string,\n\t\tReferenceDocumentNum as string,\n\t\tReferenceItemNum as string,\n\t\tSalesOfficeCd as string,\n\t\tSalesGrpCd as string,\n\t\tVolumeUnitMeas as string,\n\t\tVolumeQty as string,\n\t\tSalesUnitCd as string,\n\t\tShippingPointCd as string,\n\t\tDocumentCurCostAmt as string,\n\t\tPlantCd as string,\n\t\tDocumentCurGrossVal as string,\n\t\tSalesTypeCd as string,\n\t\tTotalQty1 as string,\n\t\tStatisticsUOMTotalQty as string,\n\t\tTotalQty2 as string,\n\t\tStatisticsUoMBillingQty as string,\n\t\tDepartureCountryCd as string,\n\t\tOrderNum as string,\n\t\tOrderReasonTxt as string,\n\t\tSalesDocumentReferenceCd as string,\n\t\tSDDocumentCatgCd as string,\n\t\tAccountingInd as string,\n\t\tPlantCatgCd as string,\n\t\tItemCreditPriceVal as string,\n\t\tAgreedDeliveryTm as string,\n\t\tPurchasingGrpCd as string,\n\t\tPurchasingOrgCd as string,\n\t\tPurchasingAreaCd as string,\n\t\tObjectCreatedByName as string,\n\t\tEntryTm as string,\n\t\tFunctionalAreaCd as string,\n\t\tBillingPlanItemCd as string,\n\t\tEntryTm1 as string,\n\t\tVendorMatNum as string,\n\t\tAccountAssignmentGrpCd as string,\n\t\tSalesOrderDestinationCountryCd as string,\n\t\tMatTypeCd as string,\n\t\tOpenBillingDocumentCreditVal as string,\n\t\tTotalOpenBillingDocumentCreditVal as string,\n\t\tOpenBillingDocumentQty as string,\n\t\tOpenDeliveryCreditVal as string,\n\t\tTotalOpenDeliveryCreditVal as string,\n\t\tSoldToParty1Cd as string,\n\t\tProfitCenterCd as string,\n\t\tItemReturnedInd as string,\n\t\tBaseUoMSalesQty as string,\n\t\tGenerallyIncompleteInd as string,\n\t\tEBSAgreeNum as string,\n\t\tEBSAgreeTypCd as string,\n\t\tWorkBreakdownStructureElementCd as string,\n\t\tNumOfBillingItemNum as string,\n\t\tFiscalYearVariantCd as string,\n\t\tReferredSalesOrderItemCampaignCd as string,\n\t\tCustCd as string,\n\t\tPrecedingSalesDistDocumentCd as string,\n\t\tCust1Cd as string,\n\t\tPayer1Cd as string,\n\t\tSoldToParty2Num as string,\n\t\tBillToParty1Num as string,\n\t\tShipToParty1Num as string,\n\t\tODQChangeModeCd as string,\n\t\tODQEntityCntrCd as string,\n\t\tFileCreatedDtTm as string,\n\t\tFileName as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tIsReversedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Exploration+$Folder_EBS+'/'+$inputfile_2LIS_13_VDITM+$filename_BillingDocumentItemData+$file_extension_tsv)]) ~> SourceBillingDocumentItemData\nsource(output(\n\t\tDISequenceNum as string,\n\t\tDIOperationTypeCd as string,\n\t\tCompanyCd as string,\n\t\tFiscalYearDt as string,\n\t\tAccountingDocNum as string,\n\t\tLineItemNum as string,\n\t\tSubItemnum as string,\n\t\tFIItemStatusCd as string,\n\t\tCustomerNum as string,\n\t\tCreditControlAreaCd as string,\n\t\tDunninAreaMeas as string,\n\t\tAccountTypeCd as string,\n\t\tGLInd as string,\n\t\tAccountingDocTypeCd as string,\n\t\tPostingKeyCd as string,\n\t\tFiscalYearVariantCd as string,\n\t\tDocDt as string,\n\t\tDocPostingDt as string,\n\t\tAccDocEnterDt as string,\n\t\tClearDt as string,\n\t\tLastDunnDt as string,\n\t\tPaymentDueDt as string,\n\t\tTerms1CashDiscountDueDt as string,\n\t\tTerms2CashDiscountDueDt as string,\n\t\tBaselineDueDtForDueDtCalc as string,\n\t\tFirstCashDiscDaysTm as string,\n\t\tSecondCashDiscDaysTm as string,\n\t\tNetPayTermsTm as string,\n\t\tCashDisc1Pct as string,\n\t\tCashDisc2Pct as string,\n\t\tCountrCd as string,\n\t\tPaymentMethodCd as string,\n\t\tPaymentKeyTermsCd as string,\n\t\tPayBlockKeyCd as string,\n\t\tPaymentReasonCd as string,\n\t\tDunningBlockCd as string,\n\t\tDunningCd as string,\n\t\tDunningLevCd as string,\n\t\tLocalCurrCd as string,\n\t\tLocalCurrDebitAmt as string,\n\t\tLocalCurrCreditAmt as string,\n\t\tLocalCurrSignedAmt as string,\n\t\tLocalCurrCashDiscountAmt as string,\n\t\tCurrencyCd as string,\n\t\tDocCurrDebitAmt as string,\n\t\tDocCurrCreditAmt as string,\n\t\tSignedForeignAmt as string,\n\t\tEligibleDocDiscountAmt as string,\n\t\tDocDiscountAmt as string,\n\t\tChartOfAccountsCd as string,\n\t\tGLAccountCd as string,\n\t\tGLAccountNum as string,\n\t\tBranchAccountnum as string,\n\t\tClearingDocnum as string,\n\t\tReferDocNum as string,\n\t\tTxnInvoicenum as string,\n\t\tInvoiceFiscalyearNum as string,\n\t\tInvoicelineItemCd as string,\n\t\tSalesDistrDocNum as string,\n\t\tBusinessPartnerRefKey1Cd as string,\n\t\tBusinessPartnerRefKey2Cd as string,\n\t\tLineItemRefKeyCd as string,\n\t\tItemTxt as string,\n\t\tNegativePostingInd as string,\n\t\tDocArchiveInd as string,\n\t\tSplGLTransactiontypeCd as string,\n\t\tRecordModeCd as string,\n\t\tAssignmentNum as string,\n\t\tReferenceTxnAmt as string,\n\t\tReferenceKeyCd as string,\n\t\tDocstatusCd as string,\n\t\tLocalCurrAmt as string,\n\t\tLocalCurr2Amt as string,\n\t\tLocalCurr3Amt as string,\n\t\tFiscalYearNum as string,\n\t\tSecondCurrencyKeyCd as string,\n\t\tThirdCurrencyKeyCd as string,\n\t\tFiscalPeriodDt as string,\n\t\tWBSElementCd as string,\n\t\tDebitCreditInd as string,\n\t\tDocCurrencyAmt as string,\n\t\tProfitCenterCd as string,\n\t\tInternalDocHeaderKey as string,\n\t\tODQChangeModeCd as string,\n\t\tODQEntityCntrCd as string,\n\t\tFileCreatedDtTm as string,\n\t\tFileName as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tIsReversedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_Exploration+$Folder_EBS+'/'+$inputfile_0FI_AR_4+$file_Aging_expl_extract+$file_extension_tsv)]) ~> AgingExplExtract\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_cntl+$filename_cntl+$file_extension_tsv)]) ~> sourcecntl\nFilter2 window(over(Payer),\n\tdesc(SoldTo, false),\n\tr = rowNumber()) ~> Window1\nWindow1 filter(r==1) ~> Filter1\nFilter1 select(mapColumn(\n\t\tPayer,\n\t\tSoldTo\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SoldToPayerLookup\nCoalesceSoldToPayerLookup filter(countofsoldto=='1') ~> Filter2\nCoalesceCustomer select(mapColumn(\n\t\tCustomerKey,\n\t\tCustomerNum,\n\t\tDunningProcedureCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 window(over(CustomerNum),\n\tdesc(CustomerKey, false),\n\tr = rowNumber()) ~> Window2\nWindow2 filter(r==1) ~> Filter3\nFilter3 select(mapColumn(\n\t\tCustomerKey,\n\t\tCustomerNum,\n\t\tDunningProcedureCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SoldtoCust\nCoalesceBIllingSoldToLookup window(over(BillingDocNum),\n\tdesc(SoldTo, false),\n\tr = rowNumber()) ~> Window3\nWindow3 filter(r==1) ~> Filter4\nFilter4 select(mapColumn(\n\t\tBillingDocNum,\n\t\tSoldTo\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> BillingSoldToLookup\nCoalesceCustomerHier select(mapColumn(\n\t\tBaseCustomerHierKey,\n\t\tCustomerNum\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2 window(over(CustomerNum),\n\tdesc(BaseCustomerHierKey, false),\n\tr = rowNumber()) ~> Window4\nWindow4 filter(r==1) ~> Filter5\nFilter5 select(mapColumn(\n\t\tCustomerNum,\n\t\tBaseCustomerHierKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SoldtoCustHier\nCoalesceExtCustomerXREF select(mapColumn(\n\t\tLegacyCustomerCd = CustomerCd,\n\t\tEBSCustNum,\n\t\tLastUpdtDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nSelect3 window(over(EBSCustNum),\n\tdesc(toTimestamp(LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'), false),\n\tr = rowNumber()) ~> Window5\nFilter7 select(mapColumn(\n\t\tEBSCustNum,\n\t\tLegacyCustomerCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> customerxref\nCoalesceBillingDocumentData select(mapColumn(\n\t\tSalesDistDocumentNum,\n\t\tBillToParty1Num,\n\t\tLastUpdtDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select4\nSelect4 window(over(SalesDistDocumentNum),\n\tdesc(toTimestamp(LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'), false),\n\tr = rowNumber()) ~> Window6\nWindow6 filter(r==1) ~> Filter6\nFilter6 select(mapColumn(\n\t\tSalesDistDocumentNum,\n\t\tBillToParty1Num\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> BillingDocumentItemData\nWindow5 filter(r==1) ~> Filter7\nDerivedColumn11 derive(RunDt = case(toTimestamp(toString(currentTimestamp(),'HH:mm:ss'),'HH:mm:ss')>=toTimestamp('00:00:00','HH:mm:ss')\n&&toTimestamp(toString(currentTimestamp(),'HH:mm:ss'),'HH:mm:ss')<=toTimestamp('05:00:00','HH:mm:ss'),\n RunDt,\n  toString(addDays(toTimestamp(toString(currentTimestamp(),'MM/dd/yyyy'),'MM/dd/yyyy'),-1),'MM/dd/yyyy'))) ~> DerivedColumn1needtochange\nDerivedColumn1needtochange aggregate(groupBy(RunDt),\n\tdummy = count(1)) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tRunDt\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> GetRunDt\nGetRunDt, CoalesceManualRun join(1==1||isNull(RunDt)||isNull(Runon),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nJoin1 derive(Runon = case(Runon=='Enter Date', RunDt, Runon)) ~> DerivedColumn2\nDerivedColumn12 select(mapColumn(\n\t\tRunon\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> datefromfile\nDerivedColumn2 window(desc(toTimestamp(Runon,'MM/dd/yyyy'), false),\n\tr = rowNumber()) ~> Window7\nCoalesceAgingExplExtract derive(date = currentTimestamp()) ~> DerivedColumn3\nDerivedColumn3 window(over(CompanyCd,\n\t\tCustomerNum,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum),\n\tdesc(toLong(FileCreatedDtTm), false),\n\tr = denseRank()) ~> Window8\nWindow8 filter(r==1) ~> Filter8\nFilter8 select(mapColumn(\n\t\tDISequenceNum,\n\t\tDIOperationTypeCd,\n\t\tCompanyCd,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum,\n\t\tFIItemStatusCd,\n\t\tCustomerNum,\n\t\tCreditControlAreaCd,\n\t\tDunninAreaMeas,\n\t\tAccountTypeCd,\n\t\tGLInd,\n\t\tAccountingDocTypeCd,\n\t\tPostingKeyCd,\n\t\tFiscalYearVariantCd,\n\t\tDocDt,\n\t\tDocPostingDt,\n\t\tAccDocEnterDt,\n\t\tClearDt,\n\t\tLastDunnDt,\n\t\tPaymentDueDt,\n\t\tTerms1CashDiscountDueDt,\n\t\tTerms2CashDiscountDueDt,\n\t\tBaselineDueDtForDueDtCalc,\n\t\tFirstCashDiscDaysTm,\n\t\tSecondCashDiscDaysTm,\n\t\tNetPayTermsTm,\n\t\tCashDisc1Pct,\n\t\tCashDisc2Pct,\n\t\tCountrCd,\n\t\tPaymentMethodCd,\n\t\tPaymentKeyTermsCd,\n\t\tPayBlockKeyCd,\n\t\tPaymentReasonCd,\n\t\tDunningBlockCd,\n\t\tDunningCd,\n\t\tDunningLevCd,\n\t\tLocalCurrCd,\n\t\tLocalCurrDebitAmt,\n\t\tLocalCurrCreditAmt,\n\t\tLocalCurrSignedAmt,\n\t\tLocalCurrCashDiscountAmt,\n\t\tCurrencyCd,\n\t\tDocCurrDebitAmt,\n\t\tDocCurrCreditAmt,\n\t\tSignedForeignAmt,\n\t\tEligibleDocDiscountAmt,\n\t\tDocDiscountAmt,\n\t\tChartOfAccountsCd,\n\t\tGLAccountCd,\n\t\tGLAccountNum,\n\t\tBranchAccountnum,\n\t\tClearingDocnum,\n\t\tReferDocNum,\n\t\tTxnInvoicenum,\n\t\tInvoiceFiscalyearNum,\n\t\tInvoicelineItemCd,\n\t\tSalesDistrDocNum,\n\t\tBusinessPartnerRefKey1Cd,\n\t\tBusinessPartnerRefKey2Cd,\n\t\tLineItemRefKeyCd,\n\t\tItemTxt,\n\t\tNegativePostingInd,\n\t\tDocArchiveInd,\n\t\tSplGLTransactiontypeCd,\n\t\tRecordModeCd,\n\t\tAssignmentNum,\n\t\tReferenceTxnAmt,\n\t\tReferenceKeyCd,\n\t\tDocstatusCd,\n\t\tLocalCurrAmt,\n\t\tLocalCurr2Amt,\n\t\tLocalCurr3Amt,\n\t\tFiscalYearNum,\n\t\tSecondCurrencyKeyCd,\n\t\tThirdCurrencyKeyCd,\n\t\tFiscalPeriodDt,\n\t\tWBSElementCd,\n\t\tDebitCreditInd,\n\t\tDocCurrencyAmt,\n\t\tProfitCenterCd,\n\t\tInternalDocHeaderKey,\n\t\tODQChangeModeCd,\n\t\tODQEntityCntrCd,\n\t\tFileCreatedDtTm,\n\t\tFileName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tIsReversedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> AgingExplUniqueRecords\nAgingExplUniqueRecords derive(CompanyCd = trim(CompanyCd),\n\t\tCustomerNum = trim(CustomerNum),\n\t\tDocDt = case(isNull(DocDt),'19000101',DocDt),\n\t\tPaymentDueDt = case(isNull(PaymentDueDt),'19000101',PaymentDueDt),\n\t\tLocalCurrSignedAmt = toDecimal(case(isNull(LocalCurrSignedAmt)||LocalCurrSignedAmt=='', '0', LocalCurrSignedAmt),17,4),\n\t\tBranchAccountnum = case((isNull(trim(BranchAccountnum))|| trim(BranchAccountnum) == ''), '', trim(BranchAccountnum)),\n\t\tBillingDoc = case(\n    toLong(\n        case(\n            regexMatch(trim(AccountingDocNum), '^[0-9]+$') && trim(AccountingDocNum) != '',\n            trim(AccountingDocNum),\n            '0'\n        )) >= toLong('6000000000')\n        && \n     toLong(\n        case(\n            regexMatch(trim(AccountingDocNum), '^[0-9]+$') && trim(AccountingDocNum) != '',\n            trim(AccountingDocNum),\n            '0'\n        )) <= toLong('7999999999')\n        &&\nAccountingDocTypeCd != 'U1' && AccountingDocTypeCd != 'DZ',\ntrim(AccountingDocNum),\n\ncase(       \n    toLong(\n        case(\n            regexMatch(trim(AssignmentNum), '^[0-9]+$') && trim(AssignmentNum) != '',\n            trim(AssignmentNum),\n            '0'\n        )) >= toLong('6000000000')\n        && \n     toLong(\n        case(\n            regexMatch(trim(AssignmentNum), '^[0-9]+$') && trim(AssignmentNum) != '',\n            trim(AssignmentNum),\n            '0'\n        )) <= toLong('7999999999')\n        &&\nAccountingDocTypeCd != 'U1',\ntrim(AssignmentNum),\n\ncase(\n    AccountingDocTypeCd == 'U1', trim(SalesDistrDocNum),\n\n\ncase(\n    AccountingDocTypeCd != 'RV' && AccountingDocTypeCd != 'U1' && AccountingDocTypeCd != 'R1'\n    &&\n    toLong(\n        case(\n            regexMatch(trim(TxnInvoicenum), '^[0-9]+$') && trim(TxnInvoicenum) != '',\n            trim(TxnInvoicenum),\n            '0'\n        )) >=  toLong('6000000000')\n   &&\n    toLong(\n        case(\n            regexMatch(trim(TxnInvoicenum), '^[0-9]+$') && trim(TxnInvoicenum) != '',\n            trim(TxnInvoicenum),\n            '0'\n        )) <=  toLong('7999999999'),\n        trim(TxnInvoicenum),\n        trim(AccountingDocNum)\n))))) ~> DerivedColumn4\nDerivedColumn4 select(mapColumn(\n\t\tCompanyCd,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum,\n\t\tFIItemStatusCd,\n\t\tPayerCustomerNum = CustomerNum,\n\t\tCreditControlAreaCd,\n\t\tDunninAreaMeas,\n\t\tAccountTypeCd,\n\t\tGLInd,\n\t\tAccountingDocTypeCd,\n\t\tPostingKeyCd,\n\t\tFiscalYearVariantCd,\n\t\tDocDt,\n\t\tDocPostingDt,\n\t\tAccDocEnterDt,\n\t\tClearDt,\n\t\tLastDunnDt,\n\t\tPaymentDueDt,\n\t\tTerms1CashDiscountDueDt,\n\t\tTerms2CashDiscountDueDt,\n\t\tBaselineDueDtForDueDtCalc,\n\t\tFirstCashDiscDaysTm,\n\t\tSecondCashDiscDaysTm,\n\t\tNetPayTermsTm,\n\t\tCashDisc1Pct,\n\t\tCashDisc2Pct,\n\t\tCountrCd,\n\t\tPaymentMethodCd,\n\t\tPaymentKeyTermsCd,\n\t\tPayBlockKeyCd,\n\t\tPaymentReasonCd,\n\t\tDunningBlockCd,\n\t\tDunningCd,\n\t\tDunningLevCd,\n\t\tLocalCurrCd,\n\t\tLocalCurrDebitAmt,\n\t\tLocalCurrCreditAmt,\n\t\tLocalCurrSignedAmt,\n\t\tLocalCurrCashDiscountAmt,\n\t\tCurrencyCd,\n\t\tDocCurrDebitAmt,\n\t\tDocCurrCreditAmt,\n\t\tSignedForeignAmt,\n\t\tEligibleDocDiscountAmt,\n\t\tDocDiscountAmt,\n\t\tChartOfAccountsCd,\n\t\tGLAccountCd,\n\t\tGLAccountNum,\n\t\tBranchAccountnum,\n\t\tClearingDocnum,\n\t\tReferDocNum,\n\t\tTxnInvoicenum,\n\t\tInvoiceFiscalyearNum,\n\t\tInvoicelineItemCd,\n\t\tSalesDistrDocNum,\n\t\tBusinessPartnerRefKey1Cd,\n\t\tBusinessPartnerRefKey2Cd,\n\t\tLineItemRefKeyCd,\n\t\tItemTxt,\n\t\tNegativePostingInd,\n\t\tDocArchiveInd,\n\t\tSplGLTransactiontypeCd,\n\t\tRecordModeCd,\n\t\tAssignmentNum,\n\t\tReferenceTxnAmt,\n\t\tReferenceKeyCd,\n\t\tDocstatusCd,\n\t\tLocalCurrAmt,\n\t\tLocalCurr2Amt,\n\t\tLocalCurr3Amt,\n\t\tFiscalYearNum,\n\t\tSecondCurrencyKeyCd,\n\t\tThirdCurrencyKeyCd,\n\t\tFiscalPeriodDt,\n\t\tWBSElementCd,\n\t\tDebitCreditInd,\n\t\tDocCurrencyAmt,\n\t\tProfitCenterCd,\n\t\tInternalDocHeaderKey,\n\t\tODQChangeModeCd,\n\t\tODQEntityCntrCd,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsReversedInd,\n\t\tBillingDoc\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> AgingExplExtract1\nFilter12 select(mapColumn(\n\t\teach(match(true()))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> a1\na1, BillingSoldToLookup join(BillingDoc == BillingDocNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join2\nJoin2, SoldToPayerLookup join(PayerCustomerNum == Payer,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join3\nJoin3, BillingDocumentItemData join(SalesDistrDocNum == SalesDistDocumentNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4, BillingDocumentItemDataNon join(BillingDoc == BillingDocumentItemDataNon@SalesDistDocumentNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join5\nJoin6 derive(SoldToCustomer = case(BranchAccountnum!='', BranchAccountnum,\n case(BranchAccountnum==''&&BillingDoc!='', BillingSoldToLookup@SoldTo, \n case(BranchAccountnum==''&&BillingDoc=='', SoldToPayerLookup@SoldTo, ''))),\n\t\tPastDue1To30DaysAmt = case(toDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)>=1&&\ntoDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)<=30,LocalCurrSignedAmt,toDecimal(0,17,4)),\n\t\tPastDue31To60DaysAmt = case(toDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)>=31&&\ntoDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)<=60,LocalCurrSignedAmt,toDecimal(0,17,4)),\n\t\tPastDue61To90DaysAmt = case(toDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)>=61&&\ntoDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)<=90,LocalCurrSignedAmt,toDecimal(0,17,4)),\n\t\tPastDue91PlusDaysAmt = case(toDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)>=91,LocalCurrSignedAmt,toDecimal(0,17,4)),\n\t\tCurrentARAmt = case(toDecimal(toDecimal(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'),17,4)/86400000,17,4)<=0,LocalCurrSignedAmt,toDecimal(0,17,4)),\n\t\tAgingDate = toString(Runon, 'MM/dd/yyyy'),\n\t\tURLTxt = '',\n\t\tOwner = '',\n\t\tBillToCustomer = case(AccountingDocTypeCd=='U1', BillingDocumentItemData@BillToParty1Num, \ncase(AccountingDocTypeCd!='U1'&&!isNull(BillingDoc)&&BillingDoc!='', BillingDocumentItemDataNon@BillToParty1Num, toString(null()))),\n\t\tAge = toLong(toLong(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(PaymentDueDt,'yyyyMMdd'))/86400000),\n\t\t{[DSO]} = toLong(toLong(toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd')-\ntoTimestamp(DocDt,'yyyyMMdd'))/86400000)) ~> DerivedColumn\nJoin5, datefromfile join(1==1||isNull(CompanyCd)||isNull(Runon),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join6\nFilter6 select(mapColumn(\n\t\tSalesDistDocumentNum,\n\t\tBillToParty1Num\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> BillingDocumentItemDataNon\nDerivedColumn select(mapColumn(\n\t\tCompanyCd,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum,\n\t\tFIItemStatusCd,\n\t\tPayerCustomerNum,\n\t\tCreditControlAreaCd,\n\t\tDunninAreaMeas,\n\t\tAccountTypeCd,\n\t\tGLInd,\n\t\tAccountingDocTypeCd,\n\t\tPostingKeyCd,\n\t\tFiscalYearVariantCd,\n\t\tDocDt,\n\t\tDocPostingDt,\n\t\tAccDocEnterDt,\n\t\tClearDt,\n\t\tLastDunnDt,\n\t\tPaymentDueDt,\n\t\tTerms1CashDiscountDueDt,\n\t\tTerms2CashDiscountDueDt,\n\t\tBaselineDueDtForDueDtCalc,\n\t\tFirstCashDiscDaysTm,\n\t\tSecondCashDiscDaysTm,\n\t\tNetPayTermsTm,\n\t\tCashDisc1Pct,\n\t\tCashDisc2Pct,\n\t\tCountrCd,\n\t\tPaymentMethodCd,\n\t\tPaymentKeyTermsCd,\n\t\tPayBlockKeyCd,\n\t\tPaymentReasonCd,\n\t\tDunningBlockCd,\n\t\tDunningCd,\n\t\tDunningLevCd,\n\t\tLocalCurrCd,\n\t\tLocalCurrDebitAmt,\n\t\tLocalCurrCreditAmt,\n\t\tLocalCurrSignedAmt,\n\t\tLocalCurrCashDiscountAmt,\n\t\tCurrencyCd,\n\t\tDocCurrDebitAmt,\n\t\tDocCurrCreditAmt,\n\t\tSignedForeignAmt,\n\t\tEligibleDocDiscountAmt,\n\t\tDocDiscountAmt,\n\t\tChartOfAccountsCd,\n\t\tGLAccountCd,\n\t\tGLAccountNum,\n\t\tBranchAccountnum,\n\t\tClearingDocnum,\n\t\tReferDocNum,\n\t\tTxnInvoicenum,\n\t\tInvoiceFiscalyearNum,\n\t\tInvoicelineItemCd,\n\t\tSalesDistrDocNum,\n\t\tBusinessPartnerRefKey1Cd,\n\t\tBusinessPartnerRefKey2Cd,\n\t\tLineItemRefKeyCd,\n\t\tItemTxt,\n\t\tNegativePostingInd,\n\t\tDocArchiveInd,\n\t\tSplGLTransactiontypeCd,\n\t\tRecordModeCd,\n\t\tAssignmentNum,\n\t\tReferenceTxnAmt,\n\t\tReferenceKeyCd,\n\t\tDocstatusCd,\n\t\tLocalCurrAmt,\n\t\tLocalCurr2Amt,\n\t\tLocalCurr3Amt,\n\t\tFiscalYearNum,\n\t\tSecondCurrencyKeyCd,\n\t\tThirdCurrencyKeyCd,\n\t\tFiscalPeriodDt,\n\t\tWBSElementCd,\n\t\tDebitCreditInd,\n\t\tDocCurrencyAmt,\n\t\tProfitCenterCd,\n\t\tInternalDocHeaderKey,\n\t\tODQChangeModeCd,\n\t\tODQEntityCntrCd,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsReversedInd,\n\t\tBillingDoc,\n\t\tSoldToCustomer,\n\t\tPastDue1To30DaysAmt,\n\t\tPastDue31To60DaysAmt,\n\t\tPastDue61To90DaysAmt,\n\t\tPastDue91PlusDaysAmt,\n\t\tCurrentARAmt,\n\t\tAgingDate,\n\t\tURLTxt,\n\t\tOwner,\n\t\tBillToCustomer,\n\t\tAge,\n\t\t{[DSO]}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> LogicPopulation\nFilter3 select(mapColumn(\n\t\tCustomerKey,\n\t\tCustomerNum,\n\t\tDunningProcedureCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> BillTo\nFilter3 select(mapColumn(\n\t\tCustomerKey,\n\t\tCustomerNum,\n\t\tDunningProcedureCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> PayerCust\nLogicPopulation, SoldtoCust join(SoldToCustomer == CustomerNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join7\nJoin7, PayerCust join(PayerCustomerNum == PayerCust@CustomerNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join8\nFilter5 select(mapColumn(\n\t\tBaseCustomerHierKey,\n\t\tCustomerNum\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> PayerCustHier\nJoin8, SoldtoCustHier join(SoldToCustomer == SoldtoCustHier@CustomerNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join9\nJoin9, PayerCustHier join(PayerCustomerNum == PayerCustHier@CustomerNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join10\nJoin10, customerxref join(SoldToCustomer == EBSCustNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join11\nJoin11, BillTo join(BillToCustomer == BillTo@CustomerNum,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join12\nJoin12 derive(SoldToCustomerKey = case(isNull(SoldToCustomer)||SoldToCustomer=='', -1, \ncase(isNull(SoldtoCust@CustomerKey)||toString(SoldtoCust@CustomerKey)=='', -2, toInteger(SoldtoCust@CustomerKey))),\n\t\tPayerCustomerKey = case(isNull(PayerCustomerNum)||PayerCustomerNum=='', -1, \ncase(isNull(PayerCust@CustomerKey)||toString(PayerCust@CustomerKey)=='', -2, toInteger(PayerCust@CustomerKey))),\n\t\tBillToCustomerKey = case(isNull(BillToCustomer)||BillToCustomer=='', -1, \ncase(isNull(BillTo@CustomerKey)||toString(BillTo@CustomerKey)=='', -2, toInteger(BillTo@CustomerKey))),\n\t\tSoldToCustomerHierarchyKey = case(isNull(SoldToCustomer)||SoldToCustomer=='', -1, \ncase(isNull(SoldtoCustHier@BaseCustomerHierKey)||toString(SoldtoCustHier@BaseCustomerHierKey)=='', -2, toInteger(SoldtoCustHier@BaseCustomerHierKey))),\n\t\tPayerCustomerHierarchyKey = case(isNull(PayerCustomerNum)||PayerCustomerNum=='', -1, \ncase(isNull(PayerCustHier@BaseCustomerHierKey)||toString(PayerCustHier@BaseCustomerHierKey)=='', -2, toInteger(PayerCustHier@BaseCustomerHierKey))),\n\t\tCAMAlignmentKey = case(SoldToCustomer==''||isNull(SoldToCustomer), '-1', SoldToCustomer),\n\t\tCurrentAlignmentKey = case(SoldToCustomer==''||isNull(SoldToCustomer), '-1', SoldToCustomer),\n\t\tPreviousAlignmentKey = case(SoldToCustomer==''||isNull(SoldToCustomer), '-1', SoldToCustomer),\n\t\tAgreementKey = case(SoldToCustomer==''||isNull(SoldToCustomer), '-1', SoldToCustomer),\n\t\tLegacySoldToCustomer = case(AccountingDocTypeCd=='U1', LegacyCustomerCd, ''),\n\t\tPastDue1To30DaysAmt = toString(PastDue1To30DaysAmt),\n\t\tPastDue31To60DaysAmt = toString(PastDue31To60DaysAmt),\n\t\tPastDue61To90DaysAmt = toString(PastDue61To90DaysAmt),\n\t\tPastDue91PlusDaysAmt = toString(PastDue91PlusDaysAmt),\n\t\tCurrentARAmt = toString(CurrentARAmt),\n\t\tPastDueARAmt = toString(PastDue1To30DaysAmt+PastDue31To60DaysAmt+PastDue61To90DaysAmt+PastDue91PlusDaysAmt),\n\t\tTotalARAmt = toString(PastDue1To30DaysAmt+PastDue31To60DaysAmt+PastDue61To90DaysAmt+PastDue91PlusDaysAmt+CurrentARAmt),\n\t\tJobId = $jobid,\n\t\tCreatedDttm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDttm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> DerivedColumn5\nDerivedColumn5 select(mapColumn(\n\t\tCompanyCd,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum,\n\t\tFIItemStatusCd,\n\t\tPayerCustomerNum,\n\t\tCreditControlAreaCd,\n\t\tDunninAreaMeas,\n\t\tAccountTypeCd,\n\t\tGLInd,\n\t\tAccountingDocTypeCd,\n\t\tPostingKeyCd,\n\t\tFiscalYearVariantCd,\n\t\tDocDt,\n\t\tDocPostingDt,\n\t\tAccDocEnterDt,\n\t\tClearDt,\n\t\tLastDunnDt,\n\t\tPaymentDueDt,\n\t\tTerms1CashDiscountDueDt,\n\t\tTerms2CashDiscountDueDt,\n\t\tBaselineDueDtForDueDtCalc,\n\t\tFirstCashDiscDaysTm,\n\t\tSecondCashDiscDaysTm,\n\t\tNetPayTermsTm,\n\t\tCashDisc1Pct,\n\t\tCashDisc2Pct,\n\t\tCountrCd,\n\t\tPaymentMethodCd,\n\t\tPaymentKeyTermsCd,\n\t\tPayBlockKeyCd,\n\t\tPaymentReasonCd,\n\t\tDunningBlockCd,\n\t\tDunningCd,\n\t\tDunningLevCd,\n\t\tLocalCurrCd,\n\t\tLocalCurrDebitAmt,\n\t\tLocalCurrCreditAmt,\n\t\tLocalCurrSignedAmt,\n\t\tLocalCurrCashDiscountAmt,\n\t\tCurrencyCd,\n\t\tDocCurrDebitAmt,\n\t\tDocCurrCreditAmt,\n\t\tSignedForeignAmt,\n\t\tEligibleDocDiscountAmt,\n\t\tDocDiscountAmt,\n\t\tChartOfAccountsCd,\n\t\tGLAccountCd,\n\t\tGLAccountNum,\n\t\tBranchAccountnum,\n\t\tClearingDocnum,\n\t\tReferDocNum,\n\t\tTxnInvoicenum,\n\t\tInvoiceFiscalyearNum,\n\t\tInvoicelineItemCd,\n\t\tSalesDistrDocNum,\n\t\tBusinessPartnerRefKey1Cd,\n\t\tBusinessPartnerRefKey2Cd,\n\t\tLineItemRefKeyCd,\n\t\tItemTxt,\n\t\tNegativePostingInd,\n\t\tDocArchiveInd,\n\t\tSplGLTransactiontypeCd,\n\t\tRecordModeCd,\n\t\tAssignmentNum,\n\t\tReferenceTxnAmt,\n\t\tReferenceKeyCd,\n\t\tDocstatusCd,\n\t\tLocalCurrAmt,\n\t\tLocalCurr2Amt,\n\t\tLocalCurr3Amt,\n\t\tFiscalYearNum,\n\t\tSecondCurrencyKeyCd,\n\t\tThirdCurrencyKeyCd,\n\t\tFiscalPeriodDt,\n\t\tWBSElementCd,\n\t\tDebitCreditInd,\n\t\tDocCurrencyAmt,\n\t\tProfitCenterCd,\n\t\tInternalDocHeaderKey,\n\t\tODQChangeModeCd,\n\t\tODQEntityCntrCd,\n\t\tJobId,\n\t\tFileName,\n\t\tIsReversedInd,\n\t\tBillingDoc,\n\t\tSoldToCustomer,\n\t\tPastDue1To30DaysAmt,\n\t\tPastDue31To60DaysAmt,\n\t\tPastDue61To90DaysAmt,\n\t\tPastDue91PlusDaysAmt,\n\t\tCurrentARAmt,\n\t\tAgingDate,\n\t\tURLTxt,\n\t\tOwner,\n\t\tBillToCustomer,\n\t\tAge,\n\t\t{[DSO]},\n\t\tDunningProcedureCd = PayerCust@DunningProcedureCd,\n\t\tEBSCustNum,\n\t\tLegacyCustomerCd,\n\t\tSoldToCustomerKey,\n\t\tPayerCustomerKey,\n\t\tBillToCustomerKey,\n\t\tSoldToCustomerHierarchyKey,\n\t\tPayerCustomerHierarchyKey,\n\t\tCAMAlignmentKey,\n\t\tCurrentAlignmentKey,\n\t\tPreviousAlignmentKey,\n\t\tAgreementKey,\n\t\tLegacySoldToCustomer,\n\t\tPastDueARAmt,\n\t\tTotalARAmt,\n\t\tCreatedDttm = DerivedColumn5@CreatedDttm,\n\t\tLastUpdtDttm = DerivedColumn5@LastUpdtDttm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> FinalDailySet\nCoalesceSourceCntl select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getoldcntlvalue\nCoalesceSourceCntl derive(LastRunDate = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tStatus = 'S',\n\t\tSubjectArea = $SubjectAreacntl) ~> DerivedColumn6\nDerivedColumn6 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetoldcntlvalue, getnewcntlvalue union(byName: true)~> updatecntl\nCoalesceSourceCntl derive(Runon = 'Enter Date') ~> DerivedColumn7\nAggregate3 select(mapColumn(\n\t\tRunon\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Defaultlvalue\nFinalDailySet, datefromfile join(1==1||isNull(CompanyCd)||isNull(Runon),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join13\nJoin13 filter(toTimestamp(DocDt,'yyyyMMdd')<=toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd') &&\n(ClearDt ==''||toTimestamp(case(ClearDt=='', '19000101', ClearDt),'yyyyMMdd')>toTimestamp(toString(Runon,'yyyyMMdd'),'yyyyMMdd'))) ~> Filter10\nFilter10 derive(InvoiceNum = case(AccountingDocTypeCd=='U1', trim(ReferDocNum), trim(AccountingDocNum))) ~> DerivedColumn8\nDerivedColumn8 select(mapColumn(\n\t\tCompanyCd,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum,\n\t\tFIItemStatusCd,\n\t\tPayer = PayerCustomerNum,\n\t\tCreditControlAreaCd,\n\t\tDunninAreaMeas,\n\t\tAccountTypeCd,\n\t\tGLInd,\n\t\tAccountingDocTypeCd,\n\t\tPostingKeyCd,\n\t\tFiscalVariantCd = FiscalYearVariantCd,\n\t\tDocDt,\n\t\tDocPostingDt,\n\t\tAccDocEnterDt,\n\t\tClearDt,\n\t\tLastDunnDt,\n\t\tNetDueDt = PaymentDueDt,\n\t\tPaymentDtToAvailDiscountI = Terms1CashDiscountDueDt,\n\t\tPaymentDtToAvailDiscountII = Terms2CashDiscountDueDt,\n\t\tBaselineDtForDueDtCalculation = BaselineDueDtForDueDtCalc,\n\t\tDaysToPayWithinToAvailDiscountI = FirstCashDiscDaysTm,\n\t\tDaysToPayWithinToAvailDiscountII = SecondCashDiscDaysTm,\n\t\tNetPayTermsTm,\n\t\tCashDiscountPctI = CashDisc1Pct,\n\t\tCashDiscountPctII = CashDisc2Pct,\n\t\tCountrCd,\n\t\tPaymentMethodCd,\n\t\tPaymentTermsCode = PaymentKeyTermsCd,\n\t\tPaymentBlockKey = PayBlockKeyCd,\n\t\tReasonCodes = PaymentReasonCd,\n\t\tDunningBlock = DunningBlockCd,\n\t\tDunningCd,\n\t\tDunningLevCd,\n\t\tLocalCurrCd,\n\t\tLocalCurrDebitAmt,\n\t\tLocalCurrCreditAmt,\n\t\tLocalCurrSignedAmt,\n\t\tDiscountTakenAndHonoured = LocalCurrCashDiscountAmt,\n\t\tCurrencyCd,\n\t\tDocCurrDebitAmt,\n\t\tDocCurrCreditAmt,\n\t\tSignedForeignAmt,\n\t\tEligibleDocDiscountAmt,\n\t\tDocDiscountAmt,\n\t\tChartOfAccountsCd,\n\t\tGLAccountCd,\n\t\tGLAccountNum,\n\t\tBranchAccountnum,\n\t\tClearingDocnum,\n\t\tReferDocNum,\n\t\tTxnInvoicenum,\n\t\tInvoiceFiscalyearNum,\n\t\tInvoicelineItemCd,\n\t\tSalesDistrDocNum,\n\t\tBusinessPartnerRefKey1Cd,\n\t\tBusinessPartnerRefKey2Cd,\n\t\tLineItemRefKeyCd,\n\t\tItemTxt,\n\t\tNegativePostingInd,\n\t\tDocArchiveInd,\n\t\tSplGLTransactiontypeCd,\n\t\tRecordModeCd,\n\t\tAssignmentNum,\n\t\tReferenceTxnAmt,\n\t\tReferenceKeyCd,\n\t\tDocstatusCd,\n\t\tLocalCurrAmt,\n\t\tAmountInSecondLocalCurrency = LocalCurr2Amt,\n\t\tAmountInThirdLocalCurrency = LocalCurr3Amt,\n\t\tFiscalYearNum,\n\t\tSecondCurrencyKeyCd,\n\t\tThirdCurrencyKeyCd,\n\t\tFiscalPeriodDt,\n\t\tWBSElementCd,\n\t\tDebitCreditInd,\n\t\tDocCurrencyAmt,\n\t\tProfitCenterCd,\n\t\tInternalDocHeaderKey,\n\t\tODQChangeModeCd,\n\t\tODQEntityCntrCd,\n\t\tJobId,\n\t\tFileName,\n\t\tIsReversedInd,\n\t\tBillingDoc,\n\t\tSoldToCustomer,\n\t\tPastDue1To30DaysAmt,\n\t\tPastDue31To60DaysAmt,\n\t\tPastDue61To90DaysAmt,\n\t\tPastDue91PlusDaysAmt,\n\t\tCurrentARAmt,\n\t\tAgingDate,\n\t\tURLTxt,\n\t\tOwner,\n\t\tBillToCustomer,\n\t\tAge,\n\t\t{[DSO]},\n\t\tDunningProcedureCd,\n\t\tEBSCustNum,\n\t\tLegacyCustomerCd,\n\t\tSoldToCustomerKey,\n\t\tPayerCustomerKey,\n\t\tBillToCustomerKey,\n\t\tSoldToCustomerHierarchyKey,\n\t\tPayerCustomerHierarchyKey,\n\t\tCAMAlignmentKey,\n\t\tCurrentAlignmentKey,\n\t\tPreviousAlignmentKey,\n\t\tAgreementKey,\n\t\tLegacySoldToCustomer,\n\t\tPastDueARAmt,\n\t\tTotalARAmt,\n\t\tCreatedDttm,\n\t\tLastUpdtDttm,\n\t\tInvoiceNum\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> OpenSevendaysDataSet\nOpenSevendaysDataSet derive(forencryption = case(\n    AccountingDocTypeCd == 'U1' && like(CompanyCd, 'US%'),\n    concat('custnbr=29a8dc05-dd09-4a14-975c-ff29f0d418f0&method=getMyBills&acctnumber=', iifNull(SoldToCustomer,''), '&invoice0=009',substring(DocDt,5,2),substring(DocDt,1,4),InvoiceNum),\ncase(\n    AccountingDocTypeCd != 'U1' && like(CompanyCd, 'US%'),\n    concat('custnbr=29a8dc05-dd09-4a14-975c-ff29f0d418f0&method=getMyBills&acctnumber=',iifNull(BillToCustomer,''), '&invoice0=', InvoiceNum), \n\ncase(\n    AccountingDocTypeCd != 'U1' && like(CompanyCd, 'CA%'),\n    concat('custnbr=29a8dc05-dd09-4a14-975c-ff29f0d418f0&method=getMyBills&acctnumber=',iifNull(Payer,''), '&invoice0=', InvoiceNum), ''\n)\n)\n),\n\t\tTMvsCAMOwnership = case(isNull(DunningProcedureCd)||DunningProcedureCd=='', 'CAM Ownership', 'TM Ownership')) ~> DerivedColumn9\nDerivedColumn13 select(mapColumn(\n\t\tAgingDate,\n\t\tSoldToCustomerKey,\n\t\tPayerCustomerKey,\n\t\tBillToCustomerKey,\n\t\tSoldToCustomerHierarchyKey,\n\t\tPayerCustomerHierarchyKey,\n\t\tCAMAlignmentKey,\n\t\tCurrentAlignmentKey,\n\t\tPreviousAlignmentKey,\n\t\tAgreementKey,\n\t\tCompanyCd,\n\t\tFiscalYearDt,\n\t\tAccountingDocNum,\n\t\tLineItemNum,\n\t\tSubItemnum,\n\t\tFIItemStatusCd,\n\t\tPayer,\n\t\tTMvsCAMOwnership,\n\t\tCreditControlAreaCd,\n\t\tDunninAreaMeas,\n\t\tAccountTypeCd,\n\t\tGLInd,\n\t\tAccountingDocTypeCd,\n\t\tPostingKeyCd,\n\t\tFiscalVariantCd,\n\t\tDocDt,\n\t\tDocPostingDt,\n\t\tAccDocEnterDt,\n\t\tClearDt,\n\t\tLastDunnDt,\n\t\tNetDueDt,\n\t\tPaymentDtToAvailDiscountI,\n\t\tPaymentDtToAvailDiscountII,\n\t\tBaselineDtForDueDtCalculation,\n\t\tDaysToPayWithinToAvailDiscountI,\n\t\tDaysToPayWithinToAvailDiscountII,\n\t\tNetPayTermsTm,\n\t\tCashDiscountPctI,\n\t\tCashDiscountPctII,\n\t\tCountrCd,\n\t\tPaymentMethodCd,\n\t\tPaymentTermsCode,\n\t\tPaymentBlockKey,\n\t\tReasonCodes,\n\t\tDunningBlock,\n\t\tDunningCd,\n\t\tDunningLevCd,\n\t\tLocalCurrCd,\n\t\tLocalCurrDebitAmt,\n\t\tLocalCurrCreditAmt,\n\t\tLocalCurrSignedAmt,\n\t\tDiscountTakenAndHonoured,\n\t\tCurrencyCd,\n\t\tDocCurrDebitAmt,\n\t\tDocCurrCreditAmt,\n\t\tSignedForeignAmt,\n\t\tEligibleDocDiscountAmt,\n\t\tDocDiscountAmt,\n\t\tChartOfAccountsCd,\n\t\tGLAccountCd,\n\t\tGLAccountNum,\n\t\tBranchAccountnum,\n\t\tClearingDocnum,\n\t\tReferDocNum,\n\t\tTxnInvoicenum,\n\t\tInvoiceFiscalyearNum,\n\t\tInvoicelineItemCd,\n\t\tSalesDistrDocNum,\n\t\tBusinessPartnerRefKey1Cd,\n\t\tBusinessPartnerRefKey2Cd,\n\t\tLineItemRefKeyCd,\n\t\tItemTxt,\n\t\tNegativePostingInd,\n\t\tDocArchiveInd,\n\t\tSplGLTransactiontypeCd,\n\t\tRecordModeCd,\n\t\tAssignmentNum,\n\t\tReferenceTxnAmt,\n\t\tReferenceKeyCd,\n\t\tDocstatusCd,\n\t\tLocalCurrAmt,\n\t\tAmountInSecondLocalCurrency,\n\t\tAmountInThirdLocalCurrency,\n\t\tFiscalYearNum,\n\t\tSecondCurrencyKeyCd,\n\t\tThirdCurrencyKeyCd,\n\t\tFiscalPeriodDt,\n\t\tWBSElementCd,\n\t\tDebitCreditInd,\n\t\tDocCurrencyAmt,\n\t\tProfitCenterCd,\n\t\tInternalDocHeaderKey,\n\t\tODQChangeModeCd,\n\t\tODQEntityCntrCd,\n\t\tIsReversedInd,\n\t\tBillingDoc,\n\t\tInvoiceNum,\n\t\tSoldToCustomer,\n\t\tDunningProcedureCd,\n\t\tLegacySoldToCustomer,\n\t\tPastDue1To30DaysAmt,\n\t\tPastDue31To60DaysAmt,\n\t\tPastDue61To90DaysAmt,\n\t\tPastDue91PlusDaysAmt,\n\t\tCurrentARAmt,\n\t\tPastDueARAmt,\n\t\tTotalARAmt,\n\t\tURLTxt,\n\t\tOwner,\n\t\tBillToCustomer,\n\t\tAge,\n\t\tDSO = {[DSO]},\n\t\tJobId,\n\t\tFileName,\n\t\tCreatedDttm,\n\t\tLastUpdtDttm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> OpenSevendaysDataSet2\nOpenSevendaysDataSet2 sort(desc(AgingDate, false)) ~> Sort1\nDerivedColumn7 aggregate(groupBy(Runon),\n\tdunny = count(1)) ~> Aggregate3\nCoalesceManualRun derive(RunDt = toString(currentTimestamp(), 'MM/dd/yyyy')) ~> DerivedColumn11\nWindow7 filter(r==1) ~> Filter11\nFilter11 derive(Runon = toTimestamp(Runon,'MM/dd/yyyy')) ~> DerivedColumn12\nManualRun derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceManualRun\nSourceSoldToPayerLookup derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceSoldToPayerLookup\nSourceBillingSoldToLookup derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceBIllingSoldToLookup\nSourceCustomerhier derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceCustomerHier\nSourceExtCustomerxref derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceExtCustomerXREF\nSourceBillingDocumentItemData derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceBillingDocumentData\nAgingExplExtract derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceAgingExplExtract\nSourceCustomer derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceCustomer\nsourcecntl derive(each(match(true()), $$ = coalesce($$,''))) ~> CoalesceSourceCntl\nDerivedColumn9 derive(URLTxt = concat('https://secure.billtrust.com/xmlwebservices/webServiceDispatch.php?custnbr=29a8dc05-dd09-4a14-975c-ff29f0d418f0&p=','|~|',forencryption),\n\t\tAgingDate = toDate(AgingDate,'MM/dd/yyyy')) ~> DerivedColumn13\nAgingExplExtract1 filter(like(CompanyCd, 'US%')||like(CompanyCd, 'CA%')||like(CompanyCd, 'GB%')||like(CompanyCd, 'IE%')) ~> Filter12\nupdatecntl sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($path_cntl+$filename_cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> sinkCntl\nDefaultlvalue sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($src_path_ManualRun+$filename_ManualRun+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 4,\n\tpartitionBy('hash', 1)) ~> sinkDefaultlvalue\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($target_path+$tsv_folder+$target_filename+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tpartitionBy('hash', 1)) ~> OutputTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($target_path+$parquet_folder+$target_filename+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tpartitionBy('hash', 1)) ~> OutputParquet"
+		}
+	}
+}

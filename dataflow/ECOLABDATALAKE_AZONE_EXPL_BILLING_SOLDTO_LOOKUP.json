@@ -1,0 +1,51 @@
+{
+	"name": "ECOLABDATALAKE_AZONE_EXPL_BILLING_SOLDTO_LOOKUP",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "MasterSetSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SourceToString"
+				},
+				{
+					"name": "MasterSetFilter"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "parameters{\n\tpath_2LIS_13_VDITM as string ('Exploration/EnterpriseBackbone/EBS/2LIS_13_VDITM/'),\n\tfile_2LIS_13_VDITM as string ('2LIS_13_VDITM'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tpath_BillingSoldTolookup as string ('Exploration/EnterpriseBackbone/O2C_Lookup/'),\n\tfile_BillingSoldTolookup as string ('BillingSoldTolookup')\n}\nsource(output(\n\t\tDISequenceNum as string,\n\t\tDIOperationTypeCd as string,\n\t\tCancelDataRecInd as string,\n\t\tSalesDistDocumentNum as string,\n\t\tBillingDocumentPostingStatusCd as string,\n\t\tIntercompanyBillingTotalStatusCd as string,\n\t\tOrderBillingStatusCd as string,\n\t\tBillingStatusCd as string,\n\t\tOverallBillingBlockStatusCd as string,\n\t\tOverallProcessingStatusCd as string,\n\t\tOverallBlockedStatusCd as string,\n\t\tSDDocumentItemNum as string,\n\t\tChangesOnDt as string,\n\t\tCompanyCd as string,\n\t\tSalesDistrictCd as string,\n\t\tBillingTypeCd as string,\n\t\tBillingDt as string,\n\t\tBillingCatCd as string,\n\t\tLocalCurCd as string,\n\t\tCustGrpCd as string,\n\t\tSoldToPartyCd as string,\n\t\tPayerCd as string,\n\t\tFIPostingsExchangeRate as string,\n\t\tExchangeRateTypeCd as string,\n\t\tStatisticsCurCd as string,\n\t\tSDDocumentCatg1Cd as string,\n\t\tSalesOrgCd as string,\n\t\tDistChannelCd as string,\n\t\tSDDocumentCurCd as string,\n\t\tFiscalYear as string,\n\t\tPostingPeriodTm as string,\n\t\tTransferToAccountingStatusCd as string,\n\t\tAssignNumCd as string,\n\t\tPromotionCd as string,\n\t\tSalesDocumentNum as string,\n\t\tSalesDocumentItemNum as string,\n\t\tRebateBasis1Val as string,\n\t\tVolumeRebateGrpCd as string,\n\t\tGrossWeightQty as string,\n\t\tBillingItemDocumentCurGrossVal as string,\n\t\tApplicationComponentCd as string,\n\t\tSAPBWTransactionKeyCd as string,\n\t\tBatchNum as string,\n\t\tIntArticleNum as string,\n\t\tRecordCreatedDt as string,\n\t\tBillingPlanRuleCd as string,\n\t\tServicesRenderedDt as string,\n\t\tActualInvoicedQty as string,\n\t\tStockkeepingUnitBillingQty as string,\n\t\tWeightUnitMeas as string,\n\t\tSalesDealCd as string,\n\t\tControllingAreaCd as string,\n\t\tCostCenterCd as string,\n\t\tPriceDeterminationExchangeRate as string,\n\t\tTranslationDt as string,\n\t\tCustGrp1Cd as string,\n\t\tCustGrp2Cd as string,\n\t\tCustGrp3Cd as string,\n\t\tCustGrp4Cd as string,\n\t\tCustGrp5Cd as string,\n\t\tPricingProcedureConditionSubtotal1Amt as string,\n\t\tPricingProcedureConditionSubtotal2Amt as string,\n\t\tPricingProcedureConditionSubtotal3Amt as string,\n\t\tPricingProcedureConditionSubtotal4Amt as string,\n\t\tPricingProcedureConditionSubtotal5Amt as string,\n\t\tPricingProcedureConditionSubtotal6Amt as string,\n\t\tStorageLocationCd as string,\n\t\tMatMgmtRequiredQty as string,\n\t\tMatGrpCd as string,\n\t\tMatNum as string,\n\t\tMatEnteredNum as string,\n\t\tBaseUoMMeas as string,\n\t\tMatGrp1Cd as string,\n\t\tMatGrp2Cd as string,\n\t\tMatGrp3Cd as string,\n\t\tMatGrp4Cd as string,\n\t\tMatGrp5Cd as string,\n\t\tDocumentCurTaxAmt as string,\n\t\tBillingItemNetVal as string,\n\t\tNetWeightQty as string,\n\t\tBillToPartyCd as string,\n\t\tShipToPartyCd as string,\n\t\tItemTypeCd as string,\n\t\tProductHierarchyCd as string,\n\t\tCommisionGrpCd as string,\n\t\tPricingExchangeRateDt as string,\n\t\tSalesDocumentItemCatgCd as string,\n\t\tSalesEmpCd as string,\n\t\tCashDiscountEligibleAmt as string,\n\t\tBaseUoMScaleQty as string,\n\t\tOrderHeaderDivisionCd as string,\n\t\tDivisionCd as string,\n\t\tStatisticsDt as string,\n\t\tStatisticsExchangeRate as string,\n\t\tSalesQtyToSKUConversionDenominatorQty as string,\n\t\tSalesQtyToSKUConversionNumeratorQty as string,\n\t\tStatisticsUpdateDt as string,\n\t\tReferenceDocumentNum as string,\n\t\tReferenceItemNum as string,\n\t\tSalesOfficeCd as string,\n\t\tSalesGrpCd as string,\n\t\tVolumeUnitMeas as string,\n\t\tVolumeQty as string,\n\t\tSalesUnitCd as string,\n\t\tShippingPointCd as string,\n\t\tDocumentCurCostAmt as string,\n\t\tPlantCd as string,\n\t\tDocumentCurGrossVal as string,\n\t\tSalesTypeCd as string,\n\t\tTotalQty1 as string,\n\t\tStatisticsUOMTotalQty as string,\n\t\tTotalQty2 as string,\n\t\tStatisticsUoMBillingQty as string,\n\t\tDepartureCountryCd as string,\n\t\tOrderNum as string,\n\t\tOrderReasonTxt as string,\n\t\tSalesDocumentReferenceCd as string,\n\t\tSDDocumentCatgCd as string,\n\t\tAccountingInd as string,\n\t\tPlantCatgCd as string,\n\t\tItemCreditPriceVal as string,\n\t\tAgreedDeliveryTm as string,\n\t\tPurchasingGrpCd as string,\n\t\tPurchasingOrgCd as string,\n\t\tPurchasingAreaCd as string,\n\t\tObjectCreatedByName as string,\n\t\tEntryTm as string,\n\t\tFunctionalAreaCd as string,\n\t\tBillingPlanItemCd as string,\n\t\tEntryTm1 as string,\n\t\tVendorMatNum as string,\n\t\tAccountAssignmentGrpCd as string,\n\t\tSalesOrderDestinationCountryCd as string,\n\t\tMatTypeCd as string,\n\t\tOpenBillingDocumentCreditVal as string,\n\t\tTotalOpenBillingDocumentCreditVal as string,\n\t\tOpenBillingDocumentQty as string,\n\t\tOpenDeliveryCreditVal as string,\n\t\tTotalOpenDeliveryCreditVal as string,\n\t\tSoldToParty1Cd as string,\n\t\tProfitCenterCd as string,\n\t\tItemReturnedInd as string,\n\t\tBaseUoMSalesQty as string,\n\t\tGenerallyIncompleteInd as string,\n\t\tEBSAgreeNum as string,\n\t\tEBSAgreeTypCd as string,\n\t\tWorkBreakdownStructureElementCd as string,\n\t\tNumOfBillingItemNum as string,\n\t\tFiscalYearVariantCd as string,\n\t\tReferredSalesOrderItemCampaignCd as string,\n\t\tCustCd as string,\n\t\tPrecedingSalesDistDocumentCd as string,\n\t\tCust1Cd as string,\n\t\tPayer1Cd as string,\n\t\tSoldToParty2Num as string,\n\t\tBillToParty1Num as string,\n\t\tShipToParty1Num as string,\n\t\tODQChangeModeCd as string,\n\t\tODQEntityCntrCd as string,\n\t\tFileCreatedDtTm as string,\n\t\tFileName as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tIsReversedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($path_2LIS_13_VDITM+$file_2LIS_13_VDITM+$file_extension_tsv)]) ~> MasterSetSource\nMasterSetSource derive(each(match(true()), $$ = toString($$))) ~> SourceToString\nSourceToString filter(like(CompanyCd,'US%') || like(CompanyCd,'CA%') || like(CompanyCd,'GB%') || like(CompanyCd,'IE%')) ~> MasterSetFilter\nMasterSetFilter aggregate(groupBy(SalesDistDocumentNum,\n\t\tSoldToParty2Num),\n\tcount = count(1)) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tBillingDocNum = SalesDistDocumentNum,\n\t\tSoldTo = SoldToParty2Num\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($path_BillingSoldTolookup+$file_BillingSoldTolookup+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($path_BillingSoldTolookup+$file_BillingSoldTolookup+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink2"
+		}
+	}
+}

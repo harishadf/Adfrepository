@@ -1,0 +1,177 @@
+{
+	"name": "ECOLABDATALAKE_O2C_CREDIT_WORTH_DIM",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "AgingTransactions"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "CLMBPARTNER"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "ZBWDSBP1010"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "FSCMCM3"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "SOLDTOPAYERLOOKUP"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "CntlDimCreditWorth"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				}
+			],
+			"transformations": [
+				{
+					"name": "maxAgingdate"
+				},
+				{
+					"name": "Agingdata"
+				},
+				{
+					"name": "CrossJoin"
+				},
+				{
+					"name": "Filter1"
+				},
+				{
+					"name": "payerCreditamount"
+				},
+				{
+					"name": "Window1"
+				},
+				{
+					"name": "Filter2"
+				},
+				{
+					"name": "Window2"
+				},
+				{
+					"name": "oclmbpartner"
+				},
+				{
+					"name": "Filter3"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "zbwdsbp10101"
+				},
+				{
+					"name": "DerivedColumn3"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "ThirdParty"
+				},
+				{
+					"name": "Window3"
+				},
+				{
+					"name": "Filter4"
+				},
+				{
+					"name": "DerivedColumn5"
+				},
+				{
+					"name": "Credithold"
+				},
+				{
+					"name": "CreditHold1"
+				},
+				{
+					"name": "Join3"
+				},
+				{
+					"name": "finalsetdataset"
+				},
+				{
+					"name": "Join4"
+				},
+				{
+					"name": "getoldcntlvalue"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "DerivedColumn6"
+				},
+				{
+					"name": "getnewcntlvalue"
+				},
+				{
+					"name": "Union1"
+				},
+				{
+					"name": "FinalSet"
+				},
+				{
+					"name": "Filter5"
+				},
+				{
+					"name": "Filter6"
+				}
+			],
+			"script": "parameters{\n\tgeneral_path_1 as string ('Analytics/EnterpriseCertified/EnterpriseFacts/Accounts_Receivable/'),\n\tsrc_folder_1 as string ('Aging/'),\n\tfile_name_1 as string ('Aging_Transactions'),\n\tfile_extension_1 as string ('.tsv'),\n\tgeneral_path_2 as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tsrc_folder_2 as string ('0CLM_BPARTNER/'),\n\tfile_name_2 as string ('0CLM_BPARTNER'),\n\tsrc_folder_3 as string ('ZBW_DS_BP1010/'),\n\tfile_name_3 as string ('ZBW_DS_BP1010'),\n\tsrc_folder_4 as string ('0FSCM_CM_3/'),\n\tfile_name_4 as string ('0FSCM_CM_3'),\n\tgeneral_path_3 as string ('Exploration/EnterpriseBackbone/'),\n\tsrc_folder_5 as string ('O2C_Lookup/'),\n\tfile_name_5 as string ('soldtopayerlookup'),\n\ttgt_path_1 as string ('Analytics/EnterpriseCertified/EnterpriseDims/CREDIT_WORTH/'),\n\ttgt_file_1 as string ('dim_credit_worth'),\n\tfile_extension_2 as string ('.parquet'),\n\tgeneral_path_4 as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/'),\n\tsrc_folder_6 as string ('AUDIT_DATA/'),\n\tfile_name_6 as string ('cntl_dim_Credit_worth'),\n\ttgt_path_2 as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/')\n}\nsource(output(\n\t\tAgingDate as string,\n\t\tSoldToCustomerKey as string,\n\t\tPayerCustomerKey as string,\n\t\tBillToCustomerKey as string,\n\t\tSoldToCustomerHierarchyKey as string,\n\t\tPayerCustomerHierarchyKey as string,\n\t\tCAMAlignmentKey as string,\n\t\tCurrentAlignmentKey as string,\n\t\tPreviousAlignmentKey as string,\n\t\tAgreementKey as string,\n\t\tCompanyCd as string,\n\t\tFiscalYearDt as string,\n\t\tAccountingDocNum as string,\n\t\tLineItemNum as string,\n\t\tSubItemnum as string,\n\t\tFIItemStatusCd as string,\n\t\tPayer as string,\n\t\tTMvsCAMOwnership as string,\n\t\tCreditControlAreaCd as string,\n\t\tDunninAreaMeas as string,\n\t\tAccountTypeCd as string,\n\t\tGLInd as string,\n\t\tAccountingDocTypeCd as string,\n\t\tPostingKeyCd as string,\n\t\tFiscalVariantCd as string,\n\t\tDocDt as string,\n\t\tDocPostingDt as string,\n\t\tAccDocEnterDt as string,\n\t\tClearDt as string,\n\t\tLastDunnDt as string,\n\t\tNetDueDt as string,\n\t\tPaymentDtToAvailDiscountI as string,\n\t\tPaymentDtToAvailDiscountII as string,\n\t\tBaselineDtForDueDtCalculation as string,\n\t\tDaysToPayWithinToAvailDiscountI as string,\n\t\tDaysToPayWithinToAvailDiscountII as string,\n\t\tNetPayTermsTm as string,\n\t\tCashDiscountPctI as string,\n\t\tCashDiscountPctII as string,\n\t\tCountrCd as string,\n\t\tPaymentMethodCd as string,\n\t\tPaymentTermsCode as string,\n\t\tPaymentBlockKey as string,\n\t\tReasonCodes as string,\n\t\tDunningBlock as string,\n\t\tDunningCd as string,\n\t\tDunningLevCd as string,\n\t\tLocalCurrCd as string,\n\t\tLocalCurrDebitAmt as string,\n\t\tLocalCurrCreditAmt as string,\n\t\tLocalCurrSignedAmt as string,\n\t\tDiscountTakenAndHonoured as string,\n\t\tCurrencyCd as string,\n\t\tDocCurrDebitAmt as string,\n\t\tDocCurrCreditAmt as string,\n\t\tSignedForeignAmt as string,\n\t\tEligibleDocDiscountAmt as string,\n\t\tDocDiscountAmt as string,\n\t\tChartOfAccountsCd as string,\n\t\tGLAccountCd as string,\n\t\tGLAccountNum as string,\n\t\tBranchAccountnum as string,\n\t\tClearingDocnum as string,\n\t\tReferDocNum as string,\n\t\tTxnInvoicenum as string,\n\t\tInvoiceFiscalyearNum as string,\n\t\tInvoicelineItemCd as string,\n\t\tSalesDistrDocNum as string,\n\t\tBusinessPartnerRefKey1Cd as string,\n\t\tBusinessPartnerRefKey2Cd as string,\n\t\tLineItemRefKeyCd as string,\n\t\tItemTxt as string,\n\t\tNegativePostingInd as string,\n\t\tDocArchiveInd as string,\n\t\tSplGLTransactiontypeCd as string,\n\t\tRecordModeCd as string,\n\t\tAssignmentNum as string,\n\t\tReferenceTxnAmt as string,\n\t\tReferenceKeyCd as string,\n\t\tDocstatusCd as string,\n\t\tLocalCurrAmt as string,\n\t\tAmountInSecondLocalCurrency as string,\n\t\tAmountInThirdLocalCurrency as string,\n\t\tFiscalYearNum as string,\n\t\tSecondCurrencyKeyCd as string,\n\t\tThirdCurrencyKeyCd as string,\n\t\tFiscalPeriodDt as string,\n\t\tWBSElementCd as string,\n\t\tDebitCreditInd as string,\n\t\tDocCurrencyAmt as string,\n\t\tProfitCenterCd as string,\n\t\tInternalDocHeaderKey as string,\n\t\tODQChangeModeCd as string,\n\t\tODQEntityCntrCd as string,\n\t\tIsReversedInd as string,\n\t\tBillingDoc as string,\n\t\tInvoiceNum as string,\n\t\tSoldToCustomer as string,\n\t\tDunningProcedureCd as string,\n\t\tLegacySoldToCustomer as string,\n\t\tPastDue1To30DaysAmt as string,\n\t\tPastDue31To60DaysAmt as string,\n\t\tPastDue61To90DaysAmt as string,\n\t\tPastDue91PlusDaysAmt as float,\n\t\tCurrentARAmt as string,\n\t\tPastDueARAmt as string,\n\t\tTotalARAmt as string,\n\t\tURLTxt as string,\n\t\tOwner as string,\n\t\tBillToCustomer as string,\n\t\tAge as string,\n\t\tDSO as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tCreatedDttm as string,\n\t\tLastUpdtDttm as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($general_path_1+$src_folder_1+$file_name_1+$file_extension_1)]) ~> AgingTransactions\nsource(output(\n\t\tDISequenceNum as string,\n\t\tDIOperationTypeCd as string,\n\t\tBusinessPartnerNum as string,\n\t\tCollectionSegmentCd as string,\n\t\tCollectionGrpCd as string,\n\t\tCollectionSpecialistCd as string,\n\t\tCompanyCd as string,\n\t\tCreatedOnDt as string,\n\t\tClosedOnDt as string,\n\t\tLogicalFISystemCd as string,\n\t\tBWDeltaProcessRecordModeCd as string,\n\t\tLogicalSystemCd as string,\n\t\tFileCreatedDtTm as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($general_path_2+$src_folder_2+$file_name_2+$file_extension_1)]) ~> CLMBPARTNER\nsource(output(\n\t\tBusinessPartnerNum as string,\n\t\tAffidavitCd as string,\n\t\tAffidavitDt as string,\n\t\tLaunchBankruptcyProceedingsInd as string,\n\t\tBankruptcyProceedingsCommencementDt as string,\n\t\tForeclosureCd as string,\n\t\tForeclosureDt as string,\n\t\tCreditStandingCd as string,\n\t\tInstituteProvidingCreditStandingInfoCd as string,\n\t\tCreditStandingInfoStatusCd as string,\n\t\tAdditionalCreditStandingInfoDesc as string,\n\t\tCreditStandingInfoDt as string,\n\t\tRatingCd as string,\n\t\tLegalProceedingsStatusCd as string,\n\t\tLegalProceedingsInitiationDt as string,\n\t\tODQChangeModeCd as string,\n\t\tODQEntityCntrCd as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($general_path_2+$src_folder_3+$file_name_3+$file_extension_1)]) ~> ZBWDSBP1010\nsource(output(\n\t\tClientCd as string,\n\t\tBusinessPartnerNum as string,\n\t\tCreditSegmentCd as string,\n\t\tScoreCd as string,\n\t\tCreditCheckRuleCd as string,\n\t\tLimitCd as string,\n\t\tRatingValidToDt as string,\n\t\tRatingChangeDt as string,\n\t\tCreditAcPartnerCd as string,\n\t\tScoreCalcRule as string,\n\t\tRiskClassCd as string,\n\t\tRiskClassCalculatedCd as string,\n\t\tRiskClassChangeDt as string,\n\t\tCustomerCreditGrpCd as string,\n\t\tCreditLimitNum as string,\n\t\tBlockedbyCreditMgmt as string,\n\t\tLimitValidDt as string,\n\t\tCreditLimitChangeDate as string,\n\t\tCreditAnalystName as string,\n\t\tCustomerCreditGrpCd1 as string,\n\t\tResubmissionFollowUpDt as string,\n\t\tCalcCreditLimitnum as string,\n\t\tSpecialAttentionReqdInd as string,\n\t\tLimitisZeroInd as string,\n\t\tBlockReasonCd as string,\n\t\tCurrencyCd as string,\n\t\tBusinessPartnerNum1 as string,\n\t\tUTCTimeStampTs as string,\n\t\tDeleteFlagInd as string,\n\t\tRecordModeCd as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($general_path_2+$src_folder_4+$file_name_4+$file_extension_1)]) ~> FSCMCM3\nsource(output(\n\t\tPayer as string,\n\t\tSoldTo as string,\n\t\tcountofsoldto as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($general_path_3+$src_folder_5+$file_name_5+$file_extension_1)]) ~> SOLDTOPAYERLOOKUP\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($general_path_4+$src_folder_6+$file_name_6+$file_extension_1)]) ~> CntlDimCreditWorth\nAgingTransactions aggregate(AgingDate = max(toInteger(toString(toDate(AgingDate,\"yyyy-MM-dd\"),\"yyyyMMdd\")))) ~> maxAgingdate\nAgingTransactions select(mapColumn(\n\t\tpayer = Payer,\n\t\tAgingDate,\n\t\tPastDue91PlusDaysAmt\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Agingdata\nAgingdata, maxAgingdate join(1 == 1 || !isNull(Agingdata@AgingDate) || !isNull(maxAgingdate@AgingDate),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> CrossJoin\nCrossJoin filter(toInteger(toString(toDate(Agingdata@AgingDate,\"yyyy-MM-dd\"),\"yyyyMMdd\")) == maxAgingdate@AgingDate) ~> Filter1\nFilter1 aggregate(groupBy(payer),\n\tAmount = sum(toDecimal(case(isNull(PastDue91PlusDaysAmt),0.0000,PastDue91PlusDaysAmt),17,4))) ~> payerCreditamount\nFilter5 window(over(BusinessPartnerNum),\n\tdesc(LastUpdtDtTm, false),\n\tr = rowNumber()) ~> Window1\nWindow1 filter(r == 1) ~> Filter2\nZBWDSBP1010 window(over(BusinessPartnerNum),\n\tdesc(LastUpdtDtTm, false),\n\tr = rowNumber()) ~> Window2\nDerivedColumn3 select(mapColumn(\n\t\tpayer = BusinessPartnerNum,\n\t\tCollectionGrpCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> oclmbpartner\nWindow2 filter(r == 1) ~> Filter3\nFilter3 derive(InstituteProvidingCreditStandingInfoCd = case(isNull(trim(InstituteProvidingCreditStandingInfoCd)), '', trim(InstituteProvidingCreditStandingInfoCd))) ~> DerivedColumn2\nDerivedColumn2 select(mapColumn(\n\t\tpayer = BusinessPartnerNum,\n\t\tInstituteProvidingCreditStandingInfoCd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> zbwdsbp10101\nFilter2 derive(CollectionGrpCd = case(isNull(trim(CollectionGrpCd)), '', trim(CollectionGrpCd))) ~> DerivedColumn3\npayerCreditamount, oclmbpartner join(payerCreditamount@payer == oclmbpartner@payer,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join1\nJoin1, zbwdsbp10101 join(payerCreditamount@payer == zbwdsbp10101@payer,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join2\nJoin2 derive(Third_Party_Collection = case(\n    in(['Z_ECO_US_1','Z_ECO_US_6'], CollectionGrpCd), 'Acct Not subject to 3rd Party Collections',\ncase(\n    in(['0001','0002','0003','0004','0005','0006','0007','0012'], InstituteProvidingCreditStandingInfoCd), '3rd Party Collections', \n\ncase(\n    in(['0008','0009','0010'], InstituteProvidingCreditStandingInfoCd), 'Reinstated Account',\ncase(\n    in(['0011'], InstituteProvidingCreditStandingInfoCd), 'Bankruptcy Account',\ncase(\n    Amount >= 100.0000, 'Acct about to go under Review', 'Acct Not under Review'\n)))))) ~> ThirdParty\nFilter6 window(over(BusinessPartnerNum),\n\tdesc(LastUpdtDtTm, false),\n\tr = rowNumber()) ~> Window3\nWindow3 filter(r == 1) ~> Filter4\nFilter4 derive(CreditCheckRuleCd = case(isNull(trim(CreditCheckRuleCd)), '', trim(CreditCheckRuleCd)),\n\t\tRiskClassCd = case(isNull(trim(RiskClassCd)), '', trim(RiskClassCd))) ~> DerivedColumn5\nDerivedColumn5 derive(Credit_Hold_Status = case(\n    CreditCheckRuleCd == 'ZUS03', 'Under Credit Review',\ncase(\n    CreditCheckRuleCd == 'ZUS02', '--',\ncase(\n    CreditCheckRuleCd == 'ZUS01' && in(['US3','US2'], RiskClassCd), 'Under Credit Review',\ncase(\n    CreditCheckRuleCd == 'ZUS01' && RiskClassCd == 'US1', '--', ''\n))))) ~> Credithold\nCredithold select(mapColumn(\n\t\tpayer = BusinessPartnerNum,\n\t\tCredit_Hold_Status\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> CreditHold1\nThirdParty, CreditHold1 join(payerCreditamount@payer == CreditHold1@payer,\n\tjoinType:'outer',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(Payer = case(!isNull(payerCreditamount@payer), payerCreditamount@payer, CreditHold1@payer),\n\t\tThird_Party_Collection = case(!isNull(Third_Party_Collection), Third_Party_Collection, ''),\n\t\tCredit_Hold_Status = case(!isNull(Credit_Hold_Status), Credit_Hold_Status, ''),\n\t\tCreatedDttm = toString(currentTimestamp(), 'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDttm = toString(currentTimestamp(), 'MM/dd/yyyy HH:mm:ss')) ~> finalsetdataset\nfinalsetdataset, SOLDTOPAYERLOOKUP join(finalsetdataset@Payer == SOLDTOPAYERLOOKUP@Payer,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nCntlDimCreditWorth select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getoldcntlvalue\nDerivedColumn6 aggregate(groupBy(Status,\n\t\tLastRunDate,\n\t\tSubjectArea),\n\tDummy = max(1)) ~> Aggregate1\nCntlDimCreditWorth derive(LastRunDate = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'Credit Worth') ~> DerivedColumn6\nAggregate1 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetoldcntlvalue, getnewcntlvalue union(byName: true)~> Union1\nJoin4 select(mapColumn(\n\t\tPayer = finalsetdataset@Payer,\n\t\tThird_Party_Collection,\n\t\tCredit_Hold_Status,\n\t\tSoldTo,\n\t\tCreatedDttm,\n\t\tLastUpdtDttm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> FinalSet\nCLMBPARTNER filter(currentTimestamp() >= toTimestamp(CreatedOnDt, 'yyyy.MM.dd') && currentTimestamp() <= toTimestamp(ClosedOnDt, 'yyyy.MM.dd')) ~> Filter5\nFSCMCM3 filter(trim(CreditCheckRuleCd) != '') ~> Filter6\nFinalSet sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($tgt_path_1+$tgt_file_1+$file_extension_1)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tpartitionBy('hash', 1)) ~> sink1\nFinalSet sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($tgt_path_1+$tgt_file_1+$file_extension_2)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tpartitionBy('hash', 1)) ~> sink2\nUnion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($tgt_path_2+$file_name_6+$file_extension_1)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> sink3"
+		}
+	}
+}

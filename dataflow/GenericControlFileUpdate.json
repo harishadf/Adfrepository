@@ -1,0 +1,44 @@
+{
+	"name": "GenericControlFileUpdate",
+	"properties": {
+		"folder": {
+			"name": "Generic/ControlFiles"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "CntlSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "CntlOutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "getnewcntlvalue"
+				},
+				{
+					"name": "Distinct"
+				},
+				{
+					"name": "SelectRequiredColumns"
+				},
+				{
+					"name": "updatecntl"
+				}
+			],
+			"script": "parameters{\n\tFilePath as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tFileName as string ('Customer_Cntl'),\n\tStatus as string ('S'),\n\tSubjectArea as string ('Customer'),\n\tTimeFormat as string ('M/d/yyyy h:mm:ss a')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($FilePath+$FileName+'.tsv')]) ~> CntlSource\nCntlSource derive(LastRunDate = toString(currentTimestamp(),$TimeFormat),\n\t\tStatus = $Status,\n\t\tSubjectArea = $SubjectArea) ~> getnewcntlvalue\ngetnewcntlvalue aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = min(LastRunDate)) ~> Distinct\nDistinct select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectRequiredColumns\nCntlSource, SelectRequiredColumns union(byName: true)~> updatecntl\nupdatecntl sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($FilePath+$FileName+'.tsv')],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CntlOutput"
+		}
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "AzureDatabricksDLL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-8917076304931352.12.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "MAPKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "adb-edo-workspace-token"
+			},
+			"existingClusterId": "0820-143252-drags18"
+		}
+	}
+}

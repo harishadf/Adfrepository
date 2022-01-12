@@ -1,0 +1,38 @@
+{
+	"name": "IF_ECOLABDATALAKE_AZONE_DIM_DUNNING",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "dimdunningDummy"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "dimrouteTSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "dimrouteParquet"
+				}
+			],
+			"transformations": [],
+			"script": "parameters{\n\tfile_name_dim_stor_chan as string ('dim_dunning'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tAnalytics_Folder_DUNNING as string ('DUNNING/'),\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/')\n}\nsource(output(\n\t\tDunningKey as short,\n\t\tLanguageCd as short,\n\t\tDunningKeyCd as short,\n\t\tDunningKeyDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_stor_chan + '_dummy' + $file_extension_tsv)]) ~> dimdunningDummy\ndimdunningDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_DUNNING+$file_name_dim_stor_chan+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteTSV\ndimdunningDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_DUNNING+$file_name_dim_stor_chan+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteParquet"
+		}
+	}
+}

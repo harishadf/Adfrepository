@@ -1,0 +1,41 @@
+{
+	"name": "SnowFlakeTriggerNotExists",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "DummyCntl"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "Output"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DeriveDate"
+				},
+				{
+					"name": "DistinctRecords"
+				},
+				{
+					"name": "SortByDate"
+				},
+				{
+					"name": "SelectFinal"
+				}
+			],
+			"script": "parameters{\n\tDummyControlFolder as string ('Dummy_Data/'),\n\tDummyControlFile as string ('SnowFlakeDummyCntl'),\n\ttsvExtension as string ('.tsv'),\n\tOutputFolder as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/Snowflake_Trigger/Inbound/'),\n\tOutputFile as string ('DimsSuccess.ind')\n}\nsource(output(\n\t\tStatus as string,\n\t\tDATE as timestamp 'yyyy-MM-dd HH:mm:ss'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($DummyControlFolder+$DummyControlFile+$tsvExtension)]) ~> DummyCntl\nDummyCntl derive(Status = 'Y',\n\t\tCurrentDate = currentTimestamp()) ~> DeriveDate\nDeriveDate aggregate(groupBy(CurrentDate,\n\t\tStatus),\n\tdummy = count(1)) ~> DistinctRecords\nDistinctRecords sort(desc(CurrentDate, false)) ~> SortByDate\nSortByDate select(mapColumn(\n\t\tCurrentDate,\n\t\tStatus\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFinal\nSelectFinal sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($OutputFolder+$OutputFile+$tsvExtension)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Output"
+		}
+	}
+}

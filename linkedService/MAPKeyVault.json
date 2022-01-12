@@ -1,0 +1,11 @@
+{
+	"name": "MAPKeyVault",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://ECL-MAP-002-P-AKV.vault.azure.net/"
+		}
+	}
+}

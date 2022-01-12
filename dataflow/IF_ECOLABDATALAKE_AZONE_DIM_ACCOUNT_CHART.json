@@ -1,0 +1,38 @@
+{
+	"name": "IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_CHART",
+	"properties": {
+		"folder": {
+			"name": "Analytics/O2CAZ"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "dimDummy"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Delimited_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "TSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "Parquet"
+				}
+			],
+			"transformations": [],
+			"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_account_chart as string ('dim_account_chart'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_ACCOUNT_CHART as string ('ACCOUNT_CHART/')\n}\nsource(output(\n\t\tAccountChartKey as short,\n\t\tLanguageKeyCd as short,\n\t\tAccountsChartCd as short,\n\t\tAccountsChartDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_account_chart +'_dummy'+ $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_CHART+$file_name_dim_account_chart+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_CHART+$file_name_dim_account_chart+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+		}
+	}
+}
