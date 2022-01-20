@@ -1,0 +1,29 @@
+{
+	"name": "CDC_ANZ_Cube_Refresh_Master_Fri_Sat_Trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Week",
+				"interval": 1,
+				"startTime": "2019-12-12T11:20:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						30
+					],
+					"hours": [
+						18
+					],
+					"weekDays": [
+						"Friday",
+						"Saturday"
+					]
+				}
+			}
+		}
+	}
+}
