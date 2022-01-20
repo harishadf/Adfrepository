@@ -1,0 +1,28 @@
+{
+	"name": "NORDIC_Master_Trigger_Weekly",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Week",
+				"interval": 1,
+				"startTime": "2018-02-11T16:24:39Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						35
+					],
+					"hours": [
+						17
+					],
+					"weekDays": [
+						"Sunday"
+					]
+				}
+			}
+		}
+	}
+}
