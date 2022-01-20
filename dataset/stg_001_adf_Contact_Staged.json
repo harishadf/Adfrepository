@@ -1,0 +1,84 @@
+{
+	"name": "stg_001_adf_Contact_Staged",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzSQLDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Person Dynamics ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person Employee ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person Student ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person Full Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person Cost Center Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Vaccine Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Case Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Case Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Case Age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Case Number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Access",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Survey Pass Issued",
+				"type": "bit"
+			},
+			{
+				"name": "Survey Created On",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "AccessDuration",
+				"type": "date"
+			},
+			{
+				"name": "NoOfDaysSinceLastTest",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Conditionally Approved",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "001_adf_Contact_Staged"
+		}
+	}
+}

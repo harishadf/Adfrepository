@@ -1,0 +1,109 @@
+{
+	"name": "CohortSecondarySchoolData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "reporting_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Secondary Groups and Instructional Program.csv",
+				"folderPath": "cohort_data",
+				"fileSystem": "0-bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "LOCAL_DISTRICT",
+				"type": "String"
+			},
+			{
+				"name": "COS_NAME",
+				"type": "String"
+			},
+			{
+				"name": "COST_CENTER_CODE",
+				"type": "String"
+			},
+			{
+				"name": "LOCATION_CODE",
+				"type": "String"
+			},
+			{
+				"name": "LOCATION_NAME",
+				"type": "String"
+			},
+			{
+				"name": "STUDENT_DISTRICT_ID",
+				"type": "String"
+			},
+			{
+				"name": "STD_FIRST_NAME",
+				"type": "String"
+			},
+			{
+				"name": "STD_LAST_NAME",
+				"type": "String"
+			},
+			{
+				"name": "GRADE_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BIRTHDATE",
+				"type": "String"
+			},
+			{
+				"name": "COURSE_TITLE",
+				"type": "String"
+			},
+			{
+				"name": "COURSE_CATALOG_NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "SECTION_NUMBER_CODE",
+				"type": "String"
+			},
+			{
+				"name": "COHORT_SECTION_NUMBER_CODE",
+				"type": "String"
+			},
+			{
+				"name": "CLASS_PERIOD_CODE",
+				"type": "String"
+			},
+			{
+				"name": "TEACHER_ID",
+				"type": "String"
+			},
+			{
+				"name": "TCH_LAST_NAME",
+				"type": "String"
+			},
+			{
+				"name": "TCH_FIRST_NAME",
+				"type": "String"
+			},
+			{
+				"name": "CLASS_ROOM_CODE",
+				"type": "String"
+			},
+			{
+				"name": "MISIS_CLASS_BEGIN_DATE",
+				"type": "String"
+			},
+			{
+				"name": "MISIS_CLASS_END_DATE",
+				"type": "String"
+			}
+		]
+	}
+}

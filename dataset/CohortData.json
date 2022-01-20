@@ -1,0 +1,51 @@
+{
+	"name": "CohortData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzSQLDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Cohort_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Student District ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Grade",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Instructional Model",
+				"type": "nvarchar"
+			},
+			{
+				"name": "On-Site Childcare",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Transportation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Athletics/Auxiliary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Row Number",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "001_Cohort"
+		}
+	}
+}

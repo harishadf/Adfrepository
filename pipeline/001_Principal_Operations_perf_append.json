@@ -1,0 +1,153 @@
+{
+	"name": "001_Principal_Operations_perf_append",
+	"properties": {
+		"activities": [
+			{
+				"name": "sp_Copy_Staging_Tables_To_Reporting_001_staged",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy_Staging_Tables_To_Reporting_001_Test_Staged_90Days",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_Copy_Staging_Tables_To_Reporting_001_staged]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Update Access",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Principal-append",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_Update_NewlyDisallowedAccess]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "LoadCostCenterCodeData",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Update Access",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[LoadCostCenterCodeData]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Copy_Staging_Tables_To_Reporting_001_Test_Staged_90Days",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "LoadCostCenterCodeData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_Copy_Staging_Tables_To_Reporting_001_Test_Staged_90Days]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Principal-append",
+				"description": "adding description new",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "001_Principal_Operations_perf_append",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 48,
+						"computeType": "General"
+					},
+					"traceLevel": "None",
+					"cacheSinks": {
+						"firstRowOnly": true
+					}
+				}
+			}
+		],
+		"concurrency": 1,
+		"policy": {
+			"elapsedTimeMetric": {
+				"duration": "0.00:30:00"
+			}
+		},
+		"folder": {
+			"name": "Realtime"
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,47 @@
+{
+	"name": "001_SQL_Appointment_Staged",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzSQLDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "001_Principal_Operations"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Test_Appointment_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Appointment Person ID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Appointment Number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Appointment Datetime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "Appointment Date",
+				"type": "date"
+			},
+			{
+				"name": "Appointment Time",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "001_Test_Appointment_Staged"
+		}
+	}
+}

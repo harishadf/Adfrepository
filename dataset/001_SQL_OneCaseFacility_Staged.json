@@ -1,0 +1,19 @@
+{
+	"name": "001_SQL_OneCaseFacility_Staged",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzSQLDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "001_Principal_Operations"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "001_CaseFacility_staged"
+		}
+	}
+}

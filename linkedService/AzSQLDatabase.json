@@ -1,0 +1,11 @@
+{
+	"name": "AzSQLDatabase",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=sql-reporting-dev.database.windows.net;Initial Catalog=sqldb-reporting-dev"
+		}
+	}
+}

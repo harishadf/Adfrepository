@@ -1,0 +1,518 @@
+{
+	"name": "001_Principal_Operations_perf_append",
+	"properties": {
+		"folder": {
+			"name": "001_Principal_Operations"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "oneFacility"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "oneContact"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "oneCases"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "oneTests"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "oneSurvey"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "oneAppointment"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "getGuestSurvey"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "VaccineSource2"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalake_004",
+						"type": "LinkedServiceReference"
+					},
+					"name": "OneCaseFacility"
+				},
+				{
+					"dataset": {
+						"referenceName": "ElementarySchoolCohortData",
+						"type": "DatasetReference"
+					},
+					"name": "CohortElementarySchoolData"
+				},
+				{
+					"dataset": {
+						"referenceName": "CohortSecondarySchoolData",
+						"type": "DatasetReference"
+					},
+					"name": "CohortSecondarySchoolData"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_adls_Grades",
+						"type": "DatasetReference"
+					},
+					"name": "Grades"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Test_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkTests"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Health_Survey_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkSurvey"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Facility_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkFacility"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_OneCaseFacility_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "OneCaseFacilitySink"
+				},
+				{
+					"dataset": {
+						"referenceName": "CohortData",
+						"type": "DatasetReference"
+					},
+					"name": "sinkCohort"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_VaccineStatus_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkVaccineStatus"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Appointment_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkAppointment"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Case_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkCase"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Contact_Staged2",
+						"type": "DatasetReference"
+					},
+					"name": "sinkContact"
+				},
+				{
+					"dataset": {
+						"referenceName": "001_SQL_Grades",
+						"type": "DatasetReference"
+					},
+					"name": "sinkGrades"
+				},
+				{
+					"dataset": {
+						"referenceName": "stg_001_adf_Contact_Staged",
+						"type": "DatasetReference"
+					},
+					"name": "sinkAllowedDisallowed"
+				}
+			],
+			"transformations": [
+				{
+					"name": "twoFacility"
+				},
+				{
+					"name": "threeFacility"
+				},
+				{
+					"name": "twoTests"
+				},
+				{
+					"name": "twoSurvey"
+				},
+				{
+					"name": "twoAppointment"
+				},
+				{
+					"name": "TestCreatedOn"
+				},
+				{
+					"name": "threeSurvey"
+				},
+				{
+					"name": "threeAppointment"
+				},
+				{
+					"name": "DecodeValues"
+				},
+				{
+					"name": "twoGuestSurvey"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "threeCase"
+				},
+				{
+					"name": "NoOfDaysSinceLastTest"
+				},
+				{
+					"name": "threetest"
+				},
+				{
+					"name": "SelectColumns"
+				},
+				{
+					"name": "TestDateToPST"
+				},
+				{
+					"name": "SelectVaccineColumns"
+				},
+				{
+					"name": "twoCases"
+				},
+				{
+					"name": "DateToPST"
+				},
+				{
+					"name": "Select6"
+				},
+				{
+					"name": "ElementaryColumns"
+				},
+				{
+					"name": "SecondaryColumns"
+				},
+				{
+					"name": "CohortUnion"
+				},
+				{
+					"name": "InstructionalModel"
+				},
+				{
+					"name": "OnSiteChildcare"
+				},
+				{
+					"name": "Transportation"
+				},
+				{
+					"name": "Athletics"
+				},
+				{
+					"name": "SelectCohortColumns"
+				},
+				{
+					"name": "Select7"
+				},
+				{
+					"name": "Select8"
+				},
+				{
+					"name": "DerivedColumn6"
+				},
+				{
+					"name": "filterOutBlankLocationNumbers"
+				},
+				{
+					"name": "DerivedColumn8"
+				},
+				{
+					"name": "DailyPass"
+				},
+				{
+					"name": "FilterInactivePersonAndNullCostCenterMapping"
+				},
+				{
+					"name": "ActiveTests"
+				},
+				{
+					"name": "FilterNewExternalTestReviewStatus"
+				},
+				{
+					"name": "FilterDeclinedExternalReviewStatus"
+				},
+				{
+					"name": "FilterPendingResultsaAndCaseClosed"
+				},
+				{
+					"name": "oneAccess"
+				},
+				{
+					"name": "twoAccess"
+				},
+				{
+					"name": "threeAccess"
+				},
+				{
+					"name": "JoinDailyPass"
+				},
+				{
+					"name": "fiveAccess"
+				},
+				{
+					"name": "sixAccess"
+				},
+				{
+					"name": "AccessJoinCase"
+				},
+				{
+					"name": "sevenAccess"
+				},
+				{
+					"name": "OrderByLatest"
+				},
+				{
+					"name": "AggById"
+				},
+				{
+					"name": "AccessDuration"
+				},
+				{
+					"name": "FilterNulls"
+				},
+				{
+					"name": "DerivedColumn9"
+				},
+				{
+					"name": "DerivedColumn10"
+				},
+				{
+					"name": "Filter1"
+				},
+				{
+					"name": "Filter2"
+				},
+				{
+					"name": "DeriveVaccinationDate"
+				},
+				{
+					"name": "FilteroutInactive"
+				},
+				{
+					"name": "filternewschool"
+				},
+				{
+					"name": "NinetyDaysFromToday"
+				},
+				{
+					"name": "filternewschoolyear"
+				},
+				{
+					"name": "NinetyDaysfromTodayDate"
+				},
+				{
+					"name": "Union2"
+				},
+				{
+					"name": "Union3"
+				},
+				{
+					"name": "SelectGrades"
+				},
+				{
+					"name": "sortbycasecreated"
+				},
+				{
+					"name": "flternullcases"
+				},
+				{
+					"name": "filterObsoleteCaseType"
+				},
+				{
+					"name": "Select13"
+				},
+				{
+					"name": "AgrCreatedOn"
+				},
+				{
+					"name": "Sort1"
+				},
+				{
+					"name": "SortForRemoveDuplicates"
+				},
+				{
+					"name": "RemoveDuplicates"
+				},
+				{
+					"name": "FilterNotNullAccessDuration"
+				},
+				{
+					"name": "filteropencases"
+				},
+				{
+					"name": "GroupLatestOpenCases"
+				},
+				{
+					"name": "AddAccessDuration"
+				},
+				{
+					"name": "UnionOpenCasesAndAccessDuration"
+				},
+				{
+					"name": "OrderingColumns"
+				},
+				{
+					"name": "Select14"
+				},
+				{
+					"name": "DailyPassSorted"
+				},
+				{
+					"name": "AggDailyPassRecord"
+				},
+				{
+					"name": "DeriveVaccineStatus"
+				},
+				{
+					"name": "twoContact"
+				},
+				{
+					"name": "DervieConsolidatedVaccineStatus"
+				},
+				{
+					"name": "DeriveDateDiffAdd"
+				},
+				{
+					"name": "Filter1MonthsDataOneSurve"
+				},
+				{
+					"name": "DerivedDateDiffNew"
+				},
+				{
+					"name": "Filte1MonthsDataGuestSurvey"
+				},
+				{
+					"name": "Last111DaysOfData"
+				},
+				{
+					"name": "GuestPassIssuedCheckExceptions"
+				},
+				{
+					"name": "ConditionallyApprovedUpdate"
+				},
+				{
+					"name": "AgeCalculate"
+				},
+				{
+					"name": "DateOfBirth"
+				},
+				{
+					"name": "AgeTurning12"
+				},
+				{
+					"name": "AgeForOnlyStudent"
+				},
+				{
+					"name": "Window1"
+				},
+				{
+					"name": "Filter3"
+				},
+				{
+					"name": "Window2"
+				},
+				{
+					"name": "Filter4"
+				},
+				{
+					"name": "Window3"
+				},
+				{
+					"name": "Filter5"
+				},
+				{
+					"name": "Window4"
+				},
+				{
+					"name": "Filter6"
+				},
+				{
+					"name": "Window5"
+				},
+				{
+					"name": "Filter7"
+				},
+				{
+					"name": "Window6"
+				},
+				{
+					"name": "Filter8"
+				},
+				{
+					"name": "Window7"
+				},
+				{
+					"name": "Filter9"
+				},
+				{
+					"name": "Window8"
+				},
+				{
+					"name": "Filter10"
+				},
+				{
+					"name": "Window9"
+				},
+				{
+					"name": "Filter11"
+				}
+			],
+			"script": "source(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\tmsft_entrywindowinterval as long,\n\t\trts_validasatestlocation as long,\n\t\trts_entitytype as long,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tmsft_addresscountryid as string,\n\t\tmsft_addresscountryid_entitytype as string,\n\t\tmsft_facilitytypeid as string,\n\t\tmsft_facilitytypeid_entitytype as string,\n\t\tmsft_reopenphaseid as string,\n\t\tmsft_reopenphaseid_entitytype as string,\n\t\tmsft_facilitygroupid as string,\n\t\tmsft_facilitygroupid_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\tmsft_addressstateprovinceid as string,\n\t\tmsft_addressstateprovinceid_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\tcreatedonbehalfbyname as string,\n\t\ttimezoneruleversionnumber as long,\n\t\towningbusinessunitname as string,\n\t\towneridtype as string,\n\t\tversionnumber as long,\n\t\tmsft_addressstateprovince as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\tmsft_addresscountry as string,\n\t\trts_internalname as string,\n\t\tmsft_facilitygroupidname as string,\n\t\tmsft_name as string,\n\t\tmodifiedbyyominame as string,\n\t\tmsft_addresscity as string,\n\t\trts_boe as string,\n\t\trts_campusname as string,\n\t\trts_campuscode as string,\n\t\timportsequencenumber as long,\n\t\tmsft_description as string,\n\t\tcreatedon as timestamp,\n\t\tmsft_addresscountryidname as string,\n\t\tcreatedbyyominame as string,\n\t\toverriddencreatedon as timestamp,\n\t\trts_sitetype as string,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\ttraversedpath as string,\n\t\tmsft_addresslatitude as string,\n\t\tmsft_addresspostalcode as string,\n\t\tstageid as string,\n\t\towneridyominame as string,\n\t\tprocessid as string,\n\t\trts_ld as string,\n\t\tcreatedbyname as string,\n\t\tutcconversiontimezonecode as long,\n\t\tmodifiedbyname as string,\n\t\tmsft_addresslongitude as string,\n\t\tmodifiedon as timestamp,\n\t\tmsft_facilitytypeidname as string,\n\t\tmsft_facilityid as string,\n\t\tmsft_reopenphaseidname as string,\n\t\tmsft_addressstateprovinceidname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\towneridname as string,\n\t\trts_physicalcos as string,\n\t\trts_integrationstatus as long,\n\t\tmsft_addressstreet2 as string,\n\t\tmsft_addressstreet1 as string,\n\t\tmsft_facilitynumber as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'msft_facility',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280') ~> oneFacility\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\taddress3_freighttermscode as long,\n\t\tcustomersizecode as long,\n\t\trts_dose2sourcesystem as long,\n\t\trts_persontype as long,\n\t\trts_instructionalprogram as long,\n\t\trts_dailypassfordependentsunder13yearsold as long,\n\t\taddress1_freighttermscode as long,\n\t\tfamilystatuscode as long,\n\t\trts_covidtestwithoutparent as long,\n\t\thaschildrencode as long,\n\t\trts_race as long,\n\t\trts_sexualorientation as long,\n\t\trts_qualifiesforadailypass as long,\n\t\trts_primaryphonetype as long,\n\t\tcustomertypecode as long,\n\t\taddress3_addresstypecode as long,\n\t\trts_typeofvaccine as long,\n\t\tgendercode as long,\n\t\tshippingmethodcode as long,\n\t\tpaymenttermscode as long,\n\t\trts_vaccinationstatus as long,\n\t\teducationcode as long,\n\t\trts_preferredlanguage as long,\n\t\taddress2_shippingmethodcode as long,\n\t\tleadsourcecode as long,\n\t\tterritorycode as long,\n\t\taddress3_shippingmethodcode as long,\n\t\trts_portalpersontype as long,\n\t\trts_applanguage as long,\n\t\trts_vaccinationapproval as long,\n\t\trts_ethnicity as long,\n\t\taddress2_freighttermscode as long,\n\t\trts_consent as long,\n\t\trts_othercontact as long,\n\t\trts_dob_month as long,\n\t\taccountrolecode as long,\n\t\taddress1_shippingmethodcode as long,\n\t\trts_authorize as long,\n\t\tpreferredcontactmethodcode as long,\n\t\trts_dose1sourcesystem as long,\n\t\trts_sexcode as long,\n\t\tmsft_contacttype as long,\n\t\trts_gender as long,\n\t\tmsdyn_orgchangestatus as long,\n\t\trts_qualifiesfordailypass as long,\n\t\taddress2_addresstypecode as long,\n\t\taddress1_addresstypecode as long,\n\t\tpreferredappointmentdaycode as long,\n\t\tpreferredappointmenttimecode as long,\n\t\trts_unaccompaniedminor as long,\n\t\trts_dob_day as long,\n\t\trts_validdob as long,\n\t\trts_activetestprompted as boolean,\n\t\tadx_identity_emailaddress1confirmed as boolean,\n\t\tdonotphone as boolean,\n\t\trts_testpositivewithin90days as boolean,\n\t\tdonotpostalmail as boolean,\n\t\tcreditonhold as boolean,\n\t\tadx_confirmremovepassword as boolean,\n\t\tadx_identity_twofactorenabled as boolean,\n\t\tadx_profilealert as boolean,\n\t\tisbackofficecustomer as boolean,\n\t\tisprivate as boolean,\n\t\tdonotbulkemail as boolean,\n\t\tnew_allowteachersupervisedtesting as boolean,\n\t\tadx_identity_locallogindisabled as boolean,\n\t\trts_textmessages as boolean,\n\t\tparticipatesinworkflow as boolean,\n\t\tmsdyn_isminorwithparentalconsent as boolean,\n\t\trts_conditionallyapproved as boolean,\n\t\tmsft_isportalaccessrequired as boolean,\n\t\tmarketingonly as boolean,\n\t\tmerged as boolean,\n\t\trts_covidtestingforhybridinstruction as boolean,\n\t\tdonotemail as boolean,\n\t\tadx_identity_logonenabled as boolean,\n\t\tadx_identity_lockoutenabled as boolean,\n\t\tfollowemail as boolean,\n\t\tmsdyn_isminor as boolean,\n\t\tdonotfax as boolean,\n\t\tmsdyn_gdproptout as boolean,\n\t\tisautocreate as boolean,\n\t\tadx_identity_mobilephoneconfirmed as boolean,\n\t\tdonotbulkpostalmail as boolean,\n\t\tmsdyn_disablewebtracking as boolean,\n\t\tadx_profileisanonymous as boolean,\n\t\tdonotsendmm as boolean,\n\t\tparentcontactid as string,\n\t\tparentcontactid_entitytype as string,\n\t\tmsft_defaultareaid as string,\n\t\tmsft_defaultareaid_entitytype as string,\n\t\tmsft_hostid as string,\n\t\tmsft_hostid_entitytype as string,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\tmasterid as string,\n\t\tmasterid_entitytype as string,\n\t\tcreatedbyexternalparty as string,\n\t\tcreatedbyexternalparty_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tslaid as string,\n\t\tslaid_entitytype as string,\n\t\trts_mostrecentapptid as string,\n\t\trts_mostrecentapptid_entitytype as string,\n\t\taccountid as string,\n\t\taccountid_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\trts_union as string,\n\t\trts_union_entitytype as string,\n\t\tpreferredequipmentid as string,\n\t\tpreferredequipmentid_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\trts_dpfacilityid as string,\n\t\trts_dpfacilityid_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\tmsft_assignedareaid as string,\n\t\tmsft_assignedareaid_entitytype as string,\n\t\tdefaultpricelevelid as string,\n\t\tdefaultpricelevelid_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\toriginatingleadid as string,\n\t\toriginatingleadid_entitytype as string,\n\t\trts_msft_employeecase as string,\n\t\trts_msft_employeecase_entitytype as string,\n\t\tslainvokedid as string,\n\t\tslainvokedid_entitytype as string,\n\t\tpreferredserviceid as string,\n\t\tpreferredserviceid_entitytype as string,\n\t\tmsft_defaultfacilityid as string,\n\t\tmsft_defaultfacilityid_entitytype as string,\n\t\tmsa_managingpartnerid as string,\n\t\tmsa_managingpartnerid_entitytype as string,\n\t\tadx_preferredlanguageid as string,\n\t\tadx_preferredlanguageid_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\tpreferredsystemuserid as string,\n\t\tpreferredsystemuserid_entitytype as string,\n\t\tmodifiedbyexternalparty as string,\n\t\tmodifiedbyexternalparty_entitytype as string,\n\t\ttransactioncurrencyid as string,\n\t\ttransactioncurrencyid_entitytype as string,\n\t\trts_repofunion as string,\n\t\trts_repofunion_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\tparentcustomerid as string,\n\t\tparentcustomerid_entitytype as string,\n\t\taging30_base as decimal(18,2),\n\t\taging60 as decimal(18,2),\n\t\taging60_base as decimal(18,2),\n\t\taging90_base as decimal(18,2),\n\t\tannualincome as decimal(18,2),\n\t\tcreditlimit_base as decimal(18,2),\n\t\tannualincome_base as decimal(18,2),\n\t\taging90 as decimal(18,2),\n\t\taging30 as decimal(18,2),\n\t\tcreditlimit as decimal(18,2),\n\t\taddress2_latitude as double,\n\t\tmsft_hostidname as string,\n\t\tmanagerphone as string,\n\t\taddress3_city as string,\n\t\tmsa_managingpartneridyominame as string,\n\t\tparentcustomeridname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\trts_dose1clinic as string,\n\t\taddress2_city as string,\n\t\tutcconversiontimezonecode as long,\n\t\taddress3_name as string,\n\t\towningbusinessunitname as string,\n\t\tadx_identity_lastsuccessfullogin as timestamp,\n\t\tadx_identity_securitystamp as string,\n\t\tbusinesscard as string,\n\t\tspousesname as string,\n\t\tcreatedon as timestamp,\n\t\ttransactioncurrencyidname as string,\n\t\taddress2_line3 as string,\n\t\tmastercontactidname as string,\n\t\taddress2_line1 as string,\n\t\trts_dose1appttime as timestamp,\n\t\taddress1_city as string,\n\t\tfirstname as string,\n\t\tbusiness2 as string,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\taddress3_latitude as double,\n\t\tcreatedbyname as string,\n\t\toverriddencreatedon as timestamp,\n\t\trts_dose1admin as string,\n\t\tmanagername as string,\n\t\trts_dose1batch as string,\n\t\tmsdyn_portaltermsagreementdate as timestamp,\n\t\trts_dacecostcenter as string,\n\t\tmsft_hostname as string,\n\t\tmsft_defaultareaidname as string,\n\t\taddress1_addressid as string,\n\t\trts_dose2vis as string,\n\t\tassistantphone as string,\n\t\taccountidyominame as string,\n\t\trts_dose2serialno as string,\n\t\tpreferredequipmentidname as string,\n\t\tadx_identity_username as string,\n\t\taddress2_addressid as string,\n\t\taddress2_country as string,\n\t\trts_msft_employeecasename as string,\n\t\trts_responsibleadult as string,\n\t\tadx_modifiedbyipaddress as string,\n\t\tslaname as string,\n\t\tsubscriptionid as string,\n\t\tyomimiddlename as string,\n\t\trts_legalfirstname as string,\n\t\tassistantname as string,\n\t\tonholdtime as long,\n\t\trts_contractorcode as string,\n\t\trts_preferredmiddlename as string,\n\t\taddress1_stateorprovince as string,\n\t\taddress3_line2 as string,\n\t\taddress2_postofficebox as string,\n\t\tadx_profilealertdate as timestamp,\n\t\trts_dose2gtin as string,\n\t\tentityimageid as string,\n\t\taddress3_telephone1 as string,\n\t\taddress3_telephone2 as string,\n\t\taddress3_telephone3 as string,\n\t\temployeeid as string,\n\t\taddress1_primarycontactname as string,\n\t\tmodifiedbyyominame as string,\n\t\taddress1_line1 as string,\n\t\trts_dacestudentcode as string,\n\t\tmodifiedbyexternalpartyyominame as string,\n\t\tchildrensnames as string,\n\t\trts_dailypassexpireson as timestamp,\n\t\taccountidname as string,\n\t\trts_primaryphonenumber as string,\n\t\tnickname as string,\n\t\tsalutation as string,\n\t\trts_gradelevel as string,\n\t\taddress1_telephone1 as string,\n\t\taddress1_telephone2 as string,\n\t\taddress1_telephone3 as string,\n\t\trts_dose1vaccinetime as timestamp,\n\t\taddress3_postofficebox as string,\n\t\tprocessid as string,\n\t\taddress1_longitude as double,\n\t\tmsft_userid as string,\n\t\tmodifiedon as timestamp,\n\t\tfax as string,\n\t\tbirthdate as timestamp,\n\t\tcreatedonbehalfbyname as string,\n\t\trts_dose1serialno as string,\n\t\trts_legalmiddlename as string,\n\t\taddress3_fax as string,\n\t\trts_dose1mfg as string,\n\t\trts_dose2amount as string,\n\t\taddress2_primarycontactname as string,\n\t\tadx_createdbyusername as string,\n\t\temailaddress2 as string,\n\t\temailaddress1 as string,\n\t\trts_dose1amount as string,\n\t\taddress1_utcoffset as long,\n\t\tmastercontactidyominame as string,\n\t\toriginatingleadidyominame as string,\n\t\trts_dose2mfg as string,\n\t\ttelephone3 as string,\n\t\tentityimage_url as string,\n\t\tmsft_hostidyominame as string,\n\t\tadx_timezone as long,\n\t\taddress1_fax as string,\n\t\tcontactid as string,\n\t\tmobilephone as string,\n\t\taddress1_county as string,\n\t\tpager as string,\n\t\tlastonholdtime as timestamp,\n\t\tadx_profilelastactivity as timestamp,\n\t\tversionnumber as long,\n\t\tadx_publicprofilecopy as string,\n\t\taddress3_line1 as string,\n\t\taddress3_utcoffset as long,\n\t\trts_dose1expirationdate as timestamp,\n\t\thome2 as string,\n\t\trts_dose2route as string,\n\t\towneridyominame as string,\n\t\trts_mostrecentapptidname as string,\n\t\tdefaultpricelevelidname as string,\n\t\ttelephone2 as string,\n\t\tadx_modifiedbyusername as string,\n\t\trts_dose1logistition as string,\n\t\tlastusedincampaign as timestamp,\n\t\trts_preferredfirstname as string,\n\t\ttelephone1 as string,\n\t\tyomilastname as string,\n\t\trts_dose1lotnumber as string,\n\t\toriginatingleadidname as string,\n\t\texchangerate as decimal(18,2),\n\t\tnumberofchildren as long,\n\t\trts_parentportalcode as string,\n\t\taddress3_upszone as string,\n\t\taddress2_telephone2 as string,\n\t\tjobtitle as string,\n\t\trts_dose1route as string,\n\t\tadx_organizationname as string,\n\t\trts_mostrecentdpdate as timestamp,\n\t\trts_latesttestpositivedate as timestamp,\n\t\trts_dose1gtin as string,\n\t\tmsft_assignedareaidname as string,\n\t\taddress1_postofficebox as string,\n\t\tcreatedbyexternalpartyname as string,\n\t\tfullname as string,\n\t\trts_dose2appttime as timestamp,\n\t\taddress3_country as string,\n\t\taddress1_composite as string,\n\t\tparentcustomeridtype as string,\n\t\tentityimage_timestamp as long,\n\t\tteamsfollowed as long,\n\t\ttimespentbymeonemailandmeetings as string,\n\t\tadx_identity_lockoutenddate as timestamp,\n\t\taddress1_latitude as double,\n\t\tadx_preferredlanguageidname as string,\n\t\taddress3_postalcode as string,\n\t\taddress2_longitude as double,\n\t\taddress3_stateorprovince as string,\n\t\tparentcontactidyominame as string,\n\t\taddress1_country as string,\n\t\trts_vaccinewasreceived as string,\n\t\towneridtype as string,\n\t\ttraversedpath as string,\n\t\taddress2_line2 as string,\n\t\taddress3_addressid as string,\n\t\timportsequencenumber as long,\n\t\trts_dose2admin as string,\n\t\tadx_profilealertinstructions as string,\n\t\trts_dose1vis as string,\n\t\tdescription as string,\n\t\tmiddlename as string,\n\t\trts_dose2clinic as string,\n\t\tadx_profilemodifiedon as timestamp,\n\t\tmsft_company as string,\n\t\tftpsiteurl as string,\n\t\tpreferredsystemuseridname as string,\n\t\tmodifiedbyexternalpartyname as string,\n\t\tpreferredsystemuseridyominame as string,\n\t\tbusinesscardattributes as string,\n\t\trts_ecedstudentcode as string,\n\t\trts_activetestprompteddate as timestamp,\n\t\taddress3_longitude as double,\n\t\taddress1_upszone as string,\n\t\texternaluseridentifier as string,\n\t\tslainvokedidname as string,\n\t\temailaddress3 as string,\n\t\tmodifiedbyname as string,\n\t\taddress2_county as string,\n\t\tpreferredserviceidname as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\tcallback as string,\n\t\tmsa_managingpartneridname as string,\n\t\trts_dose2expirationdate as timestamp,\n\t\tdepartment as string,\n\t\tsuffix as string,\n\t\tanniversary as timestamp,\n\t\trts_legallastname as string,\n\t\trts_costcentercode as string,\n\t\taddress2_stateorprovince as string,\n\t\trts_dose2site as string,\n\t\trts_dose1site as string,\n\t\taddress2_fax as string,\n\t\trts_studentcode as string,\n\t\taddress2_upszone as string,\n\t\taddress3_county as string,\n\t\tcreatedbyexternalpartyyominame as string,\n\t\taddress3_line3 as string,\n\t\taddress1_line3 as string,\n\t\tcreatedbyyominame as string,\n\t\towneridname as string,\n\t\tadx_identity_passwordhash as string,\n\t\tadx_createdbyipaddress as string,\n\t\tstageid as string,\n\t\trts_repofunionname as string,\n\t\tyomifullname as string,\n\t\trts_dob_year as string,\n\t\trts_emergencycontact as string,\n\t\taddress2_name as string,\n\t\trts_datevaccinated as timestamp,\n\t\trts_preferredlastname as string,\n\t\trts_unionname as string,\n\t\tmsft_defaultfacilityidname as string,\n\t\taddress1_line2 as string,\n\t\twebsiteurl as string,\n\t\tyomifirstname as string,\n\t\tgovernmentid as string,\n\t\tparentcontactidname as string,\n\t\tadx_identity_newpassword as string,\n\t\taddress3_composite as string,\n\t\trts_dose2logistition as string,\n\t\trts_dose2batch as string,\n\t\trts_dpfacilityidname as string,\n\t\taddress2_utcoffset as long,\n\t\trts_autonumber as string,\n\t\tcompany as string,\n\t\trts_emergencycontactphone as string,\n\t\tadx_identity_accessfailedcount as long,\n\t\taddress2_telephone1 as string,\n\t\taddress2_telephone3 as string,\n\t\tlastname as string,\n\t\trts_dose2vaccinetime as timestamp,\n\t\trts_dose2lotnumber as string,\n\t\ttimezoneruleversionnumber as long,\n\t\taddress1_name as string,\n\t\tparentcustomeridyominame as string,\n\t\taddress1_postalcode as string,\n\t\taddress2_composite as string,\n\t\taddress3_primarycontactname as string,\n\t\taddress2_postalcode as string,\n\t\tIsDelete as boolean,\n\t\trts_consentforcovidvaccination as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'contact',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','MM/dd/yyyy HH:mm']) ~> oneContact\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_covid19positivetest as long,\n\t\trts_covid19testresult as long,\n\t\trts_nauseaorvomiting as long,\n\t\tmsft_riskassesment as long,\n\t\trts_closecontacttestingstatus as long,\n\t\trts_deceased_choice as long,\n\t\trts_newlossoftasteorsmell as long,\n\t\trts_casecategory as long,\n\t\trts_fatigue as long,\n\t\trts_muscleorbodyaches as long,\n\t\trts_unknowntype as long,\n\t\trts_cough as long,\n\t\trts_preferredlanguage as long,\n\t\trts_caseaffiliationtoedu as long,\n\t\trts_hospitalized_case as long,\n\t\trts_congestionorrunnynose as long,\n\t\trts_shortnessofbreathdifficultybreathing as long,\n\t\trts_contactinvestigationstatus as long,\n\t\trts_isschool as long,\n\t\trts_casetype as long,\n\t\trts_educationalgroup as long,\n\t\trts_countyofresidence as long,\n\t\trts_personexperiencinghomelessnesspeh as long,\n\t\trts_gender as long,\n\t\trts_fever as long,\n\t\trts_closecontactquarantinestatus as long,\n\t\trts_confirmedorsuspected as long,\n\t\trts_sorethroat as long,\n\t\trts_chills as long,\n\t\trts_diarrhea as long,\n\t\trts_casestatus as long,\n\t\trts_headache as long,\n\t\trts_assigned as boolean,\n\t\trts_contactedthesiteadministratorandaoo as boolean,\n\t\tmsft_isemployeeinstructionsprovided as boolean,\n\t\tmsft_isemployeecontacted as boolean,\n\t\tmsft_isscreened as boolean,\n\t\tmsft_ischeckinavailable as boolean,\n\t\trts_syncteam as boolean,\n\t\trts_hasthecasereceivedthecovid19vaccine as boolean,\n\t\trts_deceased as boolean,\n\t\trts_hospitalized as boolean,\n\t\trts_epilinked as boolean,\n\t\trts_asymptomatic as boolean,\n\t\trts_notifiedmotocleanaffectedareas as boolean,\n\t\trts_notifiedfamiliesandemployeesoftheschools as boolean,\n\t\tmsft_ispublichealthofficialnotified as boolean,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\trts_antigentest as string,\n\t\trts_antigentest_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\trts_cohortmember as string,\n\t\trts_cohortmember_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\trts_parentcaseid as string,\n\t\trts_parentcaseid_entitytype as string,\n\t\trts_labid as string,\n\t\trts_labid_entitytype as string,\n\t\trts_testid as string,\n\t\trts_testid_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\trts_emleadid as string,\n\t\trts_emleadid_entitytype as string,\n\t\tmsft_originatingcase as string,\n\t\tmsft_originatingcase_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\tmsft_employeeid as string,\n\t\tmsft_employeeid_entitytype as string,\n\t\trts_facility as string,\n\t\trts_facility_entitytype as string,\n\t\trts_celeadid as string,\n\t\trts_celeadid_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\trts_celeadidname as string,\n\t\tversionnumber as long,\n\t\trts_facilityname as string,\n\t\trts_parentguardianphonenumber as string,\n\t\trts_parentcaseidname as string,\n\t\towningbusinessunitname as string,\n\t\trts_pehlocation as string,\n\t\tutcconversiontimezonecode as long,\n\t\tmsft_checkinavailabledate as timestamp,\n\t\trts_labidname as string,\n\t\trts_symptomonsetdate as timestamp,\n\t\trts_notes as string,\n\t\trts_specifycaseaffiliationtoeducationsetting as string,\n\t\trts_lastdateofexposuretoindexcase as timestamp,\n\t\tmodifiedbyyominame as string,\n\t\tmodifiedon as timestamp,\n\t\trts_attemptstocontacttodate as long,\n\t\towneridyominame as string,\n\t\trts_cohortmembername as string,\n\t\trts_attemptstocontacttoday as long,\n\t\trts_parentguardianzipcode as string,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\trts_closeddate as timestamp,\n\t\tmsft_processstage as string,\n\t\trts_quarantinestartdate as timestamp,\n\t\towneridtype as string,\n\t\trts_emleadidyominame as string,\n\t\trts_nameofeducationgroup as string,\n\t\tcreatedbyname as string,\n\t\trts_emleadidname as string,\n\t\trts_parentguardianstreetaddress as string,\n\t\trts_covid19testdate as timestamp,\n\t\tcreatedon as timestamp,\n\t\toverriddencreatedon as timestamp,\n\t\trts_testidname as string,\n\t\tcreatedbyyominame as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\trts_age as long,\n\t\trts_vcmrid as string,\n\t\trts_parentguardianfirstname as string,\n\t\tmsft_firsttimeinvestigation as timestamp,\n\t\tmsft_duration as long,\n\t\tcreatedonbehalfbyyominame as string,\n\t\trts_specifyothercontactinvestigationstatus as string,\n\t\tmsft_employeeidyominame as string,\n\t\tmodifiedbyname as string,\n\t\tprocessid as string,\n\t\trts_antigentestname as string,\n\t\trts_isolationstartdate as timestamp,\n\t\tmsft_firsttimeemployeecontacted as timestamp,\n\t\trts_educationgroupotherspleasespecify as string,\n\t\timportsequencenumber as long,\n\t\tmsft_employeeidname as string,\n\t\tmsft_employeecaseid as string,\n\t\tcreatedonbehalfbyname as string,\n\t\trts_lastdateateducationsetting as timestamp,\n\t\trts_parentguardiancity as string,\n\t\tmsft_lastcontactsuggestiondate as timestamp,\n\t\trts_celeadidyominame as string,\n\t\towneridname as string,\n\t\tmsft_originatingcasename as string,\n\t\tmsft_checkinblockednote as string,\n\t\trts_parentguardianlastname as string,\n\t\tstageid as string,\n\t\ttimezoneruleversionnumber as long,\n\t\ttraversedpath as string,\n\t\tmsft_casenumber as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'msft_employeecase',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','MM/dd/yyyy HH:mm']) ~> oneCases\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_portalpersontype as long,\n\t\trts_firsttest as long,\n\t\trts_dob_day as long,\n\t\trts_hospitalized as long,\n\t\trts_symptomaticasdefinedbycdc as long,\n\t\trts_externaltolausdtesting as long,\n\t\trts_falsepositve as long,\n\t\trts_icu as long,\n\t\trts_haveyoubeenatlainlast14days as long,\n\t\trts_pregnant as long,\n\t\trts__dob_month as long,\n\t\trts_externaltestreportreviewstatus as long,\n\t\trts_employedinhealthcare as long,\n\t\trts_testtype as long,\n\t\trts_result as long,\n\t\trts_residentinacongregatecaresetting as long,\n\t\trts_exported as boolean,\n\t\trts_smssent as boolean,\n\t\trts_resultviewedonportal as boolean,\n\t\trts_testingprovidedbylausd as boolean,\n\t\trts_emailsent as boolean,\n\t\trts_labid as string,\n\t\trts_labid_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\trts_testlocationid as string,\n\t\trts_testlocationid_entitytype as string,\n\t\trts_defaultfacilityid as string,\n\t\trts_defaultfacilityid_entitytype as string,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\trts_contractoruser as string,\n\t\trts_contractoruser_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\trts_contactid as string,\n\t\trts_contactid_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\trts_dob_year as string,\n\t\trts_count as long,\n\t\trts_recordguid as string,\n\t\towningbusinessunitname as string,\n\t\tcreatedbyname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\trts_contactidyominame as string,\n\t\trts_resultdate as timestamp,\n\t\towneridtype as string,\n\t\tmodifiedon as timestamp,\n\t\trts_confirmdob as timestamp,\n\t\trts_name as string,\n\t\tmodifiedbyname as string,\n\t\trts_testdate as timestamp,\n\t\trts_contractoruseryominame as string,\n\t\trts_addadditionaldetails as string,\n\t\trts_labidname as string,\n\t\trts_portaltestdate as timestamp,\n\t\trts_downloadreport as string,\n\t\trts_studentid as string,\n\t\trts_exportbatch as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\trts_dateofsymptomonset as timestamp,\n\t\trts_defaultfacilityidname as string,\n\t\towneridyominame as string,\n\t\trts_specimencode as string,\n\t\towneridname as string,\n\t\timportsequencenumber as long,\n\t\tmodifiedbyyominame as string,\n\t\trts_contractorusername as string,\n\t\tutcconversiontimezonecode as long,\n\t\trts_testlocationidname as string,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\trts_postalcode as string,\n\t\tcr7cd_trigger as string,\n\t\trts_portalresultdate as timestamp,\n\t\trts_testid as string,\n\t\trts_manualsmstrigger as string,\n\t\ttimezoneruleversionnumber as long,\n\t\toverriddencreatedon as timestamp,\n\t\trts_whichareasofthesite as string,\n\t\tcreatedbyyominame as string,\n\t\trts_lastdateyouwerethere as timestamp,\n\t\tcreatedon as timestamp,\n\t\tversionnumber as long,\n\t\trts_manualemailtrigger as string,\n\t\trts_resultinterpretation as string,\n\t\trts_studentfirstname as string,\n\t\trts_contactidname as string,\n\t\tcreatedonbehalfbyname as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'rts_test',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','MM/dd/yyyy HH:mm']) ~> oneTests\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_agreetodisclaimer as long,\n\t\trts_doyouagreetocommittothesafestbehaviors as long,\n\t\trts_areyoufullyvaccinated as long,\n\t\trts_areyoufeelinganycovid19symptoms as long,\n\t\trts_doyouagreetothestatementsbelowaround as long,\n\t\trts_passissued as long,\n\t\tmsft_attested as long,\n\t\trts_traveledoutsideofcaliforniainthepast10day as long,\n\t\trts_contactwithanyonewithaconfirmedorsuspect as long,\n\t\trts_checkedin as boolean,\n\t\trts_emailsent as boolean,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\trts_checkedinlocation as string,\n\t\trts_checkedinlocation_entitytype as string,\n\t\tmsft_employeebookingid as string,\n\t\tmsft_employeebookingid_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\tmsft_employeecaseid as string,\n\t\tmsft_employeecaseid_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\tmsft_facilityid as string,\n\t\tmsft_facilityid_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\tmsft_employeeid as string,\n\t\tmsft_employeeid_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\trts_addressline1 as string,\n\t\trts_city as string,\n\t\trts_checkedinlocationname as string,\n\t\trts_lastname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\trts_mobilephone as string,\n\t\trts_attestationdate as timestamp,\n\t\tmodifiedbyyominame as string,\n\t\toverriddencreatedon as timestamp,\n\t\tmsft_name as string,\n\t\tmodifiedon as timestamp,\n\t\tmsft_employeebookingidname as string,\n\t\tmsft_employeeattestationid as string,\n\t\trts_checkedindate as timestamp,\n\t\ttimezoneruleversionnumber as long,\n\t\tmsft_employeeidyominame as string,\n\t\trts_dob as timestamp,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\towningbusinessunitname as string,\n\t\tcreatedbyname as string,\n\t\tmsft_attestationdate as timestamp,\n\t\tversionnumber as long,\n\t\timportsequencenumber as long,\n\t\towneridname as string,\n\t\trts_middlename as string,\n\t\tcreatedon as timestamp,\n\t\tutcconversiontimezonecode as long,\n\t\trts_stateorprovince as string,\n\t\trts_addressline2 as string,\n\t\trts_email as string,\n\t\tmsft_facilityidname as string,\n\t\tcreatedonbehalfbyname as string,\n\t\tmodifiedbyname as string,\n\t\tmsft_employeecaseidname as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\tmsft_employeeidname as string,\n\t\tcreatedbyyominame as string,\n\t\trts_firstname as string,\n\t\trts_postalcode as string,\n\t\towneridtype as string,\n\t\towneridyominame as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'msft_employeeattestation',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','MM/dd/yyyy HH:mm']) ~> oneSurvey\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_inclosecontactlast14days as long,\n\t\trts_islausdcommunity as long,\n\t\trts_outsideofsoutherncalifornia10d as long,\n\t\trts_willyouaccompany as long,\n\t\trts_testtype as long,\n\t\trts_ethnicity as long,\n\t\trts_amorpm as long,\n\t\trts_haveyoubeenatanlaunifiedsiteinthelast14 as long,\n\t\trts_consent as long,\n\t\trts_validdob as long,\n\t\trts_gender as long,\n\t\trts_dob_day as long,\n\t\trts_race as long,\n\t\trts_registeringlausdstudent as long,\n\t\trts_employedinhealthcare as long,\n\t\trts_symptomaticasdefinedbycdc as long,\n\t\trts_firsttest as long,\n\t\trts_istesting as long,\n\t\trts_dob_month as long,\n\t\trts_authorize as long,\n\t\trts_applanguage as long,\n\t\trts_positiveinlast14 as long,\n\t\trts_pregnant as long,\n\t\trts_multireg as long,\n\t\trts_doyouauthorizedependent as long,\n\t\trts_istestedpositive as long,\n\t\trts_takenfinaldose as long,\n\t\trts_underquarantineorisolationorder as long,\n\t\trts_primaryphonetype as long,\n\t\trts_residentinacongregatecaresetting as long,\n\t\trts_isphoneappt as boolean,\n\t\trts_textmessages as boolean,\n\t\trts_emailsent as boolean,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\trts_createdbyid as string,\n\t\trts_createdbyid_entitytype as string,\n\t\trts_testdateid as string,\n\t\trts_testdateid_entitytype as string,\n\t\trts_testtimeid as string,\n\t\trts_testtimeid_entitytype as string,\n\t\trts_parenttestappointmentid as string,\n\t\trts_parenttestappointmentid_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\trts_testlocationid as string,\n\t\trts_testlocationid_entitytype as string,\n\t\torganizationid as string,\n\t\torganizationid_entitytype as string,\n\t\trts_contactid as string,\n\t\trts_contactid_entitytype as string,\n\t\tversionnumber as long,\n\t\tcreatedon as timestamp,\n\t\trts_schooltext as string,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\trts_testdateidname as string,\n\t\trts_email as string,\n\t\tmodifiedbyyominame as string,\n\t\trts_dateofsymptomonset as timestamp,\n\t\trts_schoolssites as string,\n\t\trts_firstname as string,\n\t\trts_mobilephone as string,\n\t\trts_parenttestappointmentidname as string,\n\t\trts_dob as timestamp,\n\t\toverriddencreatedon as timestamp,\n\t\trts_testappointmentid as string,\n\t\trts_createdbyidyominame as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\trts_responsibleadult as string,\n\t\trts_totalguests as long,\n\t\trts_nameoftheresponsible as string,\n\t\ttimezoneruleversionnumber as long,\n\t\trts_name as string,\n\t\trts_postalcode as string,\n\t\trts_addressline2 as string,\n\t\trts_stateorprovince as string,\n\t\tcreatedonbehalfbyname as string,\n\t\trts_contactidname as string,\n\t\tutcconversiontimezonecode as long,\n\t\trts_testlocationidname as string,\n\t\tmodifiedon as timestamp,\n\t\timportsequencenumber as long,\n\t\trts_lastname as string,\n\t\trts_createdbyidname as string,\n\t\tcreatedbyname as string,\n\t\trts_testdatetime as timestamp,\n\t\tmodifiedonbehalfbyname as string,\n\t\trts_testtimeidname as string,\n\t\trts_city as string,\n\t\trts_addressline1 as string,\n\t\trts_studentcode as string,\n\t\tcreatedbyyominame as string,\n\t\trts_dob_year as string,\n\t\trts_guestlist as string,\n\t\trts_contactidyominame as string,\n\t\trts_primaryphonenumber as string,\n\t\tmodifiedbyname as string,\n\t\torganizationidname as string,\n\t\trts_middlename as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'rts_testappointment',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','MM/dd/yyyy HH:mm']) ~> oneAppointment\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_areyoufullyvaccinated as long,\n\t\trts_doyouagreetothestatementsbelowaround as long,\n\t\trts_traveledoutsideofcaliforniainthepast10day as long,\n\t\trts_contactwithanyonewithaconfirmedorsuspect as long,\n\t\trts_doyouagreetocommittothesafestbehaviors as long,\n\t\trts_areyoufeelinganycovid19symptoms as long,\n\t\trts_passissued as long,\n\t\trts_applanguage as long,\n\t\trts_checkedin as boolean,\n\t\tmsft_attested as boolean,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tmsft_guestregistrationid as string,\n\t\tmsft_guestregistrationid_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\tmsft_hostid as string,\n\t\tmsft_hostid_entitytype as string,\n\t\trts_checkedinlocation as string,\n\t\trts_checkedinlocation_entitytype as string,\n\t\tmsft_facilityid as string,\n\t\tmsft_facilityid_entitytype as string,\n\t\tmsft_guestid as string,\n\t\tmsft_guestid_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\tcreatedonbehalfbyname as string,\n\t\ttimezoneruleversionnumber as long,\n\t\towneridtype as string,\n\t\tversionnumber as long,\n\t\tmodifiedonbehalfbyname as string,\n\t\tmsft_name as string,\n\t\tmsft_hostname as string,\n\t\tmodifiedbyyominame as string,\n\t\tmsft_guestregistrationidname as string,\n\t\tmsft_facilityidname as string,\n\t\tmsft_attestationdate as timestamp,\n\t\tmsft_hostidyominame as string,\n\t\timportsequencenumber as long,\n\t\tcreatedon as timestamp,\n\t\tmsft_guestidname as string,\n\t\tcreatedbyyominame as string,\n\t\tmsft_guestattestationid as string,\n\t\toverriddencreatedon as timestamp,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\trts_checkedinlocationname as string,\n\t\towneridyominame as string,\n\t\tmsft_guestidyominame as string,\n\t\tcreatedbyname as string,\n\t\tutcconversiontimezonecode as long,\n\t\tmodifiedbyname as string,\n\t\trts_checkedindate as timestamp,\n\t\tmodifiedon as timestamp,\n\t\towningbusinessunitname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\tmsft_hostidname as string,\n\t\towneridname as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'msft_guestattestation',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','MM/dd/yyyy HH:mm']) ~> getGuestSurvey\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_dose2covidvaccinemanufacturer as long,\n\t\trts_portalpersontype as long,\n\t\trts_vaccinationreviewstatus as long,\n\t\trts_dose2covidmanufacturer as long,\n\t\trts_dose2sourcesystem as long,\n\t\trts_dose1sourcesystem as long,\n\t\trts_day as long,\n\t\trts_dose1covidmanufacturer as long,\n\t\trts_month as long,\n\t\trts_externaltolausdvras as boolean,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\trts_approvedbyid as string,\n\t\trts_approvedbyid_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\trts_person as string,\n\t\trts_person_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\trts_dose2appointmenttime as timestamp,\n\t\trts_dose1vis as string,\n\t\trts_dose2location as string,\n\t\trts_dose2serialnumber as string,\n\t\trts_dose1vaccinetime as timestamp,\n\t\trts_dose1manufacturer as string,\n\t\tcreatedbyname as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\trts_dose2route as string,\n\t\towneridtype as string,\n\t\tmodifiedon as timestamp,\n\t\trts_covidvaccineid as string,\n\t\trts_name as string,\n\t\tmodifiedbyname as string,\n\t\trts_extvaccinerecord as string,\n\t\trts_downloadreport as string,\n\t\trts_dose2administrator as string,\n\t\trts_dose1location as string,\n\t\trts_studentid as string,\n\t\trts_dose2manufacturer as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\towneridyominame as string,\n\t\trts_extvaccinerecord_name as string,\n\t\trts_dose2expirationdate as timestamp,\n\t\towneridname as string,\n\t\timportsequencenumber as long,\n\t\tmodifiedbyyominame as string,\n\t\trts_dose1clinic as string,\n\t\trts_dose2batch as string,\n\t\trts_approvedbyidname as string,\n\t\trts_approvedon as timestamp,\n\t\trts_dose2vaccinetime as timestamp,\n\t\trts_dose2vis as string,\n\t\trts_dose1amount as double,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\trts_dose2gtin as string,\n\t\trts_dose1batch as string,\n\t\trts_dose1route as string,\n\t\trts_dose1appointmenttime as timestamp,\n\t\trts_dose1lotnumber as string,\n\t\ttimezoneruleversionnumber as long,\n\t\trts_studentfisrstname as string,\n\t\trts_dose1expirationdate as timestamp,\n\t\trts_personname as string,\n\t\trts_dose2amount as double,\n\t\toverriddencreatedon as timestamp,\n\t\trts_dose2clinic as string,\n\t\tutcconversiontimezonecode as long,\n\t\towningbusinessunitname as string,\n\t\tcreatedbyyominame as string,\n\t\tcreatedon as timestamp,\n\t\tversionnumber as long,\n\t\trts_dose1gtin as string,\n\t\trts_personyominame as string,\n\t\trts_approvedbyidyominame as string,\n\t\trts_year as string,\n\t\trts_dose2lotnumber as string,\n\t\trts_dose1administrator as string,\n\t\trts_dose1logistician as string,\n\t\trts_dose1serialnumber as string,\n\t\tcreatedonbehalfbyname as string,\n\t\trts_dose2logistician as string,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tignoreNoFilesFound: false,\n\tentity: 'rts_covidvaccine',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280',\n\tdateFormats: ['MM/dd/yyyy','dd/MM/yyyy','yyyy/MM/dd'],\n\ttimestampFormats: ['MM/dd/yyyy HH:mm:ss','MM/dd/yyyy hh:mm:ss a','yyyy-MM-dd','MM-dd-yyyy HH:mm:ss','MM-dd-yyyy hh:mm:ss a','yyyy.MM.dd HH:mm:ss','yyyy.MM.dd hh:mm:ss a','yyyy-MM-dd\\'T\\'HH:mm:ss','yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'','yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'']) ~> VaccineSource2\nsource(output(\n\t\tId as string,\n\t\tSinkCreatedOn as timestamp,\n\t\tSinkModifiedOn as timestamp,\n\t\tstatecode as long,\n\t\tstatuscode as long,\n\t\trts_assignedlocation as boolean,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\towningteam as string,\n\t\towningteam_entitytype as string,\n\t\tmsft_employeecaseid as string,\n\t\tmsft_employeecaseid_entitytype as string,\n\t\towninguser as string,\n\t\towninguser_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\tmsft_facilityid as string,\n\t\tmsft_facilityid_entitytype as string,\n\t\towningbusinessunit as string,\n\t\towningbusinessunit_entitytype as string,\n\t\tmodifiedby as string,\n\t\tmodifiedby_entitytype as string,\n\t\tcreatedby as string,\n\t\tcreatedby_entitytype as string,\n\t\townerid as string,\n\t\townerid_entitytype as string,\n\t\tcreatedonbehalfbyyominame as string,\n\t\towneridname as string,\n\t\tmsft_comment as string,\n\t\timportsequencenumber as long,\n\t\tmsft_facilityidname as string,\n\t\tmsft_casefacilityid as string,\n\t\tmsft_employeecaseidname as string,\n\t\tcreatedbyyominame as string,\n\t\tmodifiedbyname as string,\n\t\tversionnumber as long,\n\t\tmodifiedbyyominame as string,\n\t\ttimezoneruleversionnumber as long,\n\t\towneridtype as string,\n\t\towneridyominame as string,\n\t\tmodifiedon as timestamp,\n\t\tmodifiedonbehalfbyyominame as string,\n\t\tcreatedbyname as string,\n\t\tcreatedon as timestamp,\n\t\towningbusinessunitname as string,\n\t\tcreatedonbehalfbyname as string,\n\t\tmodifiedonbehalfbyname as string,\n\t\tmsft_dateto as timestamp,\n\t\tmsft_fatefrom as timestamp,\n\t\tmsft_name as string,\n\t\toverriddencreatedon as timestamp,\n\t\tutcconversiontimezonecode as long,\n\t\tIsDelete as boolean\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tentity: 'msft_casefacility',\n\tformat: 'cdm',\n\tmanifestType: 'model',\n\tfolderPath: '',\n\tfileSystem: 'dataverse-lausdrtsprod-org8533b280') ~> OneCaseFacility\nsource(output(\n\t\t{Campus LC} as string,\n\t\t{Campus Name} as string,\n\t\t{Cohort Type} as string,\n\t\t{District ID} as string,\n\t\tFirstName as string,\n\t\tGrade as string,\n\t\t{Group Category} as string,\n\t\t{Group Subcategory} as string,\n\t\tGroupEndDate as string,\n\t\tGroupLeader as string,\n\t\tGroupLeader_ID as string,\n\t\tGroupName as string,\n\t\tGroupStartDate as string,\n\t\t{Instructional Program} as string,\n\t\t{Instructional Program End Date} as string,\n\t\t{Instructional Program Start Date} as string,\n\t\tIsStudentSpecialEd as string,\n\t\tLastName as string,\n\t\tLC as string,\n\t\tLD as string,\n\t\tPrincipalEmail as string,\n\t\tPrincipalName as string,\n\t\t{School Name} as string,\n\t\t{Student Group End Date} as string,\n\t\t{Student Group Start Date} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> CohortElementarySchoolData\nsource(output(\n\t\tLOCAL_DISTRICT as string,\n\t\tCOS_NAME as string,\n\t\tCOST_CENTER_CODE as string,\n\t\tLOCATION_CODE as string,\n\t\tLOCATION_NAME as string,\n\t\tSTUDENT_DISTRICT_ID as string,\n\t\tSTD_FIRST_NAME as string,\n\t\tSTD_LAST_NAME as string,\n\t\tGRADE_CODE as string,\n\t\tBIRTHDATE as string,\n\t\tCOURSE_TITLE as string,\n\t\tCOURSE_CATALOG_NUMBER as string,\n\t\tSECTION_NUMBER_CODE as string,\n\t\tCOHORT_SECTION_NUMBER_CODE as string,\n\t\tCLASS_PERIOD_CODE as string,\n\t\tTEACHER_ID as string,\n\t\tTCH_LAST_NAME as string,\n\t\tTCH_FIRST_NAME as string,\n\t\tCLASS_ROOM_CODE as string,\n\t\tMISIS_CLASS_BEGIN_DATE as string,\n\t\tMISIS_CLASS_END_DATE as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> CohortSecondarySchoolData\nsource(output(\n\t\tDISTRICT_STUDENT_ID as string,\n\t\tFIRST_NAME as string,\n\t\tLAST_NAME as string,\n\t\tMIDDLE_NAME as string,\n\t\tADDRESS_LINE_TXT as string,\n\t\tHOME_PHONE_NUMBER as long,\n\t\tBIRTHDATE as string,\n\t\tETHNICITY_DESCR as string,\n\t\tRACE_DESCR as string,\n\t\tGENDER_CODE as string,\n\t\tZIP_CODE as string,\n\t\tCITY_NAME as string,\n\t\tMODIFIED_DATE as string,\n\t\tEMAILID as string,\n\t\tCOST_CENTER_CODE as integer,\n\t\tSEXUAL_ORIENT as string,\n\t\tEMERGENCY_PHONE as long,\n\t\tGRADE_CODE as short\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Grades\nFilter3 select(mapColumn(\n\t\t{Facility Dynamics ID} = msft_facilityid,\n\t\t{Facility State Code} = statecode,\n\t\t{Facility Number} = msft_facilitynumber,\n\t\t{Facility Latitude} = msft_addresslatitude,\n\t\t{Facility Longitude} = msft_addresslongitude,\n\t\t{Facility Number} = msft_facilitynumber,\n\t\t{Facility Name} = msft_name,\n\t\t{Facility Campus Name} = rts_campusname,\n\t\t{Facility Campus Code} = rts_campuscode,\n\t\trts_ld,\n\t\trts_physicalcos\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoFacility\ntwoFacility derive({Facility Location Number} = substring({Facility Number}, 2, 4)) ~> threeFacility\nFilter6 select(mapColumn(\n\t\t{Test Number} = rts_name,\n\t\t{Test Result} = rts_result,\n\t\t{Test Created On} = createdon,\n\t\t{Test Person Dynamics ID} = rts_contactid,\n\t\t{Test Type} = rts_testtype,\n\t\t{Testing Provided By LAUSD} = rts_testingprovidedbylausd,\n\t\tExternalTestReportReviewStatus = rts_externaltestreportreviewstatus,\n\t\t{External Test Date} = rts_testdate,\n\t\tstatuscode,\n\t\t{Test Result Date} = rts_resultdate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoTests\nFilter2 select(mapColumn(\n\t\t{Survey Person ID} = msft_employeeid,\n\t\t{Survey Pass Issued} = rts_passissued,\n\t\t{Survey Created On} = createdon,\n\t\t{Survey Checked In} = rts_checkedin,\n\t\t{Survey Checked In Date} = rts_checkedindate,\n\t\t{Survey Location} = msft_facilityid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoSurvey\nFilterNulls select(mapColumn(\n\t\t{Appointment Person ID} = rts_contactid,\n\t\t{Appointment Number} = rts_name,\n\t\t{Appointment Datetime} = rts_testdatetime\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoAppointment\nTestDateToPST derive({Test Created On External} = case(    !isNull({External Test Date}), toDate({External Test Date}), toDate({Test Created On}))) ~> TestCreatedOn\nFilter1MonthsDataOneSurve derive({Survey Pass Issued} = toBoolean(case(    {Survey Pass Issued}==180360000, \"yes\",    {Survey Pass Issued}==180360001, \"no\"    )),\n\t\t{Survey Created On} = fromUTC({Survey Created On},'PST')) ~> threeSurvey\ntwoAppointment derive({Appointment Date} = toDate(fromUTC({Appointment Datetime},'PST')),\n\t\t{Appointment Time} = toTimestamp(split(toString({Appointment Datetime}), ' ')[2], 'HH\"mm a', 'PST'),\n\t\tCurrent_Date = toDate(fromUTC(currentTimestamp(),'PST'))) ~> threeAppointment\nFilterInactivePersonAndNullCostCenterMapping derive({Person Type} = case(\n    {Person Type} == 180360000, \"Employee\",\n    {Person Type} == 180360001, \"Book Online - Dependent\",\n    {Person Type} == 180360002, \"Daily Pass - Guest\",\n    {Person Type} == 180360003, \"Test Reg\",\n    {Person Type} == 180360004, \"Test Reg - Minor\",\n    {Person Type} == 180360005, \"Book Online - Guest\",\n    {Person Type} == 180360006, \"Book Online - Guest Dependent\",\n    {Person Type} == 180360007, \"Student\",\n    {Person Type} == 180360008, \"Parent Portal\"\n),\n\t\t{Person Employee ID} = case(isNull({Person Employee ID}), {Person Student ID}, {Person Employee ID}),\n\t\t{Person Cost Center Code} = iifNull({Person Cost Center Code}, \"Invalid\",{Person Cost Center Code}),\n\t\t{Covid Testing for In Person Learning} = case(toString({Covid Test Without Parent}) == \"180360000\",     \"Yes\",toString({Covid Test Without Parent}) == \"180360001\",     \"No\",\"Missing\"),\n\t\tConsent = case(    Consent == 180360000,    \"Yes\",    Consent == 180360001,    \"No\"),\n\t\tAuthorize = case(   Authorize == 180360000,    \"Yes\",    Authorize == 180360001,    \"No\"),\n\t\t{Daily Pass For Dependents Under 13} = case(    {Daily Pass For Dependents Under 13} == 180360000,    \"Yes\",    {Daily Pass For Dependents Under 13} == 180360001,    \"No\",    {Daily Pass For Dependents Under 13} == 180360002,    \"N/A\"),\n\t\t{Unaccompanied Minor} = case(    {Unaccompanied Minor} == 180360000,    \"Yes\",    {Unaccompanied Minor} == 180360001,    \"No\",    {Unaccompanied Minor} == 180360002,    \"N/A\")) ~> DecodeValues\nFilte1MonthsDataGuestSurvey select(mapColumn(\n\t\t{Survey Checked In} = rts_checkedin,\n\t\t{Survey Person ID} = msft_guestid,\n\t\t{Survey Pass Issued} = msft_attested,\n\t\t{Survey Location} = msft_facilityid,\n\t\t{Survey Created On} = createdon\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoGuestSurvey\nDailyPass derive({Survey Pass Issued} = case({Survey Pass Issued},\"Yes\",\"No\"),\n\t\t{Survey Checked In} = case({Survey Checked In},\"Yes\",\"No\"),\n\t\tdatediff = minus(currentDate(),toDate(toString({Survey Created On},'yyyy-MM-dd'),'yyyy-MM-dd'))) ~> DerivedColumn2\nUnion3 derive({Case Status} = case(   {Case Status Code}==1, \"Open\",     \r\n        {Case Status Code}==2, \"Case Closed\",      /* Cleared to Return */\r\n        {Case Status Code}==180360001, \"Case Closed\", /* Do Not Use NMC */\r\n        {Case Status Code}==180360002, \"Case Closed\", /* Cleared to Return NN */\r\n        {Case Status Code}==180360003, \"Obsolete\", /* Case Closed - False Positive. Decided to be considered same as Obsolete for now */\r\n        {Case Status Code}==180360000, \"Obsolete\",    \r\n        isNull({Case Status Code}), \"Closed\"    ),\n\t\t{Case Type} = case(    {Case Type}==180360000, \"Positive Test\",     {Case Type}==180360001, \"Close Contact\",     {Case Type}==180360002, \"Daily Pass\" ,   {Case Type}==180360003, \"Suspected\" ),\n\t\t{Case Age} = minus(currentDate(),toDate(toString({Case Created On},'yyyy-MM-dd'),'yyyy-MM-dd'))) ~> threeCase\nTestCreatedOn derive(NoOfDaysSinceLastTest = minus(currentDate(),toDate(toString({Test Created On External},'yyyy-MM-dd'),'yyyy-MM-dd'))) ~> NoOfDaysSinceLastTest\nLast111DaysOfData derive({Test Result} = case(    {Test Result}==180360000, \"Positive\",     {Test Result}==180360001, \"Negative\",     {Test Result}==180360002, \"Inconclusive\",     {Test Result}==180360003, \"Invalid\",    isNull({Test Result}), \"Pending\"    ),\n\t\tExternalTestReportReviewStatus = case( ExternalTestReportReviewStatus==180360000, \"New\",     ExternalTestReportReviewStatus==180360001, \"Approved\", ExternalTestReportReviewStatus==180360002, \"Declined\")) ~> threetest\nthreetest select(mapColumn(\n\t\t{Test Number},\n\t\t{Test Result},\n\t\t{Test Created On},\n\t\t{Test Person Dynamics ID},\n\t\t{Test Type},\n\t\tNoOfDaysSinceLastTest,\n\t\tExternalTestReportReviewStatus,\n\t\t{Testing Provided By LAUSD},\n\t\tstatuscode,\n\t\t{Test Result Date}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\ntwoTests derive({Test Created On} = fromUTC({Test Created On},'PST'),\n\t\t{Test Result Date} = fromUTC({Test Result Date},'PST')) ~> TestDateToPST\nFilter10 select(mapColumn(\n\t\trts_dose1covidmanufacturer,\n\t\trts_dose1vaccinetime,\n\t\trts_dose2vaccinetime,\n\t\trts_person,\n\t\trts_vaccinationreviewstatus,\n\t\tStatus = statecode,\n\t\trts_externaltolausdvras,\n\t\tcreatedon\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectVaccineColumns\nFilter5 select(mapColumn(\n\t\t{Case Number} = msft_casenumber,\n\t\t{Case Created On} = createdon,\n\t\t{Case Status Code} = statuscode,\n\t\t{Case Type} = rts_casetype,\n\t\t{Case Quarantine Start Date} = rts_quarantinestartdate,\n\t\t{Case Isolation Start Date} = rts_isolationstartdate,\n\t\t{Case Anticipated End Date} = msft_checkinavailabledate,\n\t\t{Case Person Dynamics ID} = msft_employeeid,\n\t\t{Case Check In Available} = msft_ischeckinavailable,\n\t\tEmployeecaseID = Id,\n\t\t{Case State Code} = statecode,\n\t\tmsft_employeecaseid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoCases\ntwoCases derive({Case Created On} = fromUTC({Case Created On},'PST')) ~> DateToPST\nFilter11 select(mapColumn(\n\t\tEmployeeCaseID = msft_employeecaseid,\n\t\tFacilityID = msft_facilityid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nCohortElementarySchoolData select(mapColumn(\n\t\t{Campus Name},\n\t\t{Student District ID} = {District ID},\n\t\t{First Name} = FirstName,\n\t\t{Last Name} = LastName,\n\t\tGrade,\n\t\t{Group Category},\n\t\t{Group Subcategory},\n\t\t{Student Group Start Date},\n\t\t{Student Group End Date}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ElementaryColumns\nCohortSecondarySchoolData select(mapColumn(\n\t\t{Campus Name} = LOCATION_NAME,\n\t\t{Student District ID} = STUDENT_DISTRICT_ID,\n\t\t{First Name} = STD_FIRST_NAME,\n\t\t{Last Name} = STD_LAST_NAME,\n\t\tGrade = GRADE_CODE,\n\t\t{Group Category} = COURSE_TITLE,\n\t\t{Group Subcategory} = CLASS_PERIOD_CODE,\n\t\t{Student Group Start Date} = MISIS_CLASS_BEGIN_DATE,\n\t\t{Student Group End Date} = MISIS_CLASS_END_DATE\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SecondaryColumns\nElementaryColumns, SecondaryColumns union(byName: true)~> CohortUnion\nCohortUnion derive({Instructional Model } = iif(instr({Group Subcategory},\"In-Person\")!=0, \n     \"hybrid\", \n     iif(or({Group Subcategory}==\"D\",{Group Subcategory}==\"G\"),\n      \"hybrid\",\n      \"online\"\n        )\n    )) ~> InstructionalModel\nInstructionalModel derive({On-Site Childcare} = iif(instr({Group Subcategory},\"Childcare\")!=0, \n     \"Yes\", \n     \"No\"\n    )) ~> OnSiteChildcare\nOnSiteChildcare derive(Transportation = iif(instr({Group Subcategory},\"Transportation\")!=0, \n     \"Yes\", \n     \"No\"\n    )) ~> Transportation\nTransportation derive({Athletics/Auxiliary} = iif(or(instr({Group Category},\"Athletics\")!=0,instr({Group Category},\"Auxiliary\")!=0), \n     \"Yes\",    \n     \"No\"     \n    )) ~> Athletics\nAthletics select(mapColumn(\n\t\t{Student District ID},\n\t\tGrade,\n\t\t{Instructional Model },\n\t\t{On-Site Childcare},\n\t\tTransportation,\n\t\t{Athletics/Auxiliary}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCohortColumns\nAccessDuration select(mapColumn(\n\t\t{Case Number},\n\t\t{Case Created On},\n\t\t{Case Status Code},\n\t\t{Case Type},\n\t\t{Case Quarantine Start Date},\n\t\t{Case Isolation Start Date},\n\t\t{Case Anticipated End Date},\n\t\t{Case Person Dynamics ID},\n\t\t{Case Check In Available},\n\t\tEmployeecaseID,\n\t\t{Case State Code},\n\t\tmsft_employeecaseid,\n\t\t{Case Status},\n\t\t{Case Age},\n\t\tAccessDuration\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select7\nAgeForOnlyStudent select(mapColumn(\n\t\t{Person Dynamics ID},\n\t\t{Person Employee ID},\n\t\t{Person Position},\n\t\t{Person Student ID},\n\t\t{Person Full Name},\n\t\t{Person First Name},\n\t\t{Person Last Name},\n\t\t{Person Type},\n\t\t{Person Cost Center Code},\n\t\t{Covid Test Without Parent},\n\t\t{Person Status},\n\t\t{Daily Pass For Dependents Under 13},\n\t\tConsent,\n\t\tAuthorize,\n\t\t{Unaccompanied Minor},\n\t\t{Covid Testing for In Person Learning},\n\t\tAccess,\n\t\t{DACE Cost Center Code},\n\t\trts_race,\n\t\trts_ethnicity,\n\t\tmsft_contacttype,\n\t\tVaccine_Status,\n\t\t{Conditionally Approved},\n\t\tAge,\n\t\t{DOB MMYYYY},\n\t\tmodifiedon\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select8\nDateToPST derive({Case Created On} = toDate({Case Created On}),\n\t\tCurrent_Date = toDate(fromUTC(currentTimestamp(),'PST'))) ~> DerivedColumn6\nthreeFacility filter(not(isNull({Facility Location Number}))) ~> filterOutBlankLocationNumbers\nAgrCreatedOn derive(Vaccine_Status = iif\n\t(\n\t\tand(and(isNull(rts_dose1vaccinetime)==false(),rts_dose1covidmanufacturer==180360002),rts_vaccinationreviewstatus==180360002) || and(and(isNull(rts_dose1vaccinetime)==false(),isNull(rts_dose2vaccinetime)==false()),rts_vaccinationreviewstatus==180360002)\n\t\t,\"Fully Vaccinated\"\n\t\t,iif\n\t\t\t(\n\t\t\tand(and(isNull(rts_dose1vaccinetime)==false(),rts_dose1covidmanufacturer==180360002),rts_vaccinationreviewstatus==180360001) || and(and(isNull(rts_dose1vaccinetime)==false(),isNull(rts_dose2vaccinetime)==false()),rts_vaccinationreviewstatus==180360001)\n\t\t\t,\"Pending Review\"\n\t\t\t,iif(\n\t\t\t\t\tand(and(isNull(rts_dose1vaccinetime)==false(),rts_dose1covidmanufacturer==180360002),or(rts_vaccinationreviewstatus==180360000,rts_vaccinationreviewstatus==180360003)) || and(and(isNull(rts_dose1vaccinetime)==false(),isNull(rts_dose2vaccinetime)==false()),or(rts_vaccinationreviewstatus==180360000,rts_vaccinationreviewstatus==180360003))\n\t\t\t\t\t,\"Under Review\"\n\t\t\t\t\t,iif(\n\t\t\t\t\t\t\tand(isNull(rts_dose1vaccinetime)==false(),isNull(rts_dose2vaccinetime)==true())\n\t\t\t\t\t\t\t,\"Partially Vaccinated\"\n\t\t\t\t\t\t\t,iif\n\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\tand(isNull(rts_dose1vaccinetime)==true(),isNull(rts_dose2vaccinetime)==true())\n\t\t\t\t\t\t\t\t,\"Not Vaccinated\"\n\t\t\t\t\t\t\t\t,\"Not Reported\"\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t)) ~> DerivedColumn8\nthreeSurvey, GuestPassIssuedCheckExceptions union(byName: true)~> DailyPass\ntwoContact filter({Person Status} == 1 && !isNull({Person Cost Center Code})) ~> FilterInactivePersonAndNullCostCenterMapping\nthreetest filter(statuscode==1) ~> ActiveTests\nActiveTests filter(ExternalTestReportReviewStatus!=\"New\" || isNull(ExternalTestReportReviewStatus)) ~> FilterNewExternalTestReviewStatus\nFilterNewExternalTestReviewStatus filter(or(ExternalTestReportReviewStatus!=\"Declined\",isNull(ExternalTestReportReviewStatus))) ~> FilterDeclinedExternalReviewStatus\nFilterDeclinedExternalReviewStatus filter({Test Result} != \"Pending\") ~> FilterPendingResultsaAndCaseClosed\nDerivedColumn10, FilterPendingResultsaAndCaseClosed join({Person Dynamics ID} == {Test Person Dynamics ID},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> oneAccess\noneAccess sort(desc({Test Created On External}, false)) ~> twoAccess\ntwoAccess aggregate(groupBy({Person Dynamics ID}),\n\teach(match(name!=\"Person Dynamics ID\"), $$ = first($$))) ~> threeAccess\nthreeAccess, AggDailyPassRecord join({Person Dynamics ID} == {Survey Person ID},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinDailyPass\nJoinDailyPass sort(desc({Test Created On}, false)) ~> fiveAccess\nfiveAccess aggregate(groupBy({Person Dynamics ID}),\n\teach(match(name!=\"Person Dynamics ID\"), $$ = first($$))) ~> sixAccess\nsixAccess, Select14 join({Person Dynamics ID} == {Case Person Dynamics ID},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> AccessJoinCase\nAccessJoinCase derive(Access = iif({Survey Pass Issued}==toBoolean('no') && toDate({Survey Created On}) == currentDate('PST') ,\r\n\"Disallowed\",\r\n\tiif({Case Type}=='Positive Test' && {Case Status}=='Open',\r\n\t\"Disallowed\",\r\n\t\tiif(and(Vaccine_Status != 'Fully Vaccinated', Vaccine_Status != 'Pending Review') && {Person Type} == 'Employee', /* Nov 15 fix to not allow any employeed who is not Full Vaccinated/Vax Submitted(Pendng Review). Here Vaccination consolidated status is not used, rather Vaccine_Status is used */\r\n\t\t\"Disallowed\",\r\n\t\t\tiif(Vaccine_Status_Con != 'Vaccinated' && {Person Type} != 'Employee' && {Case Status}=='Open',\r\n\t\t\t\"Disallowed\",\r\n\t\t\t\tiif(Vaccine_Status_Con == 'Vaccinated' && {Case Type}!='Positive Test' && {Case Status}=='Open',\r\n    \t\t\t\"Allowed\",\r\n\t\t\t\t\tiif(({Case Age} <=104) &&  ({Case Type}=='Positive Test') &&(isNull(AccessDuration)==toBoolean('false')) && ({Case Status}!='Open'),\r\n\t\t\t\t\t\"Allowed\",\r\n\t\t\t\t\t\tiif((NoOfDaysSinceLastTest > 26 && or({Testing Provided By LAUSD} == toBoolean('yes'), ExternalTestReportReviewStatus == 'Approved')),\r\n\t\t\t\t\t\t\"Disallowed\",\r\n\t\t\t\t\t\t\tiif(and(NoOfDaysSinceLastTest <= 26,or({Test Result}=='Inconclusive',or({Test Result}=='Negative',{Test Result}=='Invalid'))) && or({Testing Provided By LAUSD} == toBoolean('yes'), ExternalTestReportReviewStatus == 'Approved'),\r\n\t\t\t\t\t\t\t\"Allowed\",\r\n\t\t\t\t\t\t\t\"Disallowed\"\r\n\t\t\t\t\t\t\t)\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t)\r\n\t\t\t\t\t)\r\n\t\t\t\t)\r\n\t\t    )\r\n        )   \r\n    )\r\n),\n\t\t{Person Cost Center Code} = iifNull({Person Cost Center Code}, \"Invalid\",{Person Cost Center Code})) ~> sevenAccess\nsevenAccess sort(desc({Test Created On}, false)) ~> OrderByLatest\nOrderByLatest aggregate(groupBy({Person Dynamics ID}),\n\teach(match(name!=\"Person Dynamics ID\"), $$ = first($$))) ~> AggById\nsortbycasecreated derive(AccessDuration = iif(   \n     {Case Age}<=104 && {Case Type} =='Positive Test',\n         (add(({Case Created On}),104)),\n             toDate('00-00-0000', 'dd-mm-yyyy')\n             )) ~> AccessDuration\nFilter8 filter(not(isNull(rts_contactid))) ~> FilterNulls\nSelect7 derive({Case Anticipated End Date} = toDate(fromUTC({Case Anticipated End Date},'PST')) + 1) ~> DerivedColumn9\nDervieConsolidatedVaccineStatus derive({Covid Testing for In Person Learning} = iif(({Person Type} =='Employee' && {Covid Testing for In Person Learning}=='Missing'),'N/A',{Covid Testing for In Person Learning})) ~> DerivedColumn10\nFilter9 filter(statecode==0) ~> Filter1\nFilter7 filter(statecode==0) ~> Filter2\nDerivedColumn8 derive(Last_Vaccination_Date = iif\n\t(\n\t\tor(Vaccine_Status=='Partially Vaccinated',rts_dose1covidmanufacturer ==180360002)\n\t\t,rts_dose1vaccinetime\n\t\t,iif(\n\t\t\t\tor(or(Vaccine_Status=='Fully Vaccinated',Vaccine_Status=='Pending Review'),Vaccine_Status=='Under Review')\n\t\t\t\t,rts_dose2vaccinetime\n\t\t\t\t,toTimestamp('0000-00-00 00:00:00', 'yyyy-MM-dd HH:mm:ss', 'UTC')\n\t\t\t)\t\n\t)) ~> DeriveVaccinationDate\nSelectVaccineColumns filter(and(Status==0,isNull(rts_dose1vaccinetime)==false())) ~> FilteroutInactive\nDerivedColumn6 filter(({Case Created On}>=toDate('2021-07-19'))) ~> filternewschool\nDerivedColumn6 filter(and(between(Current_Date, toDate('2021-07-19'), toDate('2021-10-17')),minus(Current_Date, {Case Created On})<=111)) ~> NinetyDaysFromToday\nthreeAppointment filter(({Appointment Date}>=toDate('2021-07-19'))) ~> filternewschoolyear\nthreeAppointment filter(and(between(Current_Date, toDate('2021-07-19'), toDate('2021-10-17')),minus(Current_Date, {Appointment Date})<=90)) ~> NinetyDaysfromTodayDate\nNinetyDaysfromTodayDate, filternewschoolyear union(byName: true)~> Union2\nfilternewschool, NinetyDaysFromToday union(byName: true)~> Union3\nGrades select(mapColumn(\n\t\tDISTRICT_STUDENT_ID,\n\t\tGRADE_CODE\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectGrades\nfilterObsoleteCaseType sort(asc({Case Person Dynamics ID}, false),\n\tdesc({Case Created On}, false)) ~> sortbycasecreated\nthreeCase filter(!isNull({Case Type})) ~> flternullcases\nflternullcases filter({Case Status}!='Obsolete') ~> filterObsoleteCaseType\nDeriveVaccinationDate select(mapColumn(\n\t\trts_person,\n\t\tVaccine_Status,\n\t\tLast_Vaccination_Date\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Select13\nSort1 aggregate(groupBy(rts_person),\n\teach(match(name!='rts_person'), $$ = first($$))) ~> AgrCreatedOn\nFilteroutInactive sort(asc(rts_person, true),\n\tdesc(createdon, true)) ~> Sort1\nSelectCohortColumns sort(asc({Student District ID}, true),\n\tdesc({Athletics/Auxiliary}, true)) ~> SortForRemoveDuplicates\nSortForRemoveDuplicates aggregate(groupBy({Student District ID}),\n\teach(match(name!='Student District ID'), $$ = first($$))) ~> RemoveDuplicates\nAccessDuration filter(!isNull(AccessDuration)) ~> FilterNotNullAccessDuration\nsortbycasecreated filter({Case Status}=='Open') ~> filteropencases\nfilteropencases aggregate(groupBy({Case Person Dynamics ID}),\n\teach(match(name!=\"Case Person Dynamics ID\"), $$ = first($$))) ~> GroupLatestOpenCases\nGroupLatestOpenCases derive(AccessDuration = toDate('01-01-1111', 'dd-mm-yyyy')) ~> AddAccessDuration\nOrderingColumns, FilterNotNullAccessDuration union(byName: true)~> UnionOpenCasesAndAccessDuration\nAddAccessDuration select(mapColumn(\n\t\t{Case Number},\n\t\t{Case Created On},\n\t\t{Case Status Code},\n\t\t{Case Type},\n\t\t{Case Quarantine Start Date},\n\t\t{Case Isolation Start Date},\n\t\t{Case Anticipated End Date},\n\t\t{Case Person Dynamics ID},\n\t\t{Case Check In Available},\n\t\tEmployeecaseID,\n\t\t{Case State Code},\n\t\tmsft_employeecaseid,\n\t\tCurrent_Date,\n\t\t{Case Status},\n\t\t{Case Age},\n\t\tAccessDuration\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> OrderingColumns\nUnionOpenCasesAndAccessDuration select(mapColumn(\n\t\t{Case Number},\n\t\t{Case Created On},\n\t\t{Case Status Code},\n\t\t{Case Type},\n\t\t{Case Quarantine Start Date},\n\t\t{Case Isolation Start Date},\n\t\t{Case Anticipated End Date},\n\t\t{Case Person Dynamics ID},\n\t\t{Case Check In Available},\n\t\tEmployeecaseID,\n\t\t{Case State Code},\n\t\tmsft_employeecaseid,\n\t\t{Case Status},\n\t\t{Case Age},\n\t\tAccessDuration\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select14\nDailyPass sort(asc({Survey Person ID}, false),\n\tdesc({Survey Created On}, false)) ~> DailyPassSorted\nDailyPassSorted aggregate(groupBy({Survey Person ID}),\n\teach(match(name!='Survey Person ID'), $$ = first($$))) ~> AggDailyPassRecord\nDecodeValues derive(Vaccine_Status = case(\r\n    isNull({Vaccine Status}), \"Unvaccinated\", /*If RTS has NULL value, setting it as Not Reported. It is same as Unvaccinated*/\r\n    {Vaccine Status} == 180360003, \"Unvaccinated\",/*Coming as Unvaccinated from RTS*/\r\n    {Vaccine Status} == 180360002, \"Fully Vaccinated\", /*Coming as Vaccinated from RTS*/\r\n    {Vaccine Status} == 180360000, \"Under Review\", /*Coming as Vax Under Review from RTS*/\r\n    {Vaccine Status} == 180360001, \"Pending Review\", /*Coming as Vax Submitted from RTS*/\r\n    {Vaccine Status} == 180360004, \"Partially Vaccinated\",\r\n    {Vaccine Status} == 180360005, \"Exempt\",\r\n    {Vaccine Status} == 180360006, \"Exemption Submitted\",\r\n    {Vaccine Status} == 180360007, \"Exemption Under Review\",\r\n    {Vaccine Status} == 180360008, \"Unvaccinated\", /*Coming as Unvaccinated-Exemption Expired from RTS*/  \r\n    {Vaccine Status} == 180360009, \"Unvaccinated\" /*Coming as Unvaccinated-Exemption Declined from RTS*/  \r\n)) ~> DeriveVaccineStatus\nFilter4 select(mapColumn(\n\t\t{Person Employee ID} = employeeid,\n\t\t{Person Position} = jobtitle,\n\t\t{Person Student ID} = rts_studentcode,\n\t\t{Person Full Name} = fullname,\n\t\t{Person First Name} = firstname,\n\t\t{Person Last Name} = lastname,\n\t\t{Person Type} = rts_persontype,\n\t\t{Person Cost Center Code} = rts_costcentercode,\n\t\t{Person Dynamics ID} = contactid,\n\t\t{Covid Test Without Parent} = rts_covidtestwithoutparent,\n\t\t{Person Status} = statuscode,\n\t\t{Daily Pass For Dependents Under 13} = rts_dailypassfordependentsunder13yearsold,\n\t\tConsent = rts_consent,\n\t\tAuthorize = rts_authorize,\n\t\t{Unaccompanied Minor} = rts_unaccompaniedminor,\n\t\t{DACE Cost Center Code} = rts_dacecostcenter,\n\t\trts_race,\n\t\trts_ethnicity,\n\t\tmsft_contacttype,\n\t\t{Vaccine Status} = rts_vaccinationstatus,\n\t\t{Conditionally Approved} = rts_conditionallyapproved,\n\t\t{Birth Date} = birthdate,\n\t\tmodifiedon\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> twoContact\nDeriveVaccineStatus derive(Vaccine_Status_Con = iif((Vaccine_Status=='Fully Vaccinated' || Vaccine_Status=='Under Review' || Vaccine_Status=='Pending Review' || Vaccine_Status=='Partially Vaccinated' ||\r\nVaccine_Status=='Exempt' || Vaccine_Status=='Exemption Submitted' || Vaccine_Status=='Exemption Under Review'), 'Vaccinated','Unvaccinated')) ~> DervieConsolidatedVaccineStatus\ntwoSurvey derive(datediff = minus(currentDate(),toDate(toString(fromUTC({Survey Created On},'PST'),'yyyy-MM-dd'),'yyyy-MM-dd'))) ~> DeriveDateDiffAdd\nDeriveDateDiffAdd filter(datediff <=30) ~> Filter1MonthsDataOneSurve\nFilter1 derive(datediff = minus(currentDate(),toDate(toString(fromUTC(createdon,'PST'),'yyyy-MM-dd'),'yyyy-MM-dd'))) ~> DerivedDateDiffNew\nDerivedDateDiffNew filter(datediff <=30) ~> Filte1MonthsDataGuestSurvey\nNoOfDaysSinceLastTest filter(NoOfDaysSinceLastTest<=111) ~> Last111DaysOfData\ntwoGuestSurvey derive({Survey Pass Issued} = iif({Survey Pass Issued}==toBoolean('no') && {Survey Checked In}==toBoolean('yes') , {Survey Checked In}, {Survey Pass Issued}),\n\t\t{Survey Created On} = fromUTC({Survey Created On},'PST')) ~> GuestPassIssuedCheckExceptions\nAggById derive({Conditionally Approved} = iif({Person Type}=='Employee', \"N/A\",\r\n    iif({Conditionally Approved}==toBoolean('yes'),\"Yes\", \"No\"\r\n    )\r\n)) ~> ConditionallyApprovedUpdate\nDateOfBirth derive(Age = toString(toInteger(divide(minus(currentDate(),toDate(toString({Birth Date},'yyyy-MM-dd'),'yyyy-MM-dd')),365)))) ~> AgeCalculate\nConditionallyApprovedUpdate derive({DOB MMYYYY} = toString(month({Birth Date})) + \"/\" + toString(year({Birth Date})),\n\t\t{DOB Month} = month({Birth Date})) ~> DateOfBirth\nAgeCalculate derive(Age = iif((Age=='11' && {DOB Month} == 1) , concat(Age,\" (Jan)\"),\r\n    iif((Age=='11' && {DOB Month} == 2) , concat(Age,\" (Feb)\"), \r\n        iif((Age=='11' && {DOB Month} == 3) , concat(Age,\" (Mar)\"),\r\n            iif((Age=='11' && {DOB Month} == 4) , concat(Age,\" (Apr)\"),\r\n                iif((Age=='11' && {DOB Month} == 5) , concat(Age,\" (May)\"),\r\n                    iif((Age=='11' && {DOB Month} == 6) , concat(Age,\" (Jun)\"),Age\r\n                        )\r\n                    )\r\n                )\r\n            )\r\n        )\r\n    )) ~> AgeTurning12\nAgeTurning12 derive(Age = iif({Person Type} == \"Student\", Age, \"\"),\n\t\t{DOB MMYYYY} = iif({Person Type} == \"Student\", {DOB MMYYYY}, \"\")) ~> AgeForOnlyStudent\noneFacility window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window1\nWindow1 filter(rownumber==1 && isNull(IsDelete)) ~> Filter3\noneContact window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window2\nWindow2 filter(rownumber==1 && isNull(IsDelete)) ~> Filter4\noneCases window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window3\nWindow3 filter(rownumber==1 && isNull(IsDelete)) ~> Filter5\noneTests window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window4\nWindow4 filter(rownumber==1 && isNull(IsDelete)) ~> Filter6\noneSurvey window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window5\nWindow5 filter(rownumber==1 && isNull(IsDelete)) ~> Filter7\noneAppointment window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window6\nWindow6 filter(rownumber==1 && isNull(IsDelete)) ~> Filter8\ngetGuestSurvey window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window7\nWindow7 filter(rownumber==1 && isNull(IsDelete)) ~> Filter9\nVaccineSource2 window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window8\nWindow8 filter(rownumber==1 && isNull(IsDelete)) ~> Filter10\nOneCaseFacility window(over(Id),\n\tdesc(modifiedon, false),\n\trownumber = rowNumber()) ~> Window9\nWindow9 filter(rownumber==1 && isNull(IsDelete)) ~> Filter11\nSelectColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Test Number},\n\t\t{Test Result},\n\t\t{Test Created On},\n\t\t{Test Person Dynamics ID},\n\t\t{Test Type},\n\t\tstatuscode,\n\t\tExternalTestReportReviewStatus,\n\t\t{Testing Provided By LAUSD},\n\t\tNoOfDaysSinceLastTest,\n\t\t{Test Result Date}\n\t)) ~> sinkTests\nDerivedColumn2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Survey Person ID},\n\t\t{Survey Pass Issued},\n\t\t{Survey Created On},\n\t\t{Survey Checked In},\n\t\t{Survey Checked In Date},\n\t\t{Survey Location}\n\t)) ~> sinkSurvey\nfilterOutBlankLocationNumbers sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Facility Dynamics ID},\n\t\t{Facility State Code},\n\t\t{Facility Number},\n\t\t{Facility Latitude},\n\t\t{Facility Longitude},\n\t\t{Facility Name},\n\t\t{Facility Campus Name},\n\t\t{Facility Campus Code},\n\t\trts_ld,\n\t\trts_physicalcos,\n\t\t{Facility Location Number}\n\t)) ~> sinkFacility\nSelect6 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tEmployeeCaseID,\n\t\tFacilityID\n\t)) ~> OneCaseFacilitySink\nRemoveDuplicates sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tCohort_ID as long,\n\t\t{Student District ID} as string,\n\t\tGrade as string,\n\t\t{Instructional Model} as string,\n\t\t{On-Site Childcare} as string,\n\t\tTransportation as string,\n\t\t{Athletics/Auxiliary} as string,\n\t\t{Row Number} as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Student District ID},\n\t\tGrade,\n\t\t{Instructional Model} = {Instructional Model },\n\t\tTransportation,\n\t\t{On-Site Childcare},\n\t\t{Athletics/Auxiliary}\n\t)) ~> sinkCohort\nSelect13 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\trts_person as string,\n\t\tVaccine_Status as string,\n\t\tLast_Vaccination_Date as timestamp\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\trts_person,\n\t\tVaccine_Status,\n\t\tLast_Vaccination_Date\n\t)) ~> sinkVaccineStatus\nUnion2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tTest_Appointment_ID as long,\n\t\t{Appointment Person ID} as string,\n\t\t{Appointment Number} as string,\n\t\t{Appointment Datetime} as timestamp,\n\t\t{Appointment Date} as date,\n\t\t{Appointment Time} as timestamp\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Appointment Person ID},\n\t\t{Appointment Number},\n\t\t{Appointment Datetime},\n\t\t{Appointment Date},\n\t\t{Appointment Time}\n\t)) ~> sinkAppointment\nDerivedColumn9 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Case Number},\n\t\t{Case Created On},\n\t\t{Case Status Code},\n\t\t{Case Type},\n\t\t{Case Quarantine Start Date},\n\t\t{Case Isolation Start Date},\n\t\t{Case Anticipated End Date},\n\t\t{Case Person Dynamics ID},\n\t\t{Case Check In Available},\n\t\tEmployeecaseID,\n\t\t{Case State Code},\n\t\tmsft_employeecaseid,\n\t\t{Case Status},\n\t\t{Case Age},\n\t\tAccessDuration\n\t)) ~> sinkCase\nSelect8 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Person Dynamics ID},\n\t\t{Conditionally Approved},\n\t\t{Person Employee ID},\n\t\t{Person Position},\n\t\t{Person Student ID},\n\t\t{Person Full Name},\n\t\t{Person First Name},\n\t\t{Person Last Name},\n\t\t{Person Type},\n\t\t{Person Cost Center Code},\n\t\t{Covid Test Without Parent},\n\t\t{Person Status},\n\t\t{Daily Pass For Dependents Under 13},\n\t\tConsent,\n\t\tAuthorize,\n\t\t{Unaccompanied Minor},\n\t\t{Covid Testing for In Person Learning},\n\t\tAccess,\n\t\t{DACE Cost Center Code},\n\t\trts_race,\n\t\trts_ethnicity,\n\t\tmsft_contacttype,\n\t\t{Vaccine Status} = Vaccine_Status,\n\t\tAge,\n\t\tDobMmYyyy = {DOB MMYYYY},\n\t\tmodifiedon\n\t)) ~> sinkContact\nSelectGrades sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tDISTRICT_STUDENT_ID,\n\t\tGRADE_CODE\n\t)) ~> sinkGrades\nsevenAccess sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Person Dynamics ID} as string,\n\t\t{Person Employee ID} as string,\n\t\t{Person Student ID} as string,\n\t\t{Person Full Name} as string,\n\t\t{Person Cost Center Code} as string,\n\t\t{Vaccine Status} as string,\n\t\t{Case Type} as string,\n\t\t{Case Status} as string,\n\t\t{Case Age} as integer,\n\t\t{Case Number} as string,\n\t\tAccess as string,\n\t\t{Survey Pass Issued} as boolean,\n\t\t{Survey Created On} as timestamp,\n\t\tAccessDuration as date,\n\t\tNoOfDaysSinceLastTest as integer,\n\t\t{Conditionally Approved} as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\t{Person Dynamics ID},\n\t\t{Person Employee ID},\n\t\t{Conditionally Approved},\n\t\t{Person Student ID},\n\t\t{Person Full Name},\n\t\t{Person Cost Center Code},\n\t\t{Vaccine Status} = Vaccine_Status,\n\t\t{Case Type},\n\t\t{Case Status},\n\t\t{Case Age},\n\t\t{Case Number},\n\t\tAccess,\n\t\t{Survey Pass Issued},\n\t\t{Survey Created On},\n\t\tAccessDuration,\n\t\tNoOfDaysSinceLastTest\n\t)) ~> sinkAllowedDisallowed"
+		}
+	}
+}

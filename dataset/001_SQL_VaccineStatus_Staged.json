@@ -1,0 +1,33 @@
+{
+	"name": "001_SQL_VaccineStatus_Staged",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzSQLDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "001_Principal_Operations"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "rts_person",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Vaccine_Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Last_Vaccination_Date",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "001_VaccineStatus_Staged"
+		}
+	}
+}
