@@ -1,0 +1,1035 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "harishgituat"
+		},
+		"copytestblobtoblob_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/82da1dd1-f682-4164-8732-e21666d90066/resourceGroups/harishku/providers/Microsoft.Storage/storageAccounts/harishgen2"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNTING_TYPE')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_accounting_type as string ('dim_accounting_type'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_ACCOUNTING_TYPE as string ('ACCOUNTING_TYPE/')\n}\nsource(output(\n\t\tAccountingTypeKey as short,\n\t\tLanguageKeyCd as short,\n\t\tTextDatasourceKeyCd as short,\n\t\tLongDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_accounting_type +'_dummy'+ $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNTING_TYPE+$file_name_dim_accounting_type+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNTING_TYPE+$file_name_dim_accounting_type+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_CHART')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_account_chart as string ('dim_account_chart'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_ACCOUNT_CHART as string ('ACCOUNT_CHART/')\n}\nsource(output(\n\t\tAccountChartKey as short,\n\t\tLanguageKeyCd as short,\n\t\tAccountsChartCd as short,\n\t\tAccountsChartDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_account_chart +'_dummy'+ $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_CHART+$file_name_dim_account_chart+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_CHART+$file_name_dim_account_chart+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_account_document_type as string ('dim_account_document_type'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_ACCOUNT_DOCUMENT_TYPE as string ('ACCOUNT_DOCUMENT_TYPE/')\n}\nsource(output(\n\t\tAccountDocumentTypeKey as short,\n\t\tLanguageKeyCd as short,\n\t\tDocTypeCd as short,\n\t\tDocTypeDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_account_document_type +'_dummy'+ $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_DOCUMENT_TYPE+$file_name_dim_account_document_type+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_DOCUMENT_TYPE+$file_name_dim_account_document_type+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimCreditControllingAreaDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_credit_controlling_area as string ('dim_credit_controlling_area'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_CREDIT_CONTROLLING_AREA as string ('CREDIT_CONTROLLING_AREA/')\n}\nsource(output(\n\t\tCreditControlAreaKey as short,\n\t\tCreditControlAreaCd as short,\n\t\tCurrencyKeyCd as short,\n\t\tRiskCatgCd as short,\n\t\tRepresentativeGroupCd as short,\n\t\tLanguageKeyCd as short,\n\t\tCreditControlAreaDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_credit_controlling_area+'_dummy' + $file_extension_tsv)]) ~> dimCreditControllingAreaDummy\ndimCreditControllingAreaDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_CREDIT_CONTROLLING_AREA+$file_name_dim_credit_controlling_area+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimCreditControllingAreaDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_CREDIT_CONTROLLING_AREA+$file_name_dim_credit_controlling_area+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_DUNNING')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimdunningDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimrouteTSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimrouteParquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tfile_name_dim_stor_chan as string ('dim_dunning'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tAnalytics_Folder_DUNNING as string ('DUNNING/'),\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/')\n}\nsource(output(\n\t\tDunningKey as short,\n\t\tLanguageCd as short,\n\t\tDunningKeyCd as short,\n\t\tDunningKeyDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_stor_chan + '_dummy' + $file_extension_tsv)]) ~> dimdunningDummy\ndimdunningDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_DUNNING+$file_name_dim_stor_chan+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteTSV\ndimdunningDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_DUNNING+$file_name_dim_stor_chan+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteParquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimdunningblockDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimrouteTSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimrouteParquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tfile_name_dim_dunning_block as string ('dim_dunning_block'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tAnalytics_Folder_DUNNING_BLOCK as string ('DUNNING_BLOCK/'),\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/')\n}\nsource(output(\n\t\tDunningBlockKey as short,\n\t\tLanguageCd as short,\n\t\tDunningBlockCd as short,\n\t\tDunningBlockDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_dunning_block + '_dummy' + $file_extension_tsv)]) ~> dimdunningblockDummy\ndimdunningblockDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_DUNNING_BLOCK+$file_name_dim_dunning_block+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteTSV\ndimdunningblockDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_DUNNING_BLOCK+$file_name_dim_dunning_block+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteParquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimpaymentblockDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimrouteTSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimrouteParquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tfile_name_dim_payment_block as string ('dim_payment_block'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tAnalytics_Folder_PAYMENT_BLOCK as string ('PAYMENT_BLOCK/'),\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/')\n}\nsource(output(\n\t\tPaymentBlockKey as short,\n\t\tLanguageCd as short,\n\t\tPaymentBlockCd as short,\n\t\tPaymentBlockDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_payment_block + '_dummy' + $file_extension_tsv)]) ~> dimpaymentblockDummy\ndimpaymentblockDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_PAYMENT_BLOCK+$file_name_dim_payment_block+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteTSV\ndimpaymentblockDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+ $Analytics_Folder_PAYMENT_BLOCK+$file_name_dim_payment_block+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> dimrouteParquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_METHOD')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_method as string ('dim_payment_method'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_METHOD as string ('PAYMENT_METHOD/')\n}\nsource(output(\n\t\tPaymentMethodKey as short,\n\t\tCountryCd as short,\n\t\tPaymentMethCd as short,\n\t\tPaymentMethName as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_payment_method +'_dummy'+ $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_PAYMENT_METHOD+$file_name_dim_payment_method+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_PAYMENT_METHOD+$file_name_dim_payment_method+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_REASON')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_reason as string ('dim_payment_reason'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_REASON as string ('PAYMENT_REASON/')\n}\nsource(output(\n\t\tPaymentReasonKey as short,\n\t\tLanguageCd as short,\n\t\tCompanyCd as short,\n\t\tPaymentReasonCd as short,\n\t\tReasonShortTxt as short,\n\t\tReasonLongTxt as short,\n\t\tCreatedDtTm as short,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd8 as timestamp,\n\t\tIsDeletedInd9 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_payment_reason +'_dummy'+ $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_PAYMENT_REASON+$file_name_dim_payment_reason+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_PAYMENT_REASON+$file_name_dim_payment_reason+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IF_ECOLABDATALAKE_AZONE_DIM_PAYMENT_TERM')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "dimDummy"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "TSV"
+						},
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Parquet"
+						}
+					],
+					"transformations": [],
+					"script": "parameters{\n\tsrc_path_dummy as string ('offshore-test/Dummy_Data/'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_term as string ('dim_payment_term'),\n\tfile_extension_tsv as string ('.tsv'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_TERM as string ('PAYMENT_TERM/')\n}\nsource(output(\n\t\tPaymentTermKey as short,\n\t\tClientCd as short,\n\t\tTermsofPaymentKeyCd as short,\n\t\tValidityAreaofConditionDesc as short,\n\t\tFirstPaymentTermExplanationDesc as short,\n\t\tSecondPaymentTermExplanationDesc as short,\n\t\tNetPaymentTermExplanationDesc as short,\n\t\tCreatedDtTm as timestamp,\n\t\tLastUpdtDtTm as timestamp,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_dummy + $file_name_dim_payment_term+'_dummy' + $file_extension_tsv)]) ~> dimDummy\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_PAYMENT_TERM+$file_name_dim_payment_term+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> TSV\ndimDummy sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_PAYMENT_TERM+$file_name_dim_payment_term+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Parquet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowFlakeTriggerExists')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumn1"
+						},
+						{
+							"name": "Aggregate1"
+						},
+						{
+							"name": "Union1"
+						},
+						{
+							"name": "Aggregate2"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "Sort1"
+						}
+					],
+					"script": "parameters{\n\tTriggerFileFolder as string ('TriggerFile/Snowflake/Outbound/'),\n\tTriggerFileName as string ('1AZ_Trigger.tsv')\n}\nsource(output(\n\t\tCurrentDate as timestamp 'yyyy-MM-dd HH:mm:ss',\n\t\tStatus as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($TriggerFileFolder+$TriggerFileName)]) ~> source1\nsource1 derive(CurrentDate = currentTimestamp(),\n\t\tStatus = 'Y') ~> DerivedColumn1\nDerivedColumn1 aggregate(groupBy(Status),\n\tCurrentDate = max(CurrentDate)) ~> Aggregate1\nsource1, Aggregate1 union(byName: true)~> Union1\nUnion1 aggregate(groupBy(CurrentDate,\n\t\tStatus),\n\tdummy = count(1)) ~> Aggregate2\nSort1 select(mapColumn(\n\t\tCurrentDate,\n\t\tStatus\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nAggregate2 sort(desc(CurrentDate, false)) ~> Sort1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($TriggerFileFolder+$TriggerFileName)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowFlakeTriggerNotExists')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "DummyCntl"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "Output"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DeriveDate"
+						},
+						{
+							"name": "DistinctRecords"
+						},
+						{
+							"name": "SortByDate"
+						},
+						{
+							"name": "SelectFinal"
+						}
+					],
+					"script": "parameters{\n\tDummyControlFolder as string ('Dummy_Data/'),\n\tDummyControlFile as string ('SnowFlakeDummyCntl'),\n\ttsvExtension as string ('.tsv'),\n\tOutputFolder as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/Snowflake_Trigger/Inbound/'),\n\tOutputFile as string ('DimsSuccess.ind')\n}\nsource(output(\n\t\tStatus as string,\n\t\tDATE as timestamp 'yyyy-MM-dd HH:mm:ss'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($DummyControlFolder+$DummyControlFile+$tsvExtension)]) ~> DummyCntl\nDummyCntl derive(Status = 'Y',\n\t\tCurrentDate = currentTimestamp()) ~> DeriveDate\nDeriveDate aggregate(groupBy(CurrentDate,\n\t\tStatus),\n\tdummy = count(1)) ~> DistinctRecords\nDistinctRecords sort(desc(CurrentDate, false)) ~> SortByDate\nSortByDate select(mapColumn(\n\t\tCurrentDate,\n\t\tStatus\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFinal\nSelectFinal sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($OutputFolder+$OutputFile+$tsvExtension)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Output"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Getlookup')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get Metadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "getlookup",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"lastModified",
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"modifiedDatetimeStart": {
+									"value": "@adddays(utcnow(),-10)",
+									"type": "Expression"
+								},
+								"modifiedDatetimeEnd": {
+									"value": "@utcnow()",
+									"type": "Expression"
+								},
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/anikettest1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "anikettesting",
+						"description": "1111",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"testingarm": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-12-22T09:59:21Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/getmetadataact')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get Metadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DelimitedText24",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems",
+								"lastModified"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"modifiedDatetimeStart": {
+									"value": "@adddays(utcnow(),-10)",
+									"type": "Expression"
+								},
+								"modifiedDatetimeEnd": {
+									"value": "@utcnow()",
+									"type": "Expression"
+								},
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lastmodifieddate')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@adddays(utcnow(),-2)",
+										"type": "Expression"
+									},
+									"modifiedDatetimeEnd": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"wildcardFileName": "*csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "lm1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText23",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/modifieddates')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get Metadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DelimitedText32",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Filter1",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata1').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@endswith(item().name,'csv')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Filter1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Filter1').output.Value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Get Metadata2",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "DelimitedText31",
+											"type": "DatasetReference",
+											"parameters": {}
+										},
+										"fieldList": [
+											"lastModified"
+										],
+										"storeSettings": {
+											"type": "AzureBlobStorageReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "DelimitedTextReadSettings"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data11",
+						"description": "fdsgdsfgds",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-06T05:14:56Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/copytestblobtoblob')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "copytestblobtoblob",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "eventblob",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/eventtest1/blobs/eventtest1",
+					"blobPathEndsWith": ".txt",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Aggregationdf')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText13",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText16",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Aggregate1"
+						}
+					],
+					"script": "source(output(\n\t\tEmpid as string,\n\t\tName as string,\n\t\tCountry as string,\n\t\tDepartment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 aggregate(groupBy(Department),\n\tEmployeecount = count(Empid)) ~> Aggregate1\nAggregate1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{30} as string,\n\t\tRahul as string,\n\t\tIndia as string,\n\t\t{33} as string\n\t),\n\tpartitionFileNames:['aggregatefile.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

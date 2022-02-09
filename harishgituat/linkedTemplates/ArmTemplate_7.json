@@ -7,73 +7,85 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
 		},
-		"AzureBlobStorage79_connectionString": {
+		"AzureBlobStorage54_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage79'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage54'"
 		},
-		"AzureBlobStorage80_connectionString": {
+		"AzureBlobStorage55_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage80'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage55'"
 		},
-		"AzureBlobStorage81_connectionString": {
+		"AzureBlobStorage56_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage81'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage56'"
 		},
-		"AzureBlobStorage82_connectionString": {
+		"AzureBlobStorage57_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage82'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage57'"
 		},
-		"AzureBlobStorage83_connectionString": {
+		"AzureBlobStorage58_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage83'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage58'"
 		},
-		"AzureBlobStorage84_connectionString": {
+		"AzureBlobStorage59_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage84'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage59'"
 		},
-		"AzureBlobStorage851111_connectionString": {
+		"AzureBlobStorage60_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage851111'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage60'"
 		},
-		"AzureDataLakeStorage3_accountKey": {
+		"AzureBlobStorage61_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage3'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage61'"
 		},
-		"emplls_connectionString": {
+		"AzureBlobStorage62_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'emplls'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage62'"
 		},
-		"linkedService124_connectionString": {
+		"AzureBlobStorage63_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'linkedService124'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage63'"
 		},
-		"lm11_connectionString": {
+		"AzureBlobStorage64_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'lm11'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage64'"
 		},
-		"ls11_connectionString": {
+		"AzureBlobStorage65_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls11'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage65'"
 		},
-		"ls22_connectionString": {
+		"AzureBlobStorage66_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls22'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage66'"
 		},
-		"ls33_connectionString": {
+		"AzureBlobStorage67_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls33'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage67'"
 		},
-		"ls333_connectionString": {
+		"AzureBlobStorage68_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls333'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage68'"
 		},
-		"sql1_connectionString": {
+		"AzureBlobStorage69_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'sql1'"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage69'"
 		},
-		"AzureDataLakeStorage3_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://harishdataflows.dfs.core.windows.net"
+		"AzureBlobStorage70_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage70'"
+		},
+		"AzureBlobStorage71_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage71'"
+		},
+		"AzureBlobStorage72_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage72'"
+		},
+		"AzureBlobStorage73_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage73'"
 		}
 	},
 	"variables": {
@@ -81,14 +93,14 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage79')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage54')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage79_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage54_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -98,14 +110,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage80')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage55')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage80_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage55_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -115,14 +127,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage81')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage56')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage81_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage56_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -132,14 +144,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage82')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage57')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage82_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage57_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -149,14 +161,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage83')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage58')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage83_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage58_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -166,14 +178,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage84')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage59')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage84_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage59_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -183,35 +195,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage851111')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage60')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage851111_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime2",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage3')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage3_accountKey')]"
-					}
+					"connectionString": "[parameters('AzureBlobStorage60_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -221,14 +212,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/emplls')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage61')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('emplls_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage61_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -238,14 +229,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/linkedService124')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage62')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('linkedService124_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage62_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -255,14 +246,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/lm11')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage63')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('lm11_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage63_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -272,14 +263,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls11')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage64')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls11_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage64_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -289,14 +280,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls22')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage65')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls22_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage65_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -306,14 +297,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls33')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage66')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls33_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage66_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -323,14 +314,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls333')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage67')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('ls333_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage67_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -340,14 +331,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/sql1')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage68')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('sql1_connectionString')]"
+					"connectionString": "[parameters('AzureBlobStorage68_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -357,266 +348,86 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyNewFilesByLastModifiedDate')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage69')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Copy new and changed files only by using LastModifiedDate",
-				"activities": [
-					{
-						"name": "CopyNewFiles",
-						"description": "Copy new and changed files only by using LastModifiedDate",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"modifiedDatetimeStart": {
-										"value": "@{pipeline().parameters.LastModified_From}",
-										"type": "Expression"
-									},
-									"modifiedDatetimeEnd": {
-										"value": "@{pipeline().parameters.LastModified_To}",
-										"type": "Expression"
-									},
-									"wildcardFileName": {
-										"value": "*",
-										"type": "Expression"
-									}
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "BinaryDataSourceStore",
-								"type": "DatasetReference",
-								"parameters": {
-									"Container": {
-										"value": "@pipeline().parameters.FolderPath_Source",
-										"type": "Expression"
-									},
-									"Directory": {
-										"value": "@pipeline().parameters.Directory_Source",
-										"type": "Expression"
-									}
-								}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "BinaryDataDestinationStore",
-								"type": "DatasetReference",
-								"parameters": {
-									"Container": {
-										"value": "@pipeline().parameters.FolderPath_Destination",
-										"type": "Expression"
-									},
-									"Directory": {
-										"value": "@pipeline().parameters.Directory_Destination",
-										"type": "Expression"
-									}
-								}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"parameters": {
-					"FolderPath_Source": {
-						"type": "String",
-						"defaultValue": "sourcefolder"
-					},
-					"Directory_Source": {
-						"type": "String",
-						"defaultValue": "subfolder"
-					},
-					"FolderPath_Destination": {
-						"type": "String",
-						"defaultValue": "destinationfolder"
-					},
-					"Directory_Destination": {
-						"type": "String",
-						"defaultValue": "subfolder"
-					},
-					"LastModified_From": {
-						"type": "String",
-						"defaultValue": "2019-02-01T00:00:00Z"
-					},
-					"LastModified_To": {
-						"type": "String",
-						"defaultValue": "2019-03-01T00:00:00Z"
-					}
-				},
 				"annotations": [],
-				"lastPublishTime": "2020-12-23T06:00:44Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/eventblob')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Eventblobcopy",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "eventtest1ds1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "eventtestls2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-12-10T17:49:45Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/testinggit')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "test1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "dataset1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "dataset123",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-12-02T09:25:29Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Binary1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "ASAjobs.txt",
-						"container": "inputfolder"
-					}
+					"connectionString": "[parameters('AzureBlobStorage69_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage70')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage70_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage71')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage71_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage72')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage72_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage73')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage73_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []

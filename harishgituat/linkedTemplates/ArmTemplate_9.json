@@ -6,6 +6,18 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
+		},
+		"ls33_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls33'"
+		},
+		"ls333_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls333'"
+		},
+		"sql1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sql1'"
 		}
 	},
 	"variables": {
@@ -13,114 +25,240 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText31')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/ls33')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage82",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "outputjson"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
+					"connectionString": "[parameters('ls33_connectionString')]"
 				},
-				"schema": []
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText32')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/ls333')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage83",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "exporteddata"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
+					"connectionString": "[parameters('ls333_connectionString')]"
 				},
-				"schema": [
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sql1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('sql1_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyNewFilesByLastModifiedDate')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Copy new and changed files only by using LastModifiedDate",
+				"activities": [
 					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
+						"name": "CopyNewFiles",
+						"description": "Copy new and changed files only by using LastModifiedDate",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@{pipeline().parameters.LastModified_From}",
+										"type": "Expression"
+									},
+									"modifiedDatetimeEnd": {
+										"value": "@{pipeline().parameters.LastModified_To}",
+										"type": "Expression"
+									},
+									"wildcardFileName": {
+										"value": "*",
+										"type": "Expression"
+									}
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "BinaryDataSourceStore",
+								"type": "DatasetReference",
+								"parameters": {
+									"Container": {
+										"value": "@pipeline().parameters.FolderPath_Source",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@pipeline().parameters.Directory_Source",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "BinaryDataDestinationStore",
+								"type": "DatasetReference",
+								"parameters": {
+									"Container": {
+										"value": "@pipeline().parameters.FolderPath_Destination",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@pipeline().parameters.Directory_Destination",
+										"type": "Expression"
+									}
+								}
+							}
+						]
 					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText33')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage84",
-					"type": "LinkedServiceReference"
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"FolderPath_Source": {
+						"type": "String",
+						"defaultValue": "sourcefolder"
+					},
+					"Directory_Source": {
+						"type": "String",
+						"defaultValue": "subfolder"
+					},
+					"FolderPath_Destination": {
+						"type": "String",
+						"defaultValue": "destinationfolder"
+					},
+					"Directory_Destination": {
+						"type": "String",
+						"defaultValue": "subfolder"
+					},
+					"LastModified_From": {
+						"type": "String",
+						"defaultValue": "2019-02-01T00:00:00Z"
+					},
+					"LastModified_To": {
+						"type": "String",
+						"defaultValue": "2019-03-01T00:00:00Z"
+					}
 				},
 				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "inputs"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
+				"lastPublishTime": "2020-12-23T06:00:44Z"
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Excel1')]",
+			"name": "[concat(parameters('factoryName'), '/eventblob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Eventblobcopy",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "eventtest1ds1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "eventtestls2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-12-10T17:49:45Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -129,461 +267,37 @@
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "ADF_Test.xlsx",
-						"container": "input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "EmplName",
-						"type": "String"
-					},
-					{
-						"name": "EmplDept",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Json2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage59",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
+				"type": "Binary",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "outputs"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Json3')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage80",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "harishtesting.json",
-						"container": "exporteddata"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "integer"
-						},
-						"os_version": {
-							"type": "string"
-						},
-						"model": {
-							"type": "string"
-						},
-						"app_version": {
-							"type": "string"
-						},
-						"os_type": {
-							"type": "string"
-						},
-						"udid": {
-							"type": "string"
-						},
-						"imei": {
-							"type": "string"
-						},
-						"serial_number": {
-							"type": "string"
-						},
-						"hardware_serial_number": {
-							"type": "string"
-						},
-						"name": {
-							"type": "string"
-						},
-						"product_name": {
-							"type": "string"
-						},
-						"activated_at": {
-							"type": "string"
-						},
-						"last_app_connection": {
-							"type": "string"
-						},
-						"user": {
-							"type": "object",
-							"properties": {
-								"id": {
-									"type": "integer"
-								},
-								"name": {
-									"type": "null"
-								},
-								"email": {
-									"type": "string"
-								},
-								"external_id": {
-									"type": "null"
-								},
-								"organization": {
-									"type": "object",
-									"properties": {
-										"name": {
-											"type": "string"
-										},
-										"id": {
-											"type": "integer"
-										}
-									}
-								}
-							}
-						},
-						"identifier": {
-							"type": "string"
-						},
-						"health_status": {
-							"type": "string"
-						},
-						"compliance_status": {
-							"type": "null"
-						},
-						"risk_status": {
-							"type": "string"
-						},
-						"mdm_status": {
-							"type": "string"
-						},
-						"current_health_warnings": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						},
-						"current_compliance_warnings": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						},
-						"current_risk_warnings": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						},
-						"compromised": {
-							"type": "boolean"
-						},
-						"configuration": {
-							"type": "object",
-							"properties": {
-								"location_services": {
-									"type": "string"
-								},
-								"push_notifications": {
-									"type": "string"
-								},
-								"personal_vpn": {
-									"type": "string"
-								},
-								"default_installer": {
-									"type": "string"
-								},
-								"system_admin": {
-									"type": "string"
-								},
-								"samsung_knox_services": {
-									"type": "string"
-								}
-							}
-						},
-						"stats": {
-							"type": "object",
-							"properties": {
-								"networks_monitored": {
-									"type": "integer"
-								},
-								"access_points_scanned": {
-									"type": "integer"
-								},
-								"apps_analyzed": {
-									"type": "integer"
-								},
-								"incidents": {
-									"type": "object",
-									"properties": {
-										"network": {
-											"type": "object",
-											"properties": {
-												"open": {
-													"type": "integer"
-												},
-												"total": {
-													"type": "integer"
-												}
-											}
-										},
-										"malware": {
-											"type": "object",
-											"properties": {
-												"open": {
-													"type": "integer"
-												},
-												"total": {
-													"type": "integer"
-												}
-											}
-										},
-										"indicator_of_compromise": {
-											"type": "object",
-											"properties": {
-												"open": {
-													"type": "integer"
-												},
-												"total": {
-													"type": "integer"
-												}
-											}
-										},
-										"configuration": {
-											"type": "object",
-											"properties": {
-												"open": {
-													"type": "integer"
-												},
-												"total": {
-													"type": "integer"
-												}
-											}
-										},
-										"os": {
-											"type": "object",
-											"properties": {
-												"open": {
-													"type": "integer"
-												},
-												"total": {
-													"type": "integer"
-												}
-											}
-										}
-									}
-								}
-							}
-						},
-						"mdm": {
-							"type": "object",
-							"properties": {
-								"username": {
-									"type": "string"
-								},
-								"device_id": {
-									"type": "string"
-								},
-								"friendly_name": {
-									"type": "string"
-								},
-								"last_connection": {
-									"type": "string"
-								},
-								"organization_group": {
-									"type": "string"
-								}
-							}
-						},
-						"container": {
-							"type": "boolean"
-						}
+						"fileName": "ASAjobs.txt",
+						"container": "inputfolder"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Json4')]",
+			"name": "[concat(parameters('factoryName'), '/CSVTable')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage81",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "jsonoutputs"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLTable')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "sql1",
+					"referenceName": "AzureBlobStorage72",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"TableName": {
-						"type": "string"
-					},
-					"SchemaName": {
+					"FileName": {
 						"type": "string"
 					}
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().SchemaName",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Tablelist')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "sql1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds111')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls333",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "employee.csv",
-						"container": "inputs"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls22",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "employee.csv",
-						"container": "inputs"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds33')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls33",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "outputs"
+						"container": "exporteddata"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -595,12 +309,84 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/employeesdatads')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText11')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "emplls",
+					"referenceName": "AzureBlobStorage52",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "department.csv",
+						"container": "inputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage53",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText13')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage54",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -638,32 +424,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/getlookup')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText14')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage68",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "inputs"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/lm1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "lm11",
+					"referenceName": "AzureBlobStorage55",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -671,17 +437,28 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "inputs"
+						"container": "outputs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
+					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
+						"name": "30",
 						"type": "String"
 					},
 					{
+						"name": "Rahul",
+						"type": "String"
+					},
+					{
+						"name": "India",
+						"type": "String"
+					},
+					{
+						"name": "33",
 						"type": "String"
 					}
 				]
@@ -689,12 +466,96 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls1')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText15')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ls11",
+					"referenceName": "AzureBlobStorage56",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "30",
+						"type": "String"
+					},
+					{
+						"name": "Rahul",
+						"type": "String"
+					},
+					{
+						"name": "India",
+						"type": "String"
+					},
+					{
+						"name": "33",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText16')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage57",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "30",
+						"type": "String"
+					},
+					{
+						"name": "Rahul",
+						"type": "String"
+					},
+					{
+						"name": "India",
+						"type": "String"
+					},
+					{
+						"name": "33",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText17')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage60",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -732,222 +593,206 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Anikettesting')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText18')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "DelimitedText10",
-								"type": "DatasetReference"
-							},
-							"name": "source22"
-						},
-						{
-							"dataset": {
-								"referenceName": "DelimitedText8",
-								"type": "DatasetReference"
-							},
-							"name": "source2"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "DelimitedText7",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Union1"
-						}
-					],
-					"script": "source(output(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as integer '000',\n\t\tColumn_4 as string,\n\t\tColumn_5 as integer '000'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source22\nsource(output(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source2\nsource22 aggregate(Column_3 = sum(Column_3),\n\t\tColumn_5 = count(Column_5)) ~> Aggregate1\nsource22, Aggregate1 union(byName: true,\n\tpartitionBy('roundRobin', 2))~> Union1\nUnion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Getlookup')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "getlookup",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"lastModified",
-								"childItems"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"modifiedDatetimeStart": {
-									"value": "@adddays(utcnow(),-10)",
-									"type": "Expression"
-								},
-								"modifiedDatetimeEnd": {
-									"value": "@utcnow()",
-									"type": "Expression"
-								},
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/getlookup')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/anikettest1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "anikettesting",
-						"description": "1111",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "Binary1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Binary2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage61",
+					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-12-22T09:59:21Z"
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "employees_aggre.csv",
+						"container": "inputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Empid",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Department",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/getmetadataact')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText19')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DelimitedText24",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems",
-								"lastModified"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"modifiedDatetimeStart": {
-									"value": "@adddays(utcnow(),-10)",
-									"type": "Expression"
-								},
-								"modifiedDatetimeEnd": {
-									"value": "@utcnow()",
-									"type": "Expression"
-								},
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "DelimitedTextReadSettings"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage62",
+					"type": "LinkedServiceReference"
 				},
-				"annotations": []
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Department",
+						"type": "String"
+					},
+					{
+						"name": "Employeecount",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText20')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage63",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Department",
+						"type": "String"
+					},
+					{
+						"name": "Employeecount",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText21')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage64",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Department",
+						"type": "String"
+					},
+					{
+						"name": "Employeecount",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText22')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage65",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Department",
+						"type": "String"
+					},
+					{
+						"name": "Employeecount",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText23')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage66",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "mod",
+						"container": "modified"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
 			"dependsOn": []
 		}

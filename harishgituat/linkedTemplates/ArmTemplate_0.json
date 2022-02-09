@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
 		},
+		"AzSQLDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzSQLDatabase'"
+		},
 		"AzureBlobStorage10_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage10'"
@@ -71,23 +75,95 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage24'"
 		},
-		"AzureBlobStorage25_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage25'"
-		},
-		"AzureBlobStorage26_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage26'"
-		},
-		"AzureBlobStorage27_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage27'"
+		"ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://mapdatalakestore002p.dfs.core.windows.net"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CDC_ANZ_CUBE_REFRESH_CDConnect_SOPForecast_Pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Process AAS Cube using TMSL refresh command. Wait for the processing to complete before proceeding",
+				"activities": [
+					{
+						"name": "Process Cube TMSL",
+						"type": "WebHook",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://6f448717-1c7f-4249-8c16-88a41769d9eb.webhook.ne.azure-automation.net/webhooks?token=D1KK5%2fTE2QA6T3cBBWwT028BV9VWjnMWcCTH8dbCnq0%3d",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@json(concat('{\n\t\"WebhookType\" : \"ProcessCube\",\n\t\"DataFactory\" : {\n\t\t\"RunId\" : \"',pipeline().RunId,'\",\n\t\t\"DataFactoryName\" : \"',pipeline().DataFactory,'\",\n\t\t\"PipelineName\" : \"',pipeline().Pipeline,'\"\n\t},\n\t\"Payload\" : {\n\t\t\"OverrideFileName\" : \"',pipeline().parameters.overrideFileName,'\",\n\t\t\"TMSL\":',String(pipeline().parameters.tmslScript),'\n\t},\n\t\"LogFile\" : {\n\t \"PurgeThresholdDays\" : \"',pipeline().parameters.PurgeThresholdDays,'\"\n\t}\n}'))",
+								"type": "Expression"
+							},
+							"timeout": "01:00:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Process Cube TMSL_if_refresh_fails",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Process Cube TMSL",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://6f448717-1c7f-4249-8c16-88a41769d9eb.webhook.ne.azure-automation.net/webhooks?token=D1KK5%2fTE2QA6T3cBBWwT028BV9VWjnMWcCTH8dbCnq0%3d",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@json(concat('{\n\t\"WebhookType\" : \"ProcessCube\",\n\t\"DataFactory\" : {\n\t\t\"RunId\" : \"',pipeline().RunId,'\",\n\t\t\"DataFactoryName\" : \"',pipeline().DataFactory,'\",\n\t\t\"PipelineName\" : \"',pipeline().Pipeline,'\"\n\t},\n\t\"Payload\" : {\n\t\t\"OverrideFileName\" : \"',pipeline().parameters.overrideFileName,'\",\n\t\t\"TMSL\":',String(pipeline().parameters.tmslScript),'\n\t},\n\t\"LogFile\" : {\n\t \"PurgeThresholdDays\" : \"',pipeline().parameters.PurgeThresholdDays,'\"\n\t}\n}'))",
+								"type": "Expression"
+							},
+							"timeout": "01:00:00",
+							"reportStatusOnCallBack": true
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"tmslScript": {
+						"type": "string",
+						"defaultValue": {
+							"refresh": {
+								"type": "full",
+								"objects": [
+									{
+										"database": "CDConnect_SOPForecast"
+									}
+								]
+							}
+						}
+					},
+					"PurgeThresholdDays": {
+						"type": "string",
+						"defaultValue": "14"
+					},
+					"overrideFileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-10-06T13:10:03Z"
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/webactivty')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -118,6 +194,33 @@
 					"cancelAfter": {}
 				},
 				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSGen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ADLS Gen 2 data lake ",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzSQLDatabase')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzSQLDatabase_connectionString')]"
+				}
 			},
 			"dependsOn": []
 		},
@@ -325,45 +428,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorage24_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage25')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage25_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage26')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage26_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage27')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage27_connectionString')]"
 				}
 			},
 			"dependsOn": []

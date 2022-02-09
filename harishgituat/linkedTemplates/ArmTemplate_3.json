@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureTableStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureTableStorage1'"
+		},
+		"AzureTableStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureTableStorage2'"
+		},
 		"Datasetcsv_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Datasetcsv'"
@@ -67,25 +79,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'harishaggregratelss'"
 		},
-		"joinoutputofemplndeptls_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'joinoutputofemplndeptls'"
+		"MAPKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://ECL-MAP-002-P-AKV.vault.azure.net/"
 		},
-		"jsontocsv_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'jsontocsv'"
-		},
-		"linkedService1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
-		},
-		"linkedService2_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'linkedService2'"
-		},
-		"linkedService3_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'linkedService3'"
+		"datalake_004_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://reportingsa004.dfs.core.windows.net"
 		},
 		"desktop_properties_typeProperties_host": {
 			"type": "string",
@@ -101,6 +101,45 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureTableStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureTableStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureTableStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureTableStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureTableStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureTableStorage2_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Datasetcsv')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -109,6 +148,19 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('Datasetcsv_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MAPKeyVault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('MAPKeyVault_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -164,6 +216,19 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('csvforematxells_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/datalake_004')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('datalake_004_properties_typeProperties_url')]"
 				}
 			},
 			"dependsOn": []
@@ -305,72 +370,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('harishaggregratelss_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/joinoutputofemplndeptls')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "joinoutputofemplndept",
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('joinoutputofemplndeptls_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/jsontocsv')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('jsontocsv_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedService1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('linkedService1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedService2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('linkedService2_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedService3')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('linkedService3_connectionString')]"
 				}
 			},
 			"dependsOn": []

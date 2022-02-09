@@ -6,38 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
-		},
-		"AzureBlobStorage52_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage52'"
-		},
-		"AzureBlobStorage53_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage53'"
-		},
-		"AzureBlobStorage54_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage54'"
-		},
-		"AzureBlobStorage55_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage55'"
-		},
-		"AzureBlobStorage56_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage56'"
-		},
-		"AzureBlobStorage57_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage57'"
-		},
-		"AzureBlobStorage58_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage58'"
-		},
-		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "harishgit11"
 		}
 	},
 	"variables": {
@@ -45,21 +13,215 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"name": "[concat(parameters('factoryName'), '/001_SQL_Case_Staged')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage42",
+					"referenceName": "AzSQLDatabase",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Case_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_Contact_Staged2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Contact_Staged2"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_Facility_Staged')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Facility_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_Grades')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Grades_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_Health_Survey_Staged')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Health_Survey_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_OneCaseFacility_Staged')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_CaseFacility_staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_Test_Staged')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Test_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_SQL_VaccineStatus_Staged')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "rts_person",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Vaccine_Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Last_Vaccination_Date",
+						"type": "datetime2",
+						"scale": 7
+					}
+				],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_VaccineStatus_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/001_adls_Grades')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "reporting_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "001_Principal_Operations"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Anikettestfile.csv",
-						"container": "aniketinput"
+						"type": "AzureBlobFSLocation",
+						"fileName": "Microsoft_student_Info.csv",
+						"folderPath": "Grade Data",
+						"fileSystem": "0-bronze"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -68,6 +230,15 @@
 				},
 				"schema": [
 					{
+						"name": "UserPrincipalName",
+						"type": "String"
+					},
+					{
+						"name": "LocationCode",
+						"type": "String"
+					},
+					{
+						"name": "Costcenter",
 						"type": "String"
 					}
 				]
@@ -75,42 +246,324 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"name": "[concat(parameters('factoryName'), '/Archival_Dataset')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage44",
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string",
+						"defaultValue": "mapdatastorage"
+					},
+					"Delimiter": {
+						"type": "string",
+						"defaultValue": "\t"
+					},
+					"Archival_Path": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().Archival_Path",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": {
+						"value": "@dataset().Delimiter",
+						"type": "Expression"
+					},
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureTableStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "harishtest"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputfolder"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BinaryDataDestinationStore')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Connection to your data destination store.  ",
+				"linkedServiceName": {
+					"referenceName": "linkedService2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Directory": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BinaryDataSourceStore')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Connection to your data source store. ",
+				"linkedServiceName": {
+					"referenceName": "linkedService1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Directory": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "day1.txt",
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CohortData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Cohort_ID",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Student District ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Grade",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Instructional Model",
+						"type": "nvarchar"
+					},
+					{
+						"name": "On-Site Childcare",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Transportation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Athletics/Auxiliary",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Row Number",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_Cohort"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CohortSecondarySchoolData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "reporting_datalake",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Anikettestfile.csv",
-						"container": "aniketinput"
+						"type": "AzureBlobFSLocation",
+						"fileName": "Secondary Groups and Instructional Program.csv",
+						"folderPath": "cohort_data",
+						"fileSystem": "0-bronze"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
-					"firstRowAsHeader": false,
+					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
-						"name": "Harish",
+						"name": "LOCAL_DISTRICT",
 						"type": "String"
 					},
 					{
-						"name": "33",
+						"name": "COS_NAME",
 						"type": "String"
 					},
 					{
-						"name": "30000",
+						"name": "COST_CENTER_CODE",
 						"type": "String"
 					},
 					{
-						"name": "Pilani",
+						"name": "LOCATION_CODE",
+						"type": "String"
+					},
+					{
+						"name": "LOCATION_NAME",
+						"type": "String"
+					},
+					{
+						"name": "STUDENT_DISTRICT_ID",
+						"type": "String"
+					},
+					{
+						"name": "STD_FIRST_NAME",
+						"type": "String"
+					},
+					{
+						"name": "STD_LAST_NAME",
+						"type": "String"
+					},
+					{
+						"name": "GRADE_CODE",
+						"type": "String"
+					},
+					{
+						"name": "BIRTHDATE",
+						"type": "String"
+					},
+					{
+						"name": "COURSE_TITLE",
+						"type": "String"
+					},
+					{
+						"name": "COURSE_CATALOG_NUMBER",
+						"type": "String"
+					},
+					{
+						"name": "SECTION_NUMBER_CODE",
+						"type": "String"
+					},
+					{
+						"name": "COHORT_SECTION_NUMBER_CODE",
+						"type": "String"
+					},
+					{
+						"name": "CLASS_PERIOD_CODE",
+						"type": "String"
+					},
+					{
+						"name": "TEACHER_ID",
+						"type": "String"
+					},
+					{
+						"name": "TCH_LAST_NAME",
+						"type": "String"
+					},
+					{
+						"name": "TCH_FIRST_NAME",
+						"type": "String"
+					},
+					{
+						"name": "CLASS_ROOM_CODE",
+						"type": "String"
+					},
+					{
+						"name": "MISIS_CLASS_BEGIN_DATE",
+						"type": "String"
+					},
+					{
+						"name": "MISIS_CLASS_END_DATE",
 						"type": "String"
 					}
 				]
@@ -118,50 +571,68 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText6')]",
+			"name": "[concat(parameters('factoryName'), '/Copy_Activity_Delimited_Dataset')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage46",
+					"referenceName": "ADLSGen2",
 					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Container": {
+						"type": "string"
+					},
+					"Delimiter": {
+						"type": "string"
+					},
+					"file_path": {
+						"type": "string"
+					},
+					"file_name": {
+						"type": "string"
+					},
+					"file_extension": {
+						"type": "string"
+					}
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Anikettestfile.csv",
-						"container": "aniketinput"
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().file_name,dataset().file_extension)",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().file_path",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().Container",
+							"type": "Expression"
+						}
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": {
+						"value": "@dataset().Delimiter",
+						"type": "Expression"
+					},
 					"escapeChar": "\\",
-					"quoteChar": "\""
+					"firstRowAsHeader": true,
+					"quoteChar": ""
 				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
+				"schema": []
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText7')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage47",
+					"referenceName": "AzureBlobStorage2",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -169,7 +640,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "aniketoutput"
+						"container": "error"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -180,12 +651,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText8')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText10')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage49",
+					"referenceName": "AzureBlobStorage51",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -212,18 +683,21 @@
 					},
 					{
 						"type": "String"
+					},
+					{
+						"type": "String"
 					}
 				]
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText9')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage50",
+					"referenceName": "AzureBlobStorage3",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -231,310 +705,13 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Anikettestfile.csv",
-						"container": "aniketinput"
+						"container": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"quoteChar": "\""
 				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Excel2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage32",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "timestamp.xlsx",
-						"container": "haimfile"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Timevalues",
-						"type": "String"
-					},
-					{
-						"name": "values",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Excel3')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage33",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "timestamp.xlsx",
-						"container": "haimfile"
-					}
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataset1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedds1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "inputEmp.txt",
-						"container": "adfv2tutorial"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataset123')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedservice123",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "babu"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/eventtest1ds1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "eventtestls1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "eventtest1"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/eventtestls2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "eventtestls2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "eventtest2"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault4",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage52')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage52_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage53')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage53_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage54')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage54_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage55')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage55_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage56')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage56_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage57')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage57_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage58')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage58_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
+				"schema": []
 			},
 			"dependsOn": []
 		}

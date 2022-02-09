@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "harishgituat"
 		},
+		"AzSQLDatabase_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage10_connectionString": {
 			"value": ""
 		},
@@ -389,6 +392,9 @@
 		"xelformatls_connectionString": {
 			"value": ""
 		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"value": "https://mapdatalakestore002p.dfs.core.windows.net"
+		},
 		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
 			"value": "harishgit11"
 		},
@@ -413,14 +419,23 @@
 		"AzureKeyVault4_properties_typeProperties_baseUrl": {
 			"value": "https://harishgituat.vault.azure.net/"
 		},
+		"LOGDBSERVER_properties_typeProperties_connectionString_secretName": {
+			"value": "sql-opslog-conn"
+		},
+		"MAPKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://ECL-MAP-002-P-AKV.vault.azure.net/"
+		},
+		"datalake_004_properties_typeProperties_url": {
+			"value": "https://reportingsa004.dfs.core.windows.net"
+		},
 		"desktop_properties_typeProperties_host": {
 			"value": "C:\\Users\\hariku\\OneDrive - Microsoft\\Desktop\\copyactivity"
 		},
 		"desktop_properties_typeProperties_userId": {
 			"value": "harishtest"
 		},
-		"Eventtrigger_properties_typeProperties_scope": {
-			"value": "/subscriptions/82da1dd1-f682-4164-8732-e21666d90066/resourceGroups/harishku/providers/Microsoft.Storage/storageAccounts/harishgen2"
+		"reporting_datalake_properties_typeProperties_url": {
+			"value": "https://reportingsa001.dfs.core.windows.net"
 		},
 		"copytestblobtoblob_properties_typeProperties_scope": {
 			"value": "/subscriptions/82da1dd1-f682-4164-8732-e21666d90066/resourceGroups/harishku/providers/Microsoft.Storage/storageAccounts/harishgen2"
