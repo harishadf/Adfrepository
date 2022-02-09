@@ -50,7 +50,8 @@
 		],
 		"parameters": {
 			"testingarm": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "1234"
 			}
 		},
 		"annotations": [],
