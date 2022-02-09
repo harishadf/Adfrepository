@@ -48,6 +48,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"harish": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2020-12-22T09:59:21Z"
 	},
