@@ -49,7 +49,7 @@
 			}
 		],
 		"parameters": {
-			"harish": {
+			"testingarm": {
 				"type": "string"
 			}
 		},
