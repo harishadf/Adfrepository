@@ -1,0 +1,16 @@
+{
+	"name": "AzureSqlDatabase2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=harishsqlserver123.database.windows.net;initial catalog=harishSQL;user id=harishserver123",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQERDREE2QjRDLUUyNEYtNDgxMS05MjBBLTM3ODcxOTY5NkE1Ml9kZTdkM2NmNi1jODRlLTQ4ZGUtOWNjOC00NTEyNmZjNTVkMTMiDQp9"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime4",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
