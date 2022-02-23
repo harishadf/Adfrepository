@@ -9,8 +9,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "test",
-			"table": ""
+			"schema": "dbo.harishSQL",
+			"table": "test"
 		}
 	}
 }
