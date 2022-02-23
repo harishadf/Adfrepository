@@ -13,7 +13,8 @@
 				"type": "AzureBlobStorageLocation",
 				"fileName": "d49342fa-40b1-47b1-b959-256f3018be57.xlsx",
 				"container": "dataflow"
-			}
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
