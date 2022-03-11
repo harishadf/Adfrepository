@@ -1,0 +1,11 @@
+{
+	"name": "ADLS_gen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://kdataprodadls.dfs.core.windows.net"
+		}
+	}
+}
