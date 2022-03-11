@@ -13,6 +13,220 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sql1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableName": {
+						"type": "string"
+					},
+					"SchemaName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().SchemaName",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Tablelist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sql1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds111')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls333",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "employee.csv",
+						"container": "inputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls22",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "employee.csv",
+						"container": "inputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds33')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls33",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/employeesdatads')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "emplls",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "employees_aggre.csv",
+						"container": "inputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Empid",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Department",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/getlookup')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage68",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "inputs"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/lm1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2294,1040 +2508,6 @@
 						}
 					],
 					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_CreditControlArea_Cntl as string ('CreditControlArea_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0C_CTR_AREA as string ('0C_CTR_AREA'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_credit_controlling_area as string ('dim_credit_controlling_area'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_CREDIT_CONTROLLING_AREA as string ('CREDIT_CONTROLLING_AREA/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_CreditControlArea_Cntl+$file_extension_tsv)]) ~> SrcCntl\nsource(output(\n\t\tCreditControlAreaCd as string,\n\t\tCurrencyKeyCd as string,\n\t\tRiskCatgCd as string,\n\t\tRepresentativeGroupCd as string,\n\t\tLanguageKeyCd as string,\n\t\tCreditControlAreaDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0C_CTR_AREA+'/'+$file_name_0C_CTR_AREA+$file_extension_tsv)]) ~> viewEXPL\nsource(output(\n\t\tCreditControlAreaKey as long,\n\t\tCreditControlAreaCd as string,\n\t\tCurrencyKeyCd as string,\n\t\tRiskCatgCd as string,\n\t\tRepresentativeGroupCd as string,\n\t\tLanguageKeyCd as string,\n\t\tCreditControlAreaDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_CREDIT_CONTROLLING_AREA + $file_name_dim_credit_controlling_area + $file_extension_tsv)]) ~> view1\nSrcCntl filter(SubjectArea=='CreditControlArea' && Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'MM/dd/yyyy HH:mm:ss')))) ~> maxdate\nviewEXPL select(mapColumn(\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'Route') ~> expl\nexpl, maxdate join(1 == 1 || !isNull(SubjectArea) || !isNull(Subject),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@CreditControlAreaCd == lrd@CreditControlAreaCd\n\t&& Select1@CurrencyKeyCd == lrd@CurrencyKeyCd\n\t&& Select1@LanguageKeyCd == lrd@LanguageKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(CreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count(LanguageKeyCd)) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(CreditControlAreaCd,CurrencyKeyCd,LanguageKeyCd), true),\n\tNewCreditControlAreaKey = rowNumber()) ~> getDeltaRowNum\nview1 aggregate(MaxCreditControlAreaKey = max(CreditControlAreaKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageKeyCd) || !isNull(MaxCreditControlAreaKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxCreditControlAreaKey = case(isNull(MaxCreditControlAreaKey), toLong(0) ,(case(MaxCreditControlAreaKey<=0,toLong(0),MaxCreditControlAreaKey)))) ~> appendMaxKey\nappendMaxKey derive(CreditControlAreaKey = NewCreditControlAreaKey+MaxCreditControlAreaKey) ~> GetNewKeyDelta\nGetNewKeyDelta, view1 join(Delta@CreditControlAreaCd == view1@CreditControlAreaCd\n\t&& Delta@CurrencyKeyCd == view1@CurrencyKeyCd\n\t&& Delta@LanguageKeyCd == view1@LanguageKeyCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(view1@CreditControlAreaKey) || isNull(view1@CreditControlAreaCd)||isNull(view1@LanguageKeyCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, view1 join(Delta@CreditControlAreaCd == view1@CreditControlAreaCd\n\t&& Delta@CurrencyKeyCd == view1@CurrencyKeyCd\n\t&& Delta@LanguageKeyCd == view1@LanguageKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, view1 join(Delta@CreditControlAreaCd == view1@CreditControlAreaCd\n\t&& Delta@CurrencyKeyCd == view1@CurrencyKeyCd\n\t&& Delta@LanguageKeyCd == view1@LanguageKeyCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@CreditControlAreaCd) || isNull(Delta@CurrencyKeyCd)||isNull(Delta@LanguageKeyCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(Status)) ~> Aggregate2\nSrcCntl derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'CreditControlArea') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, SrcCntl union(byName: true)~> Union2\nUnion2 sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tCreditControlAreaCd = Select1@CreditControlAreaCd,\n\t\tCurrencyKeyCd = Select1@CurrencyKeyCd,\n\t\tRiskCatgCd = Select1@RiskCatgCd,\n\t\tRepresentativeGroupCd = Select1@RepresentativeGroupCd,\n\t\tLanguageKeyCd = Select1@LanguageKeyCd,\n\t\tCreditControlAreaDesc = Select1@CreditControlAreaDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tCreditControlAreaCd = Delta@CreditControlAreaCd,\n\t\tCurrencyKeyCd = Delta@CurrencyKeyCd,\n\t\tRiskCatgCd = Delta@RiskCatgCd,\n\t\tRepresentativeGroupCd = Delta@RepresentativeGroupCd,\n\t\tLanguageKeyCd = Delta@LanguageKeyCd,\n\t\tCreditControlAreaDesc = Delta@CreditControlAreaDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tCreditControlAreaKey = GetNewKeyDelta@CreditControlAreaKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tCreditControlAreaDesc = Delta@CreditControlAreaDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tCreditControlAreaKey = view1@CreditControlAreaKey,\n\t\tCreditControlAreaCd = view1@CreditControlAreaCd,\n\t\tCurrencyKeyCd = view1@CurrencyKeyCd,\n\t\tRiskCatgCd = view1@RiskCatgCd,\n\t\tRepresentativeGroupCd = Delta@RepresentativeGroupCd,\n\t\tLanguageKeyCd = Delta@LanguageKeyCd,\n\t\tCreatedDtTm = view1@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tCreditControlAreaCd = view1@CreditControlAreaCd,\n\t\tCurrencyKeyCd = view1@CurrencyKeyCd,\n\t\tRiskCatgCd = view1@RiskCatgCd,\n\t\tRepresentativeGroupCd = view1@RepresentativeGroupCd,\n\t\tLanguageKeyCd = view1@LanguageKeyCd,\n\t\tCreditControlAreaDesc = view1@CreditControlAreaDesc,\n\t\tCreatedDtTm = view1@CreatedDtTm,\n\t\tLastUpdtDtTm = view1@LastUpdtDtTm,\n\t\tIsDeletedInd = view1@IsDeletedInd,\n\t\tCreditControlAreaKey = view1@CreditControlAreaKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_CREDIT_CONTROLLING_AREA+$file_name_dim_credit_controlling_area+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tCreditControlAreaKey,\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputparquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_CREDIT_CONTROLLING_AREA+$file_name_dim_credit_controlling_area+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tCreditControlAreaKey,\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputtsv\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_CreditControlArea_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> updatecntl"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Analytics/O2CAZ"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "DUNNKEYCntlsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "TableDUNNKEYTEXTEXPLsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "viewdimdunning1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Parquet_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimDunningParquet"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimDunningTSV"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "DunningCntlTSV"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Filter1"
-						},
-						{
-							"name": "maxdate"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "expl"
-						},
-						{
-							"name": "Join1"
-						},
-						{
-							"name": "Join2"
-						},
-						{
-							"name": "Filter2"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Delta"
-						},
-						{
-							"name": "getDeltaRowNum"
-						},
-						{
-							"name": "MaxDimKey"
-						},
-						{
-							"name": "Join3"
-						},
-						{
-							"name": "appendMaxKey"
-						},
-						{
-							"name": "GetNewKeyDelta"
-						},
-						{
-							"name": "Join4"
-						},
-						{
-							"name": "Filter3"
-						},
-						{
-							"name": "Inserts"
-						},
-						{
-							"name": "Join5"
-						},
-						{
-							"name": "Updates"
-						},
-						{
-							"name": "Join6"
-						},
-						{
-							"name": "Filter4"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "DerivedColumn4"
-						},
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "UnionALL"
-						},
-						{
-							"name": "Sort1"
-						},
-						{
-							"name": "lrd"
-						},
-						{
-							"name": "Select5"
-						},
-						{
-							"name": "Select6"
-						},
-						{
-							"name": "Select7"
-						},
-						{
-							"name": "Existing"
-						},
-						{
-							"name": "Union3"
-						},
-						{
-							"name": "DTypeChange1"
-						},
-						{
-							"name": "DTypeChange2"
-						}
-					],
-					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_Dunning_Cntl as string ('Dunning_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0DUNN_KEY as string ('0DUNN_KEY'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_dunning as string ('dim_dunning'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_DUNNING as string ('DUNNING/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_Dunning_Cntl+$file_extension_tsv)]) ~> DUNNKEYCntlsource\nsource(output(\n\t\tLanguageCd as string,\n\t\tDunningKeyCd as string,\n\t\tDunningKeyDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0DUNN_KEY+'/'+$file_name_0DUNN_KEY+$file_extension_tsv)]) ~> TableDUNNKEYTEXTEXPLsource\nsource(output(\n\t\tDunningKey as string,\n\t\tLanguageCd as string,\n\t\tDunningKeyCd as string,\n\t\tDunningKeyDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_DUNNING + $file_name_dim_dunning + $file_extension_tsv)]) ~> viewdimdunning1\nDUNNKEYCntlsource filter(SubjectArea=='Dunning'&& Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nDTypeChange1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'Dunning') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@LanguageCd == lrd@LanguageCd\n\t&& Select1@DunningKeyCd == lrd@DunningKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(LanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count([1])) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(LanguageCd,DunningKeyCd), true),\n\tNewDunningKey = rowNumber()) ~> getDeltaRowNum\nDTypeChange2 aggregate(MaxDunningKey = max(DunningKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageCd) || !isNull(MaxDunningKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxDunningKey = case(isNull(MaxDunningKey), toLong(0) ,(case(MaxDunningKey<=0,toLong(0),MaxDunningKey)))) ~> appendMaxKey\nappendMaxKey derive(DunningKey = NewDunningKey+MaxDunningKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewdimdunning1 join(Delta@LanguageCd == viewdimdunning1@LanguageCd\n\t&& Delta@DunningKeyCd == viewdimdunning1@DunningKeyCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewdimdunning1@LanguageCd) || isNull(viewdimdunning1@DunningKeyCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimdunning1@LanguageCd\n\t&& Delta@DunningKeyCd == viewdimdunning1@DunningKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimdunning1@LanguageCd\n\t&& Delta@DunningKeyCd == viewdimdunning1@DunningKeyCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@DunningKeyCd) || isNull(Delta@LanguageCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nDUNNKEYCntlsource derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'Dunning') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, DUNNKEYCntlsource union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tLanguageCd = Select1@LanguageCd,\n\t\tDunningKeyCd = Select1@DunningKeyCd,\n\t\tDunningKeyDesc = Select1@DunningKeyDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tLanguageCd = Delta@LanguageCd,\n\t\tDunningKeyCd = Delta@DunningKeyCd,\n\t\tDunningKeyDesc = Delta@DunningKeyDesc,\n\t\tDunningKey = GetNewKeyDelta@DunningKey,\n\t\tIsDeletedInd = Delta@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tDunningKeyDesc = Delta@DunningKeyDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tDunningKey = DTypeChange2@DunningKey,\n\t\tLanguageCd = viewdimdunning1@LanguageCd,\n\t\tDunningKeyCd = viewdimdunning1@DunningKeyCd,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tLanguageCd = viewdimdunning1@LanguageCd,\n\t\tDunningKeyCd = viewdimdunning1@DunningKeyCd,\n\t\tDunningKeyDesc = viewdimdunning1@DunningKeyDesc,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tLastUpdtDtTm = DTypeChange2@LastUpdtDtTm,\n\t\tIsDeletedInd = viewdimdunning1@IsDeletedInd,\n\t\tDunningKey = DTypeChange2@DunningKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nTableDUNNKEYTEXTEXPLsource derive(CreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange1\nviewdimdunning1 derive(DunningKey = toLong(DunningKey),\n\t\tCreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange2\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_DUNNING + $file_name_dim_dunning +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tDunningKey,\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimDunningParquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_DUNNING + $file_name_dim_dunning +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tDunningKey,\n\t\tLanguageCd,\n\t\tDunningKeyCd,\n\t\tDunningKeyDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimDunningTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_Dunning_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> DunningCntlTSV"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING_BLOCK')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Analytics/O2CAZ"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "DUNNBLOCKCntlsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "TableDUNNBLOCKTEXTEXPLsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "viewdimdunningblock1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Parquet_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimDunningBlockParquet"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimDunningBlockTSV"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "DunningBlockCntlTSV"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Filter1"
-						},
-						{
-							"name": "maxdate"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "expl"
-						},
-						{
-							"name": "Join1"
-						},
-						{
-							"name": "Join2"
-						},
-						{
-							"name": "Filter2"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Delta"
-						},
-						{
-							"name": "getDeltaRowNum"
-						},
-						{
-							"name": "MaxDimKey"
-						},
-						{
-							"name": "Join3"
-						},
-						{
-							"name": "appendMaxKey"
-						},
-						{
-							"name": "GetNewKeyDelta"
-						},
-						{
-							"name": "Join4"
-						},
-						{
-							"name": "Filter3"
-						},
-						{
-							"name": "Inserts"
-						},
-						{
-							"name": "Join5"
-						},
-						{
-							"name": "Updates"
-						},
-						{
-							"name": "Join6"
-						},
-						{
-							"name": "Filter4"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "DerivedColumn4"
-						},
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "UnionALL"
-						},
-						{
-							"name": "Sort1"
-						},
-						{
-							"name": "lrd"
-						},
-						{
-							"name": "Select5"
-						},
-						{
-							"name": "Select6"
-						},
-						{
-							"name": "Select7"
-						},
-						{
-							"name": "Existing"
-						},
-						{
-							"name": "Union3"
-						},
-						{
-							"name": "DTypeChange1"
-						},
-						{
-							"name": "DTypeChange2"
-						}
-					],
-					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_DunningBlock_Cntl as string ('DunningBlock_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0DUNN_BLOCK as string ('0DUNN_BLOCK'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_dunning_block as string ('dim_dunning_block'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_DUNNING_BLOCK as string ('DUNNING_BLOCK/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_DunningBlock_Cntl+$file_extension_tsv)]) ~> DUNNBLOCKCntlsource\nsource(output(\n\t\tLanguageCd as string,\n\t\tDunningBlockCd as string,\n\t\tDunningBlockDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0DUNN_BLOCK+'/'+$file_name_0DUNN_BLOCK+$file_extension_tsv)]) ~> TableDUNNBLOCKTEXTEXPLsource\nsource(output(\n\t\tDunningBlockKey as string,\n\t\tLanguageCd as string,\n\t\tDunningBlockCd as string,\n\t\tDunningBlockDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_DUNNING_BLOCK + $file_name_dim_dunning_block + $file_extension_tsv)]) ~> viewdimdunningblock1\nDUNNBLOCKCntlsource filter(SubjectArea=='DunningBlock'&& Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nDTypeChange1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningBlockCd,\n\t\tDunningBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'DunningBlock') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@LanguageCd == lrd@LanguageCd\n\t&& Select1@DunningBlockCd == lrd@DunningBlockCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(LanguageCd,\n\t\tDunningBlockCd,\n\t\tDunningBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count([1])) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningBlockCd,\n\t\tDunningBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(LanguageCd,DunningBlockCd), true),\n\tNewDunningBlockKey = rowNumber()) ~> getDeltaRowNum\nDTypeChange2 aggregate(MaxDunningBlockKey = max(DunningBlockKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageCd) || !isNull(MaxDunningBlockKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxDunningBlockKey = case(isNull(MaxDunningBlockKey), toLong(0) ,(case(MaxDunningBlockKey<=0,toLong(0),MaxDunningBlockKey)))) ~> appendMaxKey\nappendMaxKey derive(DunningBlockKey = NewDunningBlockKey+MaxDunningBlockKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewdimdunningblock1 join(Delta@LanguageCd == viewdimdunningblock1@LanguageCd\n\t&& Delta@DunningBlockCd == viewdimdunningblock1@DunningBlockCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewdimdunningblock1@LanguageCd) || isNull(viewdimdunningblock1@DunningBlockCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimdunningblock1@LanguageCd\n\t&& Delta@DunningBlockCd == viewdimdunningblock1@DunningBlockCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimdunningblock1@LanguageCd\n\t&& Delta@DunningBlockCd == viewdimdunningblock1@DunningBlockCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@DunningBlockCd) || isNull(Delta@LanguageCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nDUNNBLOCKCntlsource derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'DunningBlock') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, DUNNBLOCKCntlsource union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tLanguageCd,\n\t\tDunningBlockCd,\n\t\tDunningBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tLanguageCd = Select1@LanguageCd,\n\t\tDunningBlockCd = Select1@DunningBlockCd,\n\t\tDunningBlockDesc = Select1@DunningBlockDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tLanguageCd = Delta@LanguageCd,\n\t\tDunningBlockCd = Delta@DunningBlockCd,\n\t\tDunningBlockDesc = Delta@DunningBlockDesc,\n\t\tDunningBlockKey = GetNewKeyDelta@DunningBlockKey,\n\t\tIsDeletedInd = Delta@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tDunningBlockDesc = Delta@DunningBlockDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tDunningBlockKey = DTypeChange2@DunningBlockKey,\n\t\tLanguageCd = viewdimdunningblock1@LanguageCd,\n\t\tDunningBlockCd = viewdimdunningblock1@DunningBlockCd,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tLanguageCd = viewdimdunningblock1@LanguageCd,\n\t\tDunningBlockCd = viewdimdunningblock1@DunningBlockCd,\n\t\tDunningBlockDesc = viewdimdunningblock1@DunningBlockDesc,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tLastUpdtDtTm = DTypeChange2@LastUpdtDtTm,\n\t\tIsDeletedInd = viewdimdunningblock1@IsDeletedInd,\n\t\tDunningBlockKey = DTypeChange2@DunningBlockKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nTableDUNNBLOCKTEXTEXPLsource derive(CreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange1\nviewdimdunningblock1 derive(DunningBlockKey = toLong(DunningBlockKey),\n\t\tCreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange2\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_DUNNING_BLOCK + $file_name_dim_dunning_block +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tDunningBlockKey,\n\t\tLanguageCd,\n\t\tDunningBlockCd,\n\t\tDunningBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimDunningBlockParquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_DUNNING_BLOCK + $file_name_dim_dunning_block +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tDunningBlockKey,\n\t\tLanguageCd,\n\t\tDunningBlockCd,\n\t\tDunningBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimDunningBlockTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_DunningBlock_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> DunningBlockCntlTSV"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_PAYMENT_BLOCK')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Analytics/O2CAZ"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "PMNTBLOCKCntlsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "TablePMNTBLOCKTEXTEXPLsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "viewdimbillingblock1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Parquet_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimPaymentBlockParquet"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimPaymentBlockTSV"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "PaymentBlockCntlTSV"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Filter1"
-						},
-						{
-							"name": "maxdate"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "expl"
-						},
-						{
-							"name": "Join1"
-						},
-						{
-							"name": "Join2"
-						},
-						{
-							"name": "Filter2"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Delta"
-						},
-						{
-							"name": "getDeltaRowNum"
-						},
-						{
-							"name": "MaxDimKey"
-						},
-						{
-							"name": "Join3"
-						},
-						{
-							"name": "appendMaxKey"
-						},
-						{
-							"name": "GetNewKeyDelta"
-						},
-						{
-							"name": "Join4"
-						},
-						{
-							"name": "Filter3"
-						},
-						{
-							"name": "Inserts"
-						},
-						{
-							"name": "Join5"
-						},
-						{
-							"name": "Updates"
-						},
-						{
-							"name": "Join6"
-						},
-						{
-							"name": "Filter4"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "DerivedColumn4"
-						},
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "UnionALL"
-						},
-						{
-							"name": "Sort1"
-						},
-						{
-							"name": "lrd"
-						},
-						{
-							"name": "Select5"
-						},
-						{
-							"name": "Select6"
-						},
-						{
-							"name": "Select7"
-						},
-						{
-							"name": "Existing"
-						},
-						{
-							"name": "Union3"
-						},
-						{
-							"name": "DTypeChange1"
-						},
-						{
-							"name": "DTypeChange2"
-						},
-						{
-							"name": "Select8"
-						}
-					],
-					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_PaymentBlock_Cntl as string ('PaymentBlock_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0PMNT_BLOCK as string ('0PMNT_BLOCK'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_block as string ('dim_payment_block'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_BLOCK as string ('PAYMENT_BLOCK/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_PaymentBlock_Cntl+$file_extension_tsv)]) ~> PMNTBLOCKCntlsource\nsource(output(\n\t\tLanguageCd as string,\n\t\tPaymentBlockCd as string,\n\t\tPaymentBlockDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0PMNT_BLOCK+'/'+$file_name_0PMNT_BLOCK+$file_extension_tsv)]) ~> TablePMNTBLOCKTEXTEXPLsource\nsource(output(\n\t\tPaymentBlockKey as string,\n\t\tLanguageCd as string,\n\t\tPaymentBlockCd as string,\n\t\tPaymentBlockDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_PAYMENT_BLOCK + $file_name_dim_payment_block + $file_extension_tsv)]) ~> viewdimbillingblock1\nPMNTBLOCKCntlsource filter(SubjectArea=='PaymentBlock'&& Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nDTypeChange1 select(mapColumn(\n\t\tLanguageCd,\n\t\tPaymentBlockCd,\n\t\tPaymentBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'PaymentBlock') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@LanguageCd == lrd@LanguageCd\n\t&& Select1@PaymentBlockCd == lrd@PaymentBlockCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp\r\n(toString\r\n(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss')\r\n,'yyyy-mm-dd HH:mm:ss') \r\n> toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(LanguageCd,\n\t\tPaymentBlockCd,\n\t\tPaymentBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count([1])) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tLanguageCd,\n\t\tPaymentBlockCd,\n\t\tPaymentBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(LanguageCd,PaymentBlockCd), true),\n\tNewPaymentBlockKey = rowNumber()) ~> getDeltaRowNum\nDTypeChange2 aggregate(MaxPaymentBlockKey = max(PaymentBlockKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageCd) || !isNull(MaxPaymentBlockKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxPaymentBlockKey = case(isNull(MaxPaymentBlockKey), toLong(0) ,(case(MaxPaymentBlockKey<=0,toLong(0),MaxPaymentBlockKey)))) ~> appendMaxKey\nappendMaxKey derive(PaymentBlockKey = NewPaymentBlockKey+MaxPaymentBlockKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewdimbillingblock1 join(Delta@LanguageCd == viewdimbillingblock1@LanguageCd\n\t&& Delta@PaymentBlockCd == viewdimbillingblock1@PaymentBlockCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewdimbillingblock1@LanguageCd) || isNull(viewdimbillingblock1@PaymentBlockCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimbillingblock1@LanguageCd\n\t&& Delta@PaymentBlockCd == viewdimbillingblock1@PaymentBlockCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimbillingblock1@LanguageCd\n\t&& Delta@PaymentBlockCd == viewdimbillingblock1@PaymentBlockCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@PaymentBlockCd) || isNull(Delta@LanguageCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nPMNTBLOCKCntlsource derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'PaymentBlock') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, PMNTBLOCKCntlsource union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tLanguageCd,\n\t\tPaymentBlockCd,\n\t\tPaymentBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tLanguageCd = Select1@LanguageCd,\n\t\tPaymentBlockCd = Select1@PaymentBlockCd,\n\t\tPaymentBlockDesc = Select1@PaymentBlockDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tLanguageCd = Delta@LanguageCd,\n\t\tPaymentBlockCd = Delta@PaymentBlockCd,\n\t\tPaymentBlockDesc = Delta@PaymentBlockDesc,\n\t\tPaymentBlockKey = GetNewKeyDelta@PaymentBlockKey,\n\t\tIsDeletedInd = Delta@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tPaymentBlockKey = DTypeChange2@PaymentBlockKey,\n\t\tLanguageCd = viewdimbillingblock1@LanguageCd,\n\t\tPaymentBlockCd = viewdimbillingblock1@PaymentBlockCd,\n\t\tPaymentBlockDesc = Delta@PaymentBlockDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tPaymentBlockKey = DTypeChange2@PaymentBlockKey,\n\t\tLanguageCd = viewdimbillingblock1@LanguageCd,\n\t\tPaymentBlockCd = viewdimbillingblock1@PaymentBlockCd,\n\t\tPaymentBlockDesc = viewdimbillingblock1@PaymentBlockDesc,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tLastUpdtDtTm = DTypeChange2@LastUpdtDtTm,\n\t\tIsDeletedInd = viewdimbillingblock1@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nTablePMNTBLOCKTEXTEXPLsource derive(CreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange1\nviewdimbillingblock1 derive(PaymentBlockKey = toLong(PaymentBlockKey),\n\t\tCreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange2\nUnion3 select(mapColumn(\n\t\tPaymentBlockKey,\n\t\tLanguageCd,\n\t\tPaymentBlockCd,\n\t\tPaymentBlockDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select8\nSelect8 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_BLOCK + $file_name_dim_payment_block +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tpartitionBy('hash', 1)) ~> dimPaymentBlockParquet\nSelect8 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_BLOCK + $file_name_dim_payment_block +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tpartitionBy('hash', 1)) ~> dimPaymentBlockTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_PaymentBlock_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> PaymentBlockCntlTSV"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_PAYMENT_METHOD')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Analytics/O2CAZ"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "SrcCntl"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "viewEXPL"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "view1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Parquet_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "outputparquet"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "outputtsv"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "updatecntl"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Filter1"
-						},
-						{
-							"name": "maxdate"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "expl"
-						},
-						{
-							"name": "Join1"
-						},
-						{
-							"name": "Join2"
-						},
-						{
-							"name": "Filter2"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Delta"
-						},
-						{
-							"name": "getDeltaRowNum"
-						},
-						{
-							"name": "MaxDimKey"
-						},
-						{
-							"name": "Join3"
-						},
-						{
-							"name": "appendMaxKey"
-						},
-						{
-							"name": "GetNewKeyDelta"
-						},
-						{
-							"name": "Join4"
-						},
-						{
-							"name": "Filter3"
-						},
-						{
-							"name": "Inserts"
-						},
-						{
-							"name": "Join5"
-						},
-						{
-							"name": "Updates"
-						},
-						{
-							"name": "Join6"
-						},
-						{
-							"name": "Filter4"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "DerivedColumn4"
-						},
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "UnionALL"
-						},
-						{
-							"name": "Sort1"
-						},
-						{
-							"name": "lrd"
-						},
-						{
-							"name": "Select5"
-						},
-						{
-							"name": "Select6"
-						},
-						{
-							"name": "Select7"
-						},
-						{
-							"name": "Existing"
-						},
-						{
-							"name": "Union3"
-						}
-					],
-					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_PaymentMethod_Cntl as string ('PaymentMethod_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0PYMT_METH as string ('0PYMT_METH'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_method as string ('dim_payment_method'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_METHOD as string ('PAYMENT_METHOD/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_PaymentMethod_Cntl+$file_extension_tsv)]) ~> SrcCntl\nsource(output(\n\t\tCountryCd as string,\n\t\tPaymentMethCd as string,\n\t\tPaymentMethName as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0PYMT_METH+'/'+$file_name_0PYMT_METH+$file_extension_tsv)]) ~> viewEXPL\nsource(output(\n\t\tPaymentMethodKey as long,\n\t\tCountryCd as string,\n\t\tPaymentMethCd as string,\n\t\tPaymentMethName as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_PAYMENT_METHOD + $file_name_dim_payment_method + $file_extension_tsv)]) ~> view1\nSrcCntl filter(SubjectArea=='PaymentMethod' && Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nviewEXPL select(mapColumn(\n\t\tCountryCd,\n\t\tPaymentMethCd,\n\t\tPaymentMethName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'PaymentMethod') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@CountryCd == lrd@CountryCd\n\t&& Select1@PaymentMethCd == lrd@PaymentMethCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(CountryCd,\n\t\tPaymentMethCd,\n\t\tPaymentMethName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count(CountryCd)) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tCountryCd,\n\t\tPaymentMethCd,\n\t\tPaymentMethName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(CountryCd,PaymentMethCd), true),\n\tNewPaymentMethodKey = rowNumber()) ~> getDeltaRowNum\nview1 aggregate(MaxPaymentMethodKey = max(PaymentMethodKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(CountryCd) || !isNull(MaxPaymentMethodKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxPaymentMethodKey = case(isNull(MaxPaymentMethodKey), toLong(0) ,(case(MaxPaymentMethodKey<=0,toLong(0),MaxPaymentMethodKey)))) ~> appendMaxKey\nappendMaxKey derive(PaymentMethodKey = NewPaymentMethodKey+MaxPaymentMethodKey) ~> GetNewKeyDelta\nGetNewKeyDelta, view1 join(Delta@CountryCd == view1@CountryCd\n\t&& Delta@PaymentMethCd == view1@PaymentMethCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(view1@CountryCd) || isNull(view1@PaymentMethCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, view1 join(Delta@CountryCd == view1@CountryCd\n\t&& Delta@PaymentMethCd == view1@PaymentMethCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, view1 join(Delta@CountryCd == view1@CountryCd\n\t&& Delta@PaymentMethCd == view1@PaymentMethCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@CountryCd) || isNull(Delta@PaymentMethCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nSrcCntl derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'PaymentMethod') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, SrcCntl union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tCountryCd,\n\t\tPaymentMethCd,\n\t\tPaymentMethName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tCountryCd = Select1@CountryCd,\n\t\tPaymentMethCd = Select1@PaymentMethCd,\n\t\tPaymentMethName = Select1@PaymentMethName,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tCountryCd = Delta@CountryCd,\n\t\tPaymentMethCd = Delta@PaymentMethCd,\n\t\tPaymentMethName = Delta@PaymentMethName,\n\t\tCreatedDtTm = Delta@CreatedDtTm,\n\t\tLastUpdtDtTm = Delta@LastUpdtDtTm,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tPaymentMethodKey = GetNewKeyDelta@PaymentMethodKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tPaymentMethName = Delta@PaymentMethName,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tCountryCd = view1@CountryCd,\n\t\tPaymentMethCd = view1@PaymentMethCd,\n\t\tCreatedDtTm = view1@CreatedDtTm,\n\t\tLastUpdtDtTm = view1@LastUpdtDtTm,\n\t\tPaymentMethodKey = view1@PaymentMethodKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tCountryCd = view1@CountryCd,\n\t\tPaymentMethCd = view1@PaymentMethCd,\n\t\tPaymentMethName = view1@PaymentMethName,\n\t\tCreatedDtTm = view1@CreatedDtTm,\n\t\tLastUpdtDtTm = view1@LastUpdtDtTm,\n\t\tIsDeletedInd = view1@IsDeletedInd,\n\t\tPaymentMethodKey = view1@PaymentMethodKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_METHOD + $file_name_dim_payment_method +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tPaymentMethodKey,\n\t\tCountryCd,\n\t\tPaymentMethCd,\n\t\tPaymentMethName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputparquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_METHOD + $file_name_dim_payment_method +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tPaymentMethodKey,\n\t\tCountryCd,\n\t\tPaymentMethCd,\n\t\tPaymentMethName,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputtsv\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_PaymentMethod_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> updatecntl"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_PAYMENT_REASON')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Analytics/O2CAZ"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "REASONCDECntlsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "TableREASONCDETEXTEXPLsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "viewdimroute1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Parquet_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimPaymentReasonParquet"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimPaymentReasonTSV"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "PaymentReasonCntlTSV"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Filter1"
-						},
-						{
-							"name": "maxdate"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "expl"
-						},
-						{
-							"name": "Join1"
-						},
-						{
-							"name": "Join2"
-						},
-						{
-							"name": "Filter2"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Delta"
-						},
-						{
-							"name": "getDeltaRowNum"
-						},
-						{
-							"name": "MaxDimKey"
-						},
-						{
-							"name": "Join3"
-						},
-						{
-							"name": "appendMaxKey"
-						},
-						{
-							"name": "GetNewKeyDelta"
-						},
-						{
-							"name": "Join4"
-						},
-						{
-							"name": "Filter3"
-						},
-						{
-							"name": "Inserts"
-						},
-						{
-							"name": "Join5"
-						},
-						{
-							"name": "Updates"
-						},
-						{
-							"name": "Join6"
-						},
-						{
-							"name": "Filter4"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "DerivedColumn4"
-						},
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "UnionALL"
-						},
-						{
-							"name": "Sort1"
-						},
-						{
-							"name": "lrd"
-						},
-						{
-							"name": "Select5"
-						},
-						{
-							"name": "Select6"
-						},
-						{
-							"name": "Select7"
-						},
-						{
-							"name": "Existing"
-						},
-						{
-							"name": "Union3"
-						},
-						{
-							"name": "DTypeChange1"
-						},
-						{
-							"name": "DTypeChange2"
-						}
-					],
-					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_P as string ('PaymentReason_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0REASON_CDE as string ('0REASON_CDE'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_reaareason as string ('dim_payment_reason'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_REASON as string ('PAYMENT_REASON/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_P+$file_extension_tsv)]) ~> REASONCDECntlsource\nsource(output(\n\t\tLanguageCd as string,\n\t\tCompanyCd as string,\n\t\tPaymentReasonCd as string,\n\t\tReasonShortTxt as string,\n\t\tReasonLongTxt as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0REASON_CDE+'/'+$file_name_0REASON_CDE+$file_extension_tsv)]) ~> TableREASONCDETEXTEXPLsource\nsource(output(\n\t\tPaymentReasonKey as string,\n\t\tLanguageCd as string,\n\t\tCompanyCd as string,\n\t\tPaymentReasonCd as string,\n\t\tReasonShortTxt as string,\n\t\tReasonLongTxt as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_PAYMENT_REASON + $file_name_dim_payment_reaareason + $file_extension_tsv)]) ~> viewdimroute1\nREASONCDECntlsource filter(SubjectArea=='PaymentReason'&& Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nDTypeChange1 select(mapColumn(\n\t\tLanguageCd,\n\t\tCompanyCd,\n\t\tPaymentReasonCd,\n\t\tReasonShortTxt,\n\t\tReasonLongTxt,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'PaymentReason') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@LanguageCd == lrd@LanguageCd\n\t&& Select1@CompanyCd == lrd@CompanyCd\n\t&& Select1@PaymentReasonCd == lrd@PaymentReasonCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(LanguageCd,\n\t\tCompanyCd,\n\t\tPaymentReasonCd,\n\t\tReasonShortTxt,\n\t\tReasonLongTxt,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count([1])) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tLanguageCd,\n\t\tCompanyCd,\n\t\tPaymentReasonCd,\n\t\tReasonShortTxt,\n\t\tReasonLongTxt,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(LanguageCd,CompanyCd,PaymentReasonCd), true),\n\tNewPaymentReasonKey = rowNumber()) ~> getDeltaRowNum\nDTypeChange2 aggregate(MaxPaymentReasonKey = max(PaymentReasonKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageCd) || !isNull(MaxPaymentReasonKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxPaymentReasonKey = case(isNull(MaxPaymentReasonKey), toLong(0) ,(case(MaxPaymentReasonKey<=0,toLong(0),MaxPaymentReasonKey)))) ~> appendMaxKey\nappendMaxKey derive(PaymentReasonKey = NewPaymentReasonKey+MaxPaymentReasonKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewdimroute1 join(Delta@LanguageCd == viewdimroute1@LanguageCd\n\t&& Delta@CompanyCd == viewdimroute1@CompanyCd\n\t&& Delta@PaymentReasonCd == viewdimroute1@PaymentReasonCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewdimroute1@LanguageCd) || isNull(viewdimroute1@CompanyCd) || isNull(viewdimroute1@PaymentReasonCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimroute1@LanguageCd\n\t&& Delta@CompanyCd == viewdimroute1@CompanyCd\n\t&& Delta@PaymentReasonCd == viewdimroute1@PaymentReasonCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, DTypeChange2 join(Delta@LanguageCd == viewdimroute1@LanguageCd\n\t&& Delta@CompanyCd == viewdimroute1@CompanyCd\n\t&& Delta@PaymentReasonCd == viewdimroute1@PaymentReasonCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@CompanyCd) || isNull(Delta@LanguageCd) || isNull(Delta@PaymentReasonCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nREASONCDECntlsource derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'PaymentReason') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, REASONCDECntlsource union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tLanguageCd,\n\t\tCompanyCd,\n\t\tPaymentReasonCd,\n\t\tReasonShortTxt,\n\t\tReasonLongTxt,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tLanguageCd = Select1@LanguageCd,\n\t\tCompanyCd = Select1@CompanyCd,\n\t\tPaymentReasonCd = Select1@PaymentReasonCd,\n\t\tReasonShortTxt = Select1@ReasonShortTxt,\n\t\tReasonLongTxt = Select1@ReasonLongTxt,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tLanguageCd = Delta@LanguageCd,\n\t\tCompanyCd = Delta@CompanyCd,\n\t\tPaymentReasonCd = Delta@PaymentReasonCd,\n\t\tReasonShortTxt = Delta@ReasonShortTxt,\n\t\tReasonLongTxt = Delta@ReasonLongTxt,\n\t\tPaymentReasonKey = GetNewKeyDelta@PaymentReasonKey,\n\t\tIsDeletedInd = Delta@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tPaymentReasonCd = viewdimroute1@PaymentReasonCd,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tPaymentReasonKey = DTypeChange2@PaymentReasonKey,\n\t\tLanguageCd = viewdimroute1@LanguageCd,\n\t\tCompanyCd = viewdimroute1@CompanyCd,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tReasonShortTxt = Delta@ReasonShortTxt,\n\t\tReasonLongTxt = Delta@ReasonLongTxt\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tLanguageCd = viewdimroute1@LanguageCd,\n\t\tCompanyCd = viewdimroute1@CompanyCd,\n\t\tPaymentReasonCd = viewdimroute1@PaymentReasonCd,\n\t\tReasonShortTxt = viewdimroute1@ReasonShortTxt,\n\t\tReasonLongTxt = viewdimroute1@ReasonLongTxt,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tLastUpdtDtTm = DTypeChange2@LastUpdtDtTm,\n\t\tIsDeletedInd = viewdimroute1@IsDeletedInd,\n\t\tPaymentReasonKey = DTypeChange2@PaymentReasonKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nTableREASONCDETEXTEXPLsource derive(CreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange1\nviewdimroute1 derive(PaymentReasonKey = toLong(PaymentReasonKey),\n\t\tCreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange2\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_REASON + $file_name_dim_payment_reaareason +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tPaymentReasonKey,\n\t\tLanguageCd,\n\t\tCompanyCd,\n\t\tPaymentReasonCd,\n\t\tReasonShortTxt,\n\t\tReasonLongTxt,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimPaymentReasonParquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_REASON + $file_name_dim_payment_reaareason +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tPaymentReasonKey,\n\t\tLanguageCd,\n\t\tCompanyCd,\n\t\tPaymentReasonCd,\n\t\tReasonShortTxt,\n\t\tReasonLongTxt,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimPaymentReasonTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_P+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> PaymentReasonCntlTSV"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_PAYMENT_TERM')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Analytics/O2CAZ"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "IDPAYTERMBRCntlsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "TableIDPAYTERMBRTEXTEXPLsource"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "viewdimroute1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Parquet_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimPaymentTermParquet"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "dimPaymentTermTSV"
-						},
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "PaymentTermCntlTSV"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Filter1"
-						},
-						{
-							"name": "maxdate"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "expl"
-						},
-						{
-							"name": "Join1"
-						},
-						{
-							"name": "Join2"
-						},
-						{
-							"name": "Filter2"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Delta"
-						},
-						{
-							"name": "getDeltaRowNum"
-						},
-						{
-							"name": "MaxDimKey"
-						},
-						{
-							"name": "Join3"
-						},
-						{
-							"name": "appendMaxKey"
-						},
-						{
-							"name": "GetNewKeyDelta"
-						},
-						{
-							"name": "Join4"
-						},
-						{
-							"name": "Filter3"
-						},
-						{
-							"name": "Inserts"
-						},
-						{
-							"name": "Join5"
-						},
-						{
-							"name": "Updates"
-						},
-						{
-							"name": "Join6"
-						},
-						{
-							"name": "Filter4"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "DerivedColumn4"
-						},
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "UnionALL"
-						},
-						{
-							"name": "Sort1"
-						},
-						{
-							"name": "lrd"
-						},
-						{
-							"name": "Select5"
-						},
-						{
-							"name": "Select6"
-						},
-						{
-							"name": "Select7"
-						},
-						{
-							"name": "Existing"
-						},
-						{
-							"name": "Union3"
-						},
-						{
-							"name": "DTypeChange1"
-						},
-						{
-							"name": "DTypeChange2"
-						}
-					],
-					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_PaymentTerm_cntl as string ('PaymentTerm_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0ID_PAYTERM_BR as string ('0ID_PAYTERM_BR'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_payment_term as string ('dim_payment_term'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_PAYMENT_TERM as string ('PAYMENT_TERM/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_PaymentTerm_cntl+$file_extension_tsv)]) ~> IDPAYTERMBRCntlsource\nsource(output(\n\t\tClientCd as string,\n\t\tTermsofPaymentKeyCd as string,\n\t\tValidityAreaofConditionDesc as string,\n\t\tFirstPaymentTermExplanationDesc as string,\n\t\tSecondPaymentTermExplanationDesc as string,\n\t\tNetPaymentTermExplanationDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0ID_PAYTERM_BR+'/'+$file_name_0ID_PAYTERM_BR+$file_extension_tsv)]) ~> TableIDPAYTERMBRTEXTEXPLsource\nsource(output(\n\t\tPaymentTermKey as string,\n\t\tClientCd as string,\n\t\tTermsofPaymentKeyCd as string,\n\t\tValidityAreaofConditionDesc as string,\n\t\tFirstPaymentTermExplanationDesc as string,\n\t\tSecondPaymentTermExplanationDesc as string,\n\t\tNetPaymentTermExplanationDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_PAYMENT_TERM + $file_name_dim_payment_term + $file_extension_tsv)]) ~> viewdimroute1\nIDPAYTERMBRCntlsource filter(SubjectArea=='PaymentTerm'&& Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nDTypeChange1 select(mapColumn(\n\t\tClientCd,\n\t\tTermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tJobId,\n\t\tFileName,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'PaymentTerm') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@ClientCd == lrd@ClientCd\n\t&& Select1@TermsofPaymentKeyCd == lrd@TermsofPaymentKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(ClientCd,\n\t\tTermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count([1])) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tClientCd,\n\t\tTermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(ClientCd,TermsofPaymentKeyCd), true),\n\tNewPaymentTermKey = rowNumber()) ~> getDeltaRowNum\nDTypeChange2 aggregate(MaxPaymentTermKey = max(PaymentTermKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(ClientCd) || !isNull(MaxPaymentTermKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxPaymentTermKey = case(isNull(MaxPaymentTermKey), toLong(0) ,(case(MaxPaymentTermKey<=0,toLong(0),MaxPaymentTermKey)))) ~> appendMaxKey\nappendMaxKey derive(PaymentTermKey = NewPaymentTermKey+MaxPaymentTermKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewdimroute1 join(Delta@ClientCd == viewdimroute1@ClientCd\n\t&& Delta@TermsofPaymentKeyCd == viewdimroute1@TermsofPaymentKeyCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewdimroute1@ClientCd) || isNull(viewdimroute1@TermsofPaymentKeyCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, DTypeChange2 join(Delta@ClientCd == viewdimroute1@ClientCd\n\t&& Delta@TermsofPaymentKeyCd == viewdimroute1@TermsofPaymentKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, DTypeChange2 join(Delta@ClientCd == viewdimroute1@ClientCd\n\t&& Delta@TermsofPaymentKeyCd == viewdimroute1@TermsofPaymentKeyCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@TermsofPaymentKeyCd) || isNull(Delta@ClientCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(1)) ~> Aggregate2\nIDPAYTERMBRCntlsource derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'PaymentTerm') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, IDPAYTERMBRCntlsource union(byName: true)~> UnionALL\nUnionALL sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tClientCd,\n\t\tTermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tClientCd = Select1@ClientCd,\n\t\tTermsofPaymentKeyCd = Select1@TermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc = Select1@ValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc = Select1@FirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc = Select1@SecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc = Select1@NetPaymentTermExplanationDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tClientCd = Delta@ClientCd,\n\t\tTermsofPaymentKeyCd = Delta@TermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc = Delta@ValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc = Delta@FirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc = Delta@SecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc = Delta@NetPaymentTermExplanationDesc,\n\t\tPaymentTermKey = GetNewKeyDelta@PaymentTermKey,\n\t\tIsDeletedInd = Delta@IsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tValidityAreaofConditionDesc = Delta@ValidityAreaofConditionDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tPaymentTermKey = DTypeChange2@PaymentTermKey,\n\t\tClientCd = viewdimroute1@ClientCd,\n\t\tTermsofPaymentKeyCd = viewdimroute1@TermsofPaymentKeyCd,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tFirstPaymentTermExplanationDesc = viewdimroute1@FirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc = Delta@SecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc = Delta@NetPaymentTermExplanationDesc\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tClientCd = viewdimroute1@ClientCd,\n\t\tTermsofPaymentKeyCd = viewdimroute1@TermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc = viewdimroute1@ValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc = viewdimroute1@FirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc = viewdimroute1@SecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc = viewdimroute1@NetPaymentTermExplanationDesc,\n\t\tCreatedDtTm = DTypeChange2@CreatedDtTm,\n\t\tLastUpdtDtTm = DTypeChange2@LastUpdtDtTm,\n\t\tIsDeletedInd = viewdimroute1@IsDeletedInd,\n\t\tPaymentTermKey = DTypeChange2@PaymentTermKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nTableIDPAYTERMBRTEXTEXPLsource derive(CreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange1\nviewdimroute1 derive(PaymentTermKey = toLong(PaymentTermKey),\n\t\tCreatedDtTm = toString(CreatedDtTm),\n\t\tLastUpdtDtTm = toString(LastUpdtDtTm)) ~> DTypeChange2\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_TERM + $file_name_dim_payment_term +$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tPaymentTermKey,\n\t\tClientCd,\n\t\tTermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimPaymentTermParquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path + $Analytics_Folder_PAYMENT_TERM + $file_name_dim_payment_term +$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tPaymentTermKey,\n\t\tClientCd,\n\t\tTermsofPaymentKeyCd,\n\t\tValidityAreaofConditionDesc,\n\t\tFirstPaymentTermExplanationDesc,\n\t\tSecondPaymentTermExplanationDesc,\n\t\tNetPaymentTermExplanationDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> dimPaymentTermTSV\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_PaymentTerm_cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> PaymentTermCntlTSV"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GenericControlFileUpdate')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Generic/ControlFiles"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "CntlSource"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "CntlOutput"
-						}
-					],
-					"transformations": [
-						{
-							"name": "getnewcntlvalue"
-						},
-						{
-							"name": "Distinct"
-						},
-						{
-							"name": "SelectRequiredColumns"
-						},
-						{
-							"name": "updatecntl"
-						}
-					],
-					"script": "parameters{\n\tFilePath as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tFileName as string ('Customer_Cntl'),\n\tStatus as string ('S'),\n\tSubjectArea as string ('Customer'),\n\tTimeFormat as string ('M/d/yyyy h:mm:ss a')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($FilePath+$FileName+'.tsv')]) ~> CntlSource\nCntlSource derive(LastRunDate = toString(currentTimestamp(),$TimeFormat),\n\t\tStatus = $Status,\n\t\tSubjectArea = $SubjectArea) ~> getnewcntlvalue\ngetnewcntlvalue aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = min(LastRunDate)) ~> Distinct\nDistinct select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectRequiredColumns\nCntlSource, SelectRequiredColumns union(byName: true)~> updatecntl\nupdatecntl sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($FilePath+$FileName+'.tsv')],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CntlOutput"
 				}
 			},
 			"dependsOn": []

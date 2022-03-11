@@ -343,6 +343,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage851111'"
 		},
+		"AzureBlobStorage851112_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage851112'"
+		},
 		"AzureBlobStorage9_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage9'"
@@ -362,6 +366,10 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
 		},
 		"AzureTableStorage1_connectionString": {
 			"type": "secureString",
@@ -1026,12 +1034,6 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureBlobStorage52_connectionString": {
-						"value": "[parameters('AzureBlobStorage52_connectionString')]"
-					},
-					"AzureBlobStorage53_connectionString": {
-						"value": "[parameters('AzureBlobStorage53_connectionString')]"
-					},
 					"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
 					}
@@ -1054,6 +1056,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage52_connectionString": {
+						"value": "[parameters('AzureBlobStorage52_connectionString')]"
+					},
+					"AzureBlobStorage53_connectionString": {
+						"value": "[parameters('AzureBlobStorage53_connectionString')]"
 					},
 					"AzureBlobStorage54_connectionString": {
 						"value": "[parameters('AzureBlobStorage54_connectionString')]"
@@ -1108,12 +1116,6 @@
 					},
 					"AzureBlobStorage71_connectionString": {
 						"value": "[parameters('AzureBlobStorage71_connectionString')]"
-					},
-					"AzureBlobStorage72_connectionString": {
-						"value": "[parameters('AzureBlobStorage72_connectionString')]"
-					},
-					"AzureBlobStorage73_connectionString": {
-						"value": "[parameters('AzureBlobStorage73_connectionString')]"
 					}
 				}
 			},
@@ -1134,6 +1136,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage72_connectionString": {
+						"value": "[parameters('AzureBlobStorage72_connectionString')]"
+					},
+					"AzureBlobStorage73_connectionString": {
+						"value": "[parameters('AzureBlobStorage73_connectionString')]"
 					},
 					"AzureBlobStorage74_connectionString": {
 						"value": "[parameters('AzureBlobStorage74_connectionString')]"
@@ -1171,23 +1179,17 @@
 					"AzureBlobStorage851111_connectionString": {
 						"value": "[parameters('AzureBlobStorage851111_connectionString')]"
 					},
+					"AzureBlobStorage851112_connectionString": {
+						"value": "[parameters('AzureBlobStorage851112_connectionString')]"
+					},
 					"AzureDataLakeStorage3_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage3_accountKey')]"
 					},
+					"AzureSqlDatabase2_connectionString": {
+						"value": "[parameters('AzureSqlDatabase2_connectionString')]"
+					},
 					"emplls_connectionString": {
 						"value": "[parameters('emplls_connectionString')]"
-					},
-					"linkedService124_connectionString": {
-						"value": "[parameters('linkedService124_connectionString')]"
-					},
-					"lm11_connectionString": {
-						"value": "[parameters('lm11_connectionString')]"
-					},
-					"ls11_connectionString": {
-						"value": "[parameters('ls11_connectionString')]"
-					},
-					"ls22_connectionString": {
-						"value": "[parameters('ls22_connectionString')]"
 					},
 					"AzureDataLakeStorage3_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]"
@@ -1214,6 +1216,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"linkedService124_connectionString": {
+						"value": "[parameters('linkedService124_connectionString')]"
+					},
+					"lm11_connectionString": {
+						"value": "[parameters('lm11_connectionString')]"
+					},
+					"ls11_connectionString": {
+						"value": "[parameters('ls11_connectionString')]"
+					},
+					"ls22_connectionString": {
+						"value": "[parameters('ls22_connectionString')]"
 					},
 					"ls33_connectionString": {
 						"value": "[parameters('ls33_connectionString')]"
@@ -1283,9 +1297,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"copytestblobtoblob_properties_typeProperties_scope": {
-						"value": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -1306,6 +1317,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"copytestblobtoblob_properties_typeProperties_scope": {
+						"value": "[parameters('copytestblobtoblob_properties_typeProperties_scope')]"
 					}
 				}
 			},

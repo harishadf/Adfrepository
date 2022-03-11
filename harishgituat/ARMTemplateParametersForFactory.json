@@ -257,6 +257,9 @@
 		"AzureBlobStorage851111_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage851112_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage9_connectionString": {
 			"value": ""
 		},
@@ -270,6 +273,9 @@
 			"value": ""
 		},
 		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_connectionString": {
 			"value": ""
 		},
 		"AzureTableStorage1_connectionString": {

@@ -343,51 +343,21 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/001_SQL_Appointment_Staged')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime4')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzSQLDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "001_Principal_Operations"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Test_Appointment_ID",
-						"type": "bigint",
-						"precision": 19
-					},
-					{
-						"name": "Appointment Person ID",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Appointment Number",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Appointment Datetime",
-						"type": "datetime2",
-						"scale": 7
-					},
-					{
-						"name": "Appointment Date",
-						"type": "date"
-					},
-					{
-						"name": "Appointment Time",
-						"type": "datetime2",
-						"scale": 7
-					}
-				],
+				"type": "Managed",
 				"typeProperties": {
-					"schema": "stg",
-					"table": "001_Test_Appointment_Staged"
+					"computeProperties": {
+						"location": "West Europe",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10,
+							"cleanup": false
+						}
+					}
 				}
 			},
 			"dependsOn": []
