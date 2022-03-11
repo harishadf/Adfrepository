@@ -6,16 +6,36 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
-		},
-		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "harishgit11"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "error"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText10')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -581,6 +601,142 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/JSON_Payroll')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_gen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"inputAdlsContainerName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "WFO/payroll"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "2020_06_10_14_02_payroll_testi-j.json",
+						"folderPath": "raw/natural/GTWFO/payroll/2020/06/10/PM",
+						"fileSystem": {
+							"value": "@dataset().inputAdlsContainerName",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"success": {
+							"type": "boolean"
+						},
+						"payload": {
+							"type": "object",
+							"properties": {
+								"payroll_records": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"employee_id": {
+												"type": "string"
+											},
+											"employee_name": {
+												"type": "string"
+											},
+											"payroll_code": {
+												"type": "string"
+											},
+											"employee_payroll_code": {
+												"type": "string"
+											},
+											"external_id": {
+												"type": "string"
+											},
+											"payroll_description": {
+												"type": "string"
+											},
+											"date": {
+												"type": "string"
+											},
+											"task_type_id": {
+												"type": "string"
+											},
+											"task_type_tags": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"id": {
+															"type": "string"
+														},
+														"value": {
+															"type": "string"
+														},
+														"tag_group": {
+															"type": "string"
+														}
+													}
+												}
+											},
+											"hours": {
+												"type": "integer"
+											},
+											"days": {
+												"type": "integer"
+											},
+											"is_confirmed": {
+												"type": "boolean"
+											},
+											"updated_at": {
+												"type": "string"
+											},
+											"time_span_type": {
+												"type": "string"
+											},
+											"time_unit_type": {
+												"type": "string"
+											},
+											"planning_unit_id": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"payroll_errors": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"employee_id": {
+												"type": "string"
+											},
+											"employee_name": {
+												"type": "string"
+											},
+											"error_type": {
+												"type": "string"
+											},
+											"error_dates": {
+												"type": "array"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Parquet_Dataset')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -687,113 +843,6 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"container": "eventtest2"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/stg_001_adf_Contact_Staged')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzSQLDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Person Dynamics ID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Person Employee ID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Person Student ID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Person Full Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Person Cost Center Code",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Vaccine Status",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Case Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Case Status",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Case Age",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Case Number",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Access",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Survey Pass Issued",
-						"type": "bit"
-					},
-					{
-						"name": "Survey Created On",
-						"type": "datetime2",
-						"scale": 7
-					},
-					{
-						"name": "AccessDuration",
-						"type": "date"
-					},
-					{
-						"name": "NoOfDaysSinceLastTest",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Conditionally Approved",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stg",
-					"table": "001_adf_Contact_Staged"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault4",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},

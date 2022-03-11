@@ -13,6 +13,324 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_ACCOUNT_DOCUMENT_TYPE')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "SrcCntl"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "viewEXPL"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "viewroute1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "outputparquet"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "outputtsv"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "updatecntl"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "maxdate"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "expl"
+						},
+						{
+							"name": "Join1"
+						},
+						{
+							"name": "Join2"
+						},
+						{
+							"name": "Filter2"
+						},
+						{
+							"name": "Aggregate1"
+						},
+						{
+							"name": "Delta"
+						},
+						{
+							"name": "getDeltaRowNum"
+						},
+						{
+							"name": "MaxDimKey"
+						},
+						{
+							"name": "Join3"
+						},
+						{
+							"name": "appendMaxKey"
+						},
+						{
+							"name": "GetNewKeyDelta"
+						},
+						{
+							"name": "Join4"
+						},
+						{
+							"name": "Filter3"
+						},
+						{
+							"name": "Inserts"
+						},
+						{
+							"name": "Join5"
+						},
+						{
+							"name": "Updates"
+						},
+						{
+							"name": "Join6"
+						},
+						{
+							"name": "Filter4"
+						},
+						{
+							"name": "Aggregate2"
+						},
+						{
+							"name": "DerivedColumn4"
+						},
+						{
+							"name": "getnewcntlvalue"
+						},
+						{
+							"name": "Union2"
+						},
+						{
+							"name": "Sort1"
+						},
+						{
+							"name": "lrd"
+						},
+						{
+							"name": "Select5"
+						},
+						{
+							"name": "Select6"
+						},
+						{
+							"name": "Select7"
+						},
+						{
+							"name": "Existing"
+						},
+						{
+							"name": "Union3"
+						}
+					],
+					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_AccountDocumentType_Cntl as string ('AccountDocumentType_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0AC_DOC_TYP as string ('0AC_DOC_TYP'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_account_document_type as string ('dim_account_document_type'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_ACCOUNT_DOCUMENT_TYPE as string ('ACCOUNT_DOCUMENT_TYPE/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_AccountDocumentType_Cntl+$file_extension_tsv)]) ~> SrcCntl\nsource(output(\n\t\tLanguageKeyCd as string,\n\t\tDocTypeCd as string,\n\t\tDocTypeDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0AC_DOC_TYP+'/'+$file_name_0AC_DOC_TYP+$file_extension_tsv)]) ~> viewEXPL\nsource(output(\n\t\tAccountDocumentTypeKey as long,\n\t\tLanguageKeyCd as string,\n\t\tDocTypeCd as string,\n\t\tDocTypeDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_ACCOUNT_DOCUMENT_TYPE + $file_name_dim_account_document_type + $file_extension_tsv)]) ~> viewroute1\nSrcCntl filter(SubjectArea=='Route' && Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'M/d/yyyy h:mm:ss a')))) ~> maxdate\nviewEXPL select(mapColumn(\n\t\tLanguageKeyCd,\n\t\tDocTypeCd,\n\t\tDocTypeDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'AccountDocumentType') ~> expl\nexpl, maxdate join(SubjectArea == Subject,\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@LanguageKeyCd == lrd@LanguageKeyCd\n\t&& Select1@DocTypeCd == lrd@DocTypeCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(LanguageKeyCd,\n\t\tDocTypeCd,\n\t\tDocTypeDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count(LanguageKeyCd)) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tLanguageKeyCd,\n\t\tDocTypeCd,\n\t\tDocTypeDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(LanguageKeyCd,DocTypeCd), true),\n\tNewAccountDocumentTypeKey = rowNumber()) ~> getDeltaRowNum\nviewroute1 aggregate(MaxAccountDocumentTypeKey = max(AccountDocumentTypeKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageKeyCd) || !isNull(MaxAccountDocumentTypeKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxAccountDocumentTypeKey = case(isNull(MaxAccountDocumentTypeKey), toLong(0) ,(case(MaxAccountDocumentTypeKey<=0,toLong(0),MaxAccountDocumentTypeKey)))) ~> appendMaxKey\nappendMaxKey derive(AccountDocumentTypeKey = NewAccountDocumentTypeKey+MaxAccountDocumentTypeKey) ~> GetNewKeyDelta\nGetNewKeyDelta, viewroute1 join(Delta@LanguageKeyCd == viewroute1@LanguageKeyCd\n\t&& Delta@DocTypeCd == viewroute1@DocTypeCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(viewroute1@LanguageKeyCd) || isNull(viewroute1@DocTypeCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, viewroute1 join(Delta@LanguageKeyCd == viewroute1@LanguageKeyCd\n\t&& Delta@DocTypeCd == viewroute1@DocTypeCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, viewroute1 join(Delta@LanguageKeyCd == viewroute1@LanguageKeyCd\n\t&& Delta@DocTypeCd == viewroute1@DocTypeCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@LanguageKeyCd) || isNull(Delta@DocTypeCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(Status)) ~> Aggregate2\nSrcCntl derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'AccountDocumentType') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, SrcCntl union(byName: true)~> Union2\nUnion2 sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tLanguageKeyCd,\n\t\tDocTypeCd,\n\t\tDocTypeDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tLanguageKeyCd = Select1@LanguageKeyCd,\n\t\tDocTypeCd = Select1@DocTypeCd,\n\t\tDocTypeDesc = Select1@DocTypeDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tLanguageKeyCd = Delta@LanguageKeyCd,\n\t\tDocTypeCd = Delta@DocTypeCd,\n\t\tDocTypeDesc = Delta@DocTypeDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tAccountDocumentTypeKey = GetNewKeyDelta@AccountDocumentTypeKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tDocTypeDesc = Delta@DocTypeDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tAccountDocumentTypeKey = viewroute1@AccountDocumentTypeKey,\n\t\tLanguageKeyCd = viewroute1@LanguageKeyCd,\n\t\tDocTypeCd = viewroute1@DocTypeCd,\n\t\tCreatedDtTm = viewroute1@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tLanguageKeyCd = viewroute1@LanguageKeyCd,\n\t\tDocTypeCd = viewroute1@DocTypeCd,\n\t\tDocTypeDesc = viewroute1@DocTypeDesc,\n\t\tCreatedDtTm = viewroute1@CreatedDtTm,\n\t\tLastUpdtDtTm = viewroute1@LastUpdtDtTm,\n\t\tIsDeletedInd = viewroute1@IsDeletedInd,\n\t\tAccountDocumentTypeKey = viewroute1@AccountDocumentTypeKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_DOCUMENT_TYPE+$file_name_dim_account_document_type+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tAccountDocumentTypeKey,\n\t\tLanguageKeyCd,\n\t\tDocTypeCd,\n\t\tDocTypeDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputparquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_ACCOUNT_DOCUMENT_TYPE+$file_name_dim_account_document_type+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tAccountDocumentTypeKey,\n\t\tLanguageKeyCd,\n\t\tDocTypeCd,\n\t\tDocTypeDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputtsv\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_AccountDocumentType_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> updatecntl"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_CREDIT_CONTROLLING_AREA')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Analytics/O2CAZ"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "SrcCntl"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "viewEXPL"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "view1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Parquet_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "outputparquet"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "outputtsv"
+						},
+						{
+							"dataset": {
+								"referenceName": "Delimited_Dataset",
+								"type": "DatasetReference"
+							},
+							"name": "updatecntl"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "maxdate"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "expl"
+						},
+						{
+							"name": "Join1"
+						},
+						{
+							"name": "Join2"
+						},
+						{
+							"name": "Filter2"
+						},
+						{
+							"name": "Aggregate1"
+						},
+						{
+							"name": "Delta"
+						},
+						{
+							"name": "getDeltaRowNum"
+						},
+						{
+							"name": "MaxDimKey"
+						},
+						{
+							"name": "Join3"
+						},
+						{
+							"name": "appendMaxKey"
+						},
+						{
+							"name": "GetNewKeyDelta"
+						},
+						{
+							"name": "Join4"
+						},
+						{
+							"name": "Filter3"
+						},
+						{
+							"name": "Inserts"
+						},
+						{
+							"name": "Join5"
+						},
+						{
+							"name": "Updates"
+						},
+						{
+							"name": "Join6"
+						},
+						{
+							"name": "Filter4"
+						},
+						{
+							"name": "Aggregate2"
+						},
+						{
+							"name": "DerivedColumn4"
+						},
+						{
+							"name": "getnewcntlvalue"
+						},
+						{
+							"name": "Union2"
+						},
+						{
+							"name": "Sort1"
+						},
+						{
+							"name": "lrd"
+						},
+						{
+							"name": "Select5"
+						},
+						{
+							"name": "Select6"
+						},
+						{
+							"name": "Select7"
+						},
+						{
+							"name": "Existing"
+						},
+						{
+							"name": "Union3"
+						}
+					],
+					"script": "parameters{\n\tAudit_Path as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/'),\n\tsrc_filename_Audit_CreditControlArea_Cntl as string ('CreditControlArea_Cntl'),\n\tfile_extension_tsv as string ('.tsv'),\n\tsrc_path_Exploration as string ('Exploration/EnterpriseBackbone/EBS/'),\n\tfile_name_0C_CTR_AREA as string ('0C_CTR_AREA'),\n\tAnalytics_Path as string ('Analytics/EnterpriseCertified/EnterpriseDims/'),\n\tfile_name_dim_credit_controlling_area as string ('dim_credit_controlling_area'),\n\tfile_extension_parquet as string ('.parquet'),\n\tAnalytics_Folder_CREDIT_CONTROLLING_AREA as string ('CREDIT_CONTROLLING_AREA/')\n}\nsource(output(\n\t\tLastRunDate as string,\n\t\tStatus as string,\n\t\tSubjectArea as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Audit_Path+$src_filename_Audit_CreditControlArea_Cntl+$file_extension_tsv)]) ~> SrcCntl\nsource(output(\n\t\tCreditControlAreaCd as string,\n\t\tCurrencyKeyCd as string,\n\t\tRiskCatgCd as string,\n\t\tRepresentativeGroupCd as string,\n\t\tLanguageKeyCd as string,\n\t\tCreditControlAreaDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tJobId as string,\n\t\tFileName as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($src_path_Exploration+$file_name_0C_CTR_AREA+'/'+$file_name_0C_CTR_AREA+$file_extension_tsv)]) ~> viewEXPL\nsource(output(\n\t\tCreditControlAreaKey as long,\n\t\tCreditControlAreaCd as string,\n\t\tCurrencyKeyCd as string,\n\t\tRiskCatgCd as string,\n\t\tRepresentativeGroupCd as string,\n\t\tLanguageKeyCd as string,\n\t\tCreditControlAreaDesc as string,\n\t\tCreatedDtTm as string,\n\t\tLastUpdtDtTm as string,\n\t\tIsDeletedInd as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($Analytics_Path + $Analytics_Folder_CREDIT_CONTROLLING_AREA + $file_name_dim_credit_controlling_area + $file_extension_tsv)]) ~> view1\nSrcCntl filter(SubjectArea=='CreditControlArea' && Status=='S') ~> Filter1\nFilter1 aggregate(groupBy(SubjectArea,\n\t\tStatus),\n\tLastRunDate = max(toString(toTimestamp(LastRunDate,'MM/dd/yyyy HH:mm:ss')))) ~> maxdate\nviewEXPL select(mapColumn(\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(CreatedDtTm = coalesce(CreatedDtTm,'01/01/1900 00:00:00'),\n\t\tLastUpdtDtTm = coalesce(LastUpdtDtTm,'01/01/1900 00:00:00'),\n\t\tSubject = 'Route') ~> expl\nexpl, maxdate join(1 == 1 || !isNull(SubjectArea) || !isNull(Subject),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join1\nexpl, lrd join(Select1@CreditControlAreaCd == lrd@CreditControlAreaCd\n\t&& Select1@CurrencyKeyCd == lrd@CurrencyKeyCd\n\t&& Select1@LanguageKeyCd == lrd@LanguageKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(toTimestamp(toString(toTimestamp(expl@LastUpdtDtTm,'MM/dd/yyyy HH:mm:ss'),'yyyy-mm-dd HH:mm:ss'),'yyyy-mm-dd HH:mm:ss') > toTimestamp(LastRunDate,'yyyy-mm-dd HH:mm:ss')) ~> Filter2\nSelect5 aggregate(groupBy(CreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject),\n\tdummy = count(LanguageKeyCd)) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Delta\nDelta window(desc(concat(CreditControlAreaCd,CurrencyKeyCd,LanguageKeyCd), true),\n\tNewCreditControlAreaKey = rowNumber()) ~> getDeltaRowNum\nview1 aggregate(MaxCreditControlAreaKey = max(CreditControlAreaKey)) ~> MaxDimKey\ngetDeltaRowNum, MaxDimKey join(1 == 1 || !isNull(LanguageKeyCd) || !isNull(MaxCreditControlAreaKey),\n\tjoinType:'cross',\n\tbroadcast: 'auto')~> Join3\nJoin3 derive(MaxCreditControlAreaKey = case(isNull(MaxCreditControlAreaKey), toLong(0) ,(case(MaxCreditControlAreaKey<=0,toLong(0),MaxCreditControlAreaKey)))) ~> appendMaxKey\nappendMaxKey derive(CreditControlAreaKey = NewCreditControlAreaKey+MaxCreditControlAreaKey) ~> GetNewKeyDelta\nGetNewKeyDelta, view1 join(Delta@CreditControlAreaCd == view1@CreditControlAreaCd\n\t&& Delta@CurrencyKeyCd == view1@CurrencyKeyCd\n\t&& Delta@LanguageKeyCd == view1@LanguageKeyCd,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join4\nJoin4 filter(isNull(view1@CreditControlAreaKey) || isNull(view1@CreditControlAreaCd)||isNull(view1@LanguageKeyCd)) ~> Filter3\nSelect6 derive(CreatedDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss'),\n\t\tLastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Inserts\nGetNewKeyDelta, view1 join(Delta@CreditControlAreaCd == view1@CreditControlAreaCd\n\t&& Delta@CurrencyKeyCd == view1@CurrencyKeyCd\n\t&& Delta@LanguageKeyCd == view1@LanguageKeyCd,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join5\nSelect7 derive(LastUpdtDtTm = toString(currentTimestamp(),'MM/dd/yyyy HH:mm:ss')) ~> Updates\nGetNewKeyDelta, view1 join(Delta@CreditControlAreaCd == view1@CreditControlAreaCd\n\t&& Delta@CurrencyKeyCd == view1@CurrencyKeyCd\n\t&& Delta@LanguageKeyCd == view1@LanguageKeyCd,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join6\nJoin6 filter(isNull(Delta@CreditControlAreaCd) || isNull(Delta@CurrencyKeyCd)||isNull(Delta@LanguageKeyCd)) ~> Filter4\nDerivedColumn4 aggregate(groupBy(LastRunDate,\n\t\tStatus,\n\t\tSubjectArea),\n\tdummy = count(Status)) ~> Aggregate2\nSrcCntl derive(LastRunDate = toString(currentTimestamp(),'M/d/yyyy h:mm:ss a'),\n\t\tStatus = 'S',\n\t\tSubjectArea = 'CreditControlArea') ~> DerivedColumn4\nAggregate2 select(mapColumn(\n\t\tLastRunDate,\n\t\tStatus,\n\t\tSubjectArea\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> getnewcntlvalue\ngetnewcntlvalue, SrcCntl union(byName: true)~> Union2\nUnion2 sort(asc(LastRunDate, true)) ~> Sort1\nJoin1 select(mapColumn(\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd,\n\t\tSubject,\n\t\tLastRunDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> lrd\nFilter2 select(mapColumn(\n\t\tCreditControlAreaCd = Select1@CreditControlAreaCd,\n\t\tCurrencyKeyCd = Select1@CurrencyKeyCd,\n\t\tRiskCatgCd = Select1@RiskCatgCd,\n\t\tRepresentativeGroupCd = Select1@RepresentativeGroupCd,\n\t\tLanguageKeyCd = Select1@LanguageKeyCd,\n\t\tCreditControlAreaDesc = Select1@CreditControlAreaDesc,\n\t\tCreatedDtTm = expl@CreatedDtTm,\n\t\tLastUpdtDtTm = expl@LastUpdtDtTm,\n\t\tIsDeletedInd = Select1@IsDeletedInd,\n\t\tSubject = expl@Subject\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nFilter3 select(mapColumn(\n\t\tCreditControlAreaCd = Delta@CreditControlAreaCd,\n\t\tCurrencyKeyCd = Delta@CurrencyKeyCd,\n\t\tRiskCatgCd = Delta@RiskCatgCd,\n\t\tRepresentativeGroupCd = Delta@RepresentativeGroupCd,\n\t\tLanguageKeyCd = Delta@LanguageKeyCd,\n\t\tCreditControlAreaDesc = Delta@CreditControlAreaDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tCreditControlAreaKey = GetNewKeyDelta@CreditControlAreaKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select6\nJoin5 select(mapColumn(\n\t\tCreditControlAreaDesc = Delta@CreditControlAreaDesc,\n\t\tIsDeletedInd = Delta@IsDeletedInd,\n\t\tCreditControlAreaKey = view1@CreditControlAreaKey,\n\t\tCreditControlAreaCd = view1@CreditControlAreaCd,\n\t\tCurrencyKeyCd = view1@CurrencyKeyCd,\n\t\tRiskCatgCd = view1@RiskCatgCd,\n\t\tRepresentativeGroupCd = Delta@RepresentativeGroupCd,\n\t\tLanguageKeyCd = Delta@LanguageKeyCd,\n\t\tCreatedDtTm = view1@CreatedDtTm\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Select7\nFilter4 select(mapColumn(\n\t\tCreditControlAreaCd = view1@CreditControlAreaCd,\n\t\tCurrencyKeyCd = view1@CurrencyKeyCd,\n\t\tRiskCatgCd = view1@RiskCatgCd,\n\t\tRepresentativeGroupCd = view1@RepresentativeGroupCd,\n\t\tLanguageKeyCd = view1@LanguageKeyCd,\n\t\tCreditControlAreaDesc = view1@CreditControlAreaDesc,\n\t\tCreatedDtTm = view1@CreatedDtTm,\n\t\tLastUpdtDtTm = view1@LastUpdtDtTm,\n\t\tIsDeletedInd = view1@IsDeletedInd,\n\t\tCreditControlAreaKey = view1@CreditControlAreaKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> Existing\nInserts, Updates, Existing union(byName: true)~> Union3\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_CREDIT_CONTROLLING_AREA+$file_name_dim_credit_controlling_area+$file_extension_parquet)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\tCreditControlAreaKey,\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputparquet\nUnion3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Analytics_Path+$Analytics_Folder_CREDIT_CONTROLLING_AREA+$file_name_dim_credit_controlling_area+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\tCreditControlAreaKey,\n\t\tCreditControlAreaCd,\n\t\tCurrencyKeyCd,\n\t\tRiskCatgCd,\n\t\tRepresentativeGroupCd,\n\t\tLanguageKeyCd,\n\t\tCreditControlAreaDesc,\n\t\tCreatedDtTm,\n\t\tLastUpdtDtTm,\n\t\tIsDeletedInd\n\t),\n\tpartitionBy('hash', 1)) ~> outputtsv\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($Audit_Path+$src_filename_Audit_CreditControlArea_Cntl+$file_extension_tsv)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 3,\n\tpartitionBy('hash', 1)) ~> updatecntl"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ELSE_ECOLABDATALAKE_AZONE_DIM_DUNNING')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -1457,151 +1775,147 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SnowFlakeTriggerExists')]",
+			"name": "[concat(parameters('factoryName'), '/Payroll_to_DeltaLake')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "source1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "DerivedColumn1"
-						},
-						{
-							"name": "Aggregate1"
-						},
-						{
-							"name": "Union1"
-						},
-						{
-							"name": "Aggregate2"
-						},
-						{
-							"name": "Select1"
-						},
-						{
-							"name": "Sort1"
-						}
-					],
-					"script": "parameters{\n\tTriggerFileFolder as string ('TriggerFile/Snowflake/Outbound/'),\n\tTriggerFileName as string ('1AZ_Trigger.tsv')\n}\nsource(output(\n\t\tCurrentDate as timestamp 'yyyy-MM-dd HH:mm:ss',\n\t\tStatus as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($TriggerFileFolder+$TriggerFileName)]) ~> source1\nsource1 derive(CurrentDate = currentTimestamp(),\n\t\tStatus = 'Y') ~> DerivedColumn1\nDerivedColumn1 aggregate(groupBy(Status),\n\tCurrentDate = max(CurrentDate)) ~> Aggregate1\nsource1, Aggregate1 union(byName: true)~> Union1\nUnion1 aggregate(groupBy(CurrentDate,\n\t\tStatus),\n\tdummy = count(1)) ~> Aggregate2\nSort1 select(mapColumn(\n\t\tCurrentDate,\n\t\tStatus\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nAggregate2 sort(desc(CurrentDate, false)) ~> Sort1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($TriggerFileFolder+$TriggerFileName)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SnowFlakeTriggerNotExists')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "DummyCntl"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "Delimited_Dataset",
-								"type": "DatasetReference"
-							},
-							"name": "Output"
-						}
-					],
-					"transformations": [
-						{
-							"name": "DeriveDate"
-						},
-						{
-							"name": "DistinctRecords"
-						},
-						{
-							"name": "SortByDate"
-						},
-						{
-							"name": "SelectFinal"
-						}
-					],
-					"script": "parameters{\n\tDummyControlFolder as string ('Dummy_Data/'),\n\tDummyControlFile as string ('SnowFlakeDummyCntl'),\n\ttsvExtension as string ('.tsv'),\n\tOutputFolder as string ('Analytics/EnterpriseCertified/EnterpriseApps/CommercialReporting/AUDIT_DATA/Snowflake_Trigger/Inbound/'),\n\tOutputFile as string ('DimsSuccess.ind')\n}\nsource(output(\n\t\tStatus as string,\n\t\tDATE as timestamp 'yyyy-MM-dd HH:mm:ss'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[($DummyControlFolder+$DummyControlFile+$tsvExtension)]) ~> DummyCntl\nDummyCntl derive(Status = 'Y',\n\t\tCurrentDate = currentTimestamp()) ~> DeriveDate\nDeriveDate aggregate(groupBy(CurrentDate,\n\t\tStatus),\n\tdummy = count(1)) ~> DistinctRecords\nDistinctRecords sort(desc(CurrentDate, false)) ~> SortByDate\nSortByDate select(mapColumn(\n\t\tCurrentDate,\n\t\tStatus\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFinal\nSelectFinal sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($OutputFolder+$OutputFile+$tsvExtension)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Output"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Getlookup')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "getlookup",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"lastModified",
-								"childItems"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"modifiedDatetimeStart": {
-									"value": "@adddays(utcnow(),-10)",
-									"type": "Expression"
-								},
-								"modifiedDatetimeEnd": {
-									"value": "@utcnow()",
-									"type": "Expression"
-								},
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+				"folder": {
+					"name": "WFO"
 				},
-				"annotations": []
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "JSON_Payroll",
+								"type": "DatasetReference"
+							},
+							"name": "PayrollJSON"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SrcPayrollErrorCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SrcPayrollTaskTypeTagCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SrcPayrollRecordCSV"
+						}
+					],
+					"sinks": [
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollErrorCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollTaskTypeTagCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollRecordCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollErrorCSVDelete"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollTaskTypeTagCSVDelete"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollRecordCSVDelete"
+						}
+					],
+					"transformations": [
+						{
+							"name": "PayrollRecordFields"
+						},
+						{
+							"name": "PayrollRecordFileName"
+						},
+						{
+							"name": "PayrollTaskTypeTag"
+						},
+						{
+							"name": "PayrollTaskTypeTagFileName"
+						},
+						{
+							"name": "PayrollErrorFields"
+						},
+						{
+							"name": "PayrollErrorFileName"
+						},
+						{
+							"name": "PayrollErrorCSVUniqueRunDateTime"
+						},
+						{
+							"name": "PayrollErrorCSVToTarget"
+						},
+						{
+							"name": "PayrollErrorCSVTargetRunDateTime"
+						},
+						{
+							"name": "PayrollErrorCSVDeleteDeltaIfExists"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVUniqueRunDateTime"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVToTarget"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVUniqueTargetRunDateTime"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVDeleteDeltaIfExists"
+						},
+						{
+							"name": "PayrollRecordCSVUniqueRunDateTime"
+						},
+						{
+							"name": "PayrollRecordCSVToTarget"
+						},
+						{
+							"name": "PayrollRecordCSVUniqueTargetRunDateTime"
+						},
+						{
+							"name": "PayrollRecordCSVDeleteDeltaIfExists"
+						}
+					],
+					"script": "parameters{\n\tdatePath as string ('2020/08/24/AM/'),\n\tinputRoot as string ('raw/natural/GTWFO/'),\n\toutputRoot as string ('natural/WFO/'),\n\tpayroll_partition_date as string ('2021-01-01'),\n\tpayroll_partition_time as string ('AM'),\n\tadls_container_name as string ('raw')\n}\nsource(output(\n\t\tsuccess as boolean,\n\t\tpayload as (payroll_records as (employee_id as string, employee_name as string, payroll_code as string, employee_payroll_code as string, external_id as string, payroll_description as string, date as string, task_type_id as string, task_type_tags as (id as string, value as string, tag_group as string)[], hours as string, days as string, is_confirmed as boolean, updated_at as string, time_span_type as string, time_unit_type as string, planning_unit_id as string)[], payroll_errors as (employee_id as string, employee_name as string, error_type as string, error_dates as string[])[])\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'file-name',\n\tdocumentForm: 'singleDocument',\n\twildcardPaths:[($inputRoot+'payroll/'+ $datePath +'*.json')]) ~> PayrollJSON\nsource(output(\n\t\trun_date as string,\n\t\trun_time as string,\n\t\tfilename as string,\n\t\temployee_id as string,\n\t\temployee_name as string,\n\t\terror_type as string,\n\t\terror_date as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: true,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-error' + '/')) ~> SrcPayrollErrorCSV\nsource(output(\n\t\trun_date as string,\n\t\trun_time as string,\n\t\tfilename as string,\n\t\temployee_id as string,\n\t\tpayroll_code as string,\n\t\tdate as string,\n\t\ttask_type_id as string,\n\t\ttag_id as string,\n\t\ttag_group as string,\n\t\ttag_value as string,\n\t\tplanning_unit_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: true,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-task-type-tag' + '/')) ~> SrcPayrollTaskTypeTagCSV\nsource(output(\n\t\trun_date as string,\n\t\trun_time as string,\n\t\tfilename as string,\n\t\temployee_id as string,\n\t\temployee_name as string,\n\t\tpayroll_code as string,\n\t\tpayroll_description as string,\n\t\tdate as string,\n\t\ttask_type_id as string,\n\t\thours as string,\n\t\tdays as string,\n\t\tis_confirmed as boolean,\n\t\tupdated_at as string,\n\t\ttime_span_type as string,\n\t\ttime_unit_type as string,\n\t\tplanning_unit_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: true,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-record' + '/')) ~> SrcPayrollRecordCSV\nPayrollJSON foldDown(unroll(payload.payroll_records, payload.payroll_records),\n\tmapColumn(\n\t\t{file-name},\n\t\temployee_id = payload.payroll_records.employee_id,\n\t\temployee_name = payload.payroll_records.employee_name,\n\t\tpayroll_code = payload.payroll_records.payroll_code,\n\t\tpayroll_description = payload.payroll_records.payroll_description,\n\t\tdate = payload.payroll_records.date,\n\t\ttask_type_id = payload.payroll_records.task_type_id,\n\t\thours = payload.payroll_records.hours,\n\t\tdays = payload.payroll_records.days,\n\t\tis_confirmed = payload.payroll_records.is_confirmed,\n\t\tupdated_at = payload.payroll_records.updated_at,\n\t\ttime_span_type = payload.payroll_records.time_span_type,\n\t\ttime_unit_type = payload.payroll_records.time_unit_type,\n\t\tplanning_unit_id = payload.payroll_records.planning_unit_id\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> PayrollRecordFields\nPayrollRecordFields derive({file-name} = replace(replace(replace({file-name},'payroll', 'payroll-record'), $inputRoot, $outputRoot),'.json','.csv'),\n\t\toutPath = '/' + $outputRoot + \n'payroll-record'+          /* entity */\n'/'+$datePath+'WFO_'+                   /* date & WFO */\n'payroll-record'+'_'+      /* entity + _ */\nreplace(                        /* planning unit */\n    substring(\n        {file-name},\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\n    ),\n    '.json', '')+\n'_'+\nreplace(                                /* timestamp without _ */\n    left(\n        substring(\n            {file-name}, \n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\n        ),\n        length('YYYY_MM_DD_HH_MM')\n    ),\n    '_', '')+\n'00'+                                   /* 00 for secs */\n'.csv',\n\t\t{column_file-name} = 'WFO_'+                   /* date & WFO */\r\n'payroll-record'+'_'+      /* entity + _ */\r\nreplace(                        /* planning unit */\r\n    substring(\r\n        {file-name},\r\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\r\n    ),\r\n    '.json', '')+\r\n'_'+\r\nreplace(                                /* timestamp without _ */\r\n    left(\r\n        substring(\r\n            {file-name}, \r\n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\r\n        ),\r\n        length('YYYY_MM_DD_HH_MM')\r\n    ),\r\n    '_', '')+\r\n'00'+                                   /* 00 for secs */\r\n'.csv',\n\t\temployee_partition_date = $payroll_partition_date,\n\t\temployee_partition_time = $payroll_partition_time) ~> PayrollRecordFileName\nPayrollJSON foldDown(unroll(payload.payroll_records.task_type_tags),\n\tmapColumn(\n\t\t{file-name},\n\t\temployee_id = payload.payroll_records.employee_id,\n\t\tpayroll_code = payload.payroll_records.payroll_code,\n\t\tdate = payload.payroll_records.date,\n\t\ttask_type_id = payload.payroll_records.task_type_id,\n\t\ttag_id = payload.payroll_records.task_type_tags.id,\n\t\ttag_group = payload.payroll_records.task_type_tags.tag_group,\n\t\ttag_value = payload.payroll_records.task_type_tags.value,\n\t\tplanning_unit_id = payload.payroll_records.planning_unit_id\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> PayrollTaskTypeTag\nPayrollTaskTypeTag derive({file-name} = replace(replace(replace({file-name},'payroll', 'payroll-task-type-tag'), $inputRoot, $outputRoot),'.json','.csv'),\n\t\toutPath = '/' + $outputRoot + \n'payroll-task-type-tag'+          /* entity */\n'/'+$datePath+'WFO_'+                   /* date & WFO */\n'payroll-task-type-tag'+'_'+      /* entity + _ */\nreplace(                        /* planning unit */\n    substring(\n        {file-name},\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\n    ),\n    '.json', '')+\n'_'+\nreplace(                                /* timestamp without _ */\n    left(\n        substring(\n            {file-name}, \n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\n        ),\n        length('YYYY_MM_DD_HH_MM')\n    ),\n    '_', '')+\n'00'+                                   /* 00 for secs */\n'.csv',\n\t\t{column_file-name} = 'WFO_'+                   /* date & WFO */\r\n'payroll-task-type-tag'+'_'+      /* entity + _ */\r\nreplace(                        /* planning unit */\r\n    substring(\r\n        {file-name},\r\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\r\n    ),\r\n    '.json', '')+\r\n'_'+\r\nreplace(                                /* timestamp without _ */\r\n    left(\r\n        substring(\r\n            {file-name}, \r\n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\r\n        ),\r\n        length('YYYY_MM_DD_HH_MM')\r\n    ),\r\n    '_', '')+\r\n'00'+                                   /* 00 for secs */\r\n'.csv',\n\t\temployee_partition_date = $payroll_partition_date,\n\t\temployee_partition_time = $payroll_partition_time) ~> PayrollTaskTypeTagFileName\nPayrollJSON foldDown(unroll(payload.payroll_errors.error_dates, payload.payroll_errors),\n\tmapColumn(\n\t\t{file-name},\n\t\temployee_id = payload.payroll_errors.employee_id,\n\t\temployee_name = payload.payroll_errors.employee_name,\n\t\terror_type = payload.payroll_errors.error_type,\n\t\terror_date = payload.payroll_errors.error_dates\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> PayrollErrorFields\nPayrollErrorFields derive({file-name} = replace(replace(replace({file-name},'payroll', 'payroll-error'), $inputRoot, $outputRoot),'.json','.csv'),\n\t\toutPath = '/' + $outputRoot + \n'payroll-error'+          /* entity */\n'/'+$datePath+'WFO_'+                   /* date & WFO */\n'payroll-error'+'_'+      /* entity + _ */\nreplace(                        /* planning unit */\n    substring(\n        {file-name},\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\n    ),\n    '.json', '')+\n'_'+\nreplace(                                /* timestamp without _ */\n    left(\n        substring(\n            {file-name}, \n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\n        ),\n        length('YYYY_MM_DD_HH_MM')\n    ),\n    '_', '')+\n'00'+                                   /* 00 for secs */\n'.csv',\n\t\temployee_partition_date = $payroll_partition_date,\n\t\temployee_partition_time = $payroll_partition_time,\n\t\t{column_file-name} = 'WFO_'+                   /* date & WFO */\r\n'payroll-error'+'_'+      /* entity + _ */\r\nreplace(                        /* planning unit */\r\n    substring(\r\n        {file-name},\r\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\r\n    ),\r\n    '.json', '')+\r\n'_'+\r\nreplace(                                /* timestamp without _ */\r\n    left(\r\n        substring(\r\n            {file-name}, \r\n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\r\n        ),\r\n        length('YYYY_MM_DD_HH_MM')\r\n    ),\r\n    '_', '')+\r\n'00'+                                   /* 00 for secs */\r\n'.csv') ~> PayrollErrorFileName\nSrcPayrollErrorCSV aggregate(groupBy(run_date,\n\t\trun_time),\n\tagg_run_date = first(run_date),\n\t\tagg_run_time = first(run_time)) ~> PayrollErrorCSVUniqueRunDateTime\nPayrollErrorCSVUniqueRunDateTime, PayrollErrorFileName join(agg_run_date == employee_partition_date\n\t&& agg_run_time == employee_partition_time,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> PayrollErrorCSVToTarget\nPayrollErrorCSVToTarget aggregate(groupBy(agg_run_date,\n\t\tagg_run_time),\n\trun_date = first(agg_run_date),\n\t\trun_time = first(agg_run_time)) ~> PayrollErrorCSVTargetRunDateTime\nPayrollErrorCSVTargetRunDateTime alterRow(deleteIf(!isNull(run_date))) ~> PayrollErrorCSVDeleteDeltaIfExists\nSrcPayrollTaskTypeTagCSV aggregate(groupBy(run_date,\n\t\trun_time),\n\tagg_run_date = first(run_date),\n\t\tagg_run_time = first(run_time)) ~> PayrollTaskTypeTagCSVUniqueRunDateTime\nPayrollTaskTypeTagCSVUniqueRunDateTime, PayrollTaskTypeTagFileName join(agg_run_date == employee_partition_date\n\t&& agg_run_time == employee_partition_time,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> PayrollTaskTypeTagCSVToTarget\nPayrollTaskTypeTagCSVToTarget aggregate(groupBy(agg_run_date,\n\t\tagg_run_time),\n\trun_date = first(agg_run_date),\n\t\trun_time = first(agg_run_time)) ~> PayrollTaskTypeTagCSVUniqueTargetRunDateTime\nPayrollTaskTypeTagCSVUniqueTargetRunDateTime alterRow(deleteIf(!isNull(run_date))) ~> PayrollTaskTypeTagCSVDeleteDeltaIfExists\nSrcPayrollRecordCSV aggregate(groupBy(run_date,\n\t\trun_time),\n\tagg_run_date = first(run_date),\n\t\tagg_run_time = first(run_time)) ~> PayrollRecordCSVUniqueRunDateTime\nPayrollRecordCSVUniqueRunDateTime, PayrollRecordFileName join(agg_run_date == employee_partition_date\n\t&& agg_run_time == employee_partition_time,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> PayrollRecordCSVToTarget\nPayrollRecordCSVToTarget aggregate(groupBy(agg_run_date,\n\t\tagg_run_time),\n\trun_date = first(agg_run_date),\n\t\trun_time = first(agg_run_time)) ~> PayrollRecordCSVUniqueTargetRunDateTime\nPayrollRecordCSVUniqueTargetRunDateTime alterRow(deleteIf(!isNull(run_date))) ~> PayrollRecordCSVDeleteDeltaIfExists\nPayrollErrorFileName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-error' + '/'),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\trun_date = employee_partition_date,\n\t\trun_time = employee_partition_time,\n\t\tfilename = {column_file-name},\n\t\temployee_id,\n\t\temployee_name,\n\t\terror_type,\n\t\terror_date\n\t),\n\tpartitionBy('dynamicRange', 20,\n\t\trun_date\n\t)) ~> PayrollErrorCSV\nPayrollTaskTypeTagFileName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-task-type-tag' + '/'),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\trun_date = employee_partition_date,\n\t\trun_time = employee_partition_time,\n\t\tfilename = {column_file-name},\n\t\temployee_id,\n\t\tpayroll_code,\n\t\tdate,\n\t\ttask_type_id,\n\t\ttag_id,\n\t\ttag_group,\n\t\ttag_value,\n\t\tplanning_unit_id\n\t),\n\tpartitionBy('dynamicRange', 20,\n\t\trun_date\n\t)) ~> PayrollTaskTypeTagCSV\nPayrollRecordFileName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-record' + '/'),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\trun_date = employee_partition_date,\n\t\trun_time = employee_partition_time,\n\t\tfilename = {column_file-name},\n\t\temployee_id,\n\t\temployee_name,\n\t\tpayroll_code,\n\t\tpayroll_description,\n\t\tdate,\n\t\ttask_type_id,\n\t\thours,\n\t\tdays,\n\t\tis_confirmed,\n\t\tupdated_at,\n\t\ttime_span_type,\n\t\ttime_unit_type,\n\t\tplanning_unit_id\n\t),\n\tpartitionBy('dynamicRange', 20,\n\t\trun_date\n\t)) ~> PayrollRecordCSV\nPayrollErrorCSVDeleteDeltaIfExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-error' + '/'),\n\tmergeSchema: false,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:true,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['run_date','run_time'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\trun_date,\n\t\trun_time\n\t)) ~> PayrollErrorCSVDelete\nPayrollTaskTypeTagCSVDeleteDeltaIfExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-task-type-tag' + '/'),\n\tmergeSchema: false,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:true,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['run_date','run_time'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\trun_date,\n\t\trun_time\n\t)) ~> PayrollTaskTypeTagCSVDelete\nPayrollRecordCSVDeleteDeltaIfExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-record' + '/'),\n\tmergeSchema: false,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:true,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['run_date','run_time'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\trun_date,\n\t\trun_time\n\t)) ~> PayrollRecordCSVDelete"
+				}
 			},
 			"dependsOn": []
 		}

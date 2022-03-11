@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "harishgituat"
 		},
+		"AzureBlobStorage42_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage42'"
+		},
 		"AzureBlobStorage43_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage43'"
@@ -90,16 +94,25 @@
 		"AzureKeyVault3_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://harishgituat.vault.azure.net/"
-		},
-		"AzureKeyVault4_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://harishgituat.vault.azure.net/"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage42')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage42_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage43')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -351,19 +364,6 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('AzureKeyVault3_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureKeyVault4')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVault4_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []

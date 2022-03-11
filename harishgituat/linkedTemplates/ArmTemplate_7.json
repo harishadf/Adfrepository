@@ -79,19 +79,122 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage69'"
 		},
-		"AzureBlobStorage70_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage70'"
-		},
-		"AzureBlobStorage71_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage71'"
+		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "harishgit11"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/stg_001_adf_Contact_Staged')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzSQLDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Person Dynamics ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Person Employee ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Person Student ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Person Full Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Person Cost Center Code",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Vaccine Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Case Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Case Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Case Age",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Case Number",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Access",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Survey Pass Issued",
+						"type": "bit"
+					},
+					{
+						"name": "Survey Created On",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "AccessDuration",
+						"type": "date"
+					},
+					{
+						"name": "NoOfDaysSinceLastTest",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Conditionally Approved",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "001_adf_Contact_Staged"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault4",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage52')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -390,40 +493,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorage69_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage70')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage70_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage71')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage71_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",

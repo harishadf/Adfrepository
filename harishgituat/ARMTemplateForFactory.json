@@ -535,6 +535,10 @@
 			"type": "string",
 			"defaultValue": "https://mapdatalakestore002p.dfs.core.windows.net"
 		},
+		"ADLS_gen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://kdataprodadls.dfs.core.windows.net"
+		},
 		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "harishgit11"
@@ -4019,6 +4023,144 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/JSON_Payroll')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_gen2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"inputAdlsContainerName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "WFO/payroll"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "2020_06_10_14_02_payroll_testi-j.json",
+						"folderPath": "raw/natural/GTWFO/payroll/2020/06/10/PM",
+						"fileSystem": {
+							"value": "@dataset().inputAdlsContainerName",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"success": {
+							"type": "boolean"
+						},
+						"payload": {
+							"type": "object",
+							"properties": {
+								"payroll_records": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"employee_id": {
+												"type": "string"
+											},
+											"employee_name": {
+												"type": "string"
+											},
+											"payroll_code": {
+												"type": "string"
+											},
+											"employee_payroll_code": {
+												"type": "string"
+											},
+											"external_id": {
+												"type": "string"
+											},
+											"payroll_description": {
+												"type": "string"
+											},
+											"date": {
+												"type": "string"
+											},
+											"task_type_id": {
+												"type": "string"
+											},
+											"task_type_tags": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"id": {
+															"type": "string"
+														},
+														"value": {
+															"type": "string"
+														},
+														"tag_group": {
+															"type": "string"
+														}
+													}
+												}
+											},
+											"hours": {
+												"type": "integer"
+											},
+											"days": {
+												"type": "integer"
+											},
+											"is_confirmed": {
+												"type": "boolean"
+											},
+											"updated_at": {
+												"type": "string"
+											},
+											"time_span_type": {
+												"type": "string"
+											},
+											"time_unit_type": {
+												"type": "string"
+											},
+											"planning_unit_id": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"payroll_errors": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"employee_id": {
+												"type": "string"
+											},
+											"employee_name": {
+												"type": "string"
+											},
+											"error_type": {
+												"type": "string"
+											},
+											"error_dates": {
+												"type": "array"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_gen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Json2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -4842,6 +4984,19 @@
 				"type": "AzureBlobFS",
 				"typeProperties": {
 					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_gen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ADLS_gen2_properties_typeProperties_url')]"
 				}
 			},
 			"dependsOn": []
@@ -10929,6 +11084,154 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Delimited_Dataset')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet_Dataset')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Payroll_to_DeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "WFO"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "JSON_Payroll",
+								"type": "DatasetReference"
+							},
+							"name": "PayrollJSON"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SrcPayrollErrorCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SrcPayrollTaskTypeTagCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SrcPayrollRecordCSV"
+						}
+					],
+					"sinks": [
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollErrorCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollTaskTypeTagCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollRecordCSV"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollErrorCSVDelete"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollTaskTypeTagCSVDelete"
+						},
+						{
+							"linkedService": {
+								"referenceName": "ADLS_gen2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PayrollRecordCSVDelete"
+						}
+					],
+					"transformations": [
+						{
+							"name": "PayrollRecordFields"
+						},
+						{
+							"name": "PayrollRecordFileName"
+						},
+						{
+							"name": "PayrollTaskTypeTag"
+						},
+						{
+							"name": "PayrollTaskTypeTagFileName"
+						},
+						{
+							"name": "PayrollErrorFields"
+						},
+						{
+							"name": "PayrollErrorFileName"
+						},
+						{
+							"name": "PayrollErrorCSVUniqueRunDateTime"
+						},
+						{
+							"name": "PayrollErrorCSVToTarget"
+						},
+						{
+							"name": "PayrollErrorCSVTargetRunDateTime"
+						},
+						{
+							"name": "PayrollErrorCSVDeleteDeltaIfExists"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVUniqueRunDateTime"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVToTarget"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVUniqueTargetRunDateTime"
+						},
+						{
+							"name": "PayrollTaskTypeTagCSVDeleteDeltaIfExists"
+						},
+						{
+							"name": "PayrollRecordCSVUniqueRunDateTime"
+						},
+						{
+							"name": "PayrollRecordCSVToTarget"
+						},
+						{
+							"name": "PayrollRecordCSVUniqueTargetRunDateTime"
+						},
+						{
+							"name": "PayrollRecordCSVDeleteDeltaIfExists"
+						}
+					],
+					"script": "parameters{\n\tdatePath as string ('2020/08/24/AM/'),\n\tinputRoot as string ('raw/natural/GTWFO/'),\n\toutputRoot as string ('natural/WFO/'),\n\tpayroll_partition_date as string ('2021-01-01'),\n\tpayroll_partition_time as string ('AM'),\n\tadls_container_name as string ('raw')\n}\nsource(output(\n\t\tsuccess as boolean,\n\t\tpayload as (payroll_records as (employee_id as string, employee_name as string, payroll_code as string, employee_payroll_code as string, external_id as string, payroll_description as string, date as string, task_type_id as string, task_type_tags as (id as string, value as string, tag_group as string)[], hours as string, days as string, is_confirmed as boolean, updated_at as string, time_span_type as string, time_unit_type as string, planning_unit_id as string)[], payroll_errors as (employee_id as string, employee_name as string, error_type as string, error_dates as string[])[])\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'file-name',\n\tdocumentForm: 'singleDocument',\n\twildcardPaths:[($inputRoot+'payroll/'+ $datePath +'*.json')]) ~> PayrollJSON\nsource(output(\n\t\trun_date as string,\n\t\trun_time as string,\n\t\tfilename as string,\n\t\temployee_id as string,\n\t\temployee_name as string,\n\t\terror_type as string,\n\t\terror_date as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: true,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-error' + '/')) ~> SrcPayrollErrorCSV\nsource(output(\n\t\trun_date as string,\n\t\trun_time as string,\n\t\tfilename as string,\n\t\temployee_id as string,\n\t\tpayroll_code as string,\n\t\tdate as string,\n\t\ttask_type_id as string,\n\t\ttag_id as string,\n\t\ttag_group as string,\n\t\ttag_value as string,\n\t\tplanning_unit_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: true,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-task-type-tag' + '/')) ~> SrcPayrollTaskTypeTagCSV\nsource(output(\n\t\trun_date as string,\n\t\trun_time as string,\n\t\tfilename as string,\n\t\temployee_id as string,\n\t\temployee_name as string,\n\t\tpayroll_code as string,\n\t\tpayroll_description as string,\n\t\tdate as string,\n\t\ttask_type_id as string,\n\t\thours as string,\n\t\tdays as string,\n\t\tis_confirmed as boolean,\n\t\tupdated_at as string,\n\t\ttime_span_type as string,\n\t\ttime_unit_type as string,\n\t\tplanning_unit_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: true,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-record' + '/')) ~> SrcPayrollRecordCSV\nPayrollJSON foldDown(unroll(payload.payroll_records, payload.payroll_records),\n\tmapColumn(\n\t\t{file-name},\n\t\temployee_id = payload.payroll_records.employee_id,\n\t\temployee_name = payload.payroll_records.employee_name,\n\t\tpayroll_code = payload.payroll_records.payroll_code,\n\t\tpayroll_description = payload.payroll_records.payroll_description,\n\t\tdate = payload.payroll_records.date,\n\t\ttask_type_id = payload.payroll_records.task_type_id,\n\t\thours = payload.payroll_records.hours,\n\t\tdays = payload.payroll_records.days,\n\t\tis_confirmed = payload.payroll_records.is_confirmed,\n\t\tupdated_at = payload.payroll_records.updated_at,\n\t\ttime_span_type = payload.payroll_records.time_span_type,\n\t\ttime_unit_type = payload.payroll_records.time_unit_type,\n\t\tplanning_unit_id = payload.payroll_records.planning_unit_id\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> PayrollRecordFields\nPayrollRecordFields derive({file-name} = replace(replace(replace({file-name},'payroll', 'payroll-record'), $inputRoot, $outputRoot),'.json','.csv'),\n\t\toutPath = '/' + $outputRoot + \n'payroll-record'+          /* entity */\n'/'+$datePath+'WFO_'+                   /* date & WFO */\n'payroll-record'+'_'+      /* entity + _ */\nreplace(                        /* planning unit */\n    substring(\n        {file-name},\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\n    ),\n    '.json', '')+\n'_'+\nreplace(                                /* timestamp without _ */\n    left(\n        substring(\n            {file-name}, \n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\n        ),\n        length('YYYY_MM_DD_HH_MM')\n    ),\n    '_', '')+\n'00'+                                   /* 00 for secs */\n'.csv',\n\t\t{column_file-name} = 'WFO_'+                   /* date & WFO */\r\n'payroll-record'+'_'+      /* entity + _ */\r\nreplace(                        /* planning unit */\r\n    substring(\r\n        {file-name},\r\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\r\n    ),\r\n    '.json', '')+\r\n'_'+\r\nreplace(                                /* timestamp without _ */\r\n    left(\r\n        substring(\r\n            {file-name}, \r\n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\r\n        ),\r\n        length('YYYY_MM_DD_HH_MM')\r\n    ),\r\n    '_', '')+\r\n'00'+                                   /* 00 for secs */\r\n'.csv',\n\t\temployee_partition_date = $payroll_partition_date,\n\t\temployee_partition_time = $payroll_partition_time) ~> PayrollRecordFileName\nPayrollJSON foldDown(unroll(payload.payroll_records.task_type_tags),\n\tmapColumn(\n\t\t{file-name},\n\t\temployee_id = payload.payroll_records.employee_id,\n\t\tpayroll_code = payload.payroll_records.payroll_code,\n\t\tdate = payload.payroll_records.date,\n\t\ttask_type_id = payload.payroll_records.task_type_id,\n\t\ttag_id = payload.payroll_records.task_type_tags.id,\n\t\ttag_group = payload.payroll_records.task_type_tags.tag_group,\n\t\ttag_value = payload.payroll_records.task_type_tags.value,\n\t\tplanning_unit_id = payload.payroll_records.planning_unit_id\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> PayrollTaskTypeTag\nPayrollTaskTypeTag derive({file-name} = replace(replace(replace({file-name},'payroll', 'payroll-task-type-tag'), $inputRoot, $outputRoot),'.json','.csv'),\n\t\toutPath = '/' + $outputRoot + \n'payroll-task-type-tag'+          /* entity */\n'/'+$datePath+'WFO_'+                   /* date & WFO */\n'payroll-task-type-tag'+'_'+      /* entity + _ */\nreplace(                        /* planning unit */\n    substring(\n        {file-name},\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\n    ),\n    '.json', '')+\n'_'+\nreplace(                                /* timestamp without _ */\n    left(\n        substring(\n            {file-name}, \n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\n        ),\n        length('YYYY_MM_DD_HH_MM')\n    ),\n    '_', '')+\n'00'+                                   /* 00 for secs */\n'.csv',\n\t\t{column_file-name} = 'WFO_'+                   /* date & WFO */\r\n'payroll-task-type-tag'+'_'+      /* entity + _ */\r\nreplace(                        /* planning unit */\r\n    substring(\r\n        {file-name},\r\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\r\n    ),\r\n    '.json', '')+\r\n'_'+\r\nreplace(                                /* timestamp without _ */\r\n    left(\r\n        substring(\r\n            {file-name}, \r\n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\r\n        ),\r\n        length('YYYY_MM_DD_HH_MM')\r\n    ),\r\n    '_', '')+\r\n'00'+                                   /* 00 for secs */\r\n'.csv',\n\t\temployee_partition_date = $payroll_partition_date,\n\t\temployee_partition_time = $payroll_partition_time) ~> PayrollTaskTypeTagFileName\nPayrollJSON foldDown(unroll(payload.payroll_errors.error_dates, payload.payroll_errors),\n\tmapColumn(\n\t\t{file-name},\n\t\temployee_id = payload.payroll_errors.employee_id,\n\t\temployee_name = payload.payroll_errors.employee_name,\n\t\terror_type = payload.payroll_errors.error_type,\n\t\terror_date = payload.payroll_errors.error_dates\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> PayrollErrorFields\nPayrollErrorFields derive({file-name} = replace(replace(replace({file-name},'payroll', 'payroll-error'), $inputRoot, $outputRoot),'.json','.csv'),\n\t\toutPath = '/' + $outputRoot + \n'payroll-error'+          /* entity */\n'/'+$datePath+'WFO_'+                   /* date & WFO */\n'payroll-error'+'_'+      /* entity + _ */\nreplace(                        /* planning unit */\n    substring(\n        {file-name},\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\n    ),\n    '.json', '')+\n'_'+\nreplace(                                /* timestamp without _ */\n    left(\n        substring(\n            {file-name}, \n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\n        ),\n        length('YYYY_MM_DD_HH_MM')\n    ),\n    '_', '')+\n'00'+                                   /* 00 for secs */\n'.csv',\n\t\temployee_partition_date = $payroll_partition_date,\n\t\temployee_partition_time = $payroll_partition_time,\n\t\t{column_file-name} = 'WFO_'+                   /* date & WFO */\r\n'payroll-error'+'_'+      /* entity + _ */\r\nreplace(                        /* planning unit */\r\n    substring(\r\n        {file-name},\r\n        1 + length('/'+$inputRoot+'payroll/'+$datePath+'YYYY_MM_DD_HH_SS_payroll_')\r\n    ),\r\n    '.json', '')+\r\n'_'+\r\nreplace(                                /* timestamp without _ */\r\n    left(\r\n        substring(\r\n            {file-name}, \r\n            1 + length('/'+$inputRoot+'payroll/'+$datePath)\r\n        ),\r\n        length('YYYY_MM_DD_HH_MM')\r\n    ),\r\n    '_', '')+\r\n'00'+                                   /* 00 for secs */\r\n'.csv') ~> PayrollErrorFileName\nSrcPayrollErrorCSV aggregate(groupBy(run_date,\n\t\trun_time),\n\tagg_run_date = first(run_date),\n\t\tagg_run_time = first(run_time)) ~> PayrollErrorCSVUniqueRunDateTime\nPayrollErrorCSVUniqueRunDateTime, PayrollErrorFileName join(agg_run_date == employee_partition_date\n\t&& agg_run_time == employee_partition_time,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> PayrollErrorCSVToTarget\nPayrollErrorCSVToTarget aggregate(groupBy(agg_run_date,\n\t\tagg_run_time),\n\trun_date = first(agg_run_date),\n\t\trun_time = first(agg_run_time)) ~> PayrollErrorCSVTargetRunDateTime\nPayrollErrorCSVTargetRunDateTime alterRow(deleteIf(!isNull(run_date))) ~> PayrollErrorCSVDeleteDeltaIfExists\nSrcPayrollTaskTypeTagCSV aggregate(groupBy(run_date,\n\t\trun_time),\n\tagg_run_date = first(run_date),\n\t\tagg_run_time = first(run_time)) ~> PayrollTaskTypeTagCSVUniqueRunDateTime\nPayrollTaskTypeTagCSVUniqueRunDateTime, PayrollTaskTypeTagFileName join(agg_run_date == employee_partition_date\n\t&& agg_run_time == employee_partition_time,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> PayrollTaskTypeTagCSVToTarget\nPayrollTaskTypeTagCSVToTarget aggregate(groupBy(agg_run_date,\n\t\tagg_run_time),\n\trun_date = first(agg_run_date),\n\t\trun_time = first(agg_run_time)) ~> PayrollTaskTypeTagCSVUniqueTargetRunDateTime\nPayrollTaskTypeTagCSVUniqueTargetRunDateTime alterRow(deleteIf(!isNull(run_date))) ~> PayrollTaskTypeTagCSVDeleteDeltaIfExists\nSrcPayrollRecordCSV aggregate(groupBy(run_date,\n\t\trun_time),\n\tagg_run_date = first(run_date),\n\t\tagg_run_time = first(run_time)) ~> PayrollRecordCSVUniqueRunDateTime\nPayrollRecordCSVUniqueRunDateTime, PayrollRecordFileName join(agg_run_date == employee_partition_date\n\t&& agg_run_time == employee_partition_time,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> PayrollRecordCSVToTarget\nPayrollRecordCSVToTarget aggregate(groupBy(agg_run_date,\n\t\tagg_run_time),\n\trun_date = first(agg_run_date),\n\t\trun_time = first(agg_run_time)) ~> PayrollRecordCSVUniqueTargetRunDateTime\nPayrollRecordCSVUniqueTargetRunDateTime alterRow(deleteIf(!isNull(run_date))) ~> PayrollRecordCSVDeleteDeltaIfExists\nPayrollErrorFileName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-error' + '/'),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\trun_date = employee_partition_date,\n\t\trun_time = employee_partition_time,\n\t\tfilename = {column_file-name},\n\t\temployee_id,\n\t\temployee_name,\n\t\terror_type,\n\t\terror_date\n\t),\n\tpartitionBy('dynamicRange', 20,\n\t\trun_date\n\t)) ~> PayrollErrorCSV\nPayrollTaskTypeTagFileName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-task-type-tag' + '/'),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\trun_date = employee_partition_date,\n\t\trun_time = employee_partition_time,\n\t\tfilename = {column_file-name},\n\t\temployee_id,\n\t\tpayroll_code,\n\t\tdate,\n\t\ttask_type_id,\n\t\ttag_id,\n\t\ttag_group,\n\t\ttag_value,\n\t\tplanning_unit_id\n\t),\n\tpartitionBy('dynamicRange', 20,\n\t\trun_date\n\t)) ~> PayrollTaskTypeTagCSV\nPayrollRecordFileName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-record' + '/'),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\tmapColumn(\n\t\trun_date = employee_partition_date,\n\t\trun_time = employee_partition_time,\n\t\tfilename = {column_file-name},\n\t\temployee_id,\n\t\temployee_name,\n\t\tpayroll_code,\n\t\tpayroll_description,\n\t\tdate,\n\t\ttask_type_id,\n\t\thours,\n\t\tdays,\n\t\tis_confirmed,\n\t\tupdated_at,\n\t\ttime_span_type,\n\t\ttime_unit_type,\n\t\tplanning_unit_id\n\t),\n\tpartitionBy('dynamicRange', 20,\n\t\trun_date\n\t)) ~> PayrollRecordCSV\nPayrollErrorCSVDeleteDeltaIfExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-error' + '/'),\n\tmergeSchema: false,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:true,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['run_date','run_time'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\trun_date,\n\t\trun_time\n\t)) ~> PayrollErrorCSVDelete\nPayrollTaskTypeTagCSVDeleteDeltaIfExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-task-type-tag' + '/'),\n\tmergeSchema: false,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:true,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['run_date','run_time'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\trun_date,\n\t\trun_time\n\t)) ~> PayrollTaskTypeTagCSVDelete\nPayrollRecordCSVDeleteDeltaIfExists sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: ($adls_container_name),\n\tfolderPath: ($outputRoot + 'payroll-record' + '/'),\n\tmergeSchema: false,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:true,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:false,\n\tkeys:['run_date','run_time'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tmapColumn(\n\t\trun_date,\n\t\trun_time\n\t)) ~> PayrollRecordCSVDelete"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/JSON_Payroll')]",
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_gen2')]"
 			]
 		},
 		{

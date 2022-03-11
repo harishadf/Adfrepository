@@ -401,6 +401,9 @@
 		"ADLSGen2_properties_typeProperties_url": {
 			"value": "https://mapdatalakestore002p.dfs.core.windows.net"
 		},
+		"ADLS_gen2_properties_typeProperties_url": {
+			"value": "https://kdataprodadls.dfs.core.windows.net"
+		},
 		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
 			"value": "harishgit11"
 		},

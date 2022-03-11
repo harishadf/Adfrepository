@@ -535,6 +535,10 @@
 			"type": "string",
 			"defaultValue": "https://mapdatalakestore002p.dfs.core.windows.net"
 		},
+		"ADLS_gen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://kdataprodadls.dfs.core.windows.net"
+		},
 		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "harishgit11"
@@ -670,11 +674,11 @@
 					"AzureBlobStorage23_connectionString": {
 						"value": "[parameters('AzureBlobStorage23_connectionString')]"
 					},
-					"AzureBlobStorage24_connectionString": {
-						"value": "[parameters('AzureBlobStorage24_connectionString')]"
-					},
 					"ADLSGen2_properties_typeProperties_url": {
 						"value": "[parameters('ADLSGen2_properties_typeProperties_url')]"
+					},
+					"ADLS_gen2_properties_typeProperties_url": {
+						"value": "[parameters('ADLS_gen2_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -693,6 +697,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage24_connectionString": {
+						"value": "[parameters('AzureBlobStorage24_connectionString')]"
 					},
 					"AzureBlobStorage25_connectionString": {
 						"value": "[parameters('AzureBlobStorage25_connectionString')]"
@@ -750,9 +757,6 @@
 					},
 					"AzureBlobStorage41_connectionString": {
 						"value": "[parameters('AzureBlobStorage41_connectionString')]"
-					},
-					"AzureBlobStorage42_connectionString": {
-						"value": "[parameters('AzureBlobStorage42_connectionString')]"
 					}
 				}
 			},
@@ -773,6 +777,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage42_connectionString": {
+						"value": "[parameters('AzureBlobStorage42_connectionString')]"
 					},
 					"AzureBlobStorage43_connectionString": {
 						"value": "[parameters('AzureBlobStorage43_connectionString')]"
@@ -836,9 +843,6 @@
 					},
 					"AzureKeyVault3_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault3_properties_typeProperties_baseUrl')]"
-					},
-					"AzureKeyVault4_properties_typeProperties_baseUrl": {
-						"value": "[parameters('AzureKeyVault4_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
@@ -911,8 +915,8 @@
 					"filtertestls_connectionString": {
 						"value": "[parameters('filtertestls_connectionString')]"
 					},
-					"harishaggregratelss_connectionString": {
-						"value": "[parameters('harishaggregratelss_connectionString')]"
+					"AzureKeyVault4_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault4_properties_typeProperties_baseUrl')]"
 					},
 					"MAPKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('MAPKeyVault_properties_typeProperties_baseUrl')]"
@@ -945,6 +949,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"harishaggregratelss_connectionString": {
+						"value": "[parameters('harishaggregratelss_connectionString')]"
 					},
 					"joinoutputofemplndeptls_connectionString": {
 						"value": "[parameters('joinoutputofemplndeptls_connectionString')]"
@@ -1033,9 +1040,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
@@ -1111,11 +1115,8 @@
 					"AzureBlobStorage69_connectionString": {
 						"value": "[parameters('AzureBlobStorage69_connectionString')]"
 					},
-					"AzureBlobStorage70_connectionString": {
-						"value": "[parameters('AzureBlobStorage70_connectionString')]"
-					},
-					"AzureBlobStorage71_connectionString": {
-						"value": "[parameters('AzureBlobStorage71_connectionString')]"
+					"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
@@ -1136,6 +1137,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage70_connectionString": {
+						"value": "[parameters('AzureBlobStorage70_connectionString')]"
+					},
+					"AzureBlobStorage71_connectionString": {
+						"value": "[parameters('AzureBlobStorage71_connectionString')]"
 					},
 					"AzureBlobStorage72_connectionString": {
 						"value": "[parameters('AzureBlobStorage72_connectionString')]"
@@ -1188,14 +1195,8 @@
 					"AzureSqlDatabase2_connectionString": {
 						"value": "[parameters('AzureSqlDatabase2_connectionString')]"
 					},
-					"emplls_connectionString": {
-						"value": "[parameters('emplls_connectionString')]"
-					},
 					"AzureDataLakeStorage3_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]"
-					},
-					"LOGDBSERVER_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('LOGDBSERVER_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
@@ -1217,6 +1218,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"emplls_connectionString": {
+						"value": "[parameters('emplls_connectionString')]"
+					},
 					"linkedService124_connectionString": {
 						"value": "[parameters('linkedService124_connectionString')]"
 					},
@@ -1237,6 +1241,9 @@
 					},
 					"sql1_connectionString": {
 						"value": "[parameters('sql1_connectionString')]"
+					},
+					"LOGDBSERVER_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('LOGDBSERVER_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
@@ -1325,6 +1332,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'harishgituat_ArmTemplate_12')]"
+			]
+		},
+		{
+			"name": "harishgituat_ArmTemplate_14",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_14.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'harishgituat_ArmTemplate_13')]"
 			]
 		}
 	]
